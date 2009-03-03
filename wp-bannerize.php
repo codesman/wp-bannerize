@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
 Plugin Name: WP-BANNERIZE
 Plugin URI: http://wordpress.org/extend/plugins/wp-bannerize/
@@ -189,7 +189,7 @@ function wpp_options_subpanel() {
 		<form style="text-align:center;width:300px;margin:0 auto" action="https://www.paypal.com/cgi-bin/webscr" method="post">
 			<input type="hidden" name="cmd" value="_s-xclick">
 			<input type="hidden" name="hosted_button_id" value="3499468">
-			<input type="image" src="https://www.paypal.com/it_IT/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - Il sistema di pagamento online più facile e sicuro!">
+			<input type="image" src="https://www.paypal.com/it_IT/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - Il sistema di pagamento online pi� facile e sicuro!">
 			<img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
 		</form>
 	</p>	

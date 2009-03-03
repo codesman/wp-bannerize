@@ -1,4 +1,4 @@
-﻿=== WP-BANNERIZE ===
+ === WP-BANNERIZE ===
 Contributors: Giovambattista Fazioli
 Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV
