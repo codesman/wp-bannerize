@@ -3,7 +3,7 @@
 Plugin Name: WP-BANNERIZE
 Plugin URI: http://wordpress.org/extend/plugins/wp-bannerize/
 Description: WP_BANNERIZE is a image banner manager. See <a href="options-general.php?page=wp-bannerize.php">configuration panel</a> for more settings. For more info and plugins visit <a href="http://labs.saidmade.com">Labs Saidmade</a>
-Version: 1.0
+Version: 1.1
 Author: Giovambattista Fazioli
 Author URI: http://labs.saidmade.com
 Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -27,6 +27,7 @@ Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
 	
 	CHANGE LOG
 	
+	* 1.1		Rev, Fix and stable release
 	* 1.0		First release
 
 */
@@ -38,16 +39,16 @@ Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
  *
  * All constant are defined here
  */
-define( 'PLUGINNAME',		'wp-bannerize' );
-define( 'OPTIONSKEY',		'wp-bannerize' );
-define( 'OPTIONSTITLE',		'wp-bannerize' );
-define( 'VERSION',			'1.0' );
+define( 'PLUGINNAME',			'wp-bannerize' );
+define( 'WPB_OPTIONSKEY',		'wp-bannerize' );
+define( 'WPBZ_OPTIONSTITLE',	'wp-bannerize' );
+define( 'WPBZ_VERSION',			'1.1' );
 
-define( 'WP_UPLOADS_URL', 	get_option('siteurl') . '/wp-content/uploads/' );
-define( 'WP_UPLOADS_PATH',	realpath( dirname(__FILE__) . '/../../uploads/' ) . '/' );
-define( 'AJAX_URL', 		get_option('siteurl') .  "/wp-content/plugins/wp-bannerize/ajax.php" );
+define( 'WPBZ_UPLOADS_URL', 	get_option('siteurl') . '/wp-content/uploads/' );
+define( 'WPBZ_UPLOADS_PATH',	realpath( dirname(__FILE__) . '/../../uploads/' ) . '/' );
+define( 'WPBZ_AJAX_URL',	 	get_option('siteurl') .  "/wp-content/plugins/wp-bannerize/ajax.php" );
 
-define( 'TABLE_BANNERIZE',	'bannerize');
+define( 'WPBZ_TABLE_BANNERIZE',	'bannerize');
 
 /**
  * INIT OPTIONS
@@ -60,12 +61,12 @@ $wpp_options = array();
 /**
  * Add to Wordpress options database
  */
-add_option( OPTIONSKEY, $wpp_options, OPTIONSTITLE );
+add_option( WPBZ_OPTIONSKEY, $wpp_options, WPBZ_OPTIONSTITLE );
 
 /**
  * re-Load options
  */
-$wpp_options = get_option( OPTIONSKEY );
+$wpp_options = get_option( WPBZ_OPTIONSKEY );
 
 // ________________________________________________________________________________________ OPTIONS
 
@@ -77,7 +78,7 @@ $wpp_options = get_option( OPTIONSKEY );
  */
 function wpp_options_page() {
 	if ( function_exists('add_options_page') ) {
- 		$plugin_page = add_options_page( OPTIONSTITLE, OPTIONSTITLE, 8, basename(__FILE__), 'wpp_options_subpanel');
+ 		$plugin_page = add_options_page( WPBZ_OPTIONSTITLE, WPBZ_OPTIONSTITLE, 8, basename(__FILE__), 'wpp_options_subpanel');
 		add_action( 'admin_head-'. $plugin_page, 'wpp_admin_head' );
 	}
 }
@@ -91,7 +92,7 @@ function wpp_options_subpanel() {
 	$any_error = "";										// any error flag
 
 
-	if( isset( $_POST['command_action'] ) ) {						// have to save options	
+	if( isset( $_POST['command_action'] ) ) {				// have to save options	
 		$any_error = 'Your settings have been saved.';
 
 		switch( $_POST['command_action'] ) {
@@ -102,21 +103,6 @@ function wpp_options_subpanel() {
 				$any_error = mysql_delete();
 				break;		
 		}
-
-
-		
-		/**
-		 * Check for any missing or wrong POST value
-		 
-		if( $_POST['test'] == '' ) {		
-			$any_error = 'Some field is empty! Check and try again!';
-		} else {
-			$wpp_options['opt1'] 	= $_POST['test'];
-			
-			update_option( OPTIONSKEY, $wpp_options);
-		}*/
-		
-		
 	}
 	
 	/**
@@ -141,12 +127,12 @@ function wpp_options_subpanel() {
 		<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
 		
 		<p>
-			<label for="group">Gruppo: </label><input type="text" name="group" id="group" value="A" size="8" style="text-align:right" />
-			<label for="description">Descrizione: </label><input type="text" name="description" id="description" value="" size="32" /> 
+			<label for="group">Group: </label><input type="text" name="group" id="group" value="A" size="8" style="text-align:right" />
+			<label for="description">Description: </label><input type="text" name="description" id="description" value="" size="32" /> 
 			<label for="url">URL: </label><input type="text" name="url" id="url" value="" size="32" />
-		    <label for="group">Immagine: </label><input type="file" name="filename" id="filename" size="40" />
+		    <label for="group">Image: </label><input type="file" name="filename" id="filename" size="40" />
 		</p>
-		<div class="submit"><input type="submit" value="Aggiungi" /></div>
+		<div class="submit"><input type="submit" value="+ Add" /></div>
 	</form>
 	
 	<form style="display:none" name="delete_bannerize" method="post" action="">
@@ -156,25 +142,25 @@ function wpp_options_subpanel() {
 
 	<h3>Lista banner</h3>
 	<form class="form_box" name="filter_bannerize" method="post" action="">
-		<p><label for="group_filter">Visualizza il gruppo: </label><?php combo_group(); ?></p>
+		<p><label for="group_filter">Show group: </label><?php combo_group(); ?></p>
 	</form>
 	<?php
 	
-		$q = "SELECT * FROM `" . TABLE_BANNERIZE . "`";
+		$q = "SELECT * FROM `" . WPBZ_TABLE_BANNERIZE . "`";
 		
 		if( isset( $_POST['group_filter']) ) {
 			if( $_POST['group_filter'] != "" ) $q .= " WHERE `group` = '".$_POST['group_filter']."'";
 		}
 		
-		$q .= " ORDER BY `sorter` ASC ";
+		$q .= " ORDER BY `sorter`, `group` ASC ";
 		
 		$rows = $wpdb->get_results( $q );
 		
 		$o = '<table id="list_bannerize" width="100%" cellpadding="4" cellspacing="0">
 		       <thead>
 			    <tr>
-				 <th>Gruppo</th>
-				 <th>Descrizione</th>
+				 <th>Group</th>
+				 <th>Description</th>
 				 <th>Banner</th>
 				 <th>!</th>
 				</tr>
@@ -185,8 +171,8 @@ function wpp_options_subpanel() {
 			$o .= '<tr id="item_' . $row->id . '">' .
 			      '<td>' . $row->group . '</td>' .
 				  '<td width="100%">' . $row->description . '</td>' .
-				  '<td align="center"><a target="_blank" href="' . $row->url . '"><img height="55" border="0" src="' . WP_UPLOADS_URL . $row->filename . '" /></a></td>' .
-				  '<td align="center"><button class="button" onclick="delete_banner('.$row->id.')">Elimina</button></td>' .
+				  '<td align="center"><a target="_blank" href="' . $row->url . '"><img height="55" border="0" src="' . WPBZ_UPLOADS_URL . $row->filename . '" /></a></td>' .
+				  '<td align="center"><button class="button" onclick="delete_banner('.$row->id.')">Delete</button></td>' .
 				  '</tr>';
 		}
 		$o .= '</tbody>
@@ -224,7 +210,7 @@ function combo_group() {
 	global $wpdb, $_POST;
 	$o = '<select onchange="document.forms[\'filter_bannerize\'].submit()" id="group_filter" name="group_filter">' .
 	     '<option value="">Tutti</option>';
-	$q = "SELECT `group` FROM `" . TABLE_BANNERIZE . "` GROUP BY `group` ORDER BY `group` ";
+	$q = "SELECT `group` FROM `" . WPBZ_TABLE_BANNERIZE . "` GROUP BY `group` ORDER BY `group` ";
 	$rows = $wpdb->get_results( $q );
 	$sel = "";
 	foreach( $rows as $row ) {
@@ -277,14 +263,14 @@ function wpp_admin_head() {
 					stop:function() {
 						jQuery.ajax({
 						type: "POST",
-						url: "<?=AJAX_URL?>",
+						url: "<?=WPBZ_AJAX_URL?>",
 						data: jQuery("table#list_bannerize tbody").sortable("serialize")	})
 					}
 		});
 	});
 	
 	function delete_banner( id ) {
-		if( confirm('ATTENZIONE!!\n\nSei sicuro di voler eliminare questo banner?') ) {
+		if( confirm('WARINING!!\n\nDo you want delete this banner?') ) {
 			var f = document.forms['delete_bannerize'];
 			f.id.value = id;
 			f.submit();
@@ -297,7 +283,7 @@ function wpp_admin_head() {
 /**
  * Esegue l'upload e lo store nel database
  * 
- * Array ( [name] 			=> Preventivo Sense of Italy.pdf 
+ * Array ( [name] 			=> test.pdf 
  * 		   [type]			=> application/pdf 
  * 		   [tmp_name] 		=> /tmp/phpcXS1lh 
  *    	   [error] 			=> 0 
@@ -318,13 +304,8 @@ function mysql_insert() {
 		$description = $_POST['description'];
 		$url 		 = $_POST['url'];
 		
-		/**
-		 * Creo, se non esiste, l'alberatura per memorizzare il file
-		 * questa è posizionata su plugins_dir/banner/2009/02/24/
-		 * 
-		 */		
 		$basepath = 'banners/' . date('Y') . '/' . date('m') . '/' . date('d') . "/";
-		$pathname = WP_UPLOADS_PATH . $basepath;
+		$pathname = WPBZ_UPLOADS_PATH . $basepath;
 		@mkdir( $pathname, 0777, true  );
 		
 		$filename = $pathname . strtolower($name);
@@ -332,20 +313,16 @@ function mysql_insert() {
 		
 		if ( move_uploaded_file( $_FILES['filename']['tmp_name'], $filename )) {
 			
-			$q = "INSERT INTO `" . TABLE_BANNERIZE . "`" .
+			$q = "INSERT INTO `" . WPBZ_TABLE_BANNERIZE . "`" .
 			     " ( `group`, `description`, `url`, `filename` )" .
 				 " VALUES ('" . $group . "', '" . $description . "', '" . $url . "', '" . $urlname . "')";
 			$wpdb->query($q);	 
 			return( '' );
 		} else {
-			// rispondo tramite un iframe
-			// @see codice javascript
 			return ( '<div id="result">Impossibile spostare e posizionare il file ' . $_FILES['filename']['name'] .
 			         ' (' . $_FILES['filename']['size'] . ' bytes). Errore ('. $pathname .') ' . $_FILES['filename']['error'] . '</div>' );
 		}
 	} else {
-		// rispondo tramite un iframe
-		// @see codice javascript
 		return( '<div id="result">Impossibile trasferire il file ' . $_FILES['filename']['name'] .
 		        ' (' . $_FILES['filename']['size'] . ' bytes). Errore ' . $_FILES['filename']['error'] . '</div>' );
 	}
@@ -359,10 +336,10 @@ function mysql_insert() {
 function mysql_delete() {
 	global $wpdb, $_POST, $_FILES;
 	//
-	$filename = $wpdb->get_var( "SELECT filename FROM `" . TABLE_BANNERIZE . "` WHERE `id` = " . $_POST['id'] );
-	@unlink( WP_UPLOADS_PATH . $filename );
+	$filename = $wpdb->get_var( "SELECT filename FROM `" . WPBZ_TABLE_BANNERIZE . "` WHERE `id` = " . $_POST['id'] );
+	@unlink( WPBZ_UPLOADS_PATH . $filename );
 	
-	$q = "DELETE FROM `" . TABLE_BANNERIZE . "` WHERE `id` = " . $_POST['id'];
+	$q = "DELETE FROM `" . WPBZ_TABLE_BANNERIZE . "` WHERE `id` = " . $_POST['id'];
 	$wpdb->query($q);
 	return('');
 }
@@ -374,11 +351,10 @@ function mysql_delete() {
  * 
  * @return 
  */
-
 function checkTable() {
 	global $wpdb;
 	
-	$q = 'CREATE TABLE IF NOT EXISTS `' . TABLE_BANNERIZE . '` (
+	$q = 'CREATE TABLE IF NOT EXISTS `' . WPBZ_TABLE_BANNERIZE . '` (
 			  `id` int(11) NOT NULL auto_increment,
 			  `sorter` int(11) NOT NULL,
 			  `group` varchar(8) NOT NULL,
@@ -416,7 +392,7 @@ function wp_bannerize( $args = '' ) {
 	
 	$new_args = wp_parse_args( $args, $default );
 	
-	$q = "SELECT * FROM `" . TABLE_BANNERIZE . "` ";
+	$q = "SELECT * FROM `" . WPBZ_TABLE_BANNERIZE . "` ";
 	
 	if( $new_args['group'] != "") {
 		$q .= " WHERE `group` = '" . $new_args['group'] . "'";
@@ -430,7 +406,7 @@ function wp_bannerize( $args = '' ) {
 	
 	foreach( $rows as $row ) {
 		$o .= $new_args['before'] . 
-			  '<a target="_blank" href="' . $row->url . '"><img border="0" src="' . WP_UPLOADS_URL . $row->filename . '" /></a>' .
+			  '<a target="_blank" href="' . $row->url . '"><img border="0" src="' . WPBZ_UPLOADS_URL . $row->filename . '" /></a>' .
 			  $new_args['after'];	
 	}
 	$o .= $new_args['container_after'];
@@ -446,11 +422,5 @@ function wp_bannerize( $args = '' ) {
  */ 
 add_action('admin_menu', 	'wpp_options_page');
 checkTable();
-
-/**
- * Some add_action(), add_filter() for example
- *
- * add_action("wp_head", 		'wpp_header');
- */
 
 ?>
