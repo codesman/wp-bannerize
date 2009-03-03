@@ -4,21 +4,38 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV
 Requires at least: 2.7.1
 Tested up to: 2.7.1
-Stable tag: 1.1
+Stable tag: 1.2
 
-WP_BANNERIZE is a image banner manager.
+WP_BANNERIZE, banner-image manager.
 
 == Description ==
 
-WP_BANNERIZE is a image banner manager.
+WP_BANNERIZE is a banner-image manager.
 In your template insert:
-<?php wp_bannerize(); ?>
+`<?php wp_bannerize(); ?>`
 
+When you insert a banner you can give a group code (8 char). In this way you can "group" a block of banner. For examples if your theme is a 3 columns you can put in left sidebar:
+
+`<?php wp_bannerize('group=left_sidebar'); ?>`
+
+and put in right sidebar:
+
+`<?php wp_bannerize('group=right_sidebar'); ?>`
+
+**params are:**
+
+`
+* group               If '' show all group, else code of group (default '')
+* container_before    Main tag container open (default <ul>)
+* container_after     Main tag container close (default </ul>)
+* before              Before tag banner open (default <li>) 
+* after               After tag banner close (default </li>) 
+`
 
 = Related Links =
 
 * [Saidmade](http://www.saidmade.com/ "Creazione siti Web")
-
+* [Undolog](http://www.undolog.com/ "Author's Web")
 
 == Screenshots ==
 
@@ -30,17 +47,38 @@ None
    so that everything will remain in a /wp-content/plugins/wp-bannerize/ folder
 2. Open the plugin configuration page, which is located under Options -> wp-bannerize
 3. Activate the plugin through the 'Plugins' menu in WordPress (deactivate and reactivate if you're upgrading).
-4. Insert in you template php wp_bannerize() function
+4. Insert in you template php `<?php wp_bannerize(); ?>` function
 5. Done. Enjoy.
-
 
 == Thanks ==
 
+* [labs.saidmade.com](http://labs.saidmade.com/ "Creazione siti Web")
 
 == Frequently Asked Questions == 
 
+= Can I customize output? =
+
+Yes, use the args for set "container" and "before" and "after" tagging.
+For example the default output is:
+`
+<ul>
+<li><a href=".."><img src="..." /></a></li>
+<li><a href=".."><img src="..." /></a></li>
+...
+</ul>`  
+You can change `<ul>` (container) and `<li>` (before) 
+
+`<?php wp_bannerize('container_before=<div>&container_after=</div>&before=<span>&after=</span>'); ?>`
+
+`
+<div>
+<span><a href=".."><img src="..." /></a></span>
+<span><a href=".."><img src="..." /></a></span>
+...
+</div>`  
 
 == Changelog ==
 
+* 1.2		Do doc :)
 * 1.1		Rev, Fix and stable release
 * 1.0		First release

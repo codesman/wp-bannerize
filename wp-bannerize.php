@@ -3,7 +3,7 @@
 Plugin Name: WP-BANNERIZE
 Plugin URI: http://wordpress.org/extend/plugins/wp-bannerize/
 Description: WP_BANNERIZE is a image banner manager. See <a href="options-general.php?page=wp-bannerize.php">configuration panel</a> for more settings. For more info and plugins visit <a href="http://labs.saidmade.com">Labs Saidmade</a>.
-Version: 1.1
+Version: 1.2
 Author: Giovambattista Fazioli
 Author URI: http://labs.saidmade.com
 Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -27,6 +27,7 @@ Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
 	
 	CHANGE LOG
 	
+	* 1.2		Re-write doc and readme.txt
 	* 1.1		Rev, Fix and stable release
 	* 1.0		First release
 
@@ -42,7 +43,7 @@ Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
 define( 'PLUGINNAME',			'wp-bannerize' );
 define( 'WPB_OPTIONSKEY',		'wp-bannerize' );
 define( 'WPBZ_OPTIONSTITLE',	'wp-bannerize' );
-define( 'WPBZ_VERSION',			'1.1' );
+define( 'WPBZ_VERSION',			'1.2' );
 
 define( 'WPBZ_UPLOADS_URL', 	get_option('siteurl') . '/wp-content/uploads/' );
 define( 'WPBZ_UPLOADS_PATH',	realpath( dirname(__FILE__) . '/../../uploads/' ) . '/' );
@@ -209,7 +210,7 @@ function wpp_options_subpanel() {
 function combo_group() {
 	global $wpdb, $_POST;
 	$o = '<select onchange="document.forms[\'filter_bannerize\'].submit()" id="group_filter" name="group_filter">' .
-	     '<option value="">Tutti</option>';
+	     '<option value="">All</option>';
 	$q = "SELECT `group` FROM `" . WPBZ_TABLE_BANNERIZE . "` GROUP BY `group` ORDER BY `group` ";
 	$rows = $wpdb->get_results( $q );
 	$sel = "";
