@@ -10,9 +10,7 @@ WP_BANNERIZE, banner-image manager.
 
 == Description ==
 
-WP_BANNERIZE is a banner-image manager.
-In your template insert:
-`<?php wp_bannerize(); ?>`
+WP_BANNERIZE is a banner-image manager. In your template insert: `<?php wp_bannerize(); ?>`
 
 When you insert a banner you can give a group code (8 char). In this way you can "group" a block of banner. For examples if your theme is a 3 columns you can put in left sidebar:
 
