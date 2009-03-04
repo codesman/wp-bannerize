@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV
 Requires at least: 2.7.1
 Tested up to: 2.7.1
-Stable tag: 1.2
+Stable tag: 1.2.5
 
 WP_BANNERIZE, banner-image manager.
 
@@ -20,7 +20,7 @@ and put in right sidebar:
 
 `<?php wp_bannerize('group=right_sidebar'); ?>`
 
-**params are:**
+**params:**
 
 `
 * group               If '' show all group, else code of group (default '')
@@ -77,6 +77,7 @@ You can change `<ul>` (container) and `<li>` (before)
 
 == Changelog ==
 
+* 1.2.5		Remove a conflict with a new class object structure 
 * 1.2		Do doc :)
 * 1.1		Rev, Fix and stable release
 * 1.0		First release
