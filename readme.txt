@@ -23,7 +23,7 @@ and put in right sidebar:
 **params:**
 
 `
-* group               If '' show all group, else code of group (default '')
+* group               If '' show all groups, else show the selected group code (default '')
 * container_before    Main tag container open (default <ul>)
 * container_after     Main tag container close (default </ul>)
 * before              Before tag banner open (default <li>) 
@@ -42,8 +42,8 @@ None
 == Installation ==
 
 1. Upload the entire content of plugin archive to your `/wp-content/plugins/` directory, 
-   so that everything will remain in a /wp-content/plugins/wp-bannerize/ folder
-2. Open the plugin configuration page, which is located under Options -> wp-bannerize
+   so that everything will remain in a `/wp-content/plugins/wp-bannerize/` folder
+2. Open the plugin configuration page, which is located under `Options -> wp-bannerize`
 3. Activate the plugin through the 'Plugins' menu in WordPress (deactivate and reactivate if you're upgrading).
 4. Insert in you template php `<?php wp_bannerize(); ?>` function
 5. Done. Enjoy.
@@ -56,7 +56,7 @@ None
 
 = Can I customize output? =
 
-Yes, use the args for set "container" and "before" and "after" tagging.
+Yes, use the `args` for set "container" and "before" and "after" tagging.
 For example the default output is:
 `
 <ul>
@@ -76,9 +76,10 @@ You can change `<ul>` (container) and `<li>` (before)
 </div>`  
 
 == Changelog ==
-
+`
 * 1.3.0		New improve class object structure
 * 1.2.5		Remove a conflict with a new class object structure 
 * 1.2		Do doc :)
 * 1.1		Rev, Fix and stable release
 * 1.0		First release
+`
