@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV
 Requires at least: 2.7.1
 Tested up to: 2.7.1
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 
 WP_BANNERIZE, banner-image manager.
 
@@ -77,6 +77,7 @@ You can change `<ul>` (container) and `<li>` (before)
 
 == Changelog ==
 `
+* 1.3.1     Update jQuery to last version
 * 1.3.0		New improve class object structure
 * 1.2.5		Remove a conflict with a new class object structure 
 * 1.2		Do doc :)
