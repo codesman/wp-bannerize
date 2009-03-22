@@ -76,6 +76,7 @@ You can change `<ul>` (container) and `<li>` (before)
 </div>`  
 
 == Changelog ==
+
 `
 * 1.3.1     Update jQuery to last version
 * 1.3.0		New improve class object structure
