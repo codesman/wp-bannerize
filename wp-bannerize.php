@@ -3,7 +3,7 @@
 Plugin Name: WP-BANNERIZE
 Plugin URI: http://wordpress.org/extend/plugins/wp-bannerize/
 Description: WP_BANNERIZE is a image banner manager. See <a href="options-general.php?page=wp-bannerize.php">configuration panel</a> for more settings. For more info and plugins visit <a href="http://labs.saidmade.com">Labs Saidmade</a>.
-Version: 1.3.1
+Version: 1.3.2
 Author: Giovambattista Fazioli
 Author URI: http://labs.saidmade.com
 Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -27,6 +27,7 @@ Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
 	
 	CHANGE LOG
 	
+	* 1.3.2		Fix bug to sort order with Ajax call 
 	* 1.3.1     Update jQuery to last version
 	* 1.3.0		New improve class object structure
 	* 1.2.5		Remove a conflict with a new class object structure

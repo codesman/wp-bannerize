@@ -219,7 +219,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 						stop:function() {
 							jQuery.ajax({
 							type: "POST",
-							url: "<?=$this->_AJAX_URL?>",
+							url: "<?=$this->ajax_url?>",
 							data: jQuery("table#list_bannerize tbody").sortable("serialize")	})
 						}
 			});
