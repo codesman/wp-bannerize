@@ -49,8 +49,9 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
 		$o = $new_args['container_before'];
 		
 		foreach( $rows as $row ) {
+			$target = ( $row->target != "" ) ? 'target="' . $row->target . '"' : "";
 			$o .= $new_args['before'] . 
-				  '<a target="_blank" href="' . $row->url . '"><img border="0" src="' . $this->uploads_url . $row->filename . '" /></a>' .
+				  '<a ' . $target . ' href="' . $row->url . '"><img border="0" src="' . $row->filename . '" /></a>' .
 				  $new_args['after'];	
 		}
 		$o .= $new_args['container_after'];

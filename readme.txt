@@ -4,13 +4,17 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV
 Requires at least: 2.7.1
 Tested up to: 2.7.1
-Stable tag: 1.3.2
+Stable tag: 1.4.0
 
 WP_BANNERIZE, banner-image manager.
 
 == Description ==
 
 WP_BANNERIZE is a banner-image manager. In your template insert: `<?php wp_bannerize(); ?>`
+
+**FROM 1.4.0**
+Due to fix an upload's trouble the database table is changed. So, I apologies, but you have to update a new database table and discard old database.
+In this way you have to re-insert your banners.
 
 When you insert a banner you can give a group code (8 char). In this way you can "group" a block of banner. For examples if your theme is a 3 columns you can put in left sidebar:
 
@@ -79,6 +83,7 @@ You can change `<ul>` (container) and `<li>` (before)
 == Changelog ==
 
 `
+* 1.4.0     Rev UI, change database, Fix upload path server bug
 * 1.3.2		Fix bug to sort order with Ajax call
 * 1.3.1     Update jQuery to last version
 * 1.3.0		New improve class object structure

@@ -9,12 +9,13 @@ class WPBANNERIZE_CLASS {
 	 * @internal
 	 * @staticvar
 	 */
-	var $version 							= "1.3.2";				// plugin version
+	var $version 							= "1.4.0";				// plugin version
 	var $plugin_name 						= "WP Bannerize";		// plugin name
 	var $options_key 						= "wp-bannerize";		// options key to store in database
 	var $options_title						= "WP Bannerize";		// label for "setting" in WP
 	
 	var $table_bannerize					= 'bannerize';
+	var $update								= false;				// flag for upgrade from 1.4 prev
 	
 	/**
 	 * Usefull vars
@@ -40,7 +41,7 @@ class WPBANNERIZE_CLASS {
 	 */
 	function WPBANNERIZE_CLASS() {
 		$this->content_url 					= get_option('siteurl') . '/wp-content';
-		$this->plugin_url 					= $this->content_url . '/plugins/' . plugin_basename(dirname(__FILE__)) . '/';
+		$this->plugin_url 					= $this->content_url . '/plugins/' . plugin_basename( dirname(__FILE__) ) . '/';
 		
 		$this->ajax_url						= $this->plugin_url . "ajax.php";
 		

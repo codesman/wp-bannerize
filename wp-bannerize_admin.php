@@ -20,7 +20,11 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		add_option( $this->options_key, $this->options, $this->options_title );
 		
 		parent::getOptions();
-		$this->checkTable();
+		
+		/**
+		 * Check for 1.4+
+		 */
+		$this->update = $this->checkTable(); 
 		
 		add_action('admin_menu', 	array( $this, 'set_options_page') );
 	}
@@ -43,6 +47,11 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	 */
 	function set_options_subpanel() {
 		global $wpp_options, $wpdb, $_POST;
+		
+		if( $this->update ) {
+			$this->showUpdate();
+			return;
+		}
 	
 		$any_error = "";										// any error flag
 	
@@ -73,84 +82,135 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		?>
 		
 		<div class="wrap">
-	    <h2><?=$this->options_title?> ver. <?=$this->version?></h2>
-	
-		<h3>Insert a new banner</h3>
-		<form class="form_box" name="insert_bannerize" method="post" action="" enctype="multipart/form-data">
-			<input type="hidden" name="command_action" id="command_action" value="mysql_insert" />
-			<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
-			
-			<p>
-				<label for="group">Group: </label><input type="text" name="group" id="group" value="A" size="8" style="text-align:right" />
-				<label for="description">Description: </label><input type="text" name="description" id="description" value="" size="32" /> 
-				<label for="url">URL: </label><input type="text" name="url" id="url" value="" size="32" />
-			    <label for="group">Image: </label><input type="file" name="filename" id="filename" size="40" />
-			</p>
-			<div class="submit"><input type="submit" value="Insert" /></div>
-		</form>
+			<div class="icon32" id="icon-options-general"><br/></div>
+		    <h2><?=$this->options_title?> ver. <?=$this->version?></h2>
 		
-		<form style="display:none" name="delete_bannerize" method="post" action="">
-			<input type="hidden" name="command_action" id="command_action" value="mysql_delete" />
-			<input type="hidden" name="id" id="id" value="" />
-		</form>
-	
-		<h3>Banners List</h3>
-		<form class="form_box" name="filter_bannerize" method="post" action="">
-			<p><label for="group_filter">Show group: </label><?php $this->combo_group(); ?></p>
-		</form>
-		<?php
-		
-			$q = "SELECT * FROM `" . $this->table_bannerize . "`";
-			
-			if( isset( $_POST['group_filter']) ) {
-				if( $_POST['group_filter'] != "" ) $q .= " WHERE `group` = '".$_POST['group_filter']."'";
-			}
-			
-			$q .= " ORDER BY `sorter`, `group` ASC ";
-			
-			$rows = $wpdb->get_results( $q );
-			
-			$o = '<table id="list_bannerize" width="100%" cellpadding="4" cellspacing="0">
-			       <thead>
-				    <tr>
-					 <th>Group</th>
-					 <th>Description</th>
-					 <th>Banner</th>
-					 <th>!</th>
-					</tr>
-				   </thead>
-				   <tbody>';	
+			<h2>Insert a new banner</h2>
+			<form class="form_box" name="insert_bannerize" method="post" action="" enctype="multipart/form-data">
+				<input type="hidden" name="command_action" id="command_action" value="mysql_insert" />
+				<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
 				
-			foreach( $rows as $row ) {
-				$o .= '<tr id="item_' . $row->id . '">' .
-				      '<td>' . $row->group . '</td>' .
-					  '<td>' . $row->description . '</td>' .
-					  '<td align="center"><a target="_blank" href="' . $row->url . '"><img height="55" border="0" src="' . $this->uploads_url . $row->filename . '" /></a></td>' .
-					  '<td align="center"><button class="button" onclick="delete_banner('.$row->id.')">Delete</button></td>' .
-					  '</tr>';
-			}
-			$o .= '</tbody>
-			       </table>';
-		
-			echo $o;
-		?>
-		
-		<p style="text-align:center;font-family:Tahoma;font-size:10px">Developed by <a target="_blank" href="http://www.saidmade.com"><img align="absmiddle" src="http://labs.saidmade.com/images/sm-a-80x15.png" border="0" /></a>
-			<br/>
-			more Wordpress plugins on <a target="_blank" href="http://labs.saidmade.com">labs.saidmade.com</a> and <a target="_blank" href="http://www.undolog.com">Undolog.com</a>
-			<br/>
-			<form style="text-align:center;width:300px;margin:0 auto" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-				<input type="hidden" name="cmd" value="_s-xclick">
-				<input type="hidden" name="hosted_button_id" value="3499468">
-				<input type="image" src="https://www.paypal.com/it_IT/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - Il sistema di pagamento online pi� facile e sicuro!">
-				<img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+				<table class="form-table">
+					<tr>
+						<th scope="row"><label for="group">Group key:</label></th>
+						<td><input type="text" name="group" id="group" value="A" size="8" style="text-align:right" /> (Insert any id/key)</td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="description">Description:</label></th>
+						<td><input type="text" name="description" id="description" value="" size="32" /></td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="url">URL:</label></th>
+						<td><input type="text" name="url" id="url" value="" size="32" /> <label for="url">Target:</label> <input type="text" name="target" id="target" value="" size="16" /> (_blank for example)</td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="group">Image:</label></th>
+						<td><input type="file" name="filename" id="filename" size="40" /></td>
+					</tr>
+				</table>
+				<div class="submit"><input type="submit" value="Insert" /></div>
 			</form>
-		</p>	
+			
+			<form style="display:none" name="delete_bannerize" method="post" action="">
+				<input type="hidden" name="command_action" id="command_action" value="mysql_delete" />
+				<input type="hidden" name="id" id="id" value="" />
+			</form>
+	
+			<h2>List Banners</h2>
+			<form class="form_box" name="filter_bannerize" method="post" action="">
+				<p><label for="group_filter">Show group: </label><?php $this->combo_group(); ?></p>
+			</form>
+			<?php
+			
+				$q = "SELECT * FROM `" . $this->table_bannerize . "`";
+				
+				if( isset( $_POST['group_filter']) ) {
+					if( $_POST['group_filter'] != "" ) $q .= " WHERE `group` = '".$_POST['group_filter']."'";
+				}
+				
+				$q .= " ORDER BY `sorter`, `group` ASC ";
+				
+				$rows = $wpdb->get_results( $q );
+				
+				$o = '<table class="widefat" id="list_bannerize" width="100%" cellpadding="4" cellspacing="0">
+				       <thead>
+					    <tr>
+						 <th width="40" scope="col">Banner</th>
+						 <th scope="col">Group</th>
+						 <th width="100%" scope="col">Description</th>
+						 <th align="right" scope="col">!</th>
+						</tr>
+					   </thead>
+					   <tbody>';	
+				
+				$i = 0;	
+				foreach( $rows as $row ) {
+					$class = ($i%2 == 0) ? 'class="alternate"' : ''; $i++;
+					$o .= '<tr ' . $class . ' id="item_' . $row->id . '">' .
+						  '<td width="40" align="left"><a rel="shadowbox" target="_blank" href="' . $row->filename . '"><img height="32" width="32" border="0" src="' . $row->filename . '" /></a></td>' .
+					      '<td>' . $row->group . '</td>' .
+						  '<td width"100%">' . $row->description . '</td>' .
+						  '<td align="right"><button class="button" onclick="delete_banner('.$row->id.')">Delete</button></td>' .
+						  '</tr>';
+				}
+				$o .= '</tbody>
+				       </table>';
+			
+				echo $o;
+			?>
+			
+			<p style="text-align:center;font-family:Tahoma;font-size:10px">Developed by <a target="_blank" href="http://www.saidmade.com"><img align="absmiddle" src="http://labs.saidmade.com/images/sm-a-80x15.png" border="0" /></a>
+				<br/>
+				more Wordpress plugins on <a target="_blank" href="http://labs.saidmade.com">labs.saidmade.com</a> and <a target="_blank" href="http://www.undolog.com">Undolog.com</a>
+				<br/>
+				<form style="text-align:center;width:300px;margin:0 auto" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="3499468">
+					<input type="image" src="https://www.paypal.com/it_IT/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - Il sistema di pagamento online pi� facile e sicuro!">
+					<img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+				</form>
+			</p>	
 	
 		</div>
 		
 		<?php
-		
+	}
+	
+	/**
+	 * Update previous WP Bannerize version to 1.4
+	 * 
+	 * @return 
+	 */
+	function showUpdate() {
+		global $wpp_options, $wpdb, $_POST;
+		?>
+		<div class="wrap">
+			<div class="icon32" id="icon-options-general"><br/></div>
+		    <h2><?=$this->options_title?> ver. <?=$this->version?></h2>
+			<?php
+
+				if( isset( $_POST['toupdate'])) {
+					//$this->dropTable();
+					//$this->createTable();
+					$this->alterTable();
+					?>
+					<p>Update succefully!</p>
+					<form method="post" action="">
+						<div class="submit"><input type="submit"  value="Reload"/></div>
+					</form>										
+					<?php
+				} else {
+				?>			
+			
+			<p>This version use a different Database Table.</p>
+			<p>You have to re-insert your banner.</p>
+			<form method="post" action="">
+				<input type="hidden" name="toupdate" />
+				<div class="submit"><input type="submit"  value="Update"/></div>
+			</form>
+		</div>	
+	<?php	
+		}
 	}
 	
 	/**
@@ -181,31 +241,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	function set_admin_head() {
 	?>
 	<style type="text/css">
-		table#list_bannerize {
-			
-		}
-		table#list_bannerize thead th {
-			background:#ccc;
-			border-bottom:1px solid;
-			padding:6px;
-		}
-		table#list_bannerize tbody tr {
-			background:#f1f1f1;
-			border:3px solid #000;
-		}
-		table#list_bannerize tbody td {
-			border:1px dotted;
-			white-space:nowrap;
-			padding:2px;
-		}
-		table#list_bannerize tbody td img {
-			border:1px solid;
-		}
-		form.form_box {
-			background:#f1f1f1;
-			border:1px solid #aaa;
-			padding:12px;
-		}
+
 	</style>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js" type="text/javascript"></script>
@@ -259,19 +295,25 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			$group 		 = $_POST['group'];
 			$description = $_POST['description'];
 			$url 		 = $_POST['url'];
+			$target 	 = $_POST['target'];
 			
 			$basepath = 'banners/' . date('Y') . '/' . date('m') . '/' . date('d') . "/";
 			$pathname = $this->uploads_path . $basepath;
-			@mkdir( $pathname, 0777, true  );
+			
+			//@mkdir( $pathname, 0777, true  );
 			
 			$filename = $pathname . strtolower($name);
 			$urlname  = $basepath . strtolower($name);
 			
-			if ( move_uploaded_file( $_FILES['filename']['tmp_name'], $filename )) {
+			$uploads = wp_upload_bits( strtolower($name), '', '' );
+			
+			//if( $uploads['error'])
+			
+			if ( move_uploaded_file( $_FILES['filename']['tmp_name'], $uploads['file'] )) {
 				
 				$q = "INSERT INTO `" . $this->table_bannerize . "`" .
-				     " ( `group`, `description`, `url`, `filename` )" .
-					 " VALUES ('" . $group . "', '" . $description . "', '" . $url . "', '" . $urlname . "')";
+				     " ( `group`, `description`, `url`, `filename`, `target`, `realpath` )" .
+					 " VALUES ('" . $group . "', '" . $description . "', '" . $url . "', '" . $uploads['url'] . "', '" . $target . "', '" . $uploads['file'] . "')";
 				$wpdb->query($q);	 
 				return( '' );
 			} else {
@@ -292,8 +334,8 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	function mysql_delete() {
 		global $wpdb, $_POST, $_FILES;
 		//
-		$filename = $wpdb->get_var( "SELECT filename FROM `" . $this->table_bannerize . "` WHERE `id` = " . $_POST['id'] );
-		@unlink( $this->uploads_path . $filename );
+		$filename = $wpdb->get_var( "SELECT realpath FROM `" . $this->table_bannerize . "` WHERE `id` = " . $_POST['id'] );
+		@unlink( $filename );
 		
 		$q = "DELETE FROM `" . $this->table_bannerize . "` WHERE `id` = " . $_POST['id'];
 		$wpdb->query($q);
@@ -309,17 +351,68 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	function checkTable() {
 		global $wpdb;
 		
-		$q = 'CREATE TABLE IF NOT EXISTS `' . $this->table_bannerize . '` (
-				  `id` int(11) NOT NULL auto_increment,
-				  `sorter` int(11) NOT NULL,
-				  `group` varchar(8) NOT NULL,
-				  `description` varchar(255) NOT NULL,
-				  `url` varchar(256) NOT NULL,
-				  `filename` varchar(255) NOT NULL,
-				  PRIMARY KEY  (`id`)
-				)';
-		$wpdb->query($q);
+		/**
+		 * Check old wp-bannerize version
+		 */
+		
+		$q = 'DESC `' . $this->table_bannerize . '`';
+		$rows = $wpdb->get_results( $q );
+		if( count( $rows ) < 8 ) {
+			// previou version
+			return true;
+		} else {
+			$this->createTable();
+		}
+		return false;
 	}	
+	
+	/**
+	 * Create WP Bannerize table for store banner data
+	 * 
+	 * @return 
+	 */
+	function createTable() {
+		global $wpdb;
+		$q = 'CREATE TABLE IF NOT EXISTS `' . $this->table_bannerize . '` (
+			  `id` int(11) NOT NULL auto_increment,
+			  `sorter` int(11) NOT NULL,
+			  `group` varchar(8) NOT NULL,
+			  `description` varchar(255) NOT NULL,
+			  `url` varchar(256) NOT NULL,
+			  `target` varchar(32) NOT NULL,
+			  `filename` varchar(255) NOT NULL,
+			  `realpath` varchar(255) NOT NULL,
+			  PRIMARY KEY  (`id`)
+			)';
+		$wpdb->query($q);		
+	}
+	
+	/**
+	 * Drop WP Bannerize table
+	 * 
+	 * @return 
+	 */
+	function dropTable() {
+		global $wpdb;
+		$q = 'DROP TABLE `' . $this->table_bannerize . '`';
+		$wpdb->query($q);		
+	}
+	
+	/**
+	 * Alter WP Bannerize table
+	 * 
+	 * ALTER TABLE `bannerize` ADD `realpath` VARCHAR( 255 ) NOT NULL 
+	 * 
+	 * @return 
+	 */
+	function alterTable() {
+		global $wpdb;
+		$q = 'ALTER TABLE `' . $this->table_bannerize . '` ADD 
+			  `target` varchar(32) NOT NULL, ADD
+			  `realpath` varchar(255) NOT NULL
+			 ';
+		$wpdb->query($q);		
+	}
 	
 } // end of class
 
