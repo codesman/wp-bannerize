@@ -9,7 +9,7 @@ class WPBANNERIZE_CLASS {
 	 * @internal
 	 * @staticvar
 	 */
-	var $version 							= "1.4.0";				// plugin version
+	var $version 							= "1.4.1";				// plugin version
 	var $plugin_name 						= "WP Bannerize";		// plugin name
 	var $options_key 						= "wp-bannerize";		// options key to store in database
 	var $options_title						= "WP Bannerize";		// label for "setting" in WP
@@ -24,9 +24,6 @@ class WPBANNERIZE_CLASS {
 	var $content_url						= "";
 	var $plugin_url							= "";
 	var $ajax_url							= "";
-	
-	var $uploads_url						= "";
-	var $uploads_path 						= "";
 
 	/**
 	 * This properties variable are @public
@@ -44,9 +41,6 @@ class WPBANNERIZE_CLASS {
 		$this->plugin_url 					= $this->content_url . '/plugins/' . plugin_basename( dirname(__FILE__) ) . '/';
 		
 		$this->ajax_url						= $this->plugin_url . "ajax.php";
-		
-		$this->uploads_url					= get_option('siteurl') . '/wp-content/uploads/';
-		$this->uploads_path					= realpath( dirname(__FILE__) . '/../../uploads/' ) . '/';
 	}
 	
 	/**

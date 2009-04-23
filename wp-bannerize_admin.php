@@ -287,27 +287,17 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		global $wpp_options, $wpdb, $_POST, $_FILES;
 		// verifica eventuali errori
 		if( $_FILES['filename']['error'] == 0 ) {
-			$size = floor( $_FILES['filename']['size'] / (1024*1024) );
-			$mime = $_FILES['filename']['type'];
-			$name = $_FILES['filename']['name'];
-			$temp = $_FILES['filename']['tmp_name'];
+			$size 			= floor( $_FILES['filename']['size'] / (1024*1024) );
+			$mime 			= $_FILES['filename']['type'];
+			$name 			= $_FILES['filename']['name'];
+			$temp 			= $_FILES['filename']['tmp_name'];
 			
-			$group 		 = $_POST['group'];
-			$description = $_POST['description'];
-			$url 		 = $_POST['url'];
-			$target 	 = $_POST['target'];
+			$group 		 	= $_POST['group'];
+			$description 	= $_POST['description'];
+			$url 		 	= $_POST['url'];
+			$target 	 	= $_POST['target'];
 			
-			$basepath = 'banners/' . date('Y') . '/' . date('m') . '/' . date('d') . "/";
-			$pathname = $this->uploads_path . $basepath;
-			
-			//@mkdir( $pathname, 0777, true  );
-			
-			$filename = $pathname . strtolower($name);
-			$urlname  = $basepath . strtolower($name);
-			
-			$uploads = wp_upload_bits( strtolower($name), '', '' );
-			
-			//if( $uploads['error'])
+			$uploads		= wp_upload_bits( strtolower($name), '', '' );
 			
 			if ( move_uploaded_file( $_FILES['filename']['tmp_name'], $uploads['file'] )) {
 				
@@ -318,7 +308,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 				return( '' );
 			} else {
 				return ( '<div id="result">Impossibile spostare e posizionare il file ' . $_FILES['filename']['name'] .
-				         ' (' . $_FILES['filename']['size'] . ' bytes). Errore ('. $pathname .') ' . $_FILES['filename']['error'] . '</div>' );
+				         ' (' . $_FILES['filename']['size'] . ' bytes). Errore ' . $_FILES['filename']['error'] . '</div>' );
 			}
 		} else {
 			return( '<div id="result">Impossibile trasferire il file ' . $_FILES['filename']['name'] .

@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV
 Requires at least: 2.7.1
 Tested up to: 2.7.1
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 
 WP_BANNERIZE, banner-image manager.
 
@@ -83,6 +83,7 @@ You can change `<ul>` (container) and `<li>` (before)
 == Changelog ==
 
 `
+* 1.4.1     Clean code
 * 1.4.0     Rev UI, change database, Fix upload path server bug
 * 1.3.2		Fix bug to sort order with Ajax call
 * 1.3.1     Update jQuery to last version
