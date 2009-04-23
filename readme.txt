@@ -41,7 +41,7 @@ and put in right sidebar:
 
 == Screenshots ==
 
-wpbannerize.png
+1. Options
 
 == Installation ==
 
