@@ -82,6 +82,8 @@ You can change `<ul>` (container) and `<li>` (before)
 
 == Changelog ==
 
+History release:
+
 `
 * 1.4.1     Clean code
 * 1.4.0     Rev UI, change database, Fix upload path server bug
