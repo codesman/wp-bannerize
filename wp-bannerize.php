@@ -27,6 +27,7 @@ Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
 	
 	CHANGE LOG
 	
+	* 1.4.2		Add Screenshot
 	* 1.4.1		Clean code
 	* 1.4.0     Rev UI - Fix upload server bug
 	* 1.3.2		Fix bug to sort order with Ajax call 
