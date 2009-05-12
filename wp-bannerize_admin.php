@@ -347,7 +347,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		
 		$q = 'DESC `' . $this->table_bannerize . '`';
 		$rows = $wpdb->get_results( $q );
-		if( count( $rows ) < 8 ) {
+		if( count( $rows ) > 0 && count( $rows ) < 8 ) {
 			// previou version
 			return true;
 		} else {
