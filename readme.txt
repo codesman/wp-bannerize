@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV
 Requires at least: 2.7.1
 Tested up to: 2.7.1
-Stable tag: 1.4.3
+Stable tag: 2.0.0
 
 WP_BANNERIZE, banner-image manager.
 
@@ -12,7 +12,17 @@ WP_BANNERIZE, banner-image manager.
 
 WP_BANNERIZE is a banner-image manager. In your template insert: `<?php wp_bannerize(); ?>`
 
-**FROM 1.4.0**
+**NEW FROM 2.0.0**
+
+* Add edit banners list
+* Add combo menu for select group/key
+* Add combo menu for selcte target browser window
+* Add Wordpress contextual HELP
+* Add `limit` option for limit banners number in output
+* Add a minimal base localization
+* Rev code and fix minor bugs 
+
+**NEW FROM 1.4.0**
 Due to fix an upload's trouble the database table is changed. So, I apologies, but you have to update a new database table and discard old database.
 In this way you have to re-insert your banners.
 
@@ -32,6 +42,7 @@ and put in right sidebar:
 * container_after     Main tag container close (default </ul>)
 * before              Before tag banner open (default <li>) 
 * after               After tag banner close (default </li>) 
+* limit               Limit rows number (default '' - show all rows) 
 `
 
 = Related Links =
@@ -42,6 +53,8 @@ and put in right sidebar:
 == Screenshots ==
 
 1. Options
+2. New inline edit
+3. Contextual HELP
 
 == Installation ==
 
@@ -85,6 +98,7 @@ You can change `<ul>` (container) and `<li>` (before)
 History release:
 
 `
+* 2.0.0     Add edit banner, combo menu for group/key and target, contextual HELP, Icon, limit oprion, rev list and rev code!
 * 1.4.3		Fix patch on old version database table
 * 1.4.2		Add screenshot
 * 1.4.1     Clean code

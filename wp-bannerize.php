@@ -2,8 +2,8 @@
 /*
 Plugin Name: WP-BANNERIZE
 Plugin URI: http://wordpress.org/extend/plugins/wp-bannerize/
-Description: WP_BANNERIZE is a image banner manager. See <a href="options-general.php?page=wp-bannerize_admin.php">configuration panel</a> for more settings. For more info and plugins visit <a href="http://labs.saidmade.com">Labs Saidmade</a>.
-Version: 1.4.3
+Description: WP_BANNERIZE is a image banner manager. For more info and plugins visit <a href="http://labs.saidmade.com">Labs Saidmade</a>.
+Version: 2.0.0
 Author: Giovambattista Fazioli
 Author URI: http://labs.saidmade.com
 Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -27,6 +27,7 @@ Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
 	
 	CHANGE LOG
 	
+	* 2.0.0     Add edit banner, combo menu for group/key and target, contextual HELP, Icon, limit oprion, rev list and rev code!
 	* 1.4.3		Fix patch on old version database table
 	* 1.4.2		Add Screenshot
 	* 1.4.1		Clean code
@@ -47,6 +48,7 @@ if( is_admin() ) {
 	require_once( 'wp-bannerize_admin.php' );
 	//
 	$wp_bannerize_admin = new WPBANNERIZE_ADMIN();
+	$wp_bannerize_admin->register_plugin_settings( __FILE__ );
 } else {
 	require_once( 'wp-bannerize_client.php');
 	$wp_bannerize_client = new WPBANNERIZE_CLIENT();

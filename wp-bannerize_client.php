@@ -20,7 +20,8 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
 	 * container_before		Main tag container open (default <ul>)
 	 * container_after		Main tag container close (default </ul>)
 	 * before				Before tag banner open (default <li>) 
-	 * after				After tag banner close (default </li>) 
+	 * after				After tag banner close (default </li>)
+	 * limit				Limit rows number (default none - show all rows) 
 	 * 
 	 */
 	function bannerize( $args = '' ) {
@@ -31,7 +32,8 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
 						 'container_before'		=> '<ul>',
 						 'container_after'		=> '</ul>',
 						 'before'				=> '<li>',
-						 'after'				=> '</li>'
+						 'after'				=> '</li>',
+						 'limit'				=> ''
 						);
 		
 		$new_args = wp_parse_args( $args, $default );
@@ -43,6 +45,14 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
 		}
 		
 		$q .= " ORDER BY `sorter` ASC";
+		
+		/**
+		 * New from 2.0.0
+		 * Limit rows number
+		 */
+		if( $new_args['limit'] != "") {
+			$q .= " LIMIT 0," . $new_args['limit'] ;
+		}
 		
 		$rows = $wpdb->get_results( $q );	
 	

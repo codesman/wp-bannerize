@@ -26,7 +26,8 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		 */
 		$this->update = $this->checkTable(); 
 		
-		add_action('admin_menu', 	array( $this, 'set_options_page') );
+		add_action('admin_menu', 	array( $this, 'add_menus') );
+		
 	}
 	
 	/**
@@ -35,10 +36,31 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	 * Add callback for adding options panel
 	 *
 	 */
-	function set_options_page() {
-		if ( function_exists('add_options_page') ) {
-	 		$plugin_page = add_options_page( $this->options_title, $this->options_title, 8, basename(__FILE__), array( $this, 'set_options_subpanel') );
-			add_action( 'admin_head-'. $plugin_page, array( $this, 'set_admin_head' ) );
+	
+	function add_menus() {
+		$menus = array();
+		
+		if (function_exists('add_object_page'))
+			$menus['main'] = add_object_page('WP Bannerize', 'WP Bannerize', 8, $this->directory.'-settings', array( &$this, 'set_options_subpanel') );
+		else
+			$menus['main'] = add_menu_page('WP Bannerize', 'WP Bannerize', 8, $this->directory.'-settings', array(&$this,'set_options_subpanel') );
+
+		$menus['settings'] = add_submenu_page($this->directory.'-settings', __('Settings'), __('Settings'), 8, $this->directory.'-settings', array(&$this,'set_options_subpanel') );
+		
+		add_action( 'admin_head-' . $menus['settings'], array( &$this, 'set_admin_head' ) );
+		
+		if (function_exists('add_contextual_help')) {
+			add_contextual_help($menus['main'],'<p><strong>'.__('Use').':</strong></p>' .
+			'<pre>wp_bannerize();</pre> or<br/>' .
+			'<pre>wp_bannerize( \'group=a&limit=10\' );</pre><br/>' .
+			'<pre>
+* group               If \'\' show all groups, else show the selected group code (default \'\')
+* container_before    Main tag container open (default &lt;ul&gt;)
+* container_after     Main tag container close (default &lt;/ul&gt;)
+* before              Before tag banner open (default &lt;li&gt;)
+* after               After tag banner close (default &lt;/li&gt;) 
+* limit               Limit rows number (default \'\' - show all rows)</pre>' 			
+			);
 		}
 	}
 	
@@ -56,7 +78,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		$any_error = "";										// any error flag
 	
 		if( isset( $_POST['command_action'] ) ) {				// have to save options	
-			$any_error = 'Your settings have been saved.';
+			$any_error = __('Your settings have been saved.');
 	
 			switch( $_POST['command_action'] ) {
 				case "mysql_insert":
@@ -64,6 +86,9 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 					break;
 				case "mysql_delete":
 					$any_error = $this->mysql_delete();
+					break;		
+				case "mysql_update":
+					$any_error = $this->mysql_update();
 					break;		
 			}
 		}
@@ -85,30 +110,30 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			<div class="icon32" id="icon-options-general"><br/></div>
 		    <h2><?=$this->options_title?> ver. <?=$this->version?></h2>
 		
-			<h2>Insert a new banner</h2>
+			<h2><?php echo __('Insert new Banner')?></h2>
 			<form class="form_box" name="insert_bannerize" method="post" action="" enctype="multipart/form-data">
 				<input type="hidden" name="command_action" id="command_action" value="mysql_insert" />
 				<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
 				
 				<table class="form-table">
 					<tr>
-						<th scope="row"><label for="group">Group key:</label></th>
-						<td><input type="text" name="group" id="group" value="A" size="8" style="text-align:right" /> (Insert any id/key)</td>
+						<th scope="row"><label for="group"><?php echo __('Image')?>:</label></th>
+						<td><input type="file" name="filename" id="filename" size="40" /></td>
 					</tr>
 					<tr>
-						<th scope="row"><label for="description">Description:</label></th>
+						<th scope="row"><label for="group"><?php echo __('Key')?>:</label></th>
+						<td><input type="text" maxlength="8" name="group" id="group" value="A" size="8" style="text-align:right" /> <?php echo $this->get_combo_group() ?> (<?php echo __('Insert a key max 8 char')?>)</td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="description"><?php echo __('Description')?>:</label></th>
 						<td><input type="text" name="description" id="description" value="" size="32" /></td>
 					</tr>
 					<tr>
 						<th scope="row"><label for="url">URL:</label></th>
-						<td><input type="text" name="url" id="url" value="" size="32" /> <label for="url">Target:</label> <input type="text" name="target" id="target" value="" size="16" /> (_blank for example)</td>
-					</tr>
-					<tr>
-						<th scope="row"><label for="group">Image:</label></th>
-						<td><input type="file" name="filename" id="filename" size="40" /></td>
+						<td><input type="text" name="url" id="url" value="" size="32" /> <label for="url"><?php echo __('Target')?>:</label> <?php echo $this->get_target_combo() ?></td>
 					</tr>
 				</table>
-				<div class="submit"><input type="submit" value="Insert" /></div>
+				<div class="submit"><input class="button-primary" type="submit" value="<?php echo __('Insert')?>" /></div>
 			</form>
 			
 			<form style="display:none" name="delete_bannerize" method="post" action="">
@@ -116,10 +141,15 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 				<input type="hidden" name="id" id="id" value="" />
 			</form>
 	
-			<h2>List Banners</h2>
-			<form class="form_box" name="filter_bannerize" method="post" action="">
-				<p><label for="group_filter">Show group: </label><?php $this->combo_group(); ?></p>
-			</form>
+			<div class="icon32" id="icon-edit"><br/></div><h2><?php echo __('Banners list')?></h2>
+			<div class="tablenav">
+				<div class="alignleft actions">
+					<form class="form_box" name="filter_bannerize" method="post" action="">
+						<?php $this->combo_group(); ?> <input class="button-secondary" type="submit" value="<?php echo __('Filter')?>"/>
+						| <?php echo __('Use')?> <img align="absmiddle" alt="Drag and Drop" border="0" src="<?php echo $this->uri ?>/css/images/arrow_ns.png" /> <?php echo __('for drag and drop to change order')?>
+					</form>
+				</div>
+			</div>		
 			<?php
 			
 				$q = "SELECT * FROM `" . $this->table_bannerize . "`";
@@ -135,22 +165,58 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 				$o = '<table class="widefat" id="list_bannerize" width="100%" cellpadding="4" cellspacing="0">
 				       <thead>
 					    <tr>
-						 <th width="40" scope="col">Banner</th>
-						 <th scope="col">Group</th>
-						 <th width="100%" scope="col">Description</th>
-						 <th align="right" scope="col">!</th>
+						 <th class="manage-column" scope="col"></th>
+						 <th width="40" scope="col">'.__('Image').'</th>
+						 <th scope="col">'.__('Key').'</th>
+						 <th width="100%" scope="col">'.__('Description').'</th>
+						 <th scope="col">'.__('URL').'</th>
+						 <th scope="col">'.__('Target').'</th>
 						</tr>
 					   </thead>
+					   <tfoot>
+					    <tr>
+						 <th class="manage-column" scope="col"></th>
+						 <th width="40" scope="col">'.__('Image').'</th>
+						 <th scope="col">'.__('Key').'</th>
+						 <th width="100%" scope="col">'.__('Description').'</th>
+						 <th scope="col">'.__('URL').'</th>
+						 <th scope="col">'.__('Target').'</th>
+						</tr>					   
+					   </tfoot>
 					   <tbody>';	
 				
 				$i = 0;	
+				
 				foreach( $rows as $row ) {
 					$class = ($i%2 == 0) ? 'class="alternate"' : ''; $i++;
+					$e = '<div class="inline-edit" id="edit_'.$row->id.'" style="display:none">' .
+						  '<form method="post" name="form_edit_'.$row->id.'">' .
+						  '<input type="hidden" name="command_action" value="mysql_update" />' .
+						  '<input type="hidden" name="id" value="'.$row->id.'" />' .
+						  '<label for="group">' . __('Key') . ':</label> <input size="8" type="text" name="group" value="' . $row->group . '" /> ' . $this->get_combo_group("form_edit_".$row->id) .
+						  '<label for="description">' . __('Description') . ':</label> <input size="32" type="text" name="description" value="' . $row->description . '" /><br/>' .
+						  '<label for="url">' . __('URL') . ':</label> <input type="text" name="url" size="32" value="' . $row->url . '" /> ' .
+						  '<label for="target">' . __('Target') . ':</label> ' . $this->get_target_combo( $row->target ) . 
+						  '<p class="submit inline-edit-save">' .
+						  '<a onclick="jQuery(\'div#edit_'.$row->id.'\').hide();return false;" class="button-secondary cancel alignleft" title="'.__('Cancel').'" href="#" accesskey="c">'.__('Cancel').'</a>' .
+						  '<a onclick="document.forms[\'form_edit_'.$row->id.'\'].submit();" class="button-primary save alignright" title="' . __('Update') . '" href="#" accesskey="s">' . __('Update') . '</a>' .
+						  '</p>' .
+						  '</form>' .
+						  '</div>';
+					
 					$o .= '<tr ' . $class . ' id="item_' . $row->id . '">' .
-						  '<td width="40" align="left"><a rel="shadowbox" target="_blank" href="' . $row->filename . '"><img height="32" width="32" border="0" src="' . $row->filename . '" /></a></td>' .
+						  '<th scope="row"><div class="arrow"></div></th> ' .
+						  '<td width="40" align="left"><img class="wp-bannerize-thumbnail" height="32" width="32" border="1" src="' . $row->filename . '" /></td>' .
 					      '<td>' . $row->group . '</td>' .
-						  '<td width"100%">' . $row->description . '</td>' .
-						  '<td align="right"><button class="button" onclick="delete_banner('.$row->id.')">Delete</button></td>' .
+						  '<td width"100%">' . $e . "<br/>" . $row->description .
+						  '<div class="row-actions">' .
+						  '<span class="edit"><a class="edit_'.$row->id.'" title="Edit" href="#">'.__('Edit').'</a> | </span>' .
+						  '<span class="delete"><a onclick="delete_banner('.$row->id.');return false;" href="#" title="'.__('Delete').'" class="submitdelete">'.__('Delete').'</a> | </span>' .
+						  '<span class="view"><a target="_blank" rel="permalink" href="' . $row->filename . '" title="'.__('View').'">'.__('View').'</a></span>' .
+						  '</div>' .
+						  '</td>' .
+						  '<td>' . $row->url . '</td>' .
+						  '<td>' . $row->target . '</td>' .
 						  '</tr>';
 				}
 				$o .= '</tbody>
@@ -188,10 +254,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			<div class="icon32" id="icon-options-general"><br/></div>
 		    <h2><?=$this->options_title?> ver. <?=$this->version?></h2>
 			<?php
-
 				if( isset( $_POST['toupdate'])) {
-					//$this->dropTable();
-					//$this->createTable();
 					$this->alterTable();
 					?>
 					<p>Update succefully!</p>
@@ -221,7 +284,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	function combo_group() {
 		global $wpdb, $_POST;
 		$o = '<select onchange="document.forms[\'filter_bannerize\'].submit()" id="group_filter" name="group_filter">' .
-		     '<option value="">All</option>';
+		     '<option value="">'.__('All').'</option>';
 		$q = "SELECT `group` FROM `" . $this->table_bannerize . "` GROUP BY `group` ORDER BY `group` ";
 		$rows = $wpdb->get_results( $q );
 		$sel = "";
@@ -232,6 +295,38 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		$o .= '</select>';
 		echo $o;
 	}	
+
+	function get_combo_group($name="insert_bannerize") {
+		global $wpdb, $_POST;
+		$o = '<select onchange="document.forms[\''.$name.'\'].group.value=this.options[this.selectedIndex].value" id="group_filter">' .
+		     '<option value=""></option>';
+		$q = "SELECT `group` FROM `" . $this->table_bannerize . "` GROUP BY `group` ORDER BY `group` ";
+		$rows = $wpdb->get_results( $q );
+		$sel = "";
+		foreach( $rows as $row ) {
+			$o .= '<option value="' . $row->group . '">' . $row->group . '</option>';
+		}
+		$o .= '</select>';
+		return $o;
+	}
+	
+	/**
+	 * Build combo menu for target
+	 * 
+	 * @return 
+	 */
+	function get_target_combo($sel="") {
+		$o = '
+		<select name="target" id="target">
+			<option></option>
+			<option '. ( ($sel=='_blank')?'selected="selected"':'' ) . '>_blank</option>
+			<option '. ( ($sel=='_parent')?'selected="selected"':'' ) . '>_parent</option>
+			<option '. ( ($sel=='_self')?'selected="selected"':'' ) . '>_self</option>
+			<option '. ( ($sel=='_top')?'selected="selected"':'' ) . '>_top</option>
+		</select>
+		';
+		return $o;
+	}
 	
 	/**
 	 * Hook the admin/plugin head
@@ -239,35 +334,14 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	 * @return 
 	 */
 	function set_admin_head() {
+		$aba = $this->ajax_url;
 	?>
-	<style type="text/css">
+	<link rel="stylesheet" href="<?php echo $this->uri?>/css/style.css" type="text/css" media="screen, projection" />
 
-	</style>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
-		
-		jQuery(document).ready(function(){
-			jQuery('table#list_bannerize tbody tr').css('width',jQuery('table#list_bannerize').width() );
-			jQuery('table#list_bannerize tbody').sortable({
-						axis:"y",
-						cursor:"n-resize",
-						stop:function() {
-							jQuery.ajax({
-							type: "POST",
-							url: "<?=$this->ajax_url?>",
-							data: jQuery("table#list_bannerize tbody").sortable("serialize")	})
-						}
-			});
-		});
-		
-		function delete_banner( id ) {
-			if( confirm('WARINING!!\n\nDo you want delete this banner?') ) {
-				var f = document.forms['delete_bannerize'];
-				f.id.value = id;
-				f.submit();
-			}
-		}
+		<?php require_once( $this->path . '/js/main.php'); ?>
 	</script>
 	<?php
 	}
@@ -298,7 +372,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			$target 	 	= $_POST['target'];
 			
 			$uploads		= wp_upload_bits( strtolower($name), '', '' );
-			
+
 			if ( move_uploaded_file( $_FILES['filename']['tmp_name'], $uploads['file'] )) {
 				
 				$q = "INSERT INTO `" . $this->table_bannerize . "`" .
@@ -331,6 +405,30 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		$wpdb->query($q);
 		return('');
 	}
+	
+	function mysql_update() {
+		global $wpdb, $_POST, $_FILES;
+		
+		$q = "UPDATE `" . $this->table_bannerize . "`" .
+			 "set `group` = '{$_POST['group']}', " .
+			 "`description` = '{$_POST['description']}', " .
+			 "`url` = '{$_POST['url']}', " .
+			 "`target` = '{$_POST['target']}' " .
+		 	 " WHERE `id` = " . $_POST['id'];
+		$wpdb->query($q);
+		return('');
+	}
+	
+	function register_plugin_settings( $pluginfile ) {
+		add_action( 'plugin_action_links_'.basename( dirname( $pluginfile ) ) . '/' . basename( $pluginfile ), array( &$this, 'plugin_settings' ), 10, 4 );
+	}
+	
+	function plugin_settings( $links ) {
+		$settings_link = '<a href="admin.php?page=wp-bannerize-settings">' . __('Settings') . '</a>';
+		array_unshift( $links, $settings_link );
+		return $links;
+	}	
+
 	
 	/**
 	 * Check if 'bannerize' table exists on the database
