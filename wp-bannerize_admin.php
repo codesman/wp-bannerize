@@ -466,7 +466,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			  `sorter` int(11) NOT NULL,
 			  `group` varchar(8) NOT NULL,
 			  `description` varchar(255) NOT NULL,
-			  `url` varchar(256) NOT NULL,
+			  `url` varchar(255) NOT NULL,
 			  `target` varchar(32) NOT NULL,
 			  `filename` varchar(255) NOT NULL,
 			  `realpath` varchar(255) NOT NULL,

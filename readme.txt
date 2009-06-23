@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV
 Requires at least: 2.7.1
 Tested up to: 2.7.1
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 
 WP_BANNERIZE, banner-image manager.
 
@@ -67,6 +67,7 @@ and put in right sidebar:
 
 == Thanks ==
 
+* [Ivan](http://www.bobmarleymagazine.com/) for bugs report
 * [rotunda](http://wordpress.org/support/profile/2123029) for beta test
 * [labs.saidmade.com](http://labs.saidmade.com/ "Creazione siti Web")
 
@@ -98,6 +99,7 @@ You can change `<ul>` (container) and `<li>` (before)
 History release:
 
 `
+* 2.0.1     Fix bugs on varchar size in create table
 * 2.0.0     Add edit banner, combo menu for group/key and target, contextual HELP, Icon, limit oprion, rev list and rev code!
 * 1.4.3		Fix patch on old version database table
 * 1.4.2		Add screenshot
