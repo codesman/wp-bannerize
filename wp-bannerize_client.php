@@ -21,7 +21,8 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
 	 * container_after		Main tag container close (default </ul>)
 	 * before				Before tag banner open (default <li>) 
 	 * after				After tag banner close (default </li>)
-	 * limit				Limit rows number (default none - show all rows) 
+	 * random               Show random banner sequence (default '')
+	 * limit				Limit rows number (default '' - show all rows) 
 	 * 
 	 */
 	function bannerize( $args = '' ) {
@@ -33,6 +34,7 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
 						 'container_after'		=> '</ul>',
 						 'before'				=> '<li>',
 						 'after'				=> '</li>',
+						 'random'               => '',
 						 'limit'				=> ''
 						);
 		
@@ -44,7 +46,11 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
 			$q .= " WHERE `group` = '" . $new_args['group'] . "'";
 		}
 		
-		$q .= " ORDER BY `sorter` ASC";
+		/**
+		 * New from 2.0.2
+		 * Add random option
+		 */
+		$q .= ($new_args['random'] == '') ? " ORDER BY `sorter` ASC" : "ORDER BY RAND()";
 		
 		/**
 		 * New from 2.0.0
@@ -61,7 +67,7 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
 		foreach( $rows as $row ) {
 			$target = ( $row->target != "" ) ? 'target="' . $row->target . '"' : "";
 			$o .= $new_args['before'] . 
-				  '<a ' . $target . ' href="' . $row->url . '"><img border="0" src="' . $row->filename . '" /></a>' .
+				  '<a ' . $target . ' href="' . $row->url . '"><img alt="'.$row->description.'" border="0" src="' . $row->filename . '" /></a>' .
 				  $new_args['after'];	
 		}
 		$o .= $new_args['container_after'];

@@ -59,6 +59,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 * container_after     Main tag container close (default &lt;/ul&gt;)
 * before              Before tag banner open (default &lt;li&gt;)
 * after               After tag banner close (default &lt;/li&gt;) 
+* random              Show random banner sequence (default \'\')
 * limit               Limit rows number (default \'\' - show all rows)</pre>' 			
 			);
 		}
@@ -194,7 +195,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 						  '<input type="hidden" name="command_action" value="mysql_update" />' .
 						  '<input type="hidden" name="id" value="'.$row->id.'" />' .
 						  '<label for="group">' . __('Key') . ':</label> <input size="8" type="text" name="group" value="' . $row->group . '" /> ' . $this->get_combo_group("form_edit_".$row->id) .
-						  '<label for="description">' . __('Description') . ':</label> <input size="32" type="text" name="description" value="' . $row->description . '" /><br/>' .
+						  '<label for="description">' . __('Description') . ':</label> <input size="32" type="text" name="description" value="' . $row->description . '" /> (image alt)<br/>' .
 						  '<label for="url">' . __('URL') . ':</label> <input type="text" name="url" size="32" value="' . $row->url . '" /> ' .
 						  '<label for="target">' . __('Target') . ':</label> ' . $this->get_target_combo( $row->target ) . 
 						  '<p class="submit inline-edit-save">' .
