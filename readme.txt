@@ -1,7 +1,7 @@
  === WP-BANNERIZE ===
 Contributors: Giovambattista Fazioli
 Donate link: http://labs.saidmade.com
-Tags: Banner, Manage, Image, ADV
+Tags: Banner, Manage, Image, ADV, Random
 Requires at least: 2.7.1
 Tested up to: 2.8.5
 Stable tag: 2.0.3
