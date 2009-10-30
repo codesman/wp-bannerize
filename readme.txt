@@ -3,14 +3,18 @@ Contributors: Giovambattista Fazioli
 Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV
 Requires at least: 2.7.1
-Tested up to: 2.7.1
-Stable tag: 2.0.1
+Tested up to: 2.8.5
+Stable tag: 2.0.3
 
 WP_BANNERIZE, banner-image manager.
 
 == Description ==
 
 WP_BANNERIZE is a banner-image manager. In your template insert: `<?php wp_bannerize(); ?>`
+
+**NEW FROM 2.0.2**
+
+* Add random option
 
 **NEW FROM 2.0.0**
 
@@ -99,6 +103,8 @@ You can change `<ul>` (container) and `<li>` (before)
 History release:
 
 `
+* 2.0.3     Minor Fix
+* 2.0.2     Add random option, fix minor bugs
 * 2.0.1     Fix bugs on varchar size in create table
 * 2.0.0     Add edit banner, combo menu for group/key and target, contextual HELP, Icon, limit oprion, rev list and rev code!
 * 1.4.3		Fix patch on old version database table

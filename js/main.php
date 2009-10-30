@@ -1,5 +1,6 @@
 /**
  * @author Giovambattista Fazioli
+ * @rev    2009-10-30
  */
 jQuery(document).ready(function(){
 	jQuery('table#list_bannerize tbody tr').css('width',jQuery('table#list_bannerize').width() );

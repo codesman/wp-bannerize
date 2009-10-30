@@ -9,7 +9,7 @@ class WPBANNERIZE_CLASS {
 	 * @internal
 	 * @staticvar
 	 */
-	var $version 							= "2.0.0";				// plugin version
+	var $version 							= "2.0.3";				// plugin version
 	var $plugin_name 						= "WP Bannerize";		// plugin name
 	var $options_key 						= "wp-bannerize";		// options key to store in database
 	var $options_title						= "WP Bannerize";		// label for "setting" in WP
