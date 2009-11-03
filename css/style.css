@@ -1,0 +1,18 @@
+/**
+ * WP bannerize Styles
+ */
+div.arrow {
+	width:16px;
+	height:16px;
+	background:url(images/arrow_ns.png) no-repeat;
+	float:left;
+	margin:6px 8px 0 0;
+	cursor:pointer;
+}
+img.wp-bannerize-thumbnail {width:32px;border:2px solid #000}
+div.inline-edit {
+	padding:10px;
+	border:1px solid #888;
+	clear:both;
+	display:block;
+}
