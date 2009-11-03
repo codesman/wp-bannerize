@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random
 Requires at least: 2.7.1
 Tested up to: 2.8.5
-Stable tag: 2.0.3
+Stable tag: 2.1.0
 
 WP_BANNERIZE, banner-image manager.
 
@@ -12,9 +12,13 @@ WP_BANNERIZE, banner-image manager.
 
 WP_BANNERIZE is a banner-image manager. In your template insert: `<?php wp_bannerize(); ?>`
 
+**NEW FROM 2.1.0**
+
+* Add thickbox support for preview thumbnail, resize key field to 128 chars, Minor Fix
+
 **NEW FROM 2.0.2**
 
-* Add random option
+* Add `random` option
 
 **NEW FROM 2.0.0**
 
@@ -46,6 +50,7 @@ and put in right sidebar:
 * container_after     Main tag container close (default </ul>)
 * before              Before tag banner open (default <li>) 
 * after               After tag banner close (default </li>) 
+* random              Show random banner sequence (default '')
 * limit               Limit rows number (default '' - show all rows) 
 `
 
@@ -103,6 +108,8 @@ You can change `<ul>` (container) and `<li>` (before)
 History release:
 
 `
+* 2.1.0     Add thickbox support for preview thumbnail, resize key field to 128 chars, Minor Fix
+* 2.0.8     Minor Fix, improve admin
 * 2.0.3     Minor Fix
 * 2.0.2     Add random option, fix minor bugs
 * 2.0.1     Fix bugs on varchar size in create table

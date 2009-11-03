@@ -42,23 +42,19 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
 		
 		$q = "SELECT * FROM `" . $this->table_bannerize . "` ";
 		
-		if( $new_args['group'] != "") {
-			$q .= " WHERE `group` = '" . $new_args['group'] . "'";
-		}
+		if( $new_args['group'] != "") $q .= " WHERE `group` = '" . $new_args['group'] . "'";
 		
 		/**
-		 * New from 2.0.2
+		 * @since 2.0.2
 		 * Add random option
 		 */
 		$q .= ($new_args['random'] == '') ? " ORDER BY `sorter` ASC" : "ORDER BY RAND()";
 		
 		/**
-		 * New from 2.0.0
+		 * @since 2.0.0
 		 * Limit rows number
 		 */
-		if( $new_args['limit'] != "") {
-			$q .= " LIMIT 0," . $new_args['limit'] ;
-		}
+		if( $new_args['limit'] != "") $q .= " LIMIT 0," . $new_args['limit'] ;
 		
 		$rows = $wpdb->get_results( $q );	
 	

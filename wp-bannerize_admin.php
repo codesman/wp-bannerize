@@ -22,12 +22,22 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		parent::getOptions();
 		
 		/**
-		 * Check for 1.4+
+		 * @since 1.4+
+		 * Check table for new field
+		 * 
+		 * @since 2.1.0
+		 * Alter table group filed to varchar(128)
 		 */
 		$this->update = $this->checkTable(); 
 		
 		add_action('admin_menu', 	array( $this, 'add_menus') );
 		
+		/**
+		 * @since 2.1.0
+		 * Add thickbox standard Wordpress support
+		 */
+		wp_enqueue_script('thickbox');
+		wp_enqueue_style('thickbox');
 	}
 	
 	/**
@@ -36,7 +46,6 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	 * Add callback for adding options panel
 	 *
 	 */
-	
 	function add_menus() {
 		$menus = array();
 		
@@ -49,10 +58,14 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		
 		add_action( 'admin_head-' . $menus['settings'], array( &$this, 'set_admin_head' ) );
 		
+		/**
+		 * Add contextual Help
+		 */
 		if (function_exists('add_contextual_help')) {
 			add_contextual_help($menus['main'],'<p><strong>'.__('Use').':</strong></p>' .
 			'<pre>wp_bannerize();</pre> or<br/>' .
-			'<pre>wp_bannerize( \'group=a&limit=10\' );</pre><br/>' .
+			'<pre>wp_bannerize( \'group=a&limit=10\' );</pre> or<br/>' .
+			'<pre>wp_bannerize( \'group=a&limit=10&random=1\' );</pre><br/>' .
 			'<pre>
 * group               If \'\' show all groups, else show the selected group code (default \'\')
 * container_before    Main tag container open (default &lt;ul&gt;)
@@ -123,7 +136,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 					</tr>
 					<tr>
 						<th scope="row"><label for="group"><?php echo __('Key')?>:</label></th>
-						<td><input type="text" maxlength="8" name="group" id="group" value="A" size="8" style="text-align:right" /> <?php echo $this->get_combo_group() ?> (<?php echo __('Insert a key max 8 char')?>)</td>
+						<td><input type="text" maxlength="128" name="group" id="group" value="A" size="32" style="text-align:right" /> <?php echo $this->get_combo_group() ?> (<?php echo __('Insert a key max 128 char')?>)</td>
 					</tr>
 					<tr>
 						<th scope="row"><label for="description"><?php echo __('Description')?>:</label></th>
@@ -213,7 +226,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 						  '<div class="row-actions">' .
 						  '<span class="edit"><a class="edit_'.$row->id.'" title="Edit" href="#">'.__('Edit').'</a> | </span>' .
 						  '<span class="delete"><a onclick="delete_banner('.$row->id.');return false;" href="#" title="'.__('Delete').'" class="submitdelete">'.__('Delete').'</a> | </span>' .
-						  '<span class="view"><a target="_blank" rel="permalink" href="' . $row->filename . '" title="'.__('View').'">'.__('View').'</a></span>' .
+						  '<span class="view"><a target="_blank" class="thickbox" rel="wp-bannerize-gallery" href="' . $row->filename . '" title="'.__('View').'">'.__('View').'</a></span>' .
 						  '</div>' .
 						  '</td>' .
 						  '<td>' . $row->url . '</td>' .
@@ -407,6 +420,11 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		return('');
 	}
 	
+	/**
+	 * Uodate a banner
+	 * 
+	 * @return 		(not used)
+	 */
 	function mysql_update() {
 		global $wpdb, $_POST, $_FILES;
 		
@@ -420,6 +438,9 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		return('');
 	}
 	
+	/**
+	 * Attach settings in Wordpress Plugins list
+	 */
 	function register_plugin_settings( $pluginfile ) {
 		add_action( 'plugin_action_links_'.basename( dirname( $pluginfile ) ) . '/' . basename( $pluginfile ), array( &$this, 'plugin_settings' ), 10, 4 );
 	}
@@ -430,7 +451,6 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		return $links;
 	}	
 
-	
 	/**
 	 * Check if 'bannerize' table exists on the database
 	 * if not exists then create it
@@ -441,9 +461,22 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		global $wpdb;
 		
 		/**
+		 * @since 2.1.0
+		 * Check group field for alter table varchar(128)
+		 */
+		$desc = $wpdb->get_results( 'DESC `' . $this->table_bannerize . '`' );
+		
+		foreach( $desc as $field ) {
+			if(  $field->Field == "group" )
+				if(  $field->Type == "varchar(8)" ) {
+					$wpdb->query( 'ALTER TABLE `' . $this->table_bannerize . '` CHANGE `group` `group` VARCHAR(128)' );
+					break;
+				}
+		}
+		
+		/**
 		 * Check old wp-bannerize version
 		 */
-		
 		$q = 'DESC `' . $this->table_bannerize . '`';
 		$rows = $wpdb->get_results( $q );
 		if( count( $rows ) > 0 && count( $rows ) < 8 ) {
@@ -458,6 +491,9 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	/**
 	 * Create WP Bannerize table for store banner data
 	 * 
+	 * @since 2.1.0
+	 * group field is varchar(128)
+	 * 
 	 * @return 
 	 */
 	function createTable() {
@@ -465,7 +501,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		$q = 'CREATE TABLE IF NOT EXISTS `' . $this->table_bannerize . '` (
 			  `id` int(11) NOT NULL auto_increment,
 			  `sorter` int(11) NOT NULL,
-			  `group` varchar(8) NOT NULL,
+			  `group` varchar(128) NOT NULL,
 			  `description` varchar(255) NOT NULL,
 			  `url` varchar(255) NOT NULL,
 			  `target` varchar(32) NOT NULL,
