@@ -49,10 +49,12 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	function add_menus() {
 		$menus = array();
 		
-		if (function_exists('add_object_page'))
-			$menus['main'] = add_object_page('WP Bannerize', 'WP Bannerize', 8, $this->directory.'-settings', array( &$this, 'set_options_subpanel') );
-		else
-			$menus['main'] = add_menu_page('WP Bannerize', 'WP Bannerize', 8, $this->directory.'-settings', array(&$this,'set_options_subpanel') );
+		if (function_exists('add_object_page')) {
+                    // Remove from 2.2.0 for fix Wordpress 2.8.6
+                    // $menus['main'] = add_object_page('WP Bannerize', 'WP Bannerize', 8, $this->directory.'-settings', array( &$this, 'set_options_subpanel') );
+                    $menus['main'] = add_object_page('WP Bannerize', 'WP Bannerize', 8, $this->directory.'-settings' );
+		} else
+                    $menus['main'] = add_menu_page('WP Bannerize', 'WP Bannerize', 8, $this->directory.'-settings', array(&$this,'set_options_subpanel') );
 
 		$menus['settings'] = add_submenu_page($this->directory.'-settings', __('Settings'), __('Settings'), 8, $this->directory.'-settings', array(&$this,'set_options_subpanel') );
 		
