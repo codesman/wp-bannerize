@@ -96,8 +96,8 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [Ivan](http://www.bobmarleymagazine.com/) for bugs report
 * [rotunda](http://wordpress.org/support/profile/2123029) for beta test
 * [labs.saidmade.com](http://labs.saidmade.com/ "Creazione siti Web")
-* [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video") for prefix table suggest
-* [marsev](http://wordpress.org/support/profile/5368431 "marsev")
+* [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video") 
+* [marsev](http://wordpress.org/support/profile/5368431 "marsev") for prefix table suggest
 
 == Frequently Asked Questions == 
 
