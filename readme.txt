@@ -2,15 +2,19 @@
 Contributors: Giovambattista Fazioli
 Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random
-Requires at least: 2.7.1
+Requires at least: 2.8
 Tested up to: 2.8.6
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 
 WP_BANNERIZE, banner-image manager.
 
 == Description ==
 
 WP_BANNERIZE is a banner-image manager. In your template insert: `<?php wp_bannerize(); ?>` or set it like Widget
+
+**NEW FROM 2.2.1**
+
+* Add Wordpress MU (and Wordpress standard table naming) prefix table and compatibility ( thanks @marsev for suggest )
 
 **NEW FROM 2.2.0**
 
@@ -65,6 +69,7 @@ and put in right sidebar:
 * [Saidmade](http://www.saidmade.com/ "Creazione siti Web")
 * [Undolog](http://www.undolog.com/ "Author's Web")
 * [Labs Saidmade](http://labs.saidmade.com/ "More Wordpress Plugin info")
+* [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Screenshots ==
 
@@ -72,6 +77,8 @@ and put in right sidebar:
 2. New inline edit
 3. Contextual HELP
 4. Widget support
+
+* [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Installation ==
 
@@ -82,11 +89,15 @@ and put in right sidebar:
 4. Insert in you template php `<?php wp_bannerize(); ?>` function
 5. Done. Enjoy.
 
+See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
+
 == Thanks ==
 
 * [Ivan](http://www.bobmarleymagazine.com/) for bugs report
 * [rotunda](http://wordpress.org/support/profile/2123029) for beta test
 * [labs.saidmade.com](http://labs.saidmade.com/ "Creazione siti Web")
+* [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video") for prefix table suggest
+* [marsev](http://wordpress.org/support/profile/5368431 "marsev")
 
 == Frequently Asked Questions == 
 
@@ -116,6 +127,7 @@ You can change `<ul>` (container) and `<li>` (before)
 History release:
 
 `
+* 2.2.1     Fix to Wordpress MU compatibilities, Fix minor bugs
 * 2.2.0     Add Widget support, fix compatibility with Wordpress 2.8.6
 * 2.1.0     Add thickbox support for preview thumbnail, resize key field to 128 chars, Minor Fix
 * 2.0.8     Minor Fix, improve admin
