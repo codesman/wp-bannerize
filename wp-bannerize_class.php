@@ -100,11 +100,11 @@ class WPBANNERIZE_CLASS {
 class WP_BANNERIZE_WIDGET extends WP_Widget {
 
     // @since 2.2.1
-    var $table_bannerize					= WP_BANNERIZE_TABLE;
+    var $table_bannerize = WP_BANNERIZE_TABLE;
 
     function WP_BANNERIZE_WIDGET() {
         // @since 2.2.1
-        $this->table_bannerize                                  = $wpdb->prefix . WP_BANNERIZE_TABLE;
+        $this->table_bannerize = $wpdb->prefix . WP_BANNERIZE_TABLE;
         //
         $widget_ops = array('classname' => 'widget_wp_bannerize', 'description' => 'Very simple Banner Image Manager');
         $control_ops = array('width' => 400, 'height' => 350);
@@ -151,16 +151,16 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
     }
 
     function update( $new_instance, $old_instance ) {
-        $instance 						= $old_instance;
-        $instance['title'] 				= strip_tags($new_instance['title']);
-        $instance['group'] 				= strip_tags($new_instance['group']);
-        $instance['random'] 			= strip_tags($new_instance['random']);
-        $instance['limit'] 				= strip_tags($new_instance['limit']);
+        $instance                       = $old_instance;
+        $instance['title'] 		= strip_tags($new_instance['title']);
+        $instance['group']              = strip_tags($new_instance['group']);
+        $instance['random'] 		= strip_tags($new_instance['random']);
+        $instance['limit'] 		= strip_tags($new_instance['limit']);
 
         $instance['container_before'] 	= ($new_instance['container_before']);
         $instance['container_after'] 	= ($new_instance['container_after']);
-        $instance['before'] 			= ($new_instance['before']);
-        $instance['after'] 				= ($new_instance['after']);
+        $instance['before'] 		= ($new_instance['before']);
+        $instance['after'] 		= ($new_instance['after']);
 
         return $instance;
     }
