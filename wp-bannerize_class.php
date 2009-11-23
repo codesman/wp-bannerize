@@ -11,7 +11,10 @@ class WPBANNERIZE_CLASS {
  * @internal
  * @staticvar
  */
-    var $version 						= "2.2.1";		// plugin version
+    var $release                                                = 2;
+    var $minor                                                  = 2;
+    var $revision                                               = 2;
+    var $version 						= "";		// plugin version
     var $plugin_name 						= "WP Bannerize";	// plugin name
     var $options_key 						= "wp-bannerize";	// options key to store in database
     var $options_title						= "WP Bannerize";	// label for "setting" in WP
@@ -48,6 +51,9 @@ class WPBANNERIZE_CLASS {
      */
     function WPBANNERIZE_CLASS() {
         global $wpdb;
+
+        $this->version = $this->release . "." . $this->minor . "." . $this->revision;
+
         /**
          * @since 2.2.1
          * Add $wpdb->prefix to table name define in WP_BANNERIZE_TABLE
@@ -91,11 +97,11 @@ class WPBANNERIZE_CLASS {
  * Widget support
  *
  * @abstract	Add Widget support
- * @author		=undo=
+ * @author	=undo=
  * @copyright	Saidmade Srl
- * @since		2.2.0
- * @version		1.0
- * @uses		Wordpress 2.8+
+ * @since	2.2.0
+ * @version	1.0
+ * @uses	Wordpress 2.8+
  */
 class WP_BANNERIZE_WIDGET extends WP_Widget {
 
@@ -147,7 +153,7 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
 
         echo $o;
 
-        echo $before_widget;
+        echo $after_widget;
     }
 
     function update( $new_instance, $old_instance ) {

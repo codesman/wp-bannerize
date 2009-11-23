@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random
 Requires at least: 2.8
 Tested up to: 2.8.6
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 
 WP_BANNERIZE, banner-image manager.
 
@@ -97,7 +97,7 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [rotunda](http://wordpress.org/support/profile/2123029) for beta test
 * [labs.saidmade.com](http://labs.saidmade.com/ "Creazione siti Web")
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video") 
-* [marsev](http://wordpress.org/support/profile/5368431 "marsev") for prefix table suggest
+* [marsev](http://wordpress.org/support/profile/5368431 "marsev") for prefix table suggest and beta test
 
 == Frequently Asked Questions == 
 
@@ -127,6 +127,7 @@ You can change `<ul>` (container) and `<li>` (before)
 History release:
 
 `
+* 2.2.2     Fix minor bugs + prepare major release
 * 2.2.1     Fix to Wordpress MU compatibilities, Fix minor bugs
 * 2.2.0     Add Widget support, fix compatibility with Wordpress 2.8.6
 * 2.1.0     Add thickbox support for preview thumbnail, resize key field to 128 chars, Minor Fix

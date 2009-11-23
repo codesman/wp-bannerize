@@ -16,7 +16,16 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      * @return
      */
     function initDefaultOption() {
-        $this->options 						= array();
+        /**
+         * @since 2.2.2
+         * Add version control in options.
+         * In questa maniera dalle release successive quando si chiama il
+         * metodo checkTable() è possibile verificare la versione del plugin
+         * precedente; senza impazzire con le DESC sulle tabelle.
+         *
+         */
+        $this->options = array('wp_bannerize_version' => $this->version );
+
         add_option( $this->options_key, $this->options, $this->options_title );
 
         parent::getOptions();
@@ -38,6 +47,12 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
          */
         wp_enqueue_script('thickbox');
         wp_enqueue_style('thickbox');
+
+        /**
+         * @since 2.2.2
+         * Update version control in options
+         */
+        update_option( $this->options_key, $this->options);
     }
 
     /**
@@ -84,7 +99,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      * Draw Options Panel
      */
     function set_options_subpanel() {
-        global $wpp_options, $wpdb, $_POST;
+        global $wpdb, $_POST;
 
         if( $this->update ) {
             $this->showUpdate();
@@ -237,14 +252,14 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
                     '</tr>';
             }
             $o .= '</tbody>
-				       </table>';
+                    </table>';
 
             echo $o;
             ?>
 
     <p style="text-align:center;font-family:Tahoma;font-size:10px">Developed by <a target="_blank" href="http://www.saidmade.com"><img align="absmiddle" src="http://labs.saidmade.com/images/sm-a-80x15.png" border="0" /></a>
         <br/>
-				more Wordpress plugins on <a target="_blank" href="http://labs.saidmade.com">labs.saidmade.com</a> and <a target="_blank" href="http://www.undolog.com">Undolog.com</a>
+more Wordpress plugins on <a target="_blank" href="http://labs.saidmade.com">labs.saidmade.com</a> and <a target="_blank" href="http://www.undolog.com">Undolog.com</a>
         <br/>
     <form style="text-align:center;width:300px;margin:0 auto" action="https://www.paypal.com/cgi-bin/webscr" method="post">
         <input type="hidden" name="cmd" value="_s-xclick">
@@ -265,7 +280,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      * @return
      */
     function showUpdate() {
-        global $wpp_options, $wpdb, $_POST;
+        global $wpdb, $_POST;
         ?>
 <div class="wrap">
     <div class="icon32" id="icon-options-general"><br/></div>
@@ -367,10 +382,10 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      * Esegue l'upload e lo store nel database
      *
      * Array ( [name] 			=> test.pdf
-     * 		   [type]			=> application/pdf
+     * 		   [type]		=> application/pdf
      * 		   [tmp_name] 		=> /tmp/phpcXS1lh
-     *    	   [error] 			=> 0
-     *    	   [size] 			=> 277304 )
+     *    	   [error] 		=> 0
+     *    	   [size] 		=> 277304 )
      *
      * @return
      */
@@ -464,6 +479,37 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         global $wpdb;
 
         /**
+         * @since 2.2.2
+         * Da questa release è possibile controllare la versione del
+         * plugin in modo da sapere se effettuare modifiche oppure no.
+         */
+        if( !isset($this->options['wp_bannerize_version']) ) {                  // 2.2.2 minor
+            $this->options = array('wp_bannerize_version' => $this->version );
+            update_option( $this->options_key, $this->options);
+        }
+
+        /**
+         * Prelevo la versione attuale
+         *
+         * version_array[0] = release
+         * version_array[1] = minor
+         * version_array[2] = revision
+         */
+        $version_array = explode(".", $this->options['wp_bannerize_version'] );
+
+        if( $version_array[0] <= 2 && $version_array[1] <= 2 && $version_array[2] < 2 ) {      // < 2.2.2
+            $wpdb->query( 'ALTER TABLE `' . $this->table_bannerize . '` ADD `categories` MEDIUMTEXT NOT NULL' );
+        }
+        
+
+        /**
+         * @sice 2.2.2
+         * Prepare to major release
+         * ALTER TABLE `wp_bannerize` ADD `category` MEDIUMTEXT NOT NULL
+         */
+        //$wpdb->query( 'ALTER TABLE `' . $this->table_bannerize . '` ADD `category` MEDIUMTEXT NOT NULL' );
+
+        /**
          * @since 2.2.1
          * Check old table name and rename it
          *
@@ -496,7 +542,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         $q = 'DESC `' . $this->table_bannerize . '`';
         $rows = $wpdb->get_results( $q );
         if( count( $rows ) > 0 && count( $rows ) < 8 ) {
-        // previou version
+            // previou version
             return true;
         } else {
             $this->createTable();
@@ -523,6 +569,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			  `target` varchar(32) NOT NULL,
 			  `filename` varchar(255) NOT NULL,
 			  `realpath` varchar(255) NOT NULL,
+                          `categories` mediumtext NOT NULL,
 			  PRIMARY KEY  (`id`)
 			)';
         $wpdb->query($q);
