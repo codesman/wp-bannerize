@@ -110,6 +110,7 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
 
     function WP_BANNERIZE_WIDGET() {
         // @since 2.2.1
+        global $wpdb;
         $this->table_bannerize = $wpdb->prefix . WP_BANNERIZE_TABLE;
         //
         $widget_ops = array('classname' => 'widget_wp_bannerize', 'description' => 'Very simple Banner Image Manager');
