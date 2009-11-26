@@ -12,9 +12,9 @@ class WPBANNERIZE_CLASS {
  * @staticvar
  */
     var $release                                                = 2;
-    var $minor                                                  = 2;
-    var $revision                                               = 2;
-    var $version 						= "";		// plugin version
+    var $minor                                                  = 3;
+    var $revision                                               = 0;
+    var $version 						= "";                   // plugin version
     var $plugin_name 						= "WP Bannerize";	// plugin name
     var $options_key 						= "wp-bannerize";	// options key to store in database
     var $options_title						= "WP Bannerize";	// label for "setting" in WP
@@ -111,18 +111,29 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
     function WP_BANNERIZE_WIDGET() {
         // @since 2.2.1
         global $wpdb;
+        
         $this->table_bannerize = $wpdb->prefix . WP_BANNERIZE_TABLE;
         //
-        $widget_ops = array('classname' => 'widget_wp_bannerize', 'description' => 'Very simple Banner Image Manager');
+        $widget_ops = array('classname' => 'widget_wp_bannerize', 'description' => 'Amazing Banner Image Manager');
         $control_ops = array('width' => 400, 'height' => 350);
-        $this->WP_Widget('execphp', 'WP Bannerize', $widget_ops, $control_ops);
+        $this->WP_Widget('wp_bannerize', 'WP Bannerize', $widget_ops, $control_ops);
     }
 
     function widget( $args, $instance ) {
         global $wpdb;
 
-        extract($args);
+        // @note
+        // Not used in this version
+        //extract($args);
+        extract($instance);
 
+        /**
+         * @sice 2.3.0
+         * Check for categories
+         */
+        if( is_array($categories ) )  {
+            if( ! is_category( $categories ) ) return;
+        }
 
         $q = "SELECT * FROM `" . $this->table_bannerize . "` ";
 
@@ -163,6 +174,7 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
         $instance['group']              = strip_tags($new_instance['group']);
         $instance['random'] 		= strip_tags($new_instance['random']);
         $instance['limit'] 		= strip_tags($new_instance['limit']);
+        $instance['categories'] 	= ($new_instance['categories']);
 
         $instance['container_before'] 	= ($new_instance['container_before']);
         $instance['container_after'] 	= ($new_instance['container_after']);
@@ -181,12 +193,14 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
             'container_after'	=> '</ul>',
             'before'		=> '<li>',
             'after'		=> '</li>',
+            'categories'        => array(),
             'text' 		=> '' )
         );
         $title                  = strip_tags($instance['title']);
         $group                  = strip_tags($instance['group']);
         $random                 = ($instance['random']);
         $limit                  = strip_tags($instance['limit']);
+        $categories             = ($instance['categories']);
 
         $container_before	= ($instance['container_before']);
         $container_after	= ($instance['container_after']);
@@ -201,6 +215,10 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
         <?php echo $this->get_group( $group ) ?></p>
 <p><label for="<?php echo $this->get_field_id('random'); ?>"><?php _e('Random:'); ?></label>
     <input <?php echo ($random != '0') ? 'checked="chekced"' : '' ?> value="1" type="checkbox" name="<?php echo $this->get_field_name('random'); ?>" id="<?php echo $this->get_field_id('random'); ?>" /></p>
+
+<p><label for="<?php echo $this->get_field_id('categories'); ?>"><?php _e('Show only for these Categories:'); ?></label></p>
+<p><?php echo $this->get_categories_checkboxes($categories) ?></p>
+
 <p><label for="<?php echo $this->get_field_id('limit'); ?>"><?php _e('Max:'); ?></label>
     <input type="text" value="<?php echo $limit ?>" name="<?php echo $this->get_field_name('limit'); ?>" id="<?php echo $this->get_field_id('limit'); ?>" /></p>
 <p><strong>HTML Markup:</strong></p>
@@ -234,6 +252,36 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
         $o .= '</select>';
         return $o;
     }
+
+    /**
+     * Get Select Checked Categories
+     */
+    function get_categories_checkboxes( $selected_cats = null ) {
+
+        $all_categories = get_categories();
+        $o = '<ul style="margin-left:12px">';
+        
+        foreach($all_categories as $key => $cat) {
+            if($cat->parent == "0") $o .= $this->_i_show_category($cat, $selected_cats);
+        }
+        return $o . '</ul>';
+    }
+
+    function _i_show_category($cat_object, $selected_cats = null) {
+       $checked = "";
+       if(!is_null($selected_cats) && is_array($selected_cats)) {
+           $checked = (in_array($cat_object->cat_ID, $selected_cats)) ? 'checked="checked"' : "";
+       }
+       $ou = '<li><label><input ' . $checked .' type="checkbox" name="' . $this->get_field_name('categories').'[]" value="'. $cat_object->cat_ID .'" /> ' . $cat_object->cat_name . '</label>';
+
+       $childs = get_categories('parent=' . $cat_object->cat_ID);
+       foreach($childs as $key => $cat) {
+           $ou .= '<ul style="margin-left:12px">' . $this->_i_show_category($cat, $selected_cats) . '</ul>';
+       }
+       $ou .= '</li>';
+       return $ou;
+    }
+
 }
 
 add_action('widgets_init', create_function('', 'return register_widget("WP_BANNERIZE_WIDGET");'));

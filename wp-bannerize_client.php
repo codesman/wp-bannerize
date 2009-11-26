@@ -21,7 +21,8 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
      * container_after		Main tag container close (default </ul>)
      * before			Before tag banner open (default <li>)
      * after			After tag banner close (default </li>)
-         * random               Show random banner sequence (default '')
+     * random                   Show random banner sequence (default '')
+     * categories               Category ID separated by commas. (default '')
      * limit			Limit rows number (default '' - show all rows)
      *
      */
@@ -35,10 +36,20 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
             'before'			=> '<li>',
             'after'			=> '</li>',
             'random'                    => '',
+            'categories'                => '',
             'limit'			=> ''
         );
 
         $new_args = wp_parse_args( $args, $default );
+
+        /**
+         * @sice 2.3.0
+         * Check for categories
+         */
+         if( $new_args['categories'] != "")  {
+            $cat_ids = explode(",", $new_args['categories']);
+            if( ! is_category( $cat_ids ) ) return;
+        }
 
         $q = "SELECT * FROM `" . $this->table_bannerize . "` ";
 

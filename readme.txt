@@ -4,53 +4,46 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random
 Requires at least: 2.8
 Tested up to: 2.8.6
-Stable tag: 2.2.2
+Stable tag: 2.3.0
 
 WP_BANNERIZE, banner-image manager.
 
 == Description ==
 
-WP_BANNERIZE is a banner-image manager. In your template insert: `<?php wp_bannerize(); ?>` or set it like Widget
+WP_BANNERIZE is an Amazing Banner Image Manager. In your template insert: `<?php wp_bannerize(); ?>` or set it like Widget
 
-**NEW FROM 2.2.1**
+**FEATURES**
 
-* Add Wordpress MU (and Wordpress standard table naming) prefix table and compatibility ( thanks @marsev for suggest )
+* Create your list (group/key) Banners image
+* Show your banners list by php code or Widget
+* Set random, limit and catories filters
+* Wordpress Admin Contextual HELP
 
-**NEW FROM 2.2.0**
+**NEW FROM 2.3**
 
-* Add Widget support
-* Fix compatibility with Wordpress 2.8.6
+* Add Wordpress categories filter
+* Improve Widget features
+* Improve Admin Panel
+* Improve document below
 
+  See CHANGELOG for full history version
 
-**NEW FROM 2.1.0**
+**HOW TO**
 
-* Add thickbox support for preview thumbnail, resize key field to 128 chars, Minor Fix
-
-**NEW FROM 2.0.2**
-
-* Add `random` option
-
-**NEW FROM 2.0.0**
-
-* Add edit banners list
-* Add combo menu for select group/key
-* Add combo menu for selcte target browser window
-* Add Wordpress contextual HELP
-* Add `limit` option for limit banners number in output
-* Add a minimal base localization
-* Rev code and fix minor bugs 
-
-**NEW FROM 1.4.0**
-Due to fix an upload's trouble the database table is changed. So, I apologies, but you have to update a new database table and discard old database.
-In this way you have to re-insert your banners.
-
-When you insert a banner you can give a group code (8 char). In this way you can "group" a block of banner. For examples if your theme is a 3 columns you can put in left sidebar:
+When you insert a banner you can give a group (key) code. In this way you can "group" a block of banners. For examples if your theme is a 3 columns you can put in left sidebar:
 
 `<?php wp_bannerize('group=left_sidebar'); ?>`
 
 and put in right sidebar:
 
 `<?php wp_bannerize('group=right_sidebar'); ?>`
+
+However wp-bannerize provides a filter by category, for example:
+
+`<?php wp_bannerize('group=right_sidebar&categories=13,14'); ?>`
+
+The code above shows only banners in the categories 13 or 14, for the "right_sidebar" group key.
+
 
 **params:**
 
@@ -61,6 +54,7 @@ and put in right sidebar:
 * before              Before tag banner open (default <li>) 
 * after               After tag banner close (default </li>) 
 * random              Show random banner sequence (default '')
+* categories          Category ID separated by commas. (default '')
 * limit               Limit rows number (default '' - show all rows) 
 `
 
@@ -127,6 +121,7 @@ You can change `<ul>` (container) and `<li>` (before)
 History release:
 
 `
+* 2.3.0     Add Wordpress Categories Filter - Show Banner Group for Categories ID, improve admin
 * 2.2.2     Fix minor bugs + prepare major release
 * 2.2.1     Fix to Wordpress MU compatibilities, Fix minor bugs
 * 2.2.0     Add Widget support, fix compatibility with Wordpress 2.8.6
@@ -148,3 +143,5 @@ History release:
 * 1.1       Rev, Fix and stable release
 * 1.0       First release
 `
+
+For more information on the roadmap for future improvements please e-mail: g.fazioli@saidmade.com

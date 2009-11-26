@@ -90,6 +90,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 * before              Before tag banner open (default &lt;li&gt;)
 * after               After tag banner close (default &lt;/li&gt;) 
 * random              Show random banner sequence (default \'\')
+* categories          Category ID separated by commas (defualt \'\').
 * limit               Limit rows number (default \'\' - show all rows)</pre>' 			
             );
         }
@@ -141,134 +142,175 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
     <div class="icon32" id="icon-options-general"><br/></div>
     <h2><?=$this->options_title?> ver. <?=$this->version?></h2>
 
-    <h3><?php echo __('Insert new Banner')?></h3>
-    
-    <form class="form_box" name="insert_bannerize" method="post" action="" enctype="multipart/form-data">
-        <input type="hidden" name="command_action" id="command_action" value="mysql_insert" />
-        <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+    <div id="poststuff" class="metabox-holder has-right-sidebar">
+        <div class="inner-sidebar">
+            <div id="side-sortables" class="meta-box-sortabless ui-sortable" style="position: relative;">
 
-        <table class="form-table">
-            <tr>
-                <th scope="row"><label for="group"><?php echo __('Image')?>:</label></th>
-                <td><input type="file" name="filename" id="filename" size="40" /></td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="group"><?php echo __('Key')?>:</label></th>
-                <td><input type="text" maxlength="128" name="group" id="group" value="A" size="32" style="text-align:right" /> <?php echo $this->get_combo_group() ?> (<?php echo __('Insert a key max 128 char')?>)</td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="description"><?php echo __('Description')?>:</label></th>
-                <td><input type="text" name="description" id="description" value="" size="32" /></td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="url">URL:</label></th>
-                <td><input type="text" name="url" id="url" value="" size="32" /> <label for="url"><?php echo __('Target')?>:</label> <?php echo $this->get_target_combo() ?></td>
-            </tr>
-        </table>
-        <div class="submit"><input class="button-primary" type="submit" value="<?php echo __('Insert')?>" /></div>
-    </form>
+                <div id="sm_pnres" class="postbox">
+                    <h3 class="hndle"><span>Links</span></h3>
+                    <div class="inside">
+                       <div style="text-align:center;margin-bottom:12px"><script type="text/javascript" src="http://www.mad-ideas.it/widgets/?id=9"></script></div>
+                        <ul class="list-point">
+                            <li>
+                                <a href="http://www.saidmade.com">Saidmade Srl</a>
+                            </li>
+                             <li>
+                                 <a href="http://www.undolog.com">Research &amp; Development Blog</a>
+                            </li>
 
-    <form style="display:none" name="delete_bannerize" method="post" action="">
-        <input type="hidden" name="command_action" id="command_action" value="mysql_delete" />
-        <input type="hidden" name="id" id="id" value="" />
-    </form>
+                        </ul>
+                    </div>
+                </div>
 
-    <div class="icon32" id="icon-edit"><br/></div><h2><?php echo __('Banners list')?></h2>
-    <div class="tablenav">
-        <div class="alignleft actions">
-            <form class="form_box" name="filter_bannerize" method="post" action="">
-                        <?php $this->combo_group(); ?> <input class="button-secondary" type="submit" value="<?php echo __('Filter')?>"/>
-						| <?php echo __('Use')?> <img align="absmiddle" alt="Drag and Drop" border="0" src="<?php echo $this->uri ?>/css/images/arrow_ns.png" /> <?php echo __('for drag and drop to change order')?>
-            </form>
+                <div id="sm_pnres" class="postbox">
+                    <h3 class="hndle"><span>Donate</span></h3>
+                    <div class="inside">
+                        <p style="text-align:center;font-family:Tahoma;font-size:10px">Developed by <a target="_blank" href="http://www.saidmade.com"><img alt="Saidmade" align="absmiddle" src="http://labs.saidmade.com/images/sm-a-80x15.png" border="0" /></a>
+                            <br/>
+                            more Wordpress plugins on <a target="_blank" href="http://labs.saidmade.com">labs.saidmade.com</a> and <a target="_blank" href="http://www.undolog.com">Undolog.com</a>
+                            <br/>
+                        </p>
+                        <div>
+                            <form style="text-align:center;width:auto;margin:0 auto" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                <input type="hidden" name="cmd" value="_s-xclick">
+                                <input type="hidden" name="hosted_button_id" value="3499468">
+                                <input type="image" src="https://www.paypal.com/it_IT/IT/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - Il sistema di pagamento online più facile e sicuro!">
+                                <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="has-sidebar sm-padded">
+            <div id="post-body-content" class="has-sidebar-content">
+                <div class="meta-box-sortabless">
+
+                    <div id="sm_rebuild" class="postbox">
+                        <h3 class="hndle"><span><?php echo __('Insert new Banner')?></span></h3>
+                        <div class="inside">
+                            <form class="form_box" name="insert_bannerize" method="post" action="" enctype="multipart/form-data">
+                                <input type="hidden" name="command_action" id="command_action" value="mysql_insert" />
+                                <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+
+                                <table class="form-table">
+                                    <tr>
+                                        <th scope="row"><label for="group"><?php echo __('Image')?>:</label></th>
+                                        <td><input type="file" name="filename" id="filename" size="40" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><label for="group"><?php echo __('Key')?>:</label></th>
+                                        <td><input type="text" maxlength="128" name="group" id="group" value="A" size="32" style="text-align:right" /> <?php echo $this->get_combo_group() ?> (<?php echo __('Insert a key max 128 char')?>)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><label for="description"><?php echo __('Description')?>:</label></th>
+                                        <td><input type="text" name="description" id="description" value="" size="32" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><label for="url">URL:</label></th>
+                                        <td><input type="text" name="url" id="url" value="" size="32" /> <label for="url"><?php echo __('Target')?>:</label> <?php echo $this->get_target_combo() ?></td>
+                                    </tr>
+                                </table>
+                                <p class="submit"><input class="button-primary" type="submit" value="<?php echo __('Insert')?>" /></p
+                            </form>
+
+                            <form style="display:none" name="delete_bannerize" method="post" action="">
+                                <input type="hidden" name="command_action" id="command_action" value="mysql_delete" />
+                                <input type="hidden" name="id" id="id" value="" />
+                            </form>
+                        </div>
+                    </div>
+
+                    <div style="float:left;width:100%">
+
+                        <div class="tablenav">
+                            <div class="alignleft actions">
+                                <form class="form_box" name="filter_bannerize" method="post" action="">
+                                            <?php $this->combo_group(); ?> <input class="button-secondary" type="submit" value="<?php echo __('Filter')?>"/>
+                                                                    | <?php echo __('Use')?> <img align="absmiddle" alt="Drag and Drop" border="0" src="<?php echo $this->uri ?>/css/images/arrow_ns.png" /> <?php echo __('for drag and drop to change order')?>
+                                </form>
+                            </div>
+                        </div>
+                                <?php
+
+                                $q = "SELECT * FROM `" . $this->table_bannerize . "`";
+
+                                if( isset( $_POST['group_filter']) ) {
+                                    if( $_POST['group_filter'] != "" ) $q .= " WHERE `group` = '".$_POST['group_filter']."'";
+                                }
+
+                                $q .= " ORDER BY `sorter`, `group` ASC ";
+
+                                $rows = $wpdb->get_results( $q );
+
+                                $o = '<table class="widefat" id="list_bannerize" width="100%" cellpadding="4" cellspacing="0">
+                                       <thead>
+                                            <tr>
+                                                 <th class="manage-column" scope="col"></th>
+                                                 <th width="40" scope="col">'.__('Image').'</th>
+                                                 <th scope="col">'.__('Key').'</th>
+                                                 <th width="100%" scope="col">'.__('Description').'</th>
+                                                 <th scope="col">'.__('URL').'</th>
+                                                 <th scope="col">'.__('Target').'</th>
+                                                </tr>
+                                           </thead>
+                                           <tfoot>
+                                            <tr>
+                                                 <th class="manage-column" scope="col"></th>
+                                                 <th width="40" scope="col">'.__('Image').'</th>
+                                                 <th scope="col">'.__('Key').'</th>
+                                                 <th width="100%" scope="col">'.__('Description').'</th>
+                                                 <th scope="col">'.__('URL').'</th>
+                                                 <th scope="col">'.__('Target').'</th>
+                                                </tr>
+                                           </tfoot>
+                                           <tbody>';
+
+                                $i = 0;
+
+                                foreach( $rows as $row ) {
+                                    $class = ($i%2 == 0) ? 'class="alternate"' : ''; $i++;
+                                    $e = '<div class="inline-edit" id="edit_'.$row->id.'" style="display:none">' .
+                                        '<form method="post" name="form_edit_'.$row->id.'">' .
+                                        '<input type="hidden" name="command_action" value="mysql_update" />' .
+                                        '<input type="hidden" name="id" value="'.$row->id.'" />' .
+                                        '<label for="group">' . __('Key') . ':</label> <input size="8" type="text" name="group" value="' . $row->group . '" /> ' . $this->get_combo_group("form_edit_".$row->id) .
+                                        '<label for="description">' . __('Description') . ':</label> <input size="32" type="text" name="description" value="' . $row->description . '" /> (image alt)<br/>' .
+                                        '<label for="url">' . __('URL') . ':</label> <input type="text" name="url" size="32" value="' . $row->url . '" /> ' .
+                                        '<label for="target">' . __('Target') . ':</label> ' . $this->get_target_combo( $row->target ) .
+                                        '<p class="submit inline-edit-save">' .
+                                        '<a onclick="jQuery(\'div#edit_'.$row->id.'\').hide();return false;" class="button-secondary cancel alignleft" title="'.__('Cancel').'" href="#" accesskey="c">'.__('Cancel').'</a>' .
+                                        '<a onclick="document.forms[\'form_edit_'.$row->id.'\'].submit();" class="button-primary save alignright" title="' . __('Update') . '" href="#" accesskey="s">' . __('Update') . '</a>' .
+                                        '</p>' .
+                                        '</form>' .
+                                        '</div>';
+
+                                    $o .= '<tr ' . $class . ' id="item_' . $row->id . '">' .
+                                        '<th scope="row"><div class="arrow"></div></th> ' .
+                                        '<td width="40" align="left"><img class="wp-bannerize-thumbnail" height="32" width="32" border="1" src="' . $row->filename . '" /></td>' .
+                                        '<td>' . $row->group . '</td>' .
+                                        '<td width"100%">' . $e . "<br/>" . $row->description .
+                                        '<div class="row-actions">' .
+                                        '<span class="edit"><a class="edit_'.$row->id.'" title="Edit" href="#">'.__('Edit').'</a> | </span>' .
+                                        '<span class="delete"><a onclick="delete_banner('.$row->id.');return false;" href="#" title="'.__('Delete').'" class="submitdelete">'.__('Delete').'</a> | </span>' .
+                                        '<span class="view"><a target="_blank" class="thickbox" rel="wp-bannerize-gallery" href="' . $row->filename . '" title="'.__('View').'">'.__('View').'</a></span>' .
+                                        '</div>' .
+                                        '</td>' .
+                                        '<td>' . $row->url . '</td>' .
+                                        '<td>' . $row->target . '</td>' .
+                                        '</tr>';
+                                }
+                                $o .= '</tbody>
+                                        </table>';
+
+                                echo $o;
+                                ?>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-            <?php
-
-            $q = "SELECT * FROM `" . $this->table_bannerize . "`";
-
-            if( isset( $_POST['group_filter']) ) {
-                if( $_POST['group_filter'] != "" ) $q .= " WHERE `group` = '".$_POST['group_filter']."'";
-            }
-
-            $q .= " ORDER BY `sorter`, `group` ASC ";
-
-            $rows = $wpdb->get_results( $q );
-
-            $o = '<table class="widefat" id="list_bannerize" width="100%" cellpadding="4" cellspacing="0">
-                   <thead>
-                        <tr>
-                             <th class="manage-column" scope="col"></th>
-                             <th width="40" scope="col">'.__('Image').'</th>
-                             <th scope="col">'.__('Key').'</th>
-                             <th width="100%" scope="col">'.__('Description').'</th>
-                             <th scope="col">'.__('URL').'</th>
-                             <th scope="col">'.__('Target').'</th>
-                            </tr>
-                       </thead>
-                       <tfoot>
-                        <tr>
-                             <th class="manage-column" scope="col"></th>
-                             <th width="40" scope="col">'.__('Image').'</th>
-                             <th scope="col">'.__('Key').'</th>
-                             <th width="100%" scope="col">'.__('Description').'</th>
-                             <th scope="col">'.__('URL').'</th>
-                             <th scope="col">'.__('Target').'</th>
-                            </tr>					   
-                       </tfoot>
-                       <tbody>';	
-
-            $i = 0;
-
-            foreach( $rows as $row ) {
-                $class = ($i%2 == 0) ? 'class="alternate"' : ''; $i++;
-                $e = '<div class="inline-edit" id="edit_'.$row->id.'" style="display:none">' .
-                    '<form method="post" name="form_edit_'.$row->id.'">' .
-                    '<input type="hidden" name="command_action" value="mysql_update" />' .
-                    '<input type="hidden" name="id" value="'.$row->id.'" />' .
-                    '<label for="group">' . __('Key') . ':</label> <input size="8" type="text" name="group" value="' . $row->group . '" /> ' . $this->get_combo_group("form_edit_".$row->id) .
-                    '<label for="description">' . __('Description') . ':</label> <input size="32" type="text" name="description" value="' . $row->description . '" /> (image alt)<br/>' .
-                    '<label for="url">' . __('URL') . ':</label> <input type="text" name="url" size="32" value="' . $row->url . '" /> ' .
-                    '<label for="target">' . __('Target') . ':</label> ' . $this->get_target_combo( $row->target ) .
-                    '<p class="submit inline-edit-save">' .
-                    '<a onclick="jQuery(\'div#edit_'.$row->id.'\').hide();return false;" class="button-secondary cancel alignleft" title="'.__('Cancel').'" href="#" accesskey="c">'.__('Cancel').'</a>' .
-                    '<a onclick="document.forms[\'form_edit_'.$row->id.'\'].submit();" class="button-primary save alignright" title="' . __('Update') . '" href="#" accesskey="s">' . __('Update') . '</a>' .
-                    '</p>' .
-                    '</form>' .
-                    '</div>';
-
-                $o .= '<tr ' . $class . ' id="item_' . $row->id . '">' .
-                    '<th scope="row"><div class="arrow"></div></th> ' .
-                    '<td width="40" align="left"><img class="wp-bannerize-thumbnail" height="32" width="32" border="1" src="' . $row->filename . '" /></td>' .
-                    '<td>' . $row->group . '</td>' .
-                    '<td width"100%">' . $e . "<br/>" . $row->description .
-                    '<div class="row-actions">' .
-                    '<span class="edit"><a class="edit_'.$row->id.'" title="Edit" href="#">'.__('Edit').'</a> | </span>' .
-                    '<span class="delete"><a onclick="delete_banner('.$row->id.');return false;" href="#" title="'.__('Delete').'" class="submitdelete">'.__('Delete').'</a> | </span>' .
-                    '<span class="view"><a target="_blank" class="thickbox" rel="wp-bannerize-gallery" href="' . $row->filename . '" title="'.__('View').'">'.__('View').'</a></span>' .
-                    '</div>' .
-                    '</td>' .
-                    '<td>' . $row->url . '</td>' .
-                    '<td>' . $row->target . '</td>' .
-                    '</tr>';
-            }
-            $o .= '</tbody>
-                    </table>';
-
-            echo $o;
-            ?>
-
-    <p style="text-align:center;font-family:Tahoma;font-size:10px">Developed by <a target="_blank" href="http://www.saidmade.com"><img align="absmiddle" src="http://labs.saidmade.com/images/sm-a-80x15.png" border="0" /></a>
-        <br/>
-more Wordpress plugins on <a target="_blank" href="http://labs.saidmade.com">labs.saidmade.com</a> and <a target="_blank" href="http://www.undolog.com">Undolog.com</a>
-        <br/>
-    <form style="text-align:center;width:300px;margin:0 auto" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-        <input type="hidden" name="cmd" value="_s-xclick">
-        <input type="hidden" name="hosted_button_id" value="3499468">
-        <input type="image" src="https://www.paypal.com/it_IT/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - Il sistema di pagamento online pi� facile e sicuro!">
-        <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
-    </form>
-</p>	
-
 </div>
 
     <?php
@@ -289,16 +331,17 @@ more Wordpress plugins on <a target="_blank" href="http://labs.saidmade.com">lab
             if( isset( $_POST['toupdate'])) {
                 $this->alterTable();
                 ?>
-    <p>Update succefully!</p>
+    <div class="updated">
+        <p><?php echo __('Update succefully') ?></p>
+    </div>
     <form method="post" action="">
-        <div class="submit"><input type="submit"  value="Reload"/></div>
+        <div class="submit"><input type="submit"  value="<?php echo __('Reload') ?>"/></div>
     </form>
             <?php
             } else {
                 ?>
 
-    <p>This version use a different Database Table.</p>
-    <p>You have to re-insert your banner.</p>
+    <p><?php echo __('Please, re-insert your banners.') ?></p>
     <form method="post" action="">
         <input type="hidden" name="toupdate" />
         <div class="submit"><input type="submit"  value="Update"/></div>
@@ -340,6 +383,24 @@ more Wordpress plugins on <a target="_blank" href="http://labs.saidmade.com">lab
         }
         $o .= '</select>';
         return $o;
+    }
+
+    /**
+     * Get Select Checked Categories
+     */
+    function get_categories_checkboxes( $cats = null ) {
+        if(!is_null($cats)) $cat_array = explode(",", $cats);
+        $res = get_categories();
+        $o = "";
+        foreach($res as $key => $cat) {
+            $checked = "";
+            if(!is_null($cats)) {
+                if( in_array( $cat->cat_ID, $cat_array) )
+                    $checked = 'checked="checked"';
+            }
+            $o .= '<label><input ' . $checked .' type="checkbox" name="categories[]" id="categories[]" value="'. $cat->cat_ID .'" /> ' . $cat->cat_name . '</label> ';
+       }
+       return $o;
     }
 
     /**
@@ -390,17 +451,18 @@ more Wordpress plugins on <a target="_blank" href="http://labs.saidmade.com">lab
      * @return
      */
     function mysql_insert() {
-        global $wpp_options, $wpdb, $_POST, $_FILES;
+        global $wpdb, $_POST, $_FILES;
+
         // verifica eventuali errori
         if( $_FILES['filename']['error'] == 0 ) {
-            $size 			= floor( $_FILES['filename']['size'] / (1024*1024) );
-            $mime 			= $_FILES['filename']['type'];
-            $name 			= $_FILES['filename']['name'];
-            $temp 			= $_FILES['filename']['tmp_name'];
+            $size 		= floor( $_FILES['filename']['size'] / (1024*1024) );
+            $mime 		= $_FILES['filename']['type'];
+            $name 		= $_FILES['filename']['name'];
+            $temp 		= $_FILES['filename']['tmp_name'];
 
-            $group 		 	= $_POST['group'];
+            $group 		= $_POST['group'];
             $description 	= $_POST['description'];
-            $url 		 	= $_POST['url'];
+            $url 		= $_POST['url'];
             $target 	 	= $_POST['target'];
 
             $uploads		= wp_upload_bits( strtolower($name), '', '' );
@@ -409,7 +471,8 @@ more Wordpress plugins on <a target="_blank" href="http://labs.saidmade.com">lab
 
                 $q = "INSERT INTO `" . $this->table_bannerize . "`" .
                     " ( `group`, `description`, `url`, `filename`, `target`, `realpath` )" .
-                    " VALUES ('" . $group . "', '" . $description . "', '" . $url . "', '" . $uploads['url'] . "', '" . $target . "', '" . $uploads['file'] . "')";
+                    " VALUES ('" . $group . "', '" . $description . "', '" . 
+                                   $url . "', '" . $uploads['url'] . "', '" . $target . "', '" . $uploads['file'] . "')";
                 $wpdb->query($q);
                 return( '' );
             } else {
@@ -497,10 +560,10 @@ more Wordpress plugins on <a target="_blank" href="http://labs.saidmade.com">lab
          */
         $version_array = explode(".", $this->options['wp_bannerize_version'] );
 
-        if( $version_array[0] <= 2 && $version_array[1] <= 2 && $version_array[2] < 2 ) {      // < 2.2.2
-            $wpdb->query( 'ALTER TABLE `' . $this->table_bannerize . '` ADD `categories` MEDIUMTEXT NOT NULL' );
-        }
-        
+        /**
+         * @todo
+         * ALTER TABLE `wp_bannerize` DROP `categories` 
+         */
 
         /**
          * @sice 2.2.2
@@ -569,7 +632,6 @@ more Wordpress plugins on <a target="_blank" href="http://labs.saidmade.com">lab
 			  `target` varchar(32) NOT NULL,
 			  `filename` varchar(255) NOT NULL,
 			  `realpath` varchar(255) NOT NULL,
-                          `categories` mediumtext NOT NULL,
 			  PRIMARY KEY  (`id`)
 			)';
         $wpdb->query($q);
