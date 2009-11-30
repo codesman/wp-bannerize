@@ -19,7 +19,7 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
      * group			If '' show all group, else code of group (default '')
      * container_before		Main tag container open (default <ul>)
      * container_after		Main tag container close (default </ul>)
-     * before			Before tag banner open (default <li>)
+     * before			Before tag banner open (default <li %alt%>)
      * after			After tag banner close (default </li>)
      * random                   Show random banner sequence (default '')
      * categories               Category ID separated by commas. (default '')
@@ -33,10 +33,12 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
             'group' 			=> '',
             'container_before'		=> '<ul>',
             'container_after'		=> '</ul>',
-            'before'			=> '<li>',
+            'before'			=> '<li %alt%>',
             'after'			=> '</li>',
             'random'                    => '',
             'categories'                => '',
+            'alt_class'                 => 'alt',
+            'link_class'                => '',
             'limit'			=> ''
         );
 
@@ -71,11 +73,23 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
 
         $o = $new_args['container_before'];
 
+        // @since 2.3.2
+        $even_before = $odd_before = $alternate_class = "";
+        $index = 0;
+
+        $odd_before = str_replace("%alt%", "", $new_args['before']);
+        if( $new_args['alt_class'] != "" ) {
+            $alternate_class = 'class="' . $new_args['alt_class'] . '"';
+            $even_before = str_replace("%alt%", $alternate_class, $new_args['before']);
+        }
+        $new_link_class = ($new_args['link_class'] != "") ? 'class="' . $new_args['link_class'] . '"' : "";
+
         foreach( $rows as $row ) {
             $target = ( $row->target != "" ) ? 'target="' . $row->target . '"' : "";
-            $o .= $new_args['before'] .
-                '<a ' . $target . ' href="' . $row->url . '"><img alt="'.$row->description.'" border="0" src="' . $row->filename . '" /></a>' .
+            $o .= ( ($index%2 == 0 ) ? $odd_before : $even_before ) .
+                '<a ' . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img alt="'.$row->description.'" border="0" src="' . $row->filename . '" /></a>' .
                 $new_args['after'];
+            $index++;
         }
         $o .= $new_args['container_after'];
 

@@ -3,7 +3,7 @@
 Plugin Name: WP-BANNERIZE
 Plugin URI: http://wordpress.org/extend/plugins/wp-bannerize/
 Description: WP_BANNERIZE is an Amazing Banner Image Manager. For more info and plugins visit <a href="http://labs.saidmade.com">Labs Saidmade</a>.
-Version: 2.3.0
+Version: 2.3.2
 Author: Giovambattista Fazioli
 Author URI: http://labs.saidmade.com
 Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -27,6 +27,7 @@ Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
 	
 	CHANGE LOG
 
+        * 2.3.2     Add "alt" class in HTML output, Add additional class for link TAG A, Fix Widget output
         * 2.3.0     Add Wordpress Categories Filter - Show Banner Group for categories ID, improve admin
         * 2.2.2     Fix minor bugs + prepare major release
         * 2.2.1     Fix to Wordpress MU compatibilities, Fix minor bugs

@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random
 Requires at least: 2.8
 Tested up to: 2.8.6
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 
 WP_BANNERIZE, banner-image manager.
 
@@ -18,13 +18,13 @@ WP_BANNERIZE is an Amazing Banner Image Manager. In your template insert: `<?php
 * Show your banners list by php code or Widget
 * Set random, limit and catories filters
 * Wordpress Admin Contextual HELP
+* Wordpress MU compatible
 
-**NEW FROM 2.3**
+**NEW FROM 2.3.2**
 
-* Add Wordpress categories filter
-* Improve Widget features
-* Improve Admin Panel
-* Improve document below
+* Add alt class in HTML output
+* Add additional class for link TAG A
+* Fix Widget HTML output
 
   See CHANGELOG for full history version
 
@@ -51,10 +51,12 @@ The code above shows only banners in the categories 13 or 14, for the "right_sid
 * group               If '' show all groups, else show the selected group code (default '')
 * container_before    Main tag container open (default <ul>)
 * container_after     Main tag container close (default </ul>)
-* before              Before tag banner open (default <li>) 
+* before              Before tag banner open (default <li %alt%>) see alt_class below
 * after               After tag banner close (default </li>) 
 * random              Show random banner sequence (default '')
 * categories          Category ID separated by commas. (default '')
+* alt_class           class alternate for "before" TAG (use before param)
+* link_class          Additional class for link TAG A
 * limit               Limit rows number (default '' - show all rows) 
 `
 
@@ -114,13 +116,39 @@ You can change `<ul>` (container) and `<li>` (before)
 <span><a href=".."><img src="..." /></a></span>
 <span><a href=".."><img src="..." /></a></span>
 ...
-</div>`  
+</div>`
+
+= Can I customize arguments TAG? =
+
+Yes, you can cistomize alternate class on "before" TAG and class on link A:
+
+`<?php wp_bannerize('container_before=<div>&container_after=</div>&before=<span %alt%>&after=</span>&link_class=myclass'); ?>`
+
+`
+<div>
+<span><a href=".."><img src="..." /></a></span>
+<span class="alt"><a class="myclass" href=".."><img src="..." /></a></span>
+...
+</div>`
+
+OR
+
+`<?php wp_bannerize('alt_class=pair&link_class=myclass'); ?>`
+
+
+<ul>
+<li><a href=".."><img src="..." /></a></li>
+<li class="pair"><a class="myclass" href=".."><img src="..." /></a></li>
+...
+</ul>`
+
 
 == Changelog ==
 
 History release:
 
 `
+* 2.3.2     Add "alt" class in HTML output, Add additional class for link TAG A, Fix Widget output
 * 2.3.0     Add Wordpress Categories Filter - Show Banner Group for Categories ID, improve admin
 * 2.2.2     Fix minor bugs + prepare major release
 * 2.2.1     Fix to Wordpress MU compatibilities, Fix minor bugs

@@ -80,17 +80,20 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
          */
         if (function_exists('add_contextual_help')) {
             add_contextual_help($menus['main'],'<p><strong>'.__('Use').':</strong></p>' .
-                '<pre>wp_bannerize();</pre> or<br/>' .
-                '<pre>wp_bannerize( \'group=a&limit=10\' );</pre> or<br/>' .
-                '<pre>wp_bannerize( \'group=a&limit=10&random=1\' );</pre><br/>' .
+                '<pre>wp_bannerize();</pre>or<br/>' .
+                '<pre>wp_bannerize( \'group=a&limit=10\' );</pre>or<br/>' .
+                '<pre>wp_bannerize( \'group=a&limit=10&random=1\' );</pre>or<br/>' .
+                '<pre>wp_bannerize( \'group=a&limit=10&random=1&before=&lt;li %alt%>&alt_class=pair\' );</pre><br/>' .
                 '<pre>
 * group               If \'\' show all groups, else show the selected group code (default \'\')
 * container_before    Main tag container open (default &lt;ul&gt;)
 * container_after     Main tag container close (default &lt;/ul&gt;)
-* before              Before tag banner open (default &lt;li&gt;)
+* before              Before tag banner open (default &lt;li %alt% &gt;) see alt_class below
 * after               After tag banner close (default &lt;/li&gt;) 
 * random              Show random banner sequence (default \'\')
-* categories          Category ID separated by commas (defualt \'\').
+* categories          Category ID separated by commas (defualt \'\')
+* alt_class           class alternate for "before" TAG (use before param)
+* link_class          Additional class for link TAG A
 * limit               Limit rows number (default \'\' - show all rows)</pre>' 			
             );
         }
@@ -107,7 +110,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
             return;
         }
 
-        $any_error = "";										// any error flag
+        $any_error = "";                                                        // any error flag
 
         if( isset( $_POST['command_action'] ) ) {				// have to save options
             $any_error = __('Your settings have been saved.');

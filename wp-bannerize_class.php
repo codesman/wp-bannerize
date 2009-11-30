@@ -13,7 +13,7 @@ class WPBANNERIZE_CLASS {
  */
     var $release                                                = 2;
     var $minor                                                  = 3;
-    var $revision                                               = 0;
+    var $revision                                               = 2;
     var $version 						= "";                   // plugin version
     var $plugin_name 						= "WP Bannerize";	// plugin name
     var $options_key 						= "wp-bannerize";	// options key to store in database
@@ -153,18 +153,31 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
 
         $rows = $wpdb->get_results( $q );
 
-        //$o = $new_args['container_before'];
 
         echo $before_widget;
+        echo $container_before;
+
+        // @since 2.3.2
+        $even_before = $odd_before = $alternate_class = "";
+        $index = 0;
+
+        $odd_before = str_replace("%alt%", "", $before);
+        if($alt_class != "") {
+            $alternate_class = 'class="' . $alt_class . '"';
+            $even_before = str_replace("%alt%", $alternate_class, $before);
+        }
+        $new_link_class = ($link_class != "") ? 'class="'.$link_class.'"' : "";
 
         foreach( $rows as $row ) {
             $target = ( $row->target != "" ) ? 'target="' . $row->target . '"' : "";
-            $o .= '<a ' . $target . ' href="' . $row->url . '"><img alt="'.$row->description.'" border="0" src="' . $row->filename . '" /></a>';
+
+            $o .= ( ($index%2 == 0) ? $odd_before : $even_before ) . '<a ' . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img alt="'.$row->description.'" border="0" src="' . $row->filename . '" /></a>' . $after;
+            $index++;
         }
-        //$o .= $new_args['container_after'];
 
         echo $o;
 
+        echo $container_after;
         echo $after_widget;
     }
 
@@ -181,6 +194,9 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
         $instance['before'] 		= ($new_instance['before']);
         $instance['after'] 		= ($new_instance['after']);
 
+        $instance['alt_class'] 		= ($new_instance['alt_class']);
+        $instance['link_class']		= ($new_instance['link_class']);
+
         return $instance;
     }
 
@@ -191,9 +207,11 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
             'limit'		=> '10',
             'container_before'  => '<ul>',
             'container_after'	=> '</ul>',
-            'before'		=> '<li>',
+            'before'		=> '<li %alt%>',
             'after'		=> '</li>',
             'categories'        => array(),
+            'alt_class'         => 'alt',
+            'link_class'        => '',
             'text' 		=> '' )
         );
         $title                  = strip_tags($instance['title']);
@@ -206,6 +224,9 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
         $container_after	= ($instance['container_after']);
         $before			= ($instance['before']);
         $after			= ($instance['after']);
+
+        $alt_class              = strip_tags($instance['alt_class']);
+        $link_class             = strip_tags($instance['link_class']);
 
         $text                   = format_to_edit($instance['text']);
         ?>
@@ -223,16 +244,24 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
     <input type="text" value="<?php echo $limit ?>" name="<?php echo $this->get_field_name('limit'); ?>" id="<?php echo $this->get_field_id('limit'); ?>" /></p>
 <p><strong>HTML Markup:</strong></p>
 <p><label for="<?php echo $this->get_field_id('container_before'); ?>"><?php _e('container_before:'); ?></label>
-    <input type="text" value="<?php echo $container_before ?>" name="<?php echo $this->get_field_name('container_before'); ?>" id="<?php echo $this->get_field_id('container_before'); ?>" /></p>
+    <input size="8" type="text" value="<?php echo $container_before ?>" name="<?php echo $this->get_field_name('container_before'); ?>" id="<?php echo $this->get_field_id('container_before'); ?>" /></p>
 
 <p><label for="<?php echo $this->get_field_id('before'); ?>"><?php _e('before:'); ?></label>
-    <input type="text" value="<?php echo $before ?>" name="<?php echo $this->get_field_name('before'); ?>" id="<?php echo $this->get_field_id('before'); ?>" /></p>
+    <input size="8" type="text" value="<?php echo $before ?>" name="<?php echo $this->get_field_name('before'); ?>" id="<?php echo $this->get_field_id('before'); ?>" />
+    alt class: <input size="8" type="text" value="<?php echo $alt_class ?>" name="<?php echo $this->get_field_name('alt_class'); ?>" id="<?php echo $this->get_field_id('alt_class'); ?>" />
+    (Es. &lt;li class="alt"&gt; ...)
+</p>
+
+<p><label for="<?php echo $this->get_field_id('link_class'); ?>"><?php _e('link_class:'); ?></label>
+    <input size="8" type="text" value="<?php echo $link_class ?>" name="<?php echo $this->get_field_name('link_class'); ?>" id="<?php echo $this->get_field_id('link_class'); ?>" /></p>
+
+
 <p><label for="<?php echo $this->get_field_id('after'); ?>"><?php _e('after:'); ?></label>
-    <input type="text" value="<?php echo $after ?>" name="<?php echo $this->get_field_name('after'); ?>" id="<?php echo $this->get_field_id('after'); ?>" /></p>
+    <input size="8" type="text" value="<?php echo $after ?>" name="<?php echo $this->get_field_name('after'); ?>" id="<?php echo $this->get_field_id('after'); ?>" /></p>
 
 
 <p><label for="<?php echo $this->get_field_id('container_after'); ?>"><?php _e('container_after:'); ?></label>
-    <input type="text" value="<?php echo $container_after ?>" name="<?php echo $this->get_field_name('container_after'); ?>" id="<?php echo $this->get_field_id('container_after'); ?>" /></p>
+    <input size="8" type="text" value="<?php echo $container_after ?>" name="<?php echo $this->get_field_name('container_after'); ?>" id="<?php echo $this->get_field_id('container_after'); ?>" /></p>
 
 <p><input id="<?php echo $this->get_field_id('filter'); ?>" name="<?php echo $this->get_field_name('filter'); ?>" type="checkbox" <?php checked(isset($instance['filter']) ? $instance['filter'] : 0); ?> />&nbsp;<label for="<?php echo $this->get_field_id('filter'); ?>"><?php _e('Automatically add paragraphs.'); ?></label></p>
     <?php
