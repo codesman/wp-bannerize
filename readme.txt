@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random
 Requires at least: 2.8
 Tested up to: 2.8.6
-Stable tag: 2.3.1
+Stable tag: 2.3.3
 
 WP_BANNERIZE, banner-image manager.
 
@@ -148,6 +148,7 @@ OR
 History release:
 
 `
+* 2.3.3     Split Widget code, Fix "random" select on Widget
 * 2.3.2     Add "alt" class in HTML output, Add additional class for link TAG A, Fix Widget output
 * 2.3.0     Add Wordpress Categories Filter - Show Banner Group for Categories ID, improve admin
 * 2.2.2     Fix minor bugs + prepare major release
