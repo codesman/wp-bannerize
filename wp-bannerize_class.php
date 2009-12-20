@@ -13,7 +13,7 @@ class WPBANNERIZE_CLASS {
  */
     var $release                                                = 2;
     var $minor                                                  = 3;
-    var $revision                                               = 3;
+    var $revision                                               = 4;
     var $version 						= "";                   // plugin version
     var $plugin_name 						= "WP Bannerize";	// plugin name
     var $options_key 						= "wp-bannerize";	// options key to store in database
