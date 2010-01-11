@@ -1,33 +1,29 @@
 <?php
 /**
- * Core
+ * Main "super" class
+ *
+ * @author          =undo= <g.fazioli@saidmade.com>
+ * @copyright       Copyright (C) 2010 Saidmade Srl
+ *
  */
 
 define('WP_BANNERIZE_TABLE', 'bannerize');
 
 class WPBANNERIZE_CLASS {
 
-/**
- * @internal
- * @staticvar
- */
-    var $release                                                = 2;
-    var $minor                                                  = 3;
-    var $revision                                               = 4;
-    var $version 						= "";                   // plugin version
-    var $plugin_name 						= "WP Bannerize";	// plugin name
-    var $options_key 						= "wp-bannerize";	// options key to store in database
-    var $options_title						= "WP Bannerize";	// label for "setting" in WP
+    var $release                        = 2;
+    var $minor                          = 3;
+    var $revision                       = 5;
+    var $version 						= "";               // plugin version
+    var $plugin_name 					= "WP Bannerize";	// plugin name
+    var $options_key 					= "wp-bannerize";	// options key to store in database
+    var $options_title					= "WP Bannerize";	// label for "setting" in WP
 
-    var $table_bannerize					= WP_BANNERIZE_TABLE;
-    var $_old_table_bannerize					= WP_BANNERIZE_TABLE;
+    var $table_bannerize				= WP_BANNERIZE_TABLE;
+    var $_old_table_bannerize			= WP_BANNERIZE_TABLE;
     var $update							= false;		// flag for upgrade from 1.4 prev
 
-    /**
-     * Usefull vars
-     * @internal
-     */
-    var $content_url						= "";
+    var $content_url					= "";
     var $plugin_url						= "";
     var $ajax_url						= "";
 
@@ -36,19 +32,10 @@ class WPBANNERIZE_CLASS {
     var $directory						= "";
     var $uri 							= "";
     var $siteurl 						= "";
-    var $wpadminurl 						= "";
+    var $wpadminurl 					= "";
 
-    /**
-     * This properties variable are @public
-     *
-     * @property
-     *
-     */
     var $options						= array();
 
-    /**
-     * @constructor
-     */
     function WPBANNERIZE_CLASS() {
         global $wpdb;
 
@@ -59,7 +46,6 @@ class WPBANNERIZE_CLASS {
          * Add $wpdb->prefix to table name define in WP_BANNERIZE_TABLE
          */
         $this->table_bannerize                                  = $wpdb->prefix . WP_BANNERIZE_TABLE;
-
 
         $this->path 						= dirname(__FILE__);
         $this->file 						= basename(__FILE__);
@@ -75,8 +61,6 @@ class WPBANNERIZE_CLASS {
 
     /**
      * Get option from database
-     *
-     * @return
      */
     function getOptions() {
         $this->options 						= get_option( $this->options_key );
@@ -85,7 +69,7 @@ class WPBANNERIZE_CLASS {
     /**
      * Check the Wordpress relase for more setting
      *
-     * @return
+     * @deprecated
      */
     function checkWordpressRelease() {
         global $wp_version;
@@ -93,8 +77,13 @@ class WPBANNERIZE_CLASS {
     }
 } // end of class
 
-require_once('wp-bannerize_widget.php');
-
-add_action('widgets_init', create_function('', 'return register_widget("WP_BANNERIZE_WIDGET");'));
-
+/**
+ * Avoid widget support
+ *
+ * @since 2.3.5
+ */
+if(class_exists("WP_Widget")) {
+    require_once('wp-bannerize_widget.php');
+    add_action('widgets_init', create_function('', 'return register_widget("WP_BANNERIZE_WIDGET");'));
+}
 ?>

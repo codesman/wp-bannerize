@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random
 Requires at least: 2.8
 Tested up to: 2.8.6
-Stable tag: 2.3.4
+Stable tag: 2.3.5
 
 WP_BANNERIZE, banner-image manager.
 
@@ -79,6 +79,9 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.3.5 =
+* Rev Widget Class implement
 
 = 2.3.4 =
 * Revision readme.txt

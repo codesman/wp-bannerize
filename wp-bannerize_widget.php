@@ -1,14 +1,13 @@
 <?php
-
 /**
  * Widget support
  *
- * @abstract	Add Widget support
- * @author	=undo=
- * @copyright	Saidmade Srl
+ * @author          =undo= <g.fazioli@saidmade.com>
+ * @copyright       Copyright (C) 2010 Saidmade Srl
+ *
  * @since	2.3.3
  * @version	1.0.1
- * @uses	Wordpress 2.8+
+ *
  */
 class WP_BANNERIZE_WIDGET extends WP_Widget {
 

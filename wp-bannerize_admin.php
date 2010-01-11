@@ -1,6 +1,10 @@
 <?php
 /**
- * Admin (back-end)
+ * Class for Manage Admin (back-end)
+ *
+ * @author          =undo= <g.fazioli@saidmade.com>
+ * @copyright       Copyright (C) 2010 Saidmade Srl
+ *
  */
 class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 
@@ -12,8 +16,6 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 
     /**
      * Init the default plugin options and re-load from WP
-     *
-     * @return
      */
     function initDefaultOption() {
         /**

@@ -1,6 +1,10 @@
 <?php
 /**
- * Client (front-end)
+ * Client class for front-end
+ * 
+ * @author          =undo= <g.fazioli@saidmade.com>
+ * @copyright       Copyright (C) 2010 Saidmade Srl
+ *
  */
 class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
 
