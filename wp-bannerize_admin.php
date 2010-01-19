@@ -46,9 +46,21 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         /**
          * @since 2.1.0
          * Add thickbox standard Wordpress support
+         *
+         * @since 2.3.6
+         * Add wp_enqueue_script for jquery library
+         *
          */
+        wp_enqueue_script('jquery-ui-sortable');
         wp_enqueue_script('thickbox');
         wp_enqueue_style('thickbox');
+
+        /**
+         * @since 2.3.6
+         * Add queue for style sheet
+         */
+        wp_register_style('wpbannerize', $this->uri . "/css/style.css");
+        wp_enqueue_style('wpbannerize');
 
         /**
          * @since 2.2.2
@@ -432,24 +444,19 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      * @return
      */
     function set_admin_head() {
-        $aba = $this->ajax_url;
         ?>
-<link rel="stylesheet" href="<?php echo $this->uri?>/css/style.css" type="text/css" media="screen, projection" />
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-        <?php require_once( $this->path . '/js/main.php'); ?>
-</script>
+        <script type="text/javascript">
+                <?php require_once( $this->path . '/js/main.php'); ?>
+        </script>
     <?php
     }
 
     /**
      * Esegue l'upload e lo store nel database
      *
-     * Array ( [name] 			=> test.pdf
+     * Array ( [name] 		=> test.pdf
      * 		   [type]		=> application/pdf
-     * 		   [tmp_name] 		=> /tmp/phpcXS1lh
+     * 		   [tmp_name] 	=> /tmp/phpcXS1lh
      *    	   [error] 		=> 0
      *    	   [size] 		=> 277304 )
      *

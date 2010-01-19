@@ -13,7 +13,7 @@ class WPBANNERIZE_CLASS {
 
     var $release                        = 2;
     var $minor                          = 3;
-    var $revision                       = 5;
+    var $revision                       = 8;
     var $version 						= "";               // plugin version
     var $plugin_name 					= "WP Bannerize";	// plugin name
     var $options_key 					= "wp-bannerize";	// options key to store in database
@@ -21,7 +21,7 @@ class WPBANNERIZE_CLASS {
 
     var $table_bannerize				= WP_BANNERIZE_TABLE;
     var $_old_table_bannerize			= WP_BANNERIZE_TABLE;
-    var $update							= false;		// flag for upgrade from 1.4 prev
+    var $update							= false;            // flag for upgrade from 1.4 prev
 
     var $content_url					= "";
     var $plugin_url						= "";
@@ -45,12 +45,13 @@ class WPBANNERIZE_CLASS {
          * @since 2.2.1
          * Add $wpdb->prefix to table name define in WP_BANNERIZE_TABLE
          */
-        $this->table_bannerize                                  = $wpdb->prefix . WP_BANNERIZE_TABLE;
+        $this->table_bannerize              = $wpdb->prefix . WP_BANNERIZE_TABLE;
 
         $this->path 						= dirname(__FILE__);
         $this->file 						= basename(__FILE__);
         $this->directory 					= basename($this->path);
-        $this->uri 						= WP_PLUGIN_URL . "/" . $this->directory;
+        //$this->uri                          = WP_PLUGIN_URL . "/" . $this->directory;
+        $this->uri                          = plugins_url("", __FILE__);
         $this->siteurl						= get_bloginfo('url');
         $this->wpadminurl					= admin_url();
 

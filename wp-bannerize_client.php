@@ -20,30 +20,30 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
      * @return
      * @param object $args
      *
-     * group			If '' show all group, else code of group (default '')
+     * group                If '' show all group, else code of group (default '')
      * container_before		Main tag container open (default <ul>)
      * container_after		Main tag container close (default </ul>)
-     * before			Before tag banner open (default <li %alt%>)
-     * after			After tag banner close (default </li>)
-     * random                   Show random banner sequence (default '')
-     * categories               Category ID separated by commas. (default '')
-     * limit			Limit rows number (default '' - show all rows)
+     * before               Before tag banner open (default <li %alt%>)
+     * after                After tag banner close (default </li>)
+     * random               Show random banner sequence (default '')
+     * categories           Category ID separated by commas. (default '')
+     * limit                Limit rows number (default '' - show all rows)
      *
      */
     function bannerize( $args = '' ) {
         global $wpdb;
 
         $default = array(
-            'group' 			=> '',
+            'group'                 => '',
             'container_before'		=> '<ul>',
             'container_after'		=> '</ul>',
-            'before'			=> '<li %alt%>',
-            'after'			=> '</li>',
-            'random'                    => '',
-            'categories'                => '',
-            'alt_class'                 => 'alt',
-            'link_class'                => '',
-            'limit'			=> ''
+            'before'                => '<li %alt%>',
+            'after'                 => '</li>',
+            'random'                => '',
+            'categories'            => '',
+            'alt_class'             => 'alt',
+            'link_class'            => '',
+            'limit'                 => ''
         );
 
         $new_args = wp_parse_args( $args, $default );
