@@ -28,9 +28,8 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
     function widget( $args, $instance ) {
         global $wpdb;
 
-        // @note
-        // Not used in this version
-        //extract($args);
+        // @since 2.3.9
+        extract($args);
         extract($instance);
 
         /**
