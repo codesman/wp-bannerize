@@ -1,12 +1,11 @@
 /**
  * Javascript functions
-
+ *
  * @package         wp-bannerize
- * @subpackage      wp-bannerize_class
+ * @subpackage      main.js
  * @author          =undo= <g.fazioli@saidmade.com>
  * @copyright       Copyright (C) 2010 Saidmade Srl
  * @version         1.2.0
-
  */
 jQuery(document).ready(function(){
 	jQuery('table#list_bannerize tbody tr').css('width',jQuery('table#list_bannerize').width() );
@@ -16,7 +15,7 @@ jQuery(document).ready(function(){
 				stop:function() {
 					jQuery.ajax({
 					type: "POST",
-					url: "<?php echo $this->ajax_url?>",
+					url: wpBannerizeMainL10n.ajaxURL,
 					data: jQuery("table#list_bannerize tbody").sortable("serialize")	})
 				}
 	});
@@ -28,7 +27,7 @@ jQuery(document).ready(function(){
 });
 
 function delete_banner( id ) {
-	if( confirm( '<?php _e("WARINING!!\n\nDo you want delete this banner?") ?>' ) {
+	if( confirm( wpBannerizeMainL10n.messageConfirm ) ) {
 		var f = document.forms['delete_bannerize'];
 		f.id.value = id;
 		f.submit();

@@ -1,1 +1,189 @@
-msgid ""msgstr """Project-Id-Version: wp-bannerize\n""Report-Msgid-Bugs-To: \n""POT-Creation-Date: 2010-02-17 21:43-0300\n""PO-Revision-Date: 2010-02-23 02:18+0100\n""Last-Translator: Giovambattista Fazioli <g.fazioli@undolog.com>\n""Language-Team: Giovambattista Fazioli <g.fazioli@undolog.com>\n""MIME-Version: 1.0\n""Content-Type: text/plain; charset=UTF-8\n""Content-Transfer-Encoding: 8bit\n""X-Poedit-KeywordsList: _e;__;_;gettext;gettext_noop\n""X-Poedit-Basepath: .\n""X-Poedit-Language: Italian\n""X-Poedit-Country: ITALY\n"#: wp-bannerize_admin.php:88#: wp-bannerize_admin.php:542msgid "Settings"msgstr "Impostazioni"#: wp-bannerize_admin.php:96#: wp-bannerize_admin.php:248msgid "Use"msgstr "Usa"#: wp-bannerize_admin.php:130msgid "Your settings have been saved."msgstr "Le tue impostazione sono state salvate"#: wp-bannerize_admin.php:208msgid "Insert new Banner"msgstr "Inserisci un nuovo banner"#: wp-bannerize_admin.php:216#: wp-bannerize_admin.php:268#: wp-bannerize_admin.php:278msgid "Image"msgstr "Immagine"#: wp-bannerize_admin.php:220#: wp-bannerize_admin.php:269#: wp-bannerize_admin.php:279#: wp-bannerize_admin.php:295msgid "Key"msgstr "Chiave"#: wp-bannerize_admin.php:221msgid "Insert a key max 128 char"msgstr "Inserire una chiave al massimo di 128 caratteri"#: wp-bannerize_admin.php:224#: wp-bannerize_admin.php:270#: wp-bannerize_admin.php:280#: wp-bannerize_admin.php:296msgid "Description"msgstr "Descrizione"#: wp-bannerize_admin.php:229#: wp-bannerize_admin.php:272#: wp-bannerize_admin.php:282#: wp-bannerize_admin.php:298msgid "Target"msgstr "Destinazione"#: wp-bannerize_admin.php:232msgid "Insert"msgstr "Inserisci"#: wp-bannerize_admin.php:247msgid "Filter"msgstr "Filtra"#: wp-bannerize_admin.php:248msgid "for drag and drop to change order"msgstr "drag & drop per ordinare"#: wp-bannerize_admin.php:271#: wp-bannerize_admin.php:281#: wp-bannerize_admin.php:297msgid "URL"msgstr "URL"#: wp-bannerize_admin.php:300msgid "Cancel"msgstr "Annulla"#: wp-bannerize_admin.php:301msgid "Update"msgstr "Aggiorna"#: wp-bannerize_admin.php:312msgid "Edit"msgstr "Modifica"#: wp-bannerize_admin.php:313msgid "Delete"msgstr "Elimina"#: wp-bannerize_admin.php:314msgid "View"msgstr "Visualizza"#: wp-bannerize_admin.php:352msgid "Update succefully"msgstr "Aggiornamento effettuato"#: wp-bannerize_admin.php:355msgid "Reload"msgstr "Ricarica"#: wp-bannerize_admin.php:361msgid "Please, re-insert your banners."msgstr "prego, reinserisci i tuoi banner"#: wp-bannerize_admin.php:379msgid "All"msgstr "Tutto"#: wp-bannerize_widget.php:137msgid "Title:"msgstr "Titolo:"#: wp-bannerize_widget.php:139msgid "Key:"msgstr "Chiave:"#: wp-bannerize_widget.php:141msgid "Random:"msgstr "Casuale:"#: wp-bannerize_widget.php:144msgid "Show only for these Categories:"msgstr "Mostra solo per queste categorie:"#: wp-bannerize_widget.php:147msgid "Max:"msgstr "Massimo:"#: wp-bannerize_widget.php:150msgid "container_before:"msgstr "container_antes:"#: wp-bannerize_widget.php:153msgid "before:"msgstr "prima:"#: wp-bannerize_widget.php:159msgid "link_class:"msgstr "link_class:"#: wp-bannerize_widget.php:163msgid "after:"msgstr "dopo:"#: wp-bannerize_widget.php:167msgid "container_after:"msgstr "container_depois:"
+# Translation of the WordPress plugin WP-BANNERIZE 2.4.0 by Giovambattista Fazioli.
+# Copyright (C) 2010 Giovambattista Fazioli
+# This file is distributed under the same license as the WP-BANNERIZE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wp-bannerize\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-bannerize\n"
+"POT-Creation-Date: 2010-02-23 10:56+0000\n"
+"PO-Revision-Date: 2010-02-23 13:41+0100\n"
+"Last-Translator: Giovambattista Fazioli <g.fazioli@undolog.com>\n"
+"Language-Team: Giovambattista Fazioli <g.fazioli@undolog.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: /Users/giovambattistafazioli/Lavori/Giovambattista Fazioli/Siti e Blog Personali e di Lavoro/saidmade.com/Web/web_labs_saidmade/wp-content/plugins/wp-bannerize\n"
+
+#: js/main.php:31
+msgid "WARINING!! Do you want delete this banner?"
+msgstr "Attenzione!! Sei sicuro di voler eliminare questo banner?"
+
+#: wp-bannerize_admin.php:103
+#: wp-bannerize_admin.php:554
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: wp-bannerize_admin.php:111
+#: wp-bannerize_admin.php:260
+msgid "Use"
+msgstr "Usa"
+
+#: wp-bannerize_admin.php:148
+msgid "Your settings have been saved."
+msgstr "Le tue impostazioni sono state salvate"
+
+#: wp-bannerize_admin.php:221
+msgid "Insert new Banner"
+msgstr "Inserisci un nuovo Banner"
+
+#: wp-bannerize_admin.php:229
+#: wp-bannerize_admin.php:280
+#: wp-bannerize_admin.php:290
+msgid "Image"
+msgstr "Immagine"
+
+#: wp-bannerize_admin.php:233
+#: wp-bannerize_admin.php:281
+#: wp-bannerize_admin.php:291
+#: wp-bannerize_admin.php:307
+msgid "Key"
+msgstr "Chiave"
+
+#: wp-bannerize_admin.php:234
+msgid "Insert a key max 128 chars"
+msgstr "inserire una chiave univoca di massimo 128 caratteri"
+
+#: wp-bannerize_admin.php:237
+#: wp-bannerize_admin.php:282
+#: wp-bannerize_admin.php:292
+#: wp-bannerize_admin.php:308
+msgid "Description"
+msgstr "Descrizione"
+
+#: wp-bannerize_admin.php:242
+#: wp-bannerize_admin.php:284
+#: wp-bannerize_admin.php:294
+#: wp-bannerize_admin.php:310
+msgid "Target"
+msgstr "Destinazione"
+
+#: wp-bannerize_admin.php:245
+msgid "Insert"
+msgstr "Inserisci"
+
+#: wp-bannerize_admin.php:260
+msgid "Filter"
+msgstr "Filtra"
+
+#: wp-bannerize_admin.php:260
+msgid "for drag and drop to change order"
+msgstr "drag & drop per cambiare l'ordine"
+
+#: wp-bannerize_admin.php:283
+#: wp-bannerize_admin.php:293
+#: wp-bannerize_admin.php:309
+msgid "URL"
+msgstr "URL"
+
+#: wp-bannerize_admin.php:312
+msgid "Cancel"
+msgstr "Annulla"
+
+#: wp-bannerize_admin.php:313
+msgid "Update"
+msgstr "Aggiorna"
+
+#: wp-bannerize_admin.php:324
+msgid "Edit"
+msgstr "Modifica"
+
+#: wp-bannerize_admin.php:325
+msgid "Delete"
+msgstr "Elimina"
+
+#: wp-bannerize_admin.php:326
+msgid "View"
+msgstr "Visualizza"
+
+#: wp-bannerize_admin.php:364
+msgid "Update succefully"
+msgstr "Aggiornamento effettuato"
+
+#: wp-bannerize_admin.php:367
+msgid "Reload"
+msgstr "Ricarica"
+
+#: wp-bannerize_admin.php:373
+msgid "Please, re-insert your banners."
+msgstr ""
+
+#: wp-bannerize_admin.php:391
+msgid "All"
+msgstr "Tutto"
+
+#: wp-bannerize_widget.php:156
+msgid "Title:"
+msgstr "Titolo:"
+
+#: wp-bannerize_widget.php:158
+msgid "Key:"
+msgstr "Chiave:"
+
+#: wp-bannerize_widget.php:160
+msgid "Random:"
+msgstr "Casuale:"
+
+#: wp-bannerize_widget.php:163
+msgid "Show only for these Categories:"
+msgstr "Mostra solo per queste categorie:"
+
+#: wp-bannerize_widget.php:166
+msgid "Max:"
+msgstr "Massimo:"
+
+#: wp-bannerize_widget.php:169
+msgid "container_before:"
+msgstr "container_before:"
+
+#: wp-bannerize_widget.php:172
+msgid "before:"
+msgstr "before:"
+
+#: wp-bannerize_widget.php:178
+msgid "link_class:"
+msgstr "link_class:"
+
+#: wp-bannerize_widget.php:182
+msgid "after:"
+msgstr "after:"
+
+#: wp-bannerize_widget.php:186
+msgid "container_after:"
+msgstr "container_after:"
+
+#. Plugin Name of an extension
+msgid "WP-BANNERIZE"
+msgstr "WP-BANNERIZE"
+
+#. Plugin URI of an extension
+msgid "http://wordpress.org/extend/plugins/wp-bannerize/"
+msgstr "http://wordpress.org/extend/plugins/wp-bannerize/"
+
+#. Description of an extension
+msgid "WP_BANNERIZE is an Amazing Banner Image Manager. For more info and plugins visit <a href=\"http://labs.saidmade.com\">Labs Saidmade</a>."
+msgstr "WP_BANNERIZE is an Amazing Banner Image Manager. For more info and plugins visit <a href=\"http://labs.saidmade.com\">Labs Saidmade</a>."
+
+#. Author of an extension
+msgid "Giovambattista Fazioli"
+msgstr "Giovambattista Fazioli"
+
+#. Author URI of an extension
+msgid "http://labs.saidmade.com"
+msgstr "http://labs.saidmade.com"
+

@@ -13,6 +13,13 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
     function WPBANNERIZE_ADMIN() {
         $this->WPBANNERIZE_CLASS();	// super
 
+        /**
+         * Load localizations if available
+         *
+         * @since 2.4.0
+         */
+		load_plugin_textdomain ( 'wp-bannerize' , false, 'wp-bannerize/localization'  );
+
         $this->initDefaultOption();
     }
 
@@ -33,14 +40,6 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         add_option( $this->options_key, $this->options, $this->options_title );
 
         parent::getOptions();
-
-        /**
-         * Load localizations if available
-         *
-         * @since 2.4.0
-         */
-        echo $this->plugin_url;
-		load_plugin_textdomain ( 'wp-bannerize' , '/wp-content/plugins/wp-bannerize/localization'  );
 
         /**
          * Check table for new field
@@ -75,9 +74,19 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
          *
          * @since 2.3.6
          */
-        wp_register_style('wpbannerize', $this->uri . "/css/style.css");
-        wp_enqueue_style('wpbannerize');
+        wp_register_style('wp-bannerize-style-css', $this->uri . "/css/style.css");
+        wp_enqueue_style('wp-bannerize-style-css');
 
+        /**
+         * Add main admin javascript
+         *
+         * @since 2.4.0
+         */
+		wp_enqueue_script ( 'wp-bannerize-main-js' , $this->uri . '/js/main.js' , array ( 'jquery' ) , '1.2.0' , true );
+		wp_localize_script ( 'wp-bannerize-main-js' , 'wpBannerizeMainL10n' , array (
+                                                    'ajaxURL' => $this->ajax_url,
+													'messageConfirm' => __( 'WARINING!! Do you want delete this banner?'  , 'wp-bannerize' )
+													) );
         /**
          * Update version control in options
          *
@@ -101,8 +110,6 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
             $menus['main'] = add_menu_page('WP Bannerize', 'WP Bannerize', 8, $this->directory.'-settings', array(&$this,'set_options_subpanel') );
 
         $menus['settings'] = add_submenu_page($this->directory.'-settings', __('Settings', 'wp-bannerize'), __('Settings', 'wp-bannerize'), 8, $this->directory.'-settings', array(&$this,'set_options_subpanel') );
-
-        add_action( 'admin_head-' . $menus['settings'], array( &$this, 'set_admin_head' ) );
 
         /**
          * Add contextual Help
@@ -231,7 +238,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
                                     </tr>
                                     <tr>
                                         <th scope="row"><label for="group"><?php _e('Key', 'wp-bannerize')?>:</label></th>
-                                        <td><input type="text" maxlength="128" name="group" id="group" value="A" size="32" style="text-align:right" /> <?php echo $this->get_combo_group() ?> (<?php _e('Insert a key max 128 char', 'wp-bannerize')?>)</td>
+                                        <td><input type="text" maxlength="128" name="group" id="group" value="A" size="32" style="text-align:right" /> <?php echo $this->get_combo_group() ?> (<?php _e('Insert a key max 128 chars', 'wp-bannerize')?>)</td>
                                     </tr>
                                     <tr>
                                         <th scope="row"><label for="description"><?php _e('Description', 'wp-bannerize')?>:</label></th>
@@ -239,10 +246,10 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
                                     </tr>
                                     <tr>
                                         <th scope="row"><label for="url">URL:</label></th>
-                                        <td><input type="text" name="url" id="url" value="" size="32" /> <label for="url"><?php _e('Target')?>:</label> <?php echo $this->get_target_combo() ?></td>
+                                        <td><input type="text" name="url" id="url" value="" size="32" /> <label for="url"><?php _e('Target', 'wp-bannerize')?>:</label> <?php echo $this->get_target_combo() ?></td>
                                     </tr>
                                 </table>
-                                <p class="submit"><input class="button-primary" type="submit" value="<?php _e('Insert')?>" /></p
+                                <p class="submit"><input class="button-primary" type="submit" value="<?php _e('Insert', 'wp-bannerize')?>" /></p
                             </form>
 
                             <form style="display:none" name="delete_bannerize" method="post" action="">
@@ -257,7 +264,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
                         <div class="tablenav">
                             <div class="alignleft actions">
                                 <form class="form_box" name="filter_bannerize" method="post" action="">
-                                    <?php $this->combo_group(); ?> <input class="button-secondary" type="submit" value="<?php _e('Filter')?>"/> | <?php _e('Use')?> <img align="absmiddle" alt="Drag and Drop" border="0" src="<?php echo $this->uri ?>/css/images/arrow_ns.png" /> <?php _e('for drag and drop to change order')?>
+                                    <?php $this->combo_group(); ?> <input class="button-secondary" type="submit" value="<?php _e('Filter', 'wp-bannerize')?>"/> | <?php _e('Use', 'wp-bannerize')?> <img align="absmiddle" alt="Drag and Drop" border="0" src="<?php echo $this->uri ?>/css/images/arrow_ns.png" /> <?php _e('for drag and drop to change order', 'wp-bannerize')?>
                                 </form>
                             </div>
                         </div>
@@ -451,19 +458,6 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
     }
 
     /**
-     * Hook the admin/plugin head
-     *
-     * @return
-     */
-    function set_admin_head() {
-        ?>
-        <script type="text/javascript">
-                <?php require_once( $this->path . '/js/main.php'); ?>
-        </script>
-    <?php
-    }
-
-    /**
      * Esegue l'upload e lo store nel database
      *
      * Array ( [name] 		=> test.pdf
@@ -547,7 +541,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      * Attach settings in Wordpress Plugins list
      */
     function register_plugin_settings( $pluginfile ) {
-        add_action( 'plugin_action_links_'.basename( dirname( $pluginfile ) ) . '/' . basename( $pluginfile ), array( &$this, 'plugin_settings' ), 10, 4 );
+        add_action( 'plugin_action_links_' . basename( dirname( $pluginfile ) ) . '/' . basename( $pluginfile ), array( &$this, 'plugin_settings' ), 10, 4 );
     }
 
     function plugin_settings( $links ) {

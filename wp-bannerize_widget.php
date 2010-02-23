@@ -21,10 +21,17 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
     function WP_BANNERIZE_WIDGET() {
         global $wpdb;
 
+        /**
+         * Load localizations if available
+         *
+         * @since 2.4.0
+         */
+		load_plugin_textdomain ( 'wp-bannerize' , false, 'wp-bannerize/localization'  );
+
         $this->table_bannerize = $wpdb->prefix . WP_BANNERIZE_TABLE;
         //
         $widget_ops = array('classname' => 'widget_wp_bannerize', 'description' => 'Amazing Banner Image Manager');
-        $control_ops = array('width' => 400, 'height' => 350);
+        $control_ops = array('width' => 430, 'height' => 350);
         $this->WP_Widget('wp_bannerize', 'WP Bannerize', $widget_ops, $control_ops);
     }
 
@@ -153,37 +160,37 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
         $link_class             = strip_tags($instance['link_class']);
 
         ?>
-<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
+<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'wp-bannerize'); ?></label>
     <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></p>
-<p><label for="<?php echo $this->get_field_id('group'); ?>"><?php _e('Key:'); ?></label>
+<p><label for="<?php echo $this->get_field_id('group'); ?>"><?php _e('Key:', 'wp-bannerize'); ?></label>
         <?php echo $this->get_group( $group ) ?></p>
-<p><label for="<?php echo $this->get_field_id('random'); ?>"><?php _e('Random:'); ?></label>
+<p><label for="<?php echo $this->get_field_id('random'); ?>"><?php _e('Random:', 'wp-bannerize'); ?></label>
     <input <?php echo ($random == '1') ? 'checked="chekced"' : '' ?> value="1" type="checkbox" name="<?php echo $this->get_field_name('random'); ?>" id="<?php echo $this->get_field_id('random'); ?>" /></p>
 
-<p><label for="<?php echo $this->get_field_id('categories'); ?>"><?php _e('Show only for these Categories:'); ?></label></p>
+<p><label for="<?php echo $this->get_field_id('categories'); ?>"><?php _e('Show only for these Categories:', 'wp-bannerize'); ?></label></p>
 <p><?php echo $this->get_categories_checkboxes($categories) ?></p>
 
-<p><label for="<?php echo $this->get_field_id('limit'); ?>"><?php _e('Max:'); ?></label>
+<p><label for="<?php echo $this->get_field_id('limit'); ?>"><?php _e('Max:', 'wp-bannerize'); ?></label>
     <input type="text" value="<?php echo $limit ?>" name="<?php echo $this->get_field_name('limit'); ?>" id="<?php echo $this->get_field_id('limit'); ?>" /></p>
 <p><strong>HTML Markup:</strong></p>
-<p><label for="<?php echo $this->get_field_id('container_before'); ?>"><?php _e('container_before:'); ?></label>
+<p><label for="<?php echo $this->get_field_id('container_before'); ?>"><?php _e('container_before:', 'wp-bannerize'); ?></label>
     <input size="8" type="text" value="<?php echo $container_before ?>" name="<?php echo $this->get_field_name('container_before'); ?>" id="<?php echo $this->get_field_id('container_before'); ?>" /></p>
 
-<p><label for="<?php echo $this->get_field_id('before'); ?>"><?php _e('before:'); ?></label>
+<p><label for="<?php echo $this->get_field_id('before'); ?>"><?php _e('before:', 'wp-bannerize'); ?></label>
     <input size="8" type="text" value="<?php echo $before ?>" name="<?php echo $this->get_field_name('before'); ?>" id="<?php echo $this->get_field_id('before'); ?>" />
     alt class: <input size="8" type="text" value="<?php echo $alt_class ?>" name="<?php echo $this->get_field_name('alt_class'); ?>" id="<?php echo $this->get_field_id('alt_class'); ?>" />
     (Es. &lt;li class="alt"&gt; ...)
 </p>
 
-<p><label for="<?php echo $this->get_field_id('link_class'); ?>"><?php _e('link_class:'); ?></label>
+<p><label for="<?php echo $this->get_field_id('link_class'); ?>"><?php _e('link_class:', 'wp-bannerize'); ?></label>
     <input size="8" type="text" value="<?php echo $link_class ?>" name="<?php echo $this->get_field_name('link_class'); ?>" id="<?php echo $this->get_field_id('link_class'); ?>" /></p>
 
 
-<p><label for="<?php echo $this->get_field_id('after'); ?>"><?php _e('after:'); ?></label>
+<p><label for="<?php echo $this->get_field_id('after'); ?>"><?php _e('after:', 'wp-bannerize'); ?></label>
     <input size="8" type="text" value="<?php echo $after ?>" name="<?php echo $this->get_field_name('after'); ?>" id="<?php echo $this->get_field_id('after'); ?>" /></p>
 
 
-<p><label for="<?php echo $this->get_field_id('container_after'); ?>"><?php _e('container_after:'); ?></label>
+<p><label for="<?php echo $this->get_field_id('container_after'); ?>"><?php _e('container_after:', 'wp-bannerize'); ?></label>
     <input size="8" type="text" value="<?php echo $container_after ?>" name="<?php echo $this->get_field_name('container_after'); ?>" id="<?php echo $this->get_field_id('container_after'); ?>" /></p>
 
     <?php
