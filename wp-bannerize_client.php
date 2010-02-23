@@ -2,16 +2,20 @@
 /**
  * Client class for front-end
  * 
+ * @package         wp-bannerize
+ * @subpackage      wp-bannerize_client
  * @author          =undo= <g.fazioli@saidmade.com>
  * @copyright       Copyright (C) 2010 Saidmade Srl
+ * @version         2.0.0
  *
  */
+
 class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
 
     function WPBANNERIZE_CLIENT() {
-        $this->WPBANNERIZE_CLASS();							// super
+        $this->WPBANNERIZE_CLASS();
 
-        parent::getOptions();								// retrive options from database
+        parent::getOptions();
     }
 
     /**
@@ -49,8 +53,9 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
         $new_args = wp_parse_args( $args, $default );
 
         /**
-         * @sice 2.3.0
          * Check for categories
+         *
+         * @since 2.3.0
          */
          if( $new_args['categories'] != "")  {
             $cat_ids = explode(",", $new_args['categories']);
@@ -62,14 +67,16 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
         if( $new_args['group'] != "") $q .= " WHERE `group` = '" . $new_args['group'] . "'";
 
         /**
-         * @since 2.0.2
          * Add random option
+         *
+         * @since 2.0.2
          */
         $q .= ($new_args['random'] == '') ? " ORDER BY `sorter` ASC" : "ORDER BY RAND()";
 
         /**
-         * @since 2.0.0
          * Limit rows number
+         * 
+         * @since 2.0.0
          */
         if( $new_args['limit'] != "") $q .= " LIMIT 0," . $new_args['limit'] ;
 
@@ -77,7 +84,6 @@ class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
 
         $o = $new_args['container_before'];
 
-        // @since 2.3.2
         $even_before = $odd_before = $alternate_class = "";
         $index = 0;
 

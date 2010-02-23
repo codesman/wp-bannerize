@@ -1,27 +1,96 @@
 <?php
 /**
- * Main "super" class
- *
+ * Main class for sub.classing backend and frontend class
+ * 
+ * @package         wp-bannerize
+ * @subpackage      wp-bannerize_class
  * @author          =undo= <g.fazioli@saidmade.com>
  * @copyright       Copyright (C) 2010 Saidmade Srl
+ * @version         2.2.0
  *
  */
 
+/**
+ * Global define: nome della tabella senza il prefisso
+ */
 define('WP_BANNERIZE_TABLE', 'bannerize');
 
 class WPBANNERIZE_CLASS {
 
+    /**
+     * WP-BANNERIZE release.minor.revision
+     * 
+     * @since 2.3.0
+     * @var integer
+     */
     var $release                        = 2;
-    var $minor                          = 3;
-    var $revision                       = 8;
-    var $version 						= "";               // plugin version
-    var $plugin_name 					= "WP Bannerize";	// plugin name
-    var $options_key 					= "wp-bannerize";	// options key to store in database
-    var $options_title					= "WP Bannerize";	// label for "setting" in WP
+    var $minor                          = 4;
+    var $revision                       = 0;
+    
+    /**
+     * Plugin version (see above)
+     *
+     * @since 2.3.0
+     * @var string
+     */
+    var $version 						= "";
+    
+    /**
+     * Plugin name
+     *
+     * @since 1.0.0
+     * @var string
+     */
+    var $plugin_name 					= "WP Bannerize";
 
+    /**
+     * Key for database options
+     *
+     * @since 1.0.0
+     * @var string
+     */
+    var $options_key 					= "wp-bannerize";
+
+    /**
+     * Options array containing all options for this plugin
+     * 
+     * @since 1.0.0 
+     * @var array
+     */
+    var $options						= array();
+    
+    /**
+     * Backend title
+     *
+     * @since 1.0.0
+     * @var string
+     */
+    var $options_title					= "WP Bannerize";
+
+    /**
+     * Property for table name
+     *
+     * @since 1.4.0
+     * @var string
+     */
     var $table_bannerize				= WP_BANNERIZE_TABLE;
+
+    /**
+     * Old table name for previous compatibility
+     *
+     * @since 1.5.0
+     * @var string
+     */
     var $_old_table_bannerize			= WP_BANNERIZE_TABLE;
-    var $update							= false;            // flag for upgrade from 1.4 prev
+
+    /**
+     * Flag for database upgrade
+     *
+     * @since 1.5.0
+     * @var boolean
+     */
+    var $update							= false;
+
 
     var $content_url					= "";
     var $plugin_url						= "";
@@ -34,23 +103,32 @@ class WPBANNERIZE_CLASS {
     var $siteurl 						= "";
     var $wpadminurl 					= "";
 
-    var $options						= array();
-
+    /**
+     * Standard PHP 4 constructor
+     *
+     * @since 1.0.0
+     * @global object $wpdb
+     */
     function WPBANNERIZE_CLASS() {
         global $wpdb;
 
         $this->version = $this->release . "." . $this->minor . "." . $this->revision;
 
         /**
+         * Add $wpdb->prefix to table name define in WP_BANNERIZE_TABLE. This
+         * featured makes wp-bannerize compatible with Wordpress MU and Wordpress
+         * with different database prefix
+         *
          * @since 2.2.1
-         * Add $wpdb->prefix to table name define in WP_BANNERIZE_TABLE
          */
         $this->table_bannerize              = $wpdb->prefix . WP_BANNERIZE_TABLE;
 
+        /**
+         * Build internal usefull paths
+         */
         $this->path 						= dirname(__FILE__);
         $this->file 						= basename(__FILE__);
         $this->directory 					= basename($this->path);
-        //$this->uri                          = WP_PLUGIN_URL . "/" . $this->directory;
         $this->uri                          = plugins_url("", __FILE__);
         $this->siteurl						= get_bloginfo('url');
         $this->wpadminurl					= admin_url();

@@ -2,24 +2,34 @@
 /**
  * Class for Manage Admin (back-end)
  *
+ * @package         wp-bannerize
+ * @subpackage      wp-bannerize_client
  * @author          =undo= <g.fazioli@saidmade.com>
  * @copyright       Copyright (C) 2010 Saidmade Srl
- *
+ * @version         2.3.2
  */
 class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 
     function WPBANNERIZE_ADMIN() {
         $this->WPBANNERIZE_CLASS();	// super
 
+        /**
+         * Load localizations if available
+         *
+         * @since 2.4.0
+         */
+		load_plugin_textdomain ( 'wp-bannerize' , false, 'wp-bannerize/localization'  );
+
         $this->initDefaultOption();
     }
 
     /**
      * Init the default plugin options and re-load from WP
+     *
+     * @since 2.2.2
      */
     function initDefaultOption() {
         /**
-         * @since 2.2.2
          * Add version control in options.
          * In questa maniera dalle release successive quando si chiama il
          * metodo checkTable() è possibile verificare la versione del plugin
@@ -27,44 +37,60 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
          *
          */
         $this->options = array('wp_bannerize_version' => $this->version );
-
         add_option( $this->options_key, $this->options, $this->options_title );
 
         parent::getOptions();
 
         /**
-         * @since 1.4+
          * Check table for new field
          *
-         * @since 2.1.0
-         * Alter table group filed to varchar(128)
+         * @since 1.4+
          */
         $this->update = $this->checkTable();
 
+        /**
+         * Add option menu in Wordpress backend
+         */
         add_action('admin_menu', 	array( $this, 'add_menus') );
 
+
         /**
-         * @since 2.1.0
-         * Add thickbox standard Wordpress support
-         *
-         * @since 2.3.6
          * Add wp_enqueue_script for jquery library
          *
+         * @since 2.3.6
          */
         wp_enqueue_script('jquery-ui-sortable');
+
+        /**
+         * Add thickbox standard Wordpress support
+         *
+         * @since 2.1.0
+         */
         wp_enqueue_script('thickbox');
         wp_enqueue_style('thickbox');
 
         /**
-         * @since 2.3.6
          * Add queue for style sheet
+         *
+         * @since 2.3.6
          */
-        wp_register_style('wpbannerize', $this->uri . "/css/style.css");
-        wp_enqueue_style('wpbannerize');
+        wp_register_style('wp-bannerize-style-css', $this->uri . "/css/style.css");
+        wp_enqueue_style('wp-bannerize-style-css');
 
         /**
-         * @since 2.2.2
+         * Add main admin javascript
+         *
+         * @since 2.4.0
+         */
+		wp_enqueue_script ( 'wp-bannerize-main-js' , $this->uri . '/js/main.js' , array ( 'jquery' ) , '1.2.0' , true );
+		wp_localize_script ( 'wp-bannerize-main-js' , 'wpBannerizeMainL10n' , array (
+                                                    'ajaxURL' => $this->ajax_url,
+													'messageConfirm' => __( 'WARINING!! Do you want delete this banner?'  , 'wp-bannerize' )
+													) );
+        /**
          * Update version control in options
+         *
+         * @since 2.2.2
          */
         update_option( $this->options_key, $this->options);
     }
@@ -79,21 +105,17 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         $menus = array();
 
         if (function_exists('add_object_page')) {
-        // Remove from 2.2.0 for fix Wordpress 2.8.6
-        // $menus['main'] = add_object_page('WP Bannerize', 'WP Bannerize', 8, $this->directory.'-settings', array( &$this, 'set_options_subpanel') );
             $menus['main'] = add_object_page('WP Bannerize', 'WP Bannerize', 8, $this->directory.'-settings' );
         } else
             $menus['main'] = add_menu_page('WP Bannerize', 'WP Bannerize', 8, $this->directory.'-settings', array(&$this,'set_options_subpanel') );
 
-        $menus['settings'] = add_submenu_page($this->directory.'-settings', __('Settings'), __('Settings'), 8, $this->directory.'-settings', array(&$this,'set_options_subpanel') );
-
-        add_action( 'admin_head-' . $menus['settings'], array( &$this, 'set_admin_head' ) );
+        $menus['settings'] = add_submenu_page($this->directory.'-settings', __('Settings', 'wp-bannerize'), __('Settings', 'wp-bannerize'), 8, $this->directory.'-settings', array(&$this,'set_options_subpanel') );
 
         /**
          * Add contextual Help
          */
         if (function_exists('add_contextual_help')) {
-            add_contextual_help($menus['main'],'<p><strong>'.__('Use').':</strong></p>' .
+            add_contextual_help($menus['main'],'<p><strong>'.__('Use', 'wp-bannerize').':</strong></p>' .
                 '<pre>wp_bannerize();</pre>or<br/>' .
                 '<pre>wp_bannerize( \'group=a&limit=10\' );</pre>or<br/>' .
                 '<pre>wp_bannerize( \'group=a&limit=10&random=1\' );</pre>or<br/>' .
@@ -124,10 +146,13 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
             return;
         }
 
-        $any_error = "";                                                        // any error flag
+        /**
+         * Any error flag
+         */
+        $any_error = "";
 
-        if( isset( $_POST['command_action'] ) ) {				// have to save options
-            $any_error = __('Your settings have been saved.');
+        if( isset( $_POST['command_action'] ) ) {
+            $any_error = __('Your settings have been saved.', 'wp-bannerize');
 
             switch( $_POST['command_action'] ) {
                 case "mysql_insert":
@@ -145,14 +170,9 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         /**
          * Show error or OK
          */
-        if( $any_error != '') echo '<div id="message" class="updated fade"><p>' . $any_error . '</p></div>';
-
-        /**
-         * INSERT OPTION
-         *
-         * You can include a separate file: include ('options.php');
-         *
-         */
+        if( $any_error != '') {
+            echo '<div id="message" class="updated fade"><p>' . $any_error . '</p></div>';
+        }
         ?>
 
 <div class="wrap">
@@ -205,7 +225,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
                 <div class="meta-box-sortabless">
 
                     <div id="sm_rebuild" class="postbox">
-                        <h3 class="hndle"><span><?php echo __('Insert new Banner')?></span></h3>
+                        <h3 class="hndle"><span><?php  _e('Insert new Banner', 'wp-bannerize')?></span></h3>
                         <div class="inside">
                             <form class="form_box" name="insert_bannerize" method="post" action="" enctype="multipart/form-data">
                                 <input type="hidden" name="command_action" id="command_action" value="mysql_insert" />
@@ -213,23 +233,23 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 
                                 <table class="form-table">
                                     <tr>
-                                        <th scope="row"><label for="group"><?php echo __('Image')?>:</label></th>
+                                        <th scope="row"><label for="group"><?php _e('Image', 'wp-bannerize')?>:</label></th>
                                         <td><input type="file" name="filename" id="filename" size="40" /></td>
                                     </tr>
                                     <tr>
-                                        <th scope="row"><label for="group"><?php echo __('Key')?>:</label></th>
-                                        <td><input type="text" maxlength="128" name="group" id="group" value="A" size="32" style="text-align:right" /> <?php echo $this->get_combo_group() ?> (<?php echo __('Insert a key max 128 char')?>)</td>
+                                        <th scope="row"><label for="group"><?php _e('Key', 'wp-bannerize')?>:</label></th>
+                                        <td><input type="text" maxlength="128" name="group" id="group" value="A" size="32" style="text-align:right" /> <?php echo $this->get_combo_group() ?> (<?php _e('Insert a key max 128 chars', 'wp-bannerize')?>)</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row"><label for="description"><?php echo __('Description')?>:</label></th>
+                                        <th scope="row"><label for="description"><?php _e('Description', 'wp-bannerize')?>:</label></th>
                                         <td><input type="text" name="description" id="description" value="" size="32" /></td>
                                     </tr>
                                     <tr>
                                         <th scope="row"><label for="url">URL:</label></th>
-                                        <td><input type="text" name="url" id="url" value="" size="32" /> <label for="url"><?php echo __('Target')?>:</label> <?php echo $this->get_target_combo() ?></td>
+                                        <td><input type="text" name="url" id="url" value="" size="32" /> <label for="url"><?php _e('Target', 'wp-bannerize')?>:</label> <?php echo $this->get_target_combo() ?></td>
                                     </tr>
                                 </table>
-                                <p class="submit"><input class="button-primary" type="submit" value="<?php echo __('Insert')?>" /></p
+                                <p class="submit"><input class="button-primary" type="submit" value="<?php _e('Insert', 'wp-bannerize')?>" /></p
                             </form>
 
                             <form style="display:none" name="delete_bannerize" method="post" action="">
@@ -244,8 +264,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
                         <div class="tablenav">
                             <div class="alignleft actions">
                                 <form class="form_box" name="filter_bannerize" method="post" action="">
-                                            <?php $this->combo_group(); ?> <input class="button-secondary" type="submit" value="<?php echo __('Filter')?>"/>
-                                                                    | <?php echo __('Use')?> <img align="absmiddle" alt="Drag and Drop" border="0" src="<?php echo $this->uri ?>/css/images/arrow_ns.png" /> <?php echo __('for drag and drop to change order')?>
+                                    <?php $this->combo_group(); ?> <input class="button-secondary" type="submit" value="<?php _e('Filter', 'wp-bannerize')?>"/> | <?php _e('Use', 'wp-bannerize')?> <img align="absmiddle" alt="Drag and Drop" border="0" src="<?php echo $this->uri ?>/css/images/arrow_ns.png" /> <?php _e('for drag and drop to change order', 'wp-bannerize')?>
                                 </form>
                             </div>
                         </div>
@@ -439,19 +458,6 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
     }
 
     /**
-     * Hook the admin/plugin head
-     *
-     * @return
-     */
-    function set_admin_head() {
-        ?>
-        <script type="text/javascript">
-                <?php require_once( $this->path . '/js/main.php'); ?>
-        </script>
-    <?php
-    }
-
-    /**
      * Esegue l'upload e lo store nel database
      *
      * Array ( [name] 		=> test.pdf
@@ -467,14 +473,14 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 
         // verifica eventuali errori
         if( $_FILES['filename']['error'] == 0 ) {
-            $size 		= floor( $_FILES['filename']['size'] / (1024*1024) );
-            $mime 		= $_FILES['filename']['type'];
-            $name 		= $_FILES['filename']['name'];
-            $temp 		= $_FILES['filename']['tmp_name'];
+            $size           = floor( $_FILES['filename']['size'] / (1024*1024) );
+            $mime           = $_FILES['filename']['type'];
+            $name           = $_FILES['filename']['name'];
+            $temp           = $_FILES['filename']['tmp_name'];
 
-            $group 		= $_POST['group'];
+            $group          = $_POST['group'];
             $description 	= $_POST['description'];
-            $url 		= $_POST['url'];
+            $url            = $_POST['url'];
             $target 	 	= $_POST['target'];
 
             $uploads		= wp_upload_bits( strtolower($name), '', '' );
@@ -514,7 +520,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
     }
 
     /**
-     * Uodate a banner
+     * Update a banner
      *
      * @return 		(not used)
      */
@@ -535,7 +541,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      * Attach settings in Wordpress Plugins list
      */
     function register_plugin_settings( $pluginfile ) {
-        add_action( 'plugin_action_links_'.basename( dirname( $pluginfile ) ) . '/' . basename( $pluginfile ), array( &$this, 'plugin_settings' ), 10, 4 );
+        add_action( 'plugin_action_links_' . basename( dirname( $pluginfile ) ) . '/' . basename( $pluginfile ), array( &$this, 'plugin_settings' ), 10, 4 );
     }
 
     function plugin_settings( $links ) {
@@ -554,11 +560,12 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         global $wpdb;
 
         /**
-         * @since 2.2.2
          * Da questa release è possibile controllare la versione del
          * plugin in modo da sapere se effettuare modifiche oppure no.
+         *
+         * @since 2.2.2
          */
-        if( !isset($this->options['wp_bannerize_version']) ) {                  // 2.2.2 minor
+        if( !isset($this->options['wp_bannerize_version']) ) {
             $this->options = array('wp_bannerize_version' => $this->version );
             update_option( $this->options_key, $this->options);
         }
@@ -573,23 +580,10 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         $version_array = explode(".", $this->options['wp_bannerize_version'] );
 
         /**
-         * @todo
-         * ALTER TABLE `wp_bannerize` DROP `categories` 
-         */
-
-        /**
-         * @sice 2.2.2
-         * Prepare to major release
-         * ALTER TABLE `wp_bannerize` ADD `category` MEDIUMTEXT NOT NULL
-         */
-        //$wpdb->query( 'ALTER TABLE `' . $this->table_bannerize . '` ADD `category` MEDIUMTEXT NOT NULL' );
-
-        /**
-         * @since 2.2.1
          * Check old table name and rename it
-         *
          * RENAME TABLE `bannerize`  TO `wp_bannerize` ;
          *
+         * @since 2.2.1
          */
         $desc = $wpdb->get_results( 'DESC `' . $this->_old_table_bannerize . '`' );
 
@@ -598,8 +592,9 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         }
 
         /**
-         * @since 2.1.0
          * Check group field for alter table varchar(128)
+         *
+         * @since 2.1.0
          */
         $desc = $wpdb->get_results( 'DESC `' . $this->table_bannerize . '`' );
 
@@ -627,9 +622,9 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 
     /**
      * Create WP Bannerize table for store banner data
+     * group field is varchar(128)
      *
      * @since 2.1.0
-     * group field is varchar(128)
      *
      * @return
      */

@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random
 Requires at least: 2.8
 Tested up to: 2.9.1
-Stable tag: 2.3.9
+Stable tag: 2.4.0
 
 WP_BANNERIZE, banner-image manager.
 
@@ -20,11 +20,9 @@ WP_BANNERIZE is an Amazing Banner Image Manager. In your template insert: `<?php
 * Wordpress Admin Contextual HELP
 * Wordpress MU compatible
 
-**NEW FROM 2.3.2**
+**NEW FROM 2.4.0**
 
-* Add alt class in HTML output
-* Add additional class for link TAG A
-* Fix Widget HTML output
+* Add localization and improve code restyle
 
   See CHANGELOG for full history version
 
@@ -79,6 +77,11 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.4.0 =
+* Add localization
+* Improve code restyle
+* Minor rev code
 
 = 2.3.9 =
 * Fix Widgets args
@@ -181,6 +184,9 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 
 == Upgrade Notice ==
 
+= 2.4.0 =
+Add localization/multilanguage support and improve code restyle. Upgrade immediately
+
 = 2.2.0 =
 Add Widget support and fix for Wordpress 2.8.6. Upgrade immediately
 
@@ -212,9 +218,10 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 
 * [Ivan](http://www.bobmarleymagazine.com/) for bugs report
 * [rotunda](http://wordpress.org/support/profile/2123029) for beta test
-* [labs.saidmade.com](http://labs.saidmade.com/ "Creazione siti Web")
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video") 
 * [marsev](http://wordpress.org/support/profile/5368431 "marsev") for prefix table suggest and beta test
+* [benstewart](http://wordpress.org/support/profile/5722257 "benstewart") for widget bugs fix: `extract($args)`
+* [Fernando Lopes] for first localization
 
 == Frequently Asked Questions == 
 
