@@ -180,7 +180,7 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 
 = 1.0 =
 * First release
-`
+
 
 == Upgrade Notice ==
 
@@ -221,7 +221,7 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video") 
 * [marsev](http://wordpress.org/support/profile/5368431 "marsev") for prefix table suggest and beta test
 * [benstewart](http://wordpress.org/support/profile/5722257 "benstewart") for widget bugs fix: `extract($args)`
-* [Fernando Lopes] for first localization
+* [Fernando Lopes](http://www.fernandolopes.com.br/ "Fernando Lopes") for first localization
 
 == Frequently Asked Questions == 
 
@@ -263,7 +263,7 @@ OR
 
 `<?php wp_bannerize('alt_class=pair&link_class=myclass'); ?>`
 
-
+`
 <ul>
 <li><a href=".."><img src="..." /></a></li>
 <li class="pair"><a class="myclass" href=".."><img src="..." /></a></li>
