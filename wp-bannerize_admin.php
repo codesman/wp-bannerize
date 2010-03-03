@@ -32,7 +32,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         /**
          * Add version control in options.
          * In questa maniera dalle release successive quando si chiama il
-         * metodo checkTable() Ã¨ possibile verificare la versione del plugin
+         * metodo checkTable() è possibile verificare la versione del plugin
          * precedente; senza impazzire con le DESC sulle tabelle.
          *
          */

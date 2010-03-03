@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random
 Requires at least: 2.8
 Tested up to: 2.9.1
-Stable tag: 2.4.0
+Stable tag: 2.4.1
 
 WP_BANNERIZE, banner-image manager.
 
@@ -14,6 +14,7 @@ WP_BANNERIZE is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **FEATURES**
 
+* Localizzate for Italian, English and Portuguese
 * Create your list (group/key) Banners image
 * Show your banners list by php code or Widget
 * Set random, limit and catories filters
@@ -24,7 +25,7 @@ WP_BANNERIZE is an Amazing Banner Image Manager. In your template insert: `<?php
 
 * Add localization and improve code restyle
 
-  See CHANGELOG for full history version
+See CHANGELOG for full history version
 
 **HOW TO**
 
@@ -77,6 +78,10 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.4.1 =
+* Fix localizzation
+* Fix minor bugs
 
 = 2.4.0 =
 * Add localization
@@ -184,6 +189,9 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 
 == Upgrade Notice ==
 
+= 2.4.1 =
+Fix localization. Upgrade immediately
+
 = 2.4.0 =
 Add localization/multilanguage support and improve code restyle. Upgrade immediately
 
@@ -221,7 +229,7 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video") 
 * [marsev](http://wordpress.org/support/profile/5368431 "marsev") for prefix table suggest and beta test
 * [benstewart](http://wordpress.org/support/profile/5722257 "benstewart") for widget bugs fix: `extract($args)`
-* [Fernando Lopes](http://www.fernandolopes.com.br/ "Fernando Lopes") for first localization
+* [Fernando Lopes](http://www.fernandolopes.com.br/ "Fernando Lopes") for Portuguese localization
 
 == Frequently Asked Questions == 
 

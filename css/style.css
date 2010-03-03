@@ -1,5 +1,11 @@
 /**
  * WP Bannerize Admim Styles
+ *
+ * @package         wp-bannerize
+ * @subpackage      style.css
+ * @author          =undo= <g.fazioli@saidmade.com>
+ * @copyright       Copyright (C) 2010 Saidmade Srl
+ * @version         1.1.5
  */
 div.arrow {
 	width:16px;
@@ -23,6 +29,4 @@ ul.list-point {
 table.form-table {
     clear:none;
 }
-form.form_box {
-    
-}
+form.form_box {}
