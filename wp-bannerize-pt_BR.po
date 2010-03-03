@@ -1,1 +1,186 @@
-msgid ""msgstr """Project-Id-Version: wp-bannerize\n""Report-Msgid-Bugs-To: \n""POT-Creation-Date: 2010-02-17 21:43-0300\n""PO-Revision-Date: 2010-02-23 13:40+0100\n""Last-Translator: Giovambattista Fazioli <g.fazioli@undolog.com>\n""Language-Team: Fernando Lopes <contato@fernandolopes.com.br>\n""MIME-Version: 1.0\n""Content-Type: text/plain; charset=UTF-8\n""Content-Transfer-Encoding: 8bit\n""X-Poedit-KeywordsList: _e;__;_;gettext;gettext_noop\n""X-Poedit-Basepath: .\n""X-Poedit-Language: Portuguese\n""X-Poedit-Country: BRAZIL\n"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:88#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:542msgid "Settings"msgstr "Configurações"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:96#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:248msgid "Use"msgstr "Use"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:130msgid "Your settings have been saved."msgstr "Suas configurações foram salvas."#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:208msgid "Insert new Banner"msgstr "Inserir novo Banner"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:216#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:268#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:278msgid "Image"msgstr "Imagem"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:220#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:269#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:279#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:295msgid "Key"msgstr "Chave"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:221msgid "Insert a key max 128 char"msgstr "Insira uma chave com no máximo 128 caracteres"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:224#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:270#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:280#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:296msgid "Description"msgstr "Descrição"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:229#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:272#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:282#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:298msgid "Target"msgstr "Destino"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:232msgid "Insert"msgstr "Inserir"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:247msgid "Filter"msgstr "Filtro"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:248msgid "for drag and drop to change order"msgstr "para arrastar e soltar, para alterar a ordem"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:271#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:281#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:297msgid "URL"msgstr "URL"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:300msgid "Cancel"msgstr "Cancelar"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:301msgid "Update"msgstr "Atualizar"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:312msgid "Edit"msgstr "Editar"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:313msgid "Delete"msgstr "Apagar"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:314msgid "View"msgstr "Visualizar"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:352msgid "Update succefully"msgstr "Sucesso na Atualização"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:355msgid "Reload"msgstr "Atualizar"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:361msgid "Please, re-insert your banners."msgstr "Por favor, re-inserir seus banners."#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_admin.php:379msgid "All"msgstr "Tudo"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_widget.php:137msgid "Title:"msgstr "Título:"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_widget.php:139msgid "Key:"msgstr "Chave:"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_widget.php:141msgid "Random:"msgstr "Aleatório:"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_widget.php:144msgid "Show only for these Categories:"msgstr "Mostrar somente para estas categorias:"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_widget.php:147msgid "Max:"msgstr "Máx:"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_widget.php:150msgid "container_before:"msgstr "container_antes:"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_widget.php:153msgid "before:"msgstr "antes:"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_widget.php:159msgid "link_class:"msgstr "link_class:"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_widget.php:163msgid "after:"msgstr "depois:"#: C:\xampplite\htdocs\wp\wp-content\plugins\wp-bannerize/wp-bannerize_widget.php:167msgid "container_after:"msgstr "container_depois:"
+# Translation of the WordPress plugin WP-BANNERIZE 2.4.0 by Giovambattista Fazioli.
+# Copyright (C) 2010 Giovambattista Fazioli
+# This file is distributed under the same license as the WP-BANNERIZE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-BANNERIZE 2.4.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-bannerize\n"
+"POT-Creation-Date: 2010-03-03 15:20+0000\n"
+"PO-Revision-Date: 2010-03-03 15:35-0300\n"
+"Last-Translator: Fernando Lopes <contato@fernandolopes.com.br>\n"
+"Language-Team: Fernando Lopes <contato@fernandolopes.com.br>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+
+#: wp-bannerize_admin.php:88
+msgid "WARINING!! Do you want delete this banner?"
+msgstr "ATENÇÃO! Você quer apagar este banner?"
+
+#: wp-bannerize_admin.php:112
+#: wp-bannerize_admin.php:548
+msgid "Settings"
+msgstr "Configurações"
+
+#: wp-bannerize_admin.php:118
+#: wp-bannerize_admin.php:267
+msgid "Use"
+msgstr "Use"
+
+#: wp-bannerize_admin.php:155
+msgid "Your settings have been saved."
+msgstr "Suas configurações foram salvas."
+
+#: wp-bannerize_admin.php:228
+msgid "Insert new Banner"
+msgstr "Inserir novo Banner"
+
+#: wp-bannerize_admin.php:236
+#: wp-bannerize_admin.php:287
+#: wp-bannerize_admin.php:297
+msgid "Image"
+msgstr "Imagem"
+
+#: wp-bannerize_admin.php:240
+#: wp-bannerize_admin.php:288
+#: wp-bannerize_admin.php:298
+#: wp-bannerize_admin.php:314
+msgid "Key"
+msgstr "Chave"
+
+#: wp-bannerize_admin.php:241
+msgid "Insert a key max 128 chars"
+msgstr "Inserir chave com no máximo 128 caracteres"
+
+#: wp-bannerize_admin.php:244
+#: wp-bannerize_admin.php:289
+#: wp-bannerize_admin.php:299
+#: wp-bannerize_admin.php:315
+msgid "Description"
+msgstr "Descrição"
+
+#: wp-bannerize_admin.php:249
+#: wp-bannerize_admin.php:291
+#: wp-bannerize_admin.php:301
+#: wp-bannerize_admin.php:317
+msgid "Target"
+msgstr "Destino"
+
+#: wp-bannerize_admin.php:252
+msgid "Insert"
+msgstr "Inserir"
+
+#: wp-bannerize_admin.php:267
+msgid "Filter"
+msgstr "Filtrar"
+
+#: wp-bannerize_admin.php:267
+msgid "for drag and drop to change order"
+msgstr "para arrastar e soltar, para alterar a ordem"
+
+#: wp-bannerize_admin.php:290
+#: wp-bannerize_admin.php:300
+#: wp-bannerize_admin.php:316
+msgid "URL"
+msgstr "URL"
+
+#: wp-bannerize_admin.php:319
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: wp-bannerize_admin.php:320
+msgid "Update"
+msgstr "Atualizar"
+
+#: wp-bannerize_admin.php:331
+msgid "Edit"
+msgstr "Editar"
+
+#: wp-bannerize_admin.php:332
+msgid "Delete"
+msgstr "Apagar"
+
+#: wp-bannerize_admin.php:333
+msgid "View"
+msgstr "Visualizar"
+
+#: wp-bannerize_admin.php:371
+msgid "Update succefully"
+msgstr "Sucesso na Atualização"
+
+#: wp-bannerize_admin.php:374
+msgid "Reload"
+msgstr "Recarregar"
+
+#: wp-bannerize_admin.php:380
+msgid "Please, re-insert your banners."
+msgstr "Por favor, re-inserir seus banners."
+
+#: wp-bannerize_admin.php:398
+msgid "All"
+msgstr "Tudo"
+
+#: wp-bannerize_widget.php:163
+msgid "Title:"
+msgstr "Título:"
+
+#: wp-bannerize_widget.php:165
+msgid "Key:"
+msgstr "Chave:"
+
+#: wp-bannerize_widget.php:167
+msgid "Random:"
+msgstr "Aleatório:"
+
+#: wp-bannerize_widget.php:170
+msgid "Show only for these Categories:"
+msgstr "Mostrar somente para estas categorias:"
+
+#: wp-bannerize_widget.php:173
+msgid "Max:"
+msgstr "Máx:"
+
+#: wp-bannerize_widget.php:176
+msgid "container_before:"
+msgstr "container_before:"
+
+#: wp-bannerize_widget.php:179
+msgid "before:"
+msgstr "antes:"
+
+#: wp-bannerize_widget.php:185
+msgid "link_class:"
+msgstr "link_class:"
+
+#: wp-bannerize_widget.php:189
+msgid "after:"
+msgstr "depois:"
+
+#: wp-bannerize_widget.php:193
+msgid "container_after:"
+msgstr "container_after:"
+
+#. Plugin Name of an extension
+msgid "WP-BANNERIZE"
+msgstr "WP-BANNERIZE"
+
+#. Plugin URI of an extension
+msgid "http://wordpress.org/extend/plugins/wp-bannerize/"
+msgstr "http://wordpress.org/extend/plugins/wp-bannerize/"
+
+#. Description of an extension
+msgid "WP_BANNERIZE is an Amazing Banner Image Manager. For more info and plugins visit <a href=\"http://labs.saidmade.com\">Labs Saidmade</a>."
+msgstr "WP_BANNERIZE é um surpreendente administrador de imagens de banners. Para mais informações e plugins visite <a href=\"http://labs.saidmade.com\">Labs Saidmade</a>."
+
+#. Author of an extension
+msgid "Giovambattista Fazioli"
+msgstr "Giovambattista Fazioli"
+
+#. Author URI of an extension
+msgid "http://labs.saidmade.com"
+msgstr "http://labs.saidmade.com"
+
