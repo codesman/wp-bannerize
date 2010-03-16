@@ -6,7 +6,7 @@
  * @subpackage      wp-bannerize_client
  * @author          =undo= <g.fazioli@saidmade.com>
  * @copyright       Copyright (C) 2010 Saidmade Srl
- * @version         2.3.2
+ * 
  */
 class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 
@@ -186,16 +186,9 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
                 <div id="sm_pnres" class="postbox">
                     <h3 class="hndle"><span>Links</span></h3>
                     <div class="inside">
-                       <div style="text-align:center;margin-bottom:12px"><script type="text/javascript" src="http://www.mad-ideas.it/widgets/?id=9"></script></div>
-                        <ul class="list-point">
-                            <li>
-                                <a href="http://www.saidmade.com">Saidmade Srl</a>
-                            </li>
-                             <li>
-                                 <a href="http://www.undolog.com">Research &amp; Development Blog</a>
-                            </li>
-
-                        </ul>
+                       <div style="text-align:center;margin-bottom:12px"><?php include_once('adv.php') ?></div>
+                       <p style="text-align:center"><a href="http://www.saidmade.com">Saidmade Srl</a></p>
+                       <p style="text-align:center"><a href="http://www.undolog.com">Research &amp; Development Blog</a></p>
                     </div>
                 </div>
 

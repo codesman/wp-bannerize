@@ -76,6 +76,12 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
         $rows = $wpdb->get_results( $q );
 
         echo $before_widget;
+
+        // @since 2.4.3 - fix widget title output
+        $title = apply_filters('widget_title', $instance['title']);
+        if($title) {
+             echo $before_title . $title . $after_title;
+        }
         echo $container_before;
 
         $even_before = $odd_before = $alternate_class = "";

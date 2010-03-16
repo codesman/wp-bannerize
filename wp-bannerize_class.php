@@ -6,7 +6,6 @@
  * @subpackage      wp-bannerize_class
  * @author          =undo= <g.fazioli@saidmade.com>
  * @copyright       Copyright (C) 2010 Saidmade Srl
- * @version         2.2.0
  *
  */
 
@@ -25,7 +24,7 @@ class WPBANNERIZE_CLASS {
      */
     var $release                        = 2;
     var $minor                          = 4;
-    var $revision                       = 1;
+    var $revision                       = 3;
     
     /**
      * Plugin version (see above)
