@@ -177,7 +177,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 
 <div class="wrap">
     <div class="icon32" id="icon-options-general"><br/></div>
-    <h2><?=$this->options_title?> ver. <?=$this->version?></h2>
+    <h2><?php echo $this->options_title ?> ver. <?php echo $this->version ?></h2>
 
     <div id="poststuff" class="metabox-holder has-right-sidebar">
         <div class="inner-sidebar">
@@ -355,25 +355,25 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         ?>
 <div class="wrap">
     <div class="icon32" id="icon-options-general"><br/></div>
-    <h2><?=$this->options_title?> ver. <?=$this->version?></h2>
+    <h2><?php echo $this->options_title ?> ver. <?php echo $this->version?></h2>
             <?php
             if( isset( $_POST['toupdate'])) {
                 $this->alterTable();
                 ?>
     <div class="updated">
-        <p><?php echo __('Update succefully') ?></p>
+        <p><?php _e('Update succefully', 'wp-bannerize') ?></p>
     </div>
     <form method="post" action="">
-        <div class="submit"><input type="submit"  value="<?php echo __('Reload') ?>"/></div>
+        <div class="submit"><input type="submit"  value="<?php _e('Reload', 'wp-bannerize') ?>"/></div>
     </form>
             <?php
             } else {
                 ?>
 
-    <p><?php echo __('Please, re-insert your banners.') ?></p>
+    <p><?php _e('Please, re-insert your banners.', 'wp-bannerize') ?></p>
     <form method="post" action="">
         <input type="hidden" name="toupdate" />
-        <div class="submit"><input type="submit"  value="Update"/></div>
+        <div class="submit"><input type="submit"  value="<?php -e('Update', 'wp-bannerize') ?>"/></div>
     </form>
 </div>	
         <?php
@@ -538,7 +538,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
     }
 
     function plugin_settings( $links ) {
-        $settings_link = '<a href="admin.php?page=wp-bannerize-settings">' . __('Settings') . '</a>';
+        $settings_link = '<a href="admin.php?page=wp-bannerize-settings">' . __('Settings', 'wp-bannerize') . '</a>';
         array_unshift( $links, $settings_link );
         return $links;
     }
