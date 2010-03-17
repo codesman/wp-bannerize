@@ -6,7 +6,6 @@
  * @subpackage      wp-bannerize_widget
  * @author          =undo= <g.fazioli@saidmade.com>
  * @copyright       Copyright (C) 2010 Saidmade Srl
- * @version         1.1.0
  *
  */
 class WP_BANNERIZE_WIDGET extends WP_Widget {
