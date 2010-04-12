@@ -24,7 +24,7 @@ class WPBANNERIZE_CLASS {
      */
     var $release                        = 2;
     var $minor                          = 4;
-    var $revision                       = 5;
+    var $revision                       = 6;
     
     /**
      * Plugin version (see above)

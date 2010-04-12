@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random
 Requires at least: 2.8
 Tested up to: 2.9.1
-Stable tag: 2.4.5
+Stable tag: 2.4.6
 
 WP_BANNERIZE, banner-image manager.
 
@@ -14,16 +14,14 @@ WP_BANNERIZE is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **FEATURES**
 
-* Localizzate for Italian, English and Portuguese
+* Localizzate for Italian, English, Portuguese and Belorussian
 * Create your list (group/key) Banners image
 * Show your banners list by php code or Widget
 * Set random, limit and catories filters
 * Wordpress Admin Contextual HELP
 * Wordpress MU compatible
 
-**NEW FROM 2.4.0**
-
-* Add localization and improve code restyle
+**LAST IMPROVE**
 
 See CHANGELOG for full history version
 
@@ -78,6 +76,9 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.4.6 =
+Add Belorussian Localization; thanks to [Marcis G.](http://pc.de/ "Marcis G.")
 
 = 2.4.5 =
 * Add Secure Layer on Ajax Gateway
@@ -240,6 +241,7 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [marsev](http://wordpress.org/support/profile/5368431 "marsev") for prefix table suggest and beta test
 * [benstewart](http://wordpress.org/support/profile/5722257 "benstewart") for widget bugs fix: `extract($args)`
 * [Fernando Lopes](http://www.fernandolopes.com.br/ "Fernando Lopes") for Portuguese localization
+* [Marcis G.](http://pc.de/ "Marcis G.") for Belorussian localization
 
 == Frequently Asked Questions == 
 
