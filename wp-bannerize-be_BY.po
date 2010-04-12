@@ -1,0 +1,187 @@
+# Translation of the WordPress plugin WP-BANNERIZE 2.4.1 by Giovambattista Fazioli.
+# Copyright (C) 2010 Giovambattista Fazioli
+# This file is distributed under the same license as the WP-BANNERIZE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-BANNERIZE\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-bannerize\n"
+"POT-Creation-Date: 2010-03-03 20:27+0000\n"
+"PO-Revision-Date: 2010-04-09 19:30+0300\n"
+"Last-Translator: FatCow <zhr@tut.by>\n"
+"Language-Team: Marcis G. <by.marcis@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Belarusian\n"
+"X-Poedit-Country: BELARUS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: wp-bannerize_admin.php:88
+msgid "WARINING!! Do you want delete this banner?"
+msgstr "ПАПЯРЭДЖАННЕ! Вы жадаеце выдаліць гэты банар?"
+
+#: wp-bannerize_admin.php:112
+#: wp-bannerize_admin.php:548
+msgid "Settings"
+msgstr "Налады"
+
+#: wp-bannerize_admin.php:118
+#: wp-bannerize_admin.php:267
+msgid "Use"
+msgstr "Выкарыстоўваць"
+
+#: wp-bannerize_admin.php:155
+msgid "Your settings have been saved."
+msgstr "Вашы налады захаваны."
+
+#: wp-bannerize_admin.php:228
+msgid "Insert new Banner"
+msgstr "Уставіць новы банар"
+
+#: wp-bannerize_admin.php:236
+#: wp-bannerize_admin.php:287
+#: wp-bannerize_admin.php:297
+msgid "Image"
+msgstr "Малюнак"
+
+#: wp-bannerize_admin.php:240
+#: wp-bannerize_admin.php:288
+#: wp-bannerize_admin.php:298
+#: wp-bannerize_admin.php:314
+msgid "Key"
+msgstr "Клавіша"
+
+#: wp-bannerize_admin.php:241
+msgid "Insert a key max 128 chars"
+msgstr "Устаўце ключ максімум у 128 знакаў"
+
+#: wp-bannerize_admin.php:244
+#: wp-bannerize_admin.php:289
+#: wp-bannerize_admin.php:299
+#: wp-bannerize_admin.php:315
+msgid "Description"
+msgstr "Апісанне"
+
+#: wp-bannerize_admin.php:249
+#: wp-bannerize_admin.php:291
+#: wp-bannerize_admin.php:301
+#: wp-bannerize_admin.php:317
+msgid "Target"
+msgstr "Мэта"
+
+#: wp-bannerize_admin.php:252
+msgid "Insert"
+msgstr "Уставіць"
+
+#: wp-bannerize_admin.php:267
+msgid "Filter"
+msgstr "Фільтр"
+
+#: wp-bannerize_admin.php:267
+msgid "for drag and drop to change order"
+msgstr "для перацягвання і змены парадку"
+
+#: wp-bannerize_admin.php:290
+#: wp-bannerize_admin.php:300
+#: wp-bannerize_admin.php:316
+msgid "URL"
+msgstr "УРЛ"
+
+#: wp-bannerize_admin.php:319
+msgid "Cancel"
+msgstr "Адмена"
+
+#: wp-bannerize_admin.php:320
+msgid "Update"
+msgstr "Абнавіць"
+
+#: wp-bannerize_admin.php:331
+msgid "Edit"
+msgstr "Рэдагаваць"
+
+#: wp-bannerize_admin.php:332
+msgid "Delete"
+msgstr "Выдаліць"
+
+#: wp-bannerize_admin.php:333
+msgid "View"
+msgstr "Прагляд"
+
+#: wp-bannerize_admin.php:371
+msgid "Update succefully"
+msgstr "Абноўлена цалкам"
+
+#: wp-bannerize_admin.php:374
+msgid "Reload"
+msgstr "Перазагрузка"
+
+#: wp-bannerize_admin.php:380
+msgid "Please, re-insert your banners."
+msgstr "Калі ласка, устаўце банары нанова."
+
+#: wp-bannerize_admin.php:398
+msgid "All"
+msgstr "Усё"
+
+#: wp-bannerize_widget.php:163
+msgid "Title:"
+msgstr "Назва:"
+
+#: wp-bannerize_widget.php:165
+msgid "Key:"
+msgstr "Клавіша: "
+
+#: wp-bannerize_widget.php:167
+msgid "Random:"
+msgstr "Выпадкова: "
+
+#: wp-bannerize_widget.php:170
+msgid "Show only for these Categories:"
+msgstr "Паказваць толькі для гэтых катэгорый:"
+
+#: wp-bannerize_widget.php:173
+msgid "Max:"
+msgstr "Макс.:"
+
+#: wp-bannerize_widget.php:176
+msgid "container_before:"
+msgstr "да кантэйнера:"
+
+#: wp-bannerize_widget.php:179
+msgid "before:"
+msgstr "пасля:"
+
+#: wp-bannerize_widget.php:185
+msgid "link_class:"
+msgstr "клас спасылкі"
+
+#: wp-bannerize_widget.php:189
+msgid "after:"
+msgstr "пасля:"
+
+#: wp-bannerize_widget.php:193
+msgid "container_after:"
+msgstr "пасля кантэйнера:"
+
+#. Plugin Name of an extension
+msgid "WP-BANNERIZE"
+msgstr "WP-BANNERIZE"
+
+#. Plugin URI of an extension
+msgid "http://wordpress.org/extend/plugins/wp-bannerize/"
+msgstr "http://wordpress.org/extend/plugins/wp-bannerize/"
+
+#. Description of an extension
+msgid "WP_BANNERIZE is an Amazing Banner Image Manager. For more info and plugins visit <a href=\"http://labs.saidmade.com\">Labs Saidmade</a>."
+msgstr "WP_BANNERIZE - мэнэджар малюнкаў. Для атрымання дадатковай інфармацыі наведаеце <a href=\"http://labs.saidmade.com\">Labs Saidmade</a>."
+
+#. Author of an extension
+msgid "Giovambattista Fazioli"
+msgstr "Giovambattista Fazioli"
+
+#. Author URI of an extension
+msgid "http://labs.saidmade.com"
+msgstr "http://labs.saidmade.com"
+
