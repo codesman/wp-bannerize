@@ -16,23 +16,23 @@ define('WP_BANNERIZE_TABLE', 'bannerize');
 
 class WPBANNERIZE_CLASS {
 
+	/**
+	 * Plugin version (see above)
+	 *
+	 * @since 2.4.7
+	 * @var string
+	 */
+	var $version 						= "2.4.7";
+
     /**
      * WP-BANNERIZE release.minor.revision
      * 
      * @since 2.3.0
      * @var integer
      */
-    var $release                        = 2;
-    var $minor                          = 4;
-    var $revision                       = 6;
-    
-    /**
-     * Plugin version (see above)
-     *
-     * @since 2.3.0
-     * @var string
-     */
-    var $version 						= "";
+    var $release                        = "";
+    var $minor                          = "";
+    var $revision                       = "";
     
     /**
      * Plugin name
@@ -111,7 +111,13 @@ class WPBANNERIZE_CLASS {
     function WPBANNERIZE_CLASS() {
         global $wpdb;
 
-        $this->version = $this->release . "." . $this->minor . "." . $this->revision;
+		/**
+         * Split version for more detail
+         */
+        $split_version  = explode(".", $this->version);
+        $this->release  = $split_version[0];
+        $this->minor    = $split_version[1];
+        $this->revision = $split_version[2];
 
         /**
          * Add $wpdb->prefix to table name define in WP_BANNERIZE_TABLE. This

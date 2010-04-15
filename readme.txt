@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random
 Requires at least: 2.8
 Tested up to: 2.9.1
-Stable tag: 2.4.6
+Stable tag: 2.4.7
 
 WP_BANNERIZE, banner-image manager.
 
@@ -77,8 +77,12 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 
 == Changelog ==
 
+= 2.4.7 =
+* Fix warning while check previous version
+* Rev code/comment
+
 = 2.4.6 =
-Add Belorussian Localization; thanks to [Marcis G.](http://pc.de/ "Marcis G.")
+* Add Belorussian Localization; thanks to [Marcis G.](http://pc.de/ "Marcis G.")
 
 = 2.4.5 =
 * Add Secure Layer on Ajax Gateway

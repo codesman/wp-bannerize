@@ -578,11 +578,13 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
          *
          * @since 2.2.1
          */
-        $desc = $wpdb->get_results( 'DESC `' . $this->_old_table_bannerize . '`' );
+        $desc = @$wpdb->get_results( 'DESC `' . $this->_old_table_bannerize . '`' );
 
-        if(count($desc) > 0) {
-            $wpdb->query( 'RENAME TABLE `' . $this->_old_table_bannerize . '` TO `' . $this->table_bannerize . '`' );
-        }
+		if(!is_null($desc)) {
+			if(count($desc) > 0) {
+				$wpdb->query( 'RENAME TABLE `' . $this->_old_table_bannerize . '` TO `' . $this->table_bannerize . '`' );
+			}
+		}
 
         /**
          * Check group field for alter table varchar(128)
