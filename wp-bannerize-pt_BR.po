@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-bannerize\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-17 10:52+0100\n"
-"PO-Revision-Date: 2010-03-17 10:52+0100\n"
+"POT-Creation-Date: 2010-04-16 17:53+0100\n"
+"PO-Revision-Date: 2010-04-16 17:53+0100\n"
 "Last-Translator: Giovambattista Fazioli <g.fazioli@undolog.com>\n"
 "Language-Team: Fernando Lopes <contato@fernandolopes.com.br>\n"
 "MIME-Version: 1.0\n"
@@ -20,150 +20,151 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../wp-bannerize_admin.php:88
+#: ../wp-bannerize_admin.php:105
 msgid "WARINING!! Do you want delete this banner?"
 msgstr "ATENÇÃO! Você quer apagar este banner?"
 
-#: ../wp-bannerize_admin.php:112
-#: ../wp-bannerize_admin.php:541
-msgid "Settings"
-msgstr "Configurações"
-
-#: ../wp-bannerize_admin.php:118
-#: ../wp-bannerize_admin.php:260
+#: ../wp-bannerize_admin.php:146
+#: ../wp-bannerize_admin.php:288
 msgid "Use"
 msgstr "Use"
 
-#: ../wp-bannerize_admin.php:155
+#: ../wp-bannerize_admin.php:183
 msgid "Your settings have been saved."
 msgstr "Suas configurações foram salvas."
 
-#: ../wp-bannerize_admin.php:221
+#: ../wp-bannerize_admin.php:249
 msgid "Insert new Banner"
 msgstr "Inserir novo Banner"
 
-#: ../wp-bannerize_admin.php:229
-#: ../wp-bannerize_admin.php:280
-#: ../wp-bannerize_admin.php:290
+#: ../wp-bannerize_admin.php:257
+#: ../wp-bannerize_admin.php:308
+#: ../wp-bannerize_admin.php:318
 msgid "Image"
 msgstr "Imagem"
 
-#: ../wp-bannerize_admin.php:233
-#: ../wp-bannerize_admin.php:281
-#: ../wp-bannerize_admin.php:291
-#: ../wp-bannerize_admin.php:307
+#: ../wp-bannerize_admin.php:261
+#: ../wp-bannerize_admin.php:309
+#: ../wp-bannerize_admin.php:319
+#: ../wp-bannerize_admin.php:335
 msgid "Key"
 msgstr "Chave"
 
-#: ../wp-bannerize_admin.php:234
+#: ../wp-bannerize_admin.php:262
 msgid "Insert a key max 128 chars"
 msgstr "Inserir chave com no máximo 128 caracteres"
 
-#: ../wp-bannerize_admin.php:237
-#: ../wp-bannerize_admin.php:282
-#: ../wp-bannerize_admin.php:292
-#: ../wp-bannerize_admin.php:308
+#: ../wp-bannerize_admin.php:265
+#: ../wp-bannerize_admin.php:310
+#: ../wp-bannerize_admin.php:320
+#: ../wp-bannerize_admin.php:336
 msgid "Description"
 msgstr "Descrição"
 
-#: ../wp-bannerize_admin.php:242
-#: ../wp-bannerize_admin.php:284
-#: ../wp-bannerize_admin.php:294
-#: ../wp-bannerize_admin.php:310
+#: ../wp-bannerize_admin.php:270
+#: ../wp-bannerize_admin.php:312
+#: ../wp-bannerize_admin.php:322
+#: ../wp-bannerize_admin.php:338
 msgid "Target"
 msgstr "Destino"
 
-#: ../wp-bannerize_admin.php:245
+#: ../wp-bannerize_admin.php:273
 msgid "Insert"
 msgstr "Inserir"
 
-#: ../wp-bannerize_admin.php:260
+#: ../wp-bannerize_admin.php:288
 msgid "Filter"
 msgstr "Filtrar"
 
-#: ../wp-bannerize_admin.php:260
+#: ../wp-bannerize_admin.php:288
 msgid "for drag and drop to change order"
 msgstr "para arrastar e soltar, para alterar a ordem"
 
-#: ../wp-bannerize_admin.php:283
-#: ../wp-bannerize_admin.php:293
-#: ../wp-bannerize_admin.php:309
+#: ../wp-bannerize_admin.php:311
+#: ../wp-bannerize_admin.php:321
+#: ../wp-bannerize_admin.php:337
 msgid "URL"
 msgstr "URL"
 
-#: ../wp-bannerize_admin.php:312
+#: ../wp-bannerize_admin.php:340
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../wp-bannerize_admin.php:313
+#: ../wp-bannerize_admin.php:341
+#: ../wp-bannerize_admin.php:404
 msgid "Update"
 msgstr "Atualizar"
 
-#: ../wp-bannerize_admin.php:324
-msgid "Edit"
-msgstr "Editar"
-
-#: ../wp-bannerize_admin.php:325
-msgid "Delete"
-msgstr "Apagar"
-
-#: ../wp-bannerize_admin.php:326
+#: ../wp-bannerize_admin.php:348
+#: ../wp-bannerize_admin.php:354
 msgid "View"
 msgstr "Visualizar"
 
-#: ../wp-bannerize_admin.php:364
+#: ../wp-bannerize_admin.php:352
+msgid "Edit"
+msgstr "Editar"
+
+#: ../wp-bannerize_admin.php:353
+msgid "Delete"
+msgstr "Apagar"
+
+#: ../wp-bannerize_admin.php:392
 msgid "Update succefully"
 msgstr "Sucesso na Atualização"
 
-#: ../wp-bannerize_admin.php:367
+#: ../wp-bannerize_admin.php:395
 msgid "Reload"
 msgstr "Recarregar"
 
-#: ../wp-bannerize_admin.php:373
+#: ../wp-bannerize_admin.php:401
 msgid "Please, re-insert your banners."
 msgstr "Por favor, re-inserir seus banners."
 
-#: ../wp-bannerize_admin.php:391
+#: ../wp-bannerize_admin.php:419
 msgid "All"
 msgstr "Tudo"
 
-#: ../wp-bannerize_widget.php:169
+#: ../wp-bannerize_admin.php:569
+msgid "Settings"
+msgstr "Configurações"
+
+#: ../wp-bannerize_widget.php:168
 msgid "Title:"
 msgstr "Título:"
 
-#: ../wp-bannerize_widget.php:171
+#: ../wp-bannerize_widget.php:170
 msgid "Key:"
 msgstr "Chave:"
 
-#: ../wp-bannerize_widget.php:173
+#: ../wp-bannerize_widget.php:172
 msgid "Random:"
 msgstr "Aleatório:"
 
-#: ../wp-bannerize_widget.php:176
+#: ../wp-bannerize_widget.php:175
 msgid "Show only for these Categories:"
 msgstr "Mostrar somente para estas categorias:"
 
-#: ../wp-bannerize_widget.php:179
+#: ../wp-bannerize_widget.php:178
 msgid "Max:"
 msgstr "Máx:"
 
-#: ../wp-bannerize_widget.php:182
+#: ../wp-bannerize_widget.php:181
 msgid "container_before:"
 msgstr "container_before:"
 
-#: ../wp-bannerize_widget.php:185
+#: ../wp-bannerize_widget.php:184
 msgid "before:"
 msgstr "antes:"
 
-#: ../wp-bannerize_widget.php:191
+#: ../wp-bannerize_widget.php:190
 msgid "link_class:"
 msgstr "link_class:"
 
-#: ../wp-bannerize_widget.php:195
+#: ../wp-bannerize_widget.php:194
 msgid "after:"
 msgstr "depois:"
 
-#: ../wp-bannerize_widget.php:199
+#: ../wp-bannerize_widget.php:198
 msgid "container_after:"
 msgstr "container_after:"
 
