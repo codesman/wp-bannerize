@@ -15,12 +15,33 @@ div.arrow {
 	margin:6px 8px 0 0;
 	cursor:pointer;
 }
-img.wp-bannerize-thumbnail {width:32px;border:2px solid #000}
+table#list_bannerize td {
+	vertical-align:middle;
+}
+td.wp-bannerize-thumbnail {
+	vertical-align:middle;
+}
+td.wp-bannerize-thumbnail img {
+	max-width:48px;
+	border:2px solid #000
+}
 div.inline-edit {
 	padding:10px;
-	border:1px solid #888;
+	border:1px solid #aaa;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;
 	clear:both;
 	display:block;
+}
+div.inline-edit label {
+	display:block;
+	width:100px;
+	float:left;
+	font-weight:bold;
+	text-align:right;
+	margin:0 6px 0 0;
+	line-height:24px;
 }
 ul.list-point {
     list-style:square;
@@ -29,4 +50,3 @@ ul.list-point {
 table.form-table {
     clear:none;
 }
-form.form_box {}

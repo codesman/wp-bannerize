@@ -12,9 +12,11 @@
 class WPBANNERIZE_CLIENT extends WPBANNERIZE_CLASS {
 
     function WPBANNERIZE_CLIENT() {
+		// super
         $this->WPBANNERIZE_CLASS();
 
-        parent::getOptions();
+		// Load configurations options
+        $this->options = get_option( $this->options_key );
     }
 
     /**

@@ -22,7 +22,7 @@ class WPBANNERIZE_CLASS {
 	 * @since 2.4.7
 	 * @var string
 	 */
-	var $version 						= "2.4.7";
+	var $version 						= "2.4.9";
 
     /**
      * WP-BANNERIZE release.minor.revision
@@ -141,13 +141,6 @@ class WPBANNERIZE_CLASS {
         $this->content_url 					= get_option('siteurl') . '/wp-content';
         $this->plugin_url 					= $this->content_url . '/plugins/' . plugin_basename( dirname(__FILE__) ) . '/';
         $this->ajax_url						= $this->plugin_url . "ajax.php";
-    }
-
-    /**
-     * Get option from database
-     */
-    function getOptions() {
-        $this->options 						= get_option( $this->options_key );
     }
 
     /**

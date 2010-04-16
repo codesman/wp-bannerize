@@ -7,7 +7,7 @@
  * @copyright       Copyright (C) 2010 Saidmade Srl
  * @version         1.2.0
  */
-jQuery(document).ready(function(){
+jQuery(document).ready(function() {
 	jQuery('table#list_bannerize tbody tr').css('width',jQuery('table#list_bannerize').width() );
 	jQuery('table#list_bannerize tbody').sortable({
 				axis:"y",

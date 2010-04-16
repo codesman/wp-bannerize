@@ -50,7 +50,7 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
          *
          * @since 2.3.0
          */
-        if( is_array($categories ) )  {
+        if( is_array($categories) )  {
             if( ! is_category( $categories ) ) return;
         }
 
