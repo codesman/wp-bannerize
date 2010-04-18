@@ -136,7 +136,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      */
     function plugin_setup() {
 
-		$plugin_page = add_options_page( $this->plugin_name, $this->plugin_name, 8, basename(__FILE__), array(&$this,'set_options_subpanel') );
+		$plugin_page = add_options_page( $this->plugin_name, $this->plugin_name, 1, basename(__FILE__), array(&$this,'set_options_subpanel') );
 		add_action( 'admin_print_scripts-'. $plugin_page, array($this, 'plugin_admin_scripts') );
 		add_action( 'admin_print_styles-'. $plugin_page, array($this, 'plugin_admin_styles') );
 
@@ -560,14 +560,20 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
     }
 
     /**
-     * Attach settings in Wordpress Plugins list
+     * Attach settings in Wordpress Plugins list. See wp-bannerize.php file
      */
     function register_plugin_settings( $pluginfile ) {
-        add_action( 'plugin_action_links_' . basename( dirname( $pluginfile ) ) . '/' . basename( $pluginfile ), array( &$this, 'plugin_settings' ), 10, 4 );
+        add_action( 'plugin_action_links_' . basename( dirname( $pluginfile ) ) . '/' . basename( $pluginfile ), array( &$this, 'plugin_settings' ), 10 );
     }
 
+    /**
+     * Add link to Plugin list page
+     *
+     * @param <type> $links
+     * @return string
+     */
     function plugin_settings( $links ) {
-        $settings_link = '<a href="admin.php?page=wp-bannerize-settings">' . __('Settings', 'wp-bannerize') . '</a>';
+        $settings_link = '<a href="options-general.php?page=wp-bannerize_admin.php">' . __('Settings', 'wp-bannerize') . '</a>';
         array_unshift( $links, $settings_link );
         return $links;
     }

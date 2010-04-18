@@ -4,7 +4,7 @@ Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random
 Requires at least: 2.8
 Tested up to: 2.9.1
-Stable tag: 2.4.9
+Stable tag: 2.4.11
 
 WP BANNERIZE, banner-image manager.
 
@@ -23,7 +23,7 @@ WP BANNERIZE is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **LAST IMPROVE**
 
-Fix scripts and styles loading onlyWP Bannerize backend page. *The WP Bannerize option menu item is shift in "options" menu*.
+Fix scripts and styles loading when WP Bannerize backend page. *The WP Bannerize option menu item has been shifting in "options" menu*.
 
 **HOW TO**
 
@@ -77,10 +77,14 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 
 == Changelog ==
 
+= 2.4.11 =
+* Fix Link on Plugins list page
+
 = 2.4.9 =
 * Change Menu Item position in Backend
 * Improve styles and script loading
 * Improve "edit" online styles and table views
+
 
 = 2.4.7 =
 * Fix warning while check previous version
