@@ -1,10 +1,10 @@
  === WP Bannerize ===
 Contributors: Giovambattista Fazioli, Ivan, rotunda, marsev, benstewart, Fernando Lopes, Marcis G.
-Donate link: http://labs.saidmade.com
-Tags: Banner, Manage, Image, ADV, Random
-Requires at least: 2.8
-Tested up to: 2.9.2
-Stable tag: 2.5.0
+Donate link: http://www.saidmade.com
+Tags: Banner, Manage, Image, ADV, Random, Adobe Flash
+Requires at least: 2.9
+Tested up to: 3.0
+Stable tag: 2.5.1
 
 WP Bannerize, banner-image manager.
 
@@ -15,15 +15,21 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 **FEATURES**
 
 * Localizzate for Italian, English, Portuguese and Belorussian
-* Create your list (group/key) Banners image
+* Create your list (group/key) Banners image/Adobe Flash movie
 * Show your banners list by php code or Widget
 * Set random, limit and catories filters
+* Standard Wordpress interface improvement
+* "nofollow" support
+* Click Counter engine for stats
 * Wordpress Admin Contextual HELP
 * Wordpress MU compatible
 
 **LAST IMPROVE**
 
-Fix scripts and styles loading when WP Bannerize backend page. *The WP Bannerize option menu item has been shifting in "options" menu*.
+* Add Click Counter Engine
+* Add Adobe Flash support
+* Add text description
+* Add "nofollow" rel attribute support
 
 **HOW TO**
 
@@ -78,6 +84,9 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.5.1 =
+* Rev some bugs
 
 = 2.5.0 =
 * Improve Database table

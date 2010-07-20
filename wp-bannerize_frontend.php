@@ -22,7 +22,7 @@ class WPBANNERIZE_FRONTEND extends WPBANNERIZE_CLASS {
 
 		wp_localize_script ( 'wp_bannerize_frontend_js',
 							 'wpBannerizeMainL10n' ,
-							array (
+								array (
 								'ajaxURL' => $this->ajax_clickcounter
 								) );
     }
