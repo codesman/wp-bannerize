@@ -556,7 +556,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		$o = '<div class="inline-edit" style="display:none">' .
 		'<label>' .  __('Group') . ':</label> <input size="8" type="text" id="group" name="group" value="' .    $row->group  . '" /> ' . $this->get_combo_group() .
 		'<br/><label>' .  __('Description') . ':</label> <input size="32" type="text" name="description" value="' . $row->description . '" /> ' .
-		'<input ' . ( ($row->use_description == '1') ? 'checked="checked"' : '' ) . ' type="checkbox" name="use_description" value="1" /> ' . addslashes( __('Use this description in output', 'wp-bannerize') ) . '<br/>' .		
+		'<input ' . ( ($row->use_description == '1') ? 'checked="checked"' : '' ) . ' type="checkbox" name="use_description" value="1" /> ' . __('Use this description in output', 'wp-bannerize') . '<br/>' .		
 		'<label>' .  __('URL') . ':</label> <input type="text" name="url" size="32" value="' . $row->url . '" /> ' .
 		'<label style="float:none;display:inline">' . __('Target') . ':</label> ' . $this->get_target_combo( $row->target ) .
 		'<br/><label for="clickcount" style="float:none;display:inline">' . __('Click Counter:', 'wp-bannerize') . '</label>' .
@@ -572,7 +572,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		'<a onclick="SMWPBannerizeJavascript.update(' . $row->id . ')" class="button-primary save alignright" title="' .  __('Update') . '" href="#" accesskey="s">' .  __('Update') . '</a>'.
 		'</p>' .
 		'</div>';
-		echo esc_html($o);
+		echo esc_html(addslashes( $o ));
 	}
 
 
