@@ -43,13 +43,6 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         $this->options = get_option( $this->options_key );
 
         /**
-         * Check table for new field
-         *
-         * @since 1.4+
-         */
-        $this->update = $this->checkTable();
-
-        /**
          * Add option menu in Wordpress backend
          */
 		add_action('admin_init', array( $this, 'plugin_init') );
@@ -70,7 +63,8 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	 * @return void
 	 */
 	function plugin_init() {
-		wp_register_style('wp-bannerize-style-css', $this->uri . "/css/style.css");
+		wp_register_style('wp-bannerize-style-css', $this->uri . "/css/wp_bannerize_admin.css");
+		wp_register_style('fancybox-css', $this->uri . "/js/fancybox/jquery.fancybox-1.3.1.css");
 	}
 
 	/**
@@ -87,22 +81,16 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
          */
         wp_enqueue_script('jquery-ui-sortable');
 
-        /**
-         * Add thickbox standard Wordpress support
-         *
-         * @since 2.1.0
-         */
-        wp_enqueue_script('thickbox');
-
-		wp_enqueue_script ( 'wp-bannerize-main-js' , $this->uri . '/js/main.js' , array ( 'jquery' ) , '1.2.0' , true );
+		wp_enqueue_script ( 'fancybox_js' , $this->uri . '/js/fancybox/jquery.fancybox-1.3.1.pack.js' , array ( 'jquery' ) , '1.4' , true );
+		wp_enqueue_script ( 'wp_bannerize_admin_js' , $this->uri . '/js/wp_bannerize_admin.js' , array ( 'jquery' ) , '1.4' , true );
 
         /**
          * Add main admin javascript
          *
          * @since 2.4.0
          */
-		wp_localize_script ( 'wp-bannerize-main-js' , 'wpBannerizeMainL10n' , array (
-                                                    'ajaxURL' => $this->ajax_url,
+		wp_localize_script ( 'wp_bannerize_admin_js' , 'wpBannerizeMainL10n' , array (
+                                                    'ajaxURL' => $this->ajax_sorter,
 													'messageConfirm' => __( 'WARINING!! Do you want delete this banner?'  , 'wp-bannerize' )
 													) );
 	}
@@ -110,22 +98,10 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	/**
 	 * Execute when plugin is showing on backend
 	 *
-	 * @sine 2.4.9
 	 * @return void
 	 */
 	function plugin_admin_styles() {
-        /**
-         * Add thickbox standard Wordpress support
-         *
-         * @since 2.1.0
-         */
-        wp_enqueue_style('thickbox');
-
-        /**
-         * Add queue for style sheet
-         *
-         * @since 2.3.6
-         */
+        wp_enqueue_style('fancybox-css');
         wp_enqueue_style('wp-bannerize-style-css');
 	}
 
@@ -136,9 +112,18 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      */
     function plugin_setup() {
 
-		$plugin_page = add_options_page( $this->plugin_name, $this->plugin_name, 1, basename(__FILE__), array(&$this,'set_options_subpanel') );
+		if (function_exists('add_menu_page')) {
+			$plugin_page = add_menu_page( $this->plugin_name, $this->plugin_name, 10, $this->directory.'-settings', array(&$this, 'show_banners'), $this->uri . "/css/images/wp-bannerize-16x16.png" );
+		}
+		if (function_exists('add_submenu_page')) {
+			add_submenu_page( $this->directory.'-settings', __('Edit', 'wp-bannerize'), __('Edit', 'wp-bannerize'), 10, $this->directory.'-settings', array(&$this, 'show_banners') );
+			$add_new_banner_item = add_submenu_page( $this->directory.'-settings', __('Add New', 'wp-bannerize'), __('Add New', 'wp-bannerize'), 8, $this->directory.'-addnew', array(&$this, 'add_new_banner') );
+		}
+
 		add_action( 'admin_print_scripts-'. $plugin_page, array($this, 'plugin_admin_scripts') );
+		add_action( 'admin_print_scripts-'. $add_new_banner_item, array($this, 'plugin_admin_scripts') );
 		add_action( 'admin_print_styles-'. $plugin_page, array($this, 'plugin_admin_styles') );
+		add_action( 'admin_print_styles-'. $add_new_banner_item, array($this, 'plugin_admin_styles') );
 
         /**
          * Add contextual Help
@@ -164,274 +149,471 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         }
     }
 
+	/**
+	 * Add new banner Panel
+	 *
+	 * @return void
+	 */
+	function add_new_banner() {
+		global $wpdb;
+
+		if(isset($_POST['command_action']) && $_POST['command_action'] == "insert") {
+			$any_error = $this->insertBanner();
+		}
+
+		if( $any_error != '') : ?>
+        	<div id="message" class="updated fade"><p><?php echo $any_error ?></p></div>
+        <?php endif; ?>
+
+<div class="wrap">
+	<div class="wp_saidmade_box">
+		<p class="wp_saidmade_copy_info"><?php _e('For more info and plugins visit', 'wp-bannerize') ?> <a href="http://www.saidmade.com">Saidmade</a></p>
+		<a class="wp_saidmade_logo" href="http://www.saidmade.com/prodotti/wordpress/wp-bannerize/">
+			<?php echo $this->plugin_name ?> ver. <?php echo $this->version ?>
+		</a>
+	</div>
+	
+	<div id="poststuff" class="metabox-holder">
+
+		<div class="sm-padded">
+			<div class="postbox">
+				<h3><span><?php  _e('Insert new Banner', 'wp-bannerize')?></span></h3>
+
+				<div class="inside">
+					<form class="form_box" name="insert_bannerize" method="post" action=""
+						  enctype="multipart/form-data">
+						<input type="hidden" name="command_action" value="insert"/>
+						<input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+
+						<table class="form-table wp_bannerize">
+							<tr>
+								<th scope="row">
+									<label for="filename"><?php _e('Image', 'wp-bannerize')?>:</label>
+								</th>
+								<td><input type="file" name="filename" id="filename" /></td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<label for="group"><?php _e('Group', 'wp-bannerize')?>:</label>
+								</th>
+								<td>
+									<input type="text" maxlength="128" name="group" id="group" value="group" /> <?php echo $this->get_combo_group() ?> (<?php _e('Insert a key max 128 chars', 'wp-bannerize')?>)
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<label for="description"><?php _e('Description', 'wp-bannerize')?>:</label>
+								</th>
+								<td>
+									<input type="text" name="description" id="description" /> <input type="checkbox" name="use_description" value="1" /> <?php _e('Use this description in output', 'wp-bannerize') ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row"><label for="url"><?php _e('URL:', 'wp-bannerize') ?></label></th>
+								<td>
+									<input type="text" name="url" id="url" /> <label for="target"><?php _e('Target:', 'wp-bannerize')?></label> <?php echo $this->get_target_combo() ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row"><label for="nofollow"><?php _e('Add “nofollow“ attribute', 'wp-bannerize') ?></label></th>
+								<td><input type="checkbox" name="nofollow" id="nofollow" value="1" /></td>
+							</tr>
+						</table>
+						<p class="submit">
+							<input class="button-primary" type="submit" value="<?php _e('Insert', 'wp-bannerize')?>"/>
+						</p>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+		<?php
+	}
+
     /**
      * Draw Options Panel
+	 *
+	 * TODO:	finire lo show
+	 * 
      */
-    function set_options_subpanel() {
-        global $wpdb, $_POST;
+    function show_banners() {
+        global $wpdb;
 
-        if( $this->update ) {
-            $this->showUpdate();
-            return;
-        }
+		$this->options = get_option( $this->options_key );
 
-        /**
-         * Any error flag
-         */
-        $any_error = "";
+		if( isset( $_POST['form_action'] ) && $_POST['form_action'] != "" ) {
+			switch( $_POST['form_action'] ) {
+				case "convert":
+					$any_error = $this->convertDatabse();
+					break;
+				case "nothing":
+					$this->options['todo_upgrade'] = "no";
+					update_option( $this->options_key, $this->options);
+					header("Location: admin.php?page=wp-bannerize-settings");
+					break;
+				case "deleteall":
+					$any_error = $this->dropOldDatabaseTableAndFiles();
+					break;
+			}
+		} else if(isset($this->options['todo_upgrade']) && $this->options['todo_upgrade'] == "yes") : ?>
+			<div class="wrap">
+				<div class="wp_saidmade_box">
+					<p class="wp_saidmade_copy_info"><?php _e('For more info and plugins visit', 'wp-bannerize') ?> <a href="http://www.saidmade.com">Saidmade</a></p>
+					<a class="wp_saidmade_logo" href="http://www.saidmade.com/prodotti/wordpress/wp-bannerize/">
+						<?php echo $this->plugin_name ?> ver. <?php echo $this->version ?>
+					</a>
+				</div>
+				<h3 class="wp_bannerize_alert"><?php _e('Warning!','wp-bannerize') ?></h3>
+				<p class="wp_bannerize_alert"><?php _e('This WP Bannerize release has a different Database Table struct. WP Bannerize has found an old Database Table. Do you want convert old struct for this release?','wp-bannerize') ?></p>
+				<form class="wp_bannerize_form_action" method="post" action="">
+					<input type="hidden" name="form_action" value="convert"/>
+					<input type="submit" value="<?php _e('Convert Database Table', 'wp-bannerize') ?>" />
+				</form>
+				<form class="wp_bannerize_form_action" method="post" action="">
+					<input type="hidden" name="form_action" value="nothing" />
+					<input type="submit" value="<?php _e('Do nothing', 'wp-bannerize') ?>" />
+				</form>
+				<form class="wp_bannerize_form_action" method="post" action="">
+					<input type="hidden" name="form_action" value="deleteall" />
+					<input type="submit" value="<?php _e('Delete Database and Images', 'wp-bannerize') ?>" />
+				</form>
+			</div>
 
-        if( isset( $_POST['command_action'] ) ) {
-            $any_error = __('Your settings have been saved.', 'wp-bannerize');
-
+		<?php else : ?>
+<?php if( isset( $_POST['command_action'] ) && $_POST['command_action'] != "" ) {
             switch( $_POST['command_action'] ) {
-                case "mysql_insert":
-                    $any_error = $this->mysql_insert();
+				case "trash":
+                    $any_error = $this->setBannerToTrash();
                     break;
-                case "mysql_delete":
-                    $any_error = $this->mysql_delete();
+				case "untrash":
+                    $any_error = $this->unsetBannerToTrash();
                     break;
-                case "mysql_update":
-                    $any_error = $this->mysql_update();
+                case "delete":
+                    $any_error = $this->deleteBanner();
+                    break;
+                case "update":
+                    $any_error = $this->updateBanner();
                     break;
             }
         }
 
-        /**
-         * Show error or OK
-         */
-        if( $any_error != '') {
-            echo '<div id="message" class="updated fade"><p>' . $any_error . '</p></div>';
-        }
-        ?>
+		if( $any_error != '') : ?>
+        	<div id="message" class="updated fade"><p><?php echo $any_error ?></p></div>
+        <?php endif; ?>
 
 <div class="wrap">
-    <div class="icon32" id="icon-options-general"><br/></div>
-    <h2><?php echo $this->options_title ?> ver. <?php echo $this->version ?></h2>
 
-    <div id="poststuff" class="metabox-holder has-right-sidebar">
-        <div class="inner-sidebar">
-            <div id="side-sortables" class="meta-box-sortabless ui-sortable" style="position: relative;">
+	<div class="wp_saidmade_box">
+		<p class="wp_saidmade_copy_info"><?php _e('For more info and plugins visit', 'wp-bannerize') ?> <a href="http://www.saidmade.com">Saidmade</a></p>
+		<a class="wp_saidmade_logo" href="http://www.saidmade.com/prodotti/wordpress/wp-bannerize/">
+			<?php echo $this->plugin_name ?> ver. <?php echo $this->version ?>
+		</a>
+	</div>
 
-                <div id="sm_pnres" class="postbox">
-                    <h3 class="hndle"><span>Links</span></h3>
-                    <div class="inside">
-                       <div style="text-align:center;margin-bottom:12px"><?php include_once('adv.php') ?></div>
-                       <p style="text-align:center"><a href="http://www.saidmade.com">Saidmade Srl</a></p>
-                       <p style="text-align:center"><a href="http://www.undolog.com">Research &amp; Development Blog</a></p>
-                    </div>
-                </div>
+	<a class="button add-new-h2" href="?page=wp-bannerize-addnew"><?php _e('Add New', 'wp-bannerize') ?></a>
 
-                <div id="sm_pnres" class="postbox">
-                    <h3 class="hndle"><span>Donate</span></h3>
-                    <div class="inside">
-                        <p style="text-align:center;font-family:Tahoma;font-size:10px">Developed by <a target="_blank" href="http://www.saidmade.com"><img alt="Saidmade" align="absmiddle" src="http://labs.saidmade.com/images/sm-a-80x15.png" border="0" /></a>
-                            <br/>
-                            more Wordpress plugins on <a target="_blank" href="http://labs.saidmade.com">labs.saidmade.com</a> and <a target="_blank" href="http://www.undolog.com">Undolog.com</a>
-                            <br/>
-                        </p>
-                        <div>
-                            <form style="text-align:center;width:auto;margin:0 auto" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                                <input type="hidden" name="cmd" value="_s-xclick">
-                                <input type="hidden" name="hosted_button_id" value="3499468">
-                                <input type="image" src="https://www.paypal.com/it_IT/IT/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - Il sistema di pagamento online più facile e sicuro!">
-                                <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+	<?php
+		// Actions
+		if(isset($_POST['action']) || isset($_POST['action2']) || isset($_GET['action'] ) ) {
+			if(isset($_POST['action']) || isset($_POST['action2']) ) {
+				$action = ($_POST['action'] != "") ? $_POST['action'] : $_POST['action2'];
+			} else {
+				$action = $_GET['action'];
+			}
+			switch($action) {
+				case "trash-selected":
+					$id = implode(",", $_POST['image_record']);
+					$this->setBannerToTrash($id);
+					break;
+				case "delete-selected":
+					if( is_array($_POST['image_record']) ) foreach($_POST['image_record'] as $id) $this->deleteBanner($id);
+					break;
+				case "restore-selected":
+					$id = implode(",", $_POST['image_record']);
+					$this->unsetBannerToTrash($id);
+					break;
+			}
+		}
+	?>
 
-        <div class="has-sidebar sm-padded">
-            <div id="post-body-content" class="has-sidebar-content">
-                <div class="meta-box-sortabless">
+	<?php
+		$pagenum = ($_GET['pagenum'] == '' ? 1 : $_GET['pagenum']);
+		$limit = ($_REQUEST['combo_pagination_filter'] == '' ? 10 : $_REQUEST['combo_pagination_filter']);
+		$where = "1";
+		$count = array();
 
-                    <div id="sm_rebuild" class="postbox">
-                        <h3 class="hndle"><span><?php  _e('Insert new Banner', 'wp-bannerize')?></span></h3>
-                        <div class="inside">
-                            <form class="form_box" name="insert_bannerize" method="post" action="" enctype="multipart/form-data">
-                                <input type="hidden" name="command_action" id="command_action" value="mysql_insert" />
-                                <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+		// Build where condictions
+		if( isset($_GET['trash']) && $_GET['trash'] != "") {
+			$where = sprintf("%s AND trash = '%s'", $where, $_GET['trash']);
+		} else {
+			$where = "1 AND trash = '0'";
+		}
 
-                                <table class="form-table">
-                                    <tr>
-                                        <th scope="row"><label for="group"><?php _e('Image', 'wp-bannerize')?>:</label></th>
-                                        <td><input type="file" name="filename" id="filename" size="40" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><label for="group"><?php _e('Key', 'wp-bannerize')?>:</label></th>
-                                        <td><input type="text" maxlength="128" name="group" id="group" value="A" size="32" style="text-align:right" /> <?php echo $this->get_combo_group() ?> (<?php _e('Insert a key max 128 chars', 'wp-bannerize')?>)</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><label for="description"><?php _e('Description', 'wp-bannerize')?>:</label></th>
-                                        <td><input type="text" name="description" id="description" value="" size="32" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><label for="url">URL:</label></th>
-                                        <td><input type="text" name="url" id="url" value="" size="32" /> <label for="target"><?php _e('Target', 'wp-bannerize')?>:</label> <?php echo $this->get_target_combo() ?></td>
-                                    </tr>
-                                </table>
-                                <p class="submit"><input class="button-primary" type="submit" value="<?php _e('Insert', 'wp-bannerize')?>" /></p
-                            </form>
+		if( isset($_REQUEST['combo_group_filter']) && $_REQUEST['combo_group_filter'] != "") {
+			$where = sprintf("%s AND `group` = '%s'", $where, $_REQUEST['combo_group_filter']);
+		}
 
-                            <form style="display:none" name="delete_bannerize" method="post" action="">
-                                <input type="hidden" name="command_action" id="command_action" value="mysql_delete" />
-                                <input type="hidden" name="id" id="id" value="" />
-                            </form>
-                        </div>
-                    </div>
+		// All Total records
+		$sql = sprintf("SELECT COUNT(*) AS all_record FROM %s", $this->table_bannerize);
+		$count['All'] = intval($wpdb->get_row($sql)->all_record);
 
-                    <div style="float:left;width:100%">
+		// Trash
+		$sql = sprintf("SELECT COUNT(*) AS trashed FROM %s WHERE trash = '1'", $this->table_bannerize);
+		$count['Trash'] = intval($wpdb->get_row($sql)->trashed);
 
-                        <div class="tablenav">
-                            <div class="alignleft actions">
-                                <form class="form_box" name="filter_bannerize" method="post" action="">
-                                    <?php $this->combo_group(); ?> <input class="button-secondary" type="submit" value="<?php _e('Filter', 'wp-bannerize')?>"/> | <?php _e('Use', 'wp-bannerize')?> <img align="absmiddle" alt="Drag and Drop" border="0" src="<?php echo $this->uri ?>/css/images/arrow_ns.png" /> <?php _e('for drag and drop to change order', 'wp-bannerize')?>
-                                </form>
-                            </div>
-                        </div>
-                                <?php
+		$count['Publish'] = intval($count['All']) - intval($count['Trash']);
 
-                                $q = "SELECT * FROM `" . $this->table_bannerize . "`";
+		// Count record with where conditions
+		$sql = sprintf("SELECT COUNT(*) AS showing FROM %s WHERE %s", $this->table_bannerize, $where);
+		$count['showing'] = intval($wpdb->get_row($sql)->showing);
 
-                                if( isset( $_POST['group_filter']) ) {
-                                    if( $_POST['group_filter'] != "" ) $q .= " WHERE `group` = '".$_POST['group_filter']."'";
-                                }
+		$num_pages = ceil($count['showing'] / $limit);
 
-                                $q .= " ORDER BY `sorter`, `group` ASC ";
+		// GET query fields
+		$query_search = array( 'trash' => $_GET['trash'], 'combo_group_filter' => $_REQUEST['combo_group_filter'], 'combo_pagination_filter' => $_REQUEST['combo_pagination_filter'] );
 
-                                $rows = $wpdb->get_results( $q );
+		$arraytolink = array_merge(array('edit' => null, 'pagenum' => '%#%'), $query_search);
 
-                                $o = '<table class="widefat" id="list_bannerize" width="100%" cellpadding="4" cellspacing="0">
-                                       <thead>
-                                            <tr>
-                                                 <th class="manage-column" scope="col"></th>
-                                                 <th width="40" scope="col">'.__('Image').'</th>
-                                                 <th scope="col">'.__('Key').'</th>
-                                                 <th width="100%" scope="col">'.__('Description').'</th>
-                                                 <th scope="col">'.__('URL').'</th>
-                                                 <th scope="col">'.__('Target').'</th>
-                                                </tr>
-                                           </thead>
-                                           <tfoot>
-                                            <tr>
-                                                 <th class="manage-column" scope="col"></th>
-                                                 <th width="40" scope="col">'.__('Image').'</th>
-                                                 <th scope="col">'.__('Key').'</th>
-                                                 <th width="100%" scope="col">'.__('Description').'</th>
-                                                 <th scope="col">'.__('URL').'</th>
-                                                 <th scope="col">'.__('Target').'</th>
-                                                </tr>
-                                           </tfoot>
-                                           <tbody>';
+		$page_links = paginate_links(array(
+			'base' => add_query_arg($arraytolink),
+			'format' => 'page=wp-bannerize-settings',
+			'total' => $num_pages,
+			'current' => $pagenum));
+		?>
+		<form method="post" name="form_show" action="" id="posts-filter">
+			<input type="hidden" name="id" />
+			<input type="hidden" name="command_action" value="update" />
+			<input type="hidden" name="page" value="wp-bannerize-settings" />
+			<input type="hidden" name="status" value="<?php echo ( isset($_GET['trash']) ? $_GET['trash'] : "" ) ?>" />
 
-                                $i = 0;
+			<ul class="subsubsub">
+			<?php
+				$links = array();
+				$status_links = array( "Publish" => "0", "Trash" => "1");
+				foreach($status_links as $status => $value) {
+					if($count[$status] > 0 ) {
+						$current = "";
+						$addurl = "";
+						if( (isset($_GET['trash']) && $_GET['trash'] == $value) || (!isset($_GET['trash']) && $value == "0") ) {
+							$current = 'class="current"';
+						}
+						if($value != "") {
+							$addurl = "&trash=" . $value;
+						}
+						$links[] = sprintf("<li><a %s href=\"?page=wp-bannerize-settings%s\">%s <span class=\"count\">(%s)</span></a>", $current, $addurl, __($status, 'wp-bannerize'), $count[$status]);
+					}
+				}
+				$output = implode('| </li>', $links) . '</li>';
+				echo $output;
+			?>
+			</ul>
 
-                                foreach( $rows as $row ) {
-                                    $class = ($i%2 == 0) ? 'class="alternate"' : ''; $i++;
-                                    $e = '<div class="inline-edit" id="edit_'.$row->id.'" style="display:none">' .
-                                        '<form method="post" name="form_edit_'.$row->id.'">' .
-                                        '<input type="hidden" name="command_action" value="mysql_update" />' .
-                                        '<input type="hidden" name="id" value="'.$row->id.'" />' .
-                                        '<label>' . __('Key') . ':</label> <input size="8" type="text" name="group" value="' . $row->group . '" /> ' . $this->get_combo_group("form_edit_".$row->id) .
-                                        '<br/><label>' . __('Description') . ':</label> <input size="32" type="text" name="description" value="' . $row->description . '" /><br/>' .
-                                        '<label>' . __('URL') . ':</label> <input type="text" name="url" size="32" value="' . $row->url . '" /> ' .
-                                        '<label style="float:none;display:inline">' . __('Target') . ':</label> ' . $this->get_target_combo( $row->target ) .
-                                        '<p class="submit inline-edit-save">' .
-                                        '<a onclick="jQuery(\'div#edit_'.$row->id.'\').hide();return false;" class="button-secondary cancel alignleft" title="'.__('Cancel').'" href="#" accesskey="c">'.__('Cancel').'</a>' .
-                                        '<a onclick="document.forms[\'form_edit_'.$row->id.'\'].submit();" class="button-primary save alignright" title="' . __('Update') . '" href="#" accesskey="s">' . __('Update') . '</a>' .
-                                        '</p>' .
-                                        '</form>' .
-                                        '</div>';
+			<?php if($count["showing"] > 0 ) : ?>
 
-                                    $o .= '<tr ' . $class . ' id="item_' . $row->id . '">' .
-                                        '<th scope="row"><div class="arrow"></div></th> ' .
-                                        '<td width="40" class="wp-bannerize-thumbnail"><a class="thickbox" rel="wp-bannerize-gallery" href="' . $row->filename . '" title="'.__('View').'"><img alt="'. $row->description .'" border="0" src="' . $row->filename . '" /></a></td>' .
-                                        '<td>' . $row->group . '</td>' .
-                                        '<td width"100%">' . $e . "<br/>" . $row->description .
-                                        '<div class="row-actions">' .
-                                        '<span class="edit"><a class="edit_'.$row->id.'" title="Edit" href="#">'.__('Edit').'</a> | </span>' .
-                                        '<span class="delete"><a onclick="delete_banner('.$row->id.');return false;" href="#" title="'.__('Delete').'" class="submitdelete">'.__('Delete').'</a> | </span>' .
-                                        '<span class="view"><a class="thickbox" rel="wp-bannerize-gallery" href="' . $row->filename . '" title="'.__('View').'">'.__('View').'</a></span>' .
-                                        '</div>' .
-                                        '</td>' .
-                                        '<td>' . $row->url . '</td>' .
-                                        '<td>' . $row->target . '</td>' .
-                                        '</tr>';
-                                }
-                                $o .= '</tbody>
-                                        </table>';
+				<div class="tablenav">
 
-                                echo $o;
-                                ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+					<div class="alignleft actions">
+						<select name="action">
+							<option value="-1"><?php _e('Actions', 'wp-bannerize') ?></option>
+							<?php if(!isset($_GET['trash']) || $_GET['trash'] == "0") : ?>
+								<option value="trash-selected"><?php _e('Trash', 'wp-bannerize') ?></option>
+							<?php elseif(isset($_GET['trash']) && $_GET['trash'] == "1") : ?>
+								<option value="restore-selected"><?php _e('Restore', 'wp-bannerize') ?></option>
+								<option value="delete-selected"><?php _e('Delete', 'wp-bannerize') ?></option>
+							<?php endif; ?>
+						</select>
+						<input type="submit" class="button-secondary action" id="doaction" name="doaction" value="<?php _e('Apply', 'wp-bannerize') ?>" />
 
+						<?php echo $this->combo_group_filter(); $this->combo_pagination_filter() ?> <input type="submit" class="button-secondary action" value="<?php _e('Filter', 'wp-bannerize') ?>" />
+
+					</div>
+
+					<div class="tablenav-pages">
+						<span class="displaying-num"><?php printf(__("Showing %s-%s of %s", 'wp-bannerize'), $pagenum, ($count['showing'] > $limit ? $limit : $count['showing']), $count['showing']) ?></span>
+						<?php echo $page_links ?>
+					</div>
+					<div class="clear"></div>
+				</div>
+
+				<div class="clear"></div>
+
+				<table rel="<?php echo $pagenum . "," . $limit ?>" id="wp_bannerize_list" cellspacing="0" class="widefat">
+					<thead>
+					<tr>
+						<th class="manage-column column-cb check-column" id="cb" scope="col"><input type="checkbox" /></th>
+						<th class="manage-column" scope="col"></th>
+						<th class="manage-column column-image" scope="col"><?php _e('Image', 'wp-bannerize') ?></th>
+						<th class="manage-column column-key" scope="col"><?php _e('Group', 'wp-bannerize') ?></th>
+						<th class="manage-column column-description" scope="col"><?php _e('Description', 'wp-bannerize') ?></th>
+						<th class="manage-column column-url" scope="col"><?php _e('URL', 'wp-bannerize') ?></th>
+						<th style="" class="manage-column column-clickcount num" scope="col"><div class="vers"><img src="images/comment-grey-bubble.png" alt="<?php _e('Count Click', 'wp-bannerize') ?>"></div></th>
+					</tr>
+					</thead>
+
+					<tfoot>
+					<tr>
+						<th class="manage-column column-cb check-column" id="cb" scope="col"><input type="checkbox" /></th>
+						<th class="manage-column" scope="col"></th>
+						<th class="manage-column column-image" scope="col"><?php _e('Image', 'wp-bannerize') ?></th>
+						<th class="manage-column column-key" scope="col"><?php _e('Group', 'wp-bannerize') ?></th>
+						<th class="manage-column column-description" scope="col"><?php _e('Description', 'wp-bannerize') ?></th>
+						<th class="manage-column column-url" scope="col"><?php _e('URL', 'wp-bannerize') ?></th>
+						<th class="manage-column column-clickcount num" scope="col"><div class="vers"><img src="images/comment-grey-bubble.png" alt="<?php _e('Count Click', 'wp-bannerize') ?>"></div></th>
+					</tr>
+					</tfoot>
+
+					<tbody>
+					<?php
+						$alt = 0;
+						$sql = sprintf("SELECT * FROM %s WHERE %s ORDER BY `sorter`, `group` ASC LIMIT %s,%s", $this->table_bannerize, $where, (($pagenum-1) * $limit), $limit);
+						$row = $wpdb->get_results($sql);
+						foreach($row as $item) : ?>
+							<tr <?php echo ($alt++ %2) ? 'class="alternate"' : "" ?> id="item_<?php echo $item->id ?>">
+								<th class="check-column" scope="row"><input type="checkbox" value="<?php echo $item->id ?>" name="image_record[]" /></th>
+								<th scope="row"><div class="arrow"></div></th>
+								<td class="wp-bannerize-thumbnail">
+									<?php if($item->mime == "application/x-shockwave-flash") : ?>
+										<a class="fancybox wp_bannerize_flash" rel="wp-bannerize-gallery" title="<?php echo $item->description ?>" href="<?php echo $item->filename ?>"></a>
+									<?php else : ?>
+										<a class="fancybox" rel="wp-bannerize-gallery" href="<?php echo $item->filename ?>" title="<?php echo $item->description ?>"><img alt="<?php echo $item->description ?>" border="0" src="<?php echo $item->filename ?>" /></a>
+									<?php endif; ?>
+								</td>
+								<td nowrap="nowrap"><?php echo $item->group ?></td>
+								<td width="100%"><?php echo $item->description ?>
+									<div class="row-actions">
+										<?php if($item->trash == "0") : ?>
+											<span class="edit"><a onclick="SMWPBannerizeJavascript.showInlineEdit('div#edit_<?php echo $item->id ?>', '<?php $this->inlineEdit($item) ?>')" class="edit_<?php echo $item->id ?>" title="<?php _e('Edit', 'wp-bannerize') ?>" href="#"><?php _e('Edit', 'wp-bannerize') ?></a> | </span>
+											<span class="trash"><a class="<?php echo $item->id ?>" title="<?php _e('Trash', 'wp-bannerize') ?>" href="#"><?php _e('Trash', 'wp-bannerize') ?></a> | </span>
+											<span class="view"><a class="fancybox submitview" rel="wp-bannerize-gallery" title="<?php echo $item->description ?>"" href="<?php echo $item->filename ?>"><?php _e('View', 'wp-bannerize') ?></a></span>
+										<?php else : ?>
+											<span class="delete"><a class="<?php echo $item->id ?>" title="<?php _e('Delete', 'wp-bannerize') ?>" href="#"><?php _e('Delete', 'wp-bannerize') ?></a> | </span>
+											<span class="restore"><a class="<?php echo $item->id ?>" title="<?php _e('Restore', 'wp-bannerize') ?>" href="#"><?php _e('Restore', 'wp-bannerize') ?></a></span>
+										<?php endif; ?>
+									</div>
+									<div id="edit_<?php echo $item->id ?>"></div>
+								</td>
+								<td nowrap="nowrap"><?php echo $item->url ?></td>
+								<td class="comments column-comments">
+									<div class="post-com-count-wrapper">
+										<div class="post-com-count">
+											<span><?php echo $item->clickcount ?></span>
+										</div>
+									</div>
+								</td>
+							</tr>
+						<?php endforeach;
+					?>
+					</tbody>
+				</table>
+
+				<div class="tablenav">
+
+					<div class="alignleft actions">
+						<select name="action2">
+							<option value="-1"><?php _e('Actions', 'wp-bannerize') ?></option>
+							<?php if(!isset($_GET['trash']) || $_GET['trash'] == "0") : ?>
+								<option value="trash-selected"><?php _e('Trash', 'wp-bannerize') ?></option>
+							<?php elseif(isset($_GET['trash']) && $_GET['trash'] == "1") : ?>
+								<option value="restore-selected"><?php _e('Restore', 'wp-bannerize') ?></option>
+								<option value="delete-selected"><?php _e('Delete', 'wp-bannerize') ?></option>
+							<?php endif; ?>
+						</select>
+						<input type="submit" class="button-secondary action" id="doaction2" name="doaction" value="<?php _e('Apply', 'wp-bannerize') ?>" />
+					</div>
+
+					<div class="tablenav-pages">
+						<span class="displaying-num"><?php printf(__("Showing %s-%s of %s", 'wp-bannerize'), $pagenum, ($count['showing'] > $limit ? $limit : $count['showing']), $count['showing']) ?></span>
+						<?php echo $page_links ?>
+					</div>
+					<div class="clear"></div>
+				</div>
+
+			<?php else : ?>
+				<div class="clear"></div>
+				<p><?php _e('No Banner found!', 'wp-bannerize') ?></p>
+			<?php endif; ?>
+		</form>
+
+		<form name="wp_bannerize_action" method="post" action="">
+			<input type="hidden" name="command_action" value="" />
+			<input type="hidden" name="id" />
+		</form>
+
+	</div>
+	<?php endif; ?>
     <?php
     }
 
-    /**
-     * Update previous WP Bannerize version to 1.4
-     *
-     * @return
-     */
-    function showUpdate() {
-        global $wpdb, $_POST;
-        ?>
-<div class="wrap">
-    <div class="icon32" id="icon-options-general"><br/></div>
-    <h2><?php echo $this->options_title ?> ver. <?php echo $this->version?></h2>
-            <?php
-            if( isset( $_POST['toupdate'])) {
-                $this->alterTable();
-                ?>
-    <div class="updated">
-        <p><?php _e('Update succefully', 'wp-bannerize') ?></p>
-    </div>
-    <form method="post" action="">
-        <div class="submit"><input type="submit"  value="<?php _e('Reload', 'wp-bannerize') ?>"/></div>
-    </form>
-            <?php
-            } else {
-                ?>
+	/**
+	 * Show hide form for inline edit in banner list
+	 *
+	 * @param  $row
+	 * @return void
+	 */
+	function inlineEdit($row) {
+		$o = '<div class="inline-edit" style="display:none">' .
+		'<label>' .  __('Group') . ':</label> <input size="8" type="text" id="group" name="group" value="' .    $row->group  . '" /> ' . $this->get_combo_group() .
+		'<br/><label>' .  __('Description') . ':</label> <input size="32" type="text" name="description" value="' . $row->description . '" /> ' .
+		'<input ' . ( ($row->use_description == '1') ? 'checked="checked"' : '' ) . ' type="checkbox" name="use_description" value="1" /> ' . addslashes( __('Use this description in output', 'wp-bannerize') ) . '<br/>' .		
+		'<label>' .  __('URL') . ':</label> <input type="text" name="url" size="32" value="' . $row->url . '" /> ' .
+		'<label style="float:none;display:inline">' . __('Target') . ':</label> ' . $this->get_target_combo( $row->target ) .
+		'<br/><label for="clickcount" style="float:none;display:inline">' . __('Click Counter:', 'wp-bannerize') . '</label>' .
+		'<input class="number" type="text" name="clickcount" id="clickcount" value="' . $row->clickcount . '" /> ' .		
+		'<label for="nofollow" style="float:none;display:inline">' . __('Add nofollow attribute', 'wp-bannerize') . '</label>' .
+		'<input ' . ( ($row->nofollow == '1') ? 'checked="checked"' : '' ) . ' type="checkbox" name="nofollow" id="nofollow" value="1" /><br/>' .
+		'<label for="width" style="float:none;display:inline">' . __('Width:', 'wp-bannerize') . '</label> ' .
+		'<input type="text" name="width" id="width" value="' . $row->width . '" /> ' .
+		'<label for="height" style="float:none;display:inline">' . __('Height:', 'wp-bannerize') . '</label>' .
+		'<input type="text" name="height" id="height" value="' . $row->width . '" /> ' .
+		'<p class="submit inline-edit-save">' .
+		'<a onclick="SMWPBannerizeJavascript.hideInlineEdit(' . $row->id . ')" class="button-secondary cancel alignleft" title="' .  __('Cancel') . '" href="#" accesskey="c">' .  __('Cancel') . '</a>' .
+		'<a onclick="SMWPBannerizeJavascript.update(' . $row->id . ')" class="button-primary save alignright" title="' .  __('Update') . '" href="#" accesskey="s">' .  __('Update') . '</a>'.
+		'</p>' .
+		'</div>';
+		echo esc_html($o);
+	}
 
-    <p><?php _e('Please, re-insert your banners.', 'wp-bannerize') ?></p>
-    <form method="post" action="">
-        <input type="hidden" name="toupdate" />
-        <div class="submit"><input type="submit"  value="<?php _e('Update', 'wp-bannerize') ?>"/></div>
-    </form>
-</div>	
-        <?php
-        }
-    }
 
     /**
      * Build the select/option filter group
      *
      * @return
      */
-    function combo_group() {
-        global $wpdb, $_POST;
-        $o = '<select onchange="document.forms[\'filter_bannerize\'].submit()" id="group_filter" name="group_filter">' .
-            '<option value="">'.__('All').'</option>';
+    function combo_group_filter() {
+        global $wpdb;
+        $o = '<select name="combo_group_filter">' .
+            '<option value="">'.__('All groups').'</option>';
         $q = "SELECT `group` FROM `" . $this->table_bannerize . "` GROUP BY `group` ORDER BY `group` ";
         $rows = $wpdb->get_results( $q );
         $sel = "";
         foreach( $rows as $row ) {
-            if( $_POST['group_filter'] == $row->group ) $sel = 'selected="selected"'; else $sel = "";
+            if( $_REQUEST['combo_group_filter'] == $row->group ) $sel = 'selected="selected"'; else $sel = "";
             $o .= '<option ' . $sel . 'value="' . $row->group . '">' . $row->group . '</option>';
         }
         $o .= '</select>';
         echo $o;
     }
 
-    function get_combo_group($name="insert_bannerize") {
-        global $wpdb, $_POST;
-        $o = '<select onchange="document.forms[\''.$name.'\'].group.value=this.options[this.selectedIndex].value" id="group_filter">' .
+
+	function combo_pagination_filter() { ?>
+		<select name="combo_pagination_filter">
+			<option <?php echo ($_REQUEST['combo_pagination_filter'] == "10") ? 'selected="selected"' : "" ?> value="10">10</option>
+			<option <?php echo ($_REQUEST['combo_pagination_filter'] == "20") ? 'selected="selected"' : "" ?> value="20">20</option>
+			<option <?php echo ($_REQUEST['combo_pagination_filter'] == "50") ? 'selected="selected"' : "" ?> value="50">50</option>
+		</select>
+	<?php
+	}
+
+	/**
+	 * Build combo group
+	 * 
+	 * @return string
+	 */
+    function get_combo_group() {
+        global $wpdb;
+        $o = '<select id="group_filter">' .
             '<option value=""></option>';
         $q = "SELECT `group` FROM `" . $this->table_bannerize . "` GROUP BY `group` ORDER BY `group` ";
         $rows = $wpdb->get_results( $q );
@@ -466,16 +648,14 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      *
      * @return
      */
-    function get_target_combo($sel="") {
-        $o = '
-		<select name="target">
-			<option></option>
-			<option '. ( ($sel=='_blank')?'selected="selected"':'' ) . '>_blank</option>
-			<option '. ( ($sel=='_parent')?'selected="selected"':'' ) . '>_parent</option>
-			<option '. ( ($sel=='_self')?'selected="selected"':'' ) . '>_self</option>
-			<option '. ( ($sel=='_top')?'selected="selected"':'' ) . '>_top</option>
-		</select>
-		';
+    function get_target_combo( $sel = "") {
+        $o = '<select name="target" id="target">' .
+				'<option></option>' .
+				'<option ' . ( ($sel=='_blank')?'selected="selected"':'' ) . '>_blank</option>' .
+				'<option ' . ( ($sel=='_parent')?'selected="selected"':'' ) . '>_parent</option>' .
+				'<option ' . ( ($sel=='_self')?'selected="selected"':'' ) . '>_self</option>' .
+				'<option ' . ( ($sel=='_top')?'selected="selected"':'' ) . '>_top</option>' .
+				'</select>';
         return $o;
     }
 
@@ -490,80 +670,104 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      *
      * @return
      */
-    function mysql_insert() {
-        global $wpdb, $_POST, $_FILES;
+    function insertBanner() {
+        global $wpdb;
 
-        // verifica eventuali errori
-        if( $_FILES['filename']['error'] == 0 ) {
-            $size           = floor( $_FILES['filename']['size'] / (1024*1024) );
-            $mime           = $_FILES['filename']['type'];
-            $name           = $_FILES['filename']['name'];
-            $temp           = $_FILES['filename']['tmp_name'];
+        // check post error
+		if( $_FILES['filename']['error'] == 0 ) {
+			$size           = floor( $_FILES['filename']['size'] / (1024*1024) );
+			$mime           = $_FILES['filename']['type'];
+			$name           = $_FILES['filename']['name'];
+			$temp           = $_FILES['filename']['tmp_name'];
 
-            $group          = $_POST['group'];
-            $description 	= $_POST['description'];
-            $url            = $_POST['url'];
-            $target 	 	= $_POST['target'];
+			$group          	= $_POST['group'];
+			$description 		= $_POST['description'];
+			$use_description 	= $_POST['use_description'];
+			$url            	= $_POST['url'];
+			$target 	 		= $_POST['target'];
+			$nofollow	 		= $_POST['nofollow'];
 
-            $uploads		= wp_upload_bits( strtolower($name), null, '' );
+			$uploads = wp_upload_bits( strtolower($name), null, '' );
 
-            if ( move_uploaded_file( $_FILES['filename']['tmp_name'], $uploads['file'] )) {
-
-                $q = "INSERT INTO `" . $this->table_bannerize . "`" .
-                    " ( `group`, `description`, `url`, `filename`, `target`, `realpath` )" .
-                    " VALUES ('" . $group . "', '" . $description . "', '" . 
-                                   $url . "', '" . $uploads['url'] . "', '" . $target . "', '" . $uploads['file'] . "')";
-                $wpdb->query($q);
-                return( '' );
-            } else {
-                return ( '<div id="result">Impossibile spostare e posizionare il file ' . $_FILES['filename']['name'] .
-                    ' (' . $_FILES['filename']['size'] . ' bytes). Errore ' . $_FILES['filename']['error'] . '</div>' );
-            }
-        } else {
-            return( '<div id="result">Impossibile trasferire il file ' . $_FILES['filename']['name'] .
-                ' (' . $_FILES['filename']['size'] . ' bytes). Errore ' . $_FILES['filename']['error'] . '</div>' );
-        }
+			if ( move_uploaded_file( $_FILES['filename']['tmp_name'], $uploads['file'] )) {
+				$dimensions = getimagesize($uploads['url']);
+				$sql = sprintf("INSERT INTO %s (`group`, `description`, `use_description`, `url`, `filename`, `target`, `nofollow`, `mime`, `realpath`, `width`, `height`) ".
+										"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %s, %s)", $this->table_bannerize, $group, $description, $use_description, $url,
+										$uploads['url'], $target, $nofollow, $mime, $uploads['file'], $dimensions[0], $dimensions[1]);
+				$wpdb->query($sql);
+				return "";
+			} else {
+				$error = sprintf( __('Error while copying [%s] [%s bytes] - [%s]','wp-bannerize'), $_FILES['filename']['name'],  $_FILES['filename']['size'], $_FILES['filename']['error'] );
+				return $error;
+			}
+		} else {
+			$error = sprintf( __('No file to upload! - [%s]','wp-bannerize'), $_FILES['filename']['error'] );
+			return $error;
+		}
     }
 
+	/**
+	 * Set one or more banner in trash mode: trash = "1"
+	 *
+	 * @param  $id		string|array
+	 * @return void
+	 */
+	function setBannerToTrash($id = null) {
+		global $wpdb;
+		$id = ( is_null($id) ) ? $_POST['id'] : $id;
+		$sql = sprintf("UPDATE %s SET trash = '1' WHERE id IN(%s)", $this->table_bannerize, $id);
+		$wpdb->query($sql);
+	}
+
+	/**
+	 * Set one or more banner in publish mode: trash = "0"
+	 *
+	 * @param  $id		string|array
+	 * @return void
+	 */
+	function unsetBannerToTrash($id = null) {
+		global $wpdb;
+		$id = ( is_null($id) ) ? $_POST['id'] : $id;
+		$sql = sprintf("UPDATE %s SET trash = '0' WHERE id IN(%s)", $this->table_bannerize, $id);
+		$wpdb->query($sql);
+	}
+
     /**
-     * Delete a banner
+     * Delete (permanently) a banner from Database and filesystem. Because a banner is delete from disk, this method
+	 * is call from loop for delete more banner
      *
      * @return
      */
-    function mysql_delete() {
-        global $wpdb, $_POST, $_FILES;
-        //
-        $filename = $wpdb->get_var( "SELECT realpath FROM `" . $this->table_bannerize . "` WHERE `id` = " . $_POST['id'] );
+    function deleteBanner($id = null) {
+        global $wpdb;
+		$id = ( is_null($id) ) ? $_POST['id'] : $id;
+        $filename = $wpdb->get_var( "SELECT realpath FROM `" . $this->table_bannerize . "` WHERE `id` = " . $id );
         @unlink( $filename );
 
-        $q = "DELETE FROM `" . $this->table_bannerize . "` WHERE `id` = " . $_POST['id'];
+        $q = "DELETE FROM `" . $this->table_bannerize . "` WHERE `id` = " .$id;
         $wpdb->query($q);
-        return('');
     }
 
     /**
-     * Update a banner
+     * Update a banner. Only db data
      *
      * @return 		(not used)
      */
-    function mysql_update() {
-        global $wpdb, $_POST, $_FILES;
-
-        $q = "UPDATE `" . $this->table_bannerize . "`" .
-            "set `group` = '{$_POST['group']}', " .
-            "`description` = '{$_POST['description']}', " .
-            "`url` = '{$_POST['url']}', " .
-            "`target` = '{$_POST['target']}' " .
-            " WHERE `id` = " . $_POST['id'];
-        $wpdb->query($q);
-        return('');
+    function updateBanner() {
+        global $wpdb;
+		$sql = sprintf("UPDATE %s SET `group` ='%s', `description` = '%s', `url` = '%s', `target` = '%s', `use_description` = '%s', `nofollow` = '%s' WHERE id = %s",
+					$this->table_bannerize, $_POST['group'], $_POST['description'], $_POST['url'], $_POST['target'], $_POST['use_description'], $_POST['nofollow'], 
+					$_POST['id']);
+        $wpdb->query($sql);
     }
 
     /**
-     * Attach settings in Wordpress Plugins list. See wp-bannerize.php file
+     * Attach settings in Wordpress Plugins list
      */
     function register_plugin_settings( $pluginfile ) {
-        add_action( 'plugin_action_links_' . basename( dirname( $pluginfile ) ) . '/' . basename( $pluginfile ), array( &$this, 'plugin_settings' ), 10 );
+        $this->plugin_file = $pluginfile;
+        add_action( 'plugin_action_links_' . basename( dirname( $pluginfile ) ) . '/' . basename( $pluginfile ), array( &$this, 'plugin_settings' ), 10, 4 );
+        add_filter( 'plugin_row_meta',  array(&$this, 'add_plugin_links'), 10, 2);
     }
 
     /**
@@ -573,86 +777,137 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      * @return string
      */
     function plugin_settings( $links ) {
-        $settings_link = '<a href="options-general.php?page=wp-bannerize_admin.php">' . __('Settings', 'wp-bannerize') . '</a>';
+        $settings_link = '<a href="admin.php?page=wp-bannerize-settings">' . __('Settings') . '</a>';
         array_unshift( $links, $settings_link );
         return $links;
     }
 
     /**
-     * Check if 'bannerize' table exists on the database
-     * if not exists then create it
-     *
-     * @return
-     */
-    function checkTable() {
-        global $wpdb;
-
-        /**
-         * Da questa release è possibile controllare la versione del
-         * plugin in modo da sapere se effettuare modifiche oppure no.
-         *
-         * @since 2.2.2
-         */
-        if( !isset($this->options['wp_bannerize_version']) ) {
-            $this->options = array('wp_bannerize_version' => $this->version );
-            update_option( $this->options_key, $this->options);
+	 * Add links on installed plugin list
+	 */
+	function add_plugin_links($links, $file) {
+        if( $file == plugin_basename( $this->plugin_file ) ) {
+            $links[] = '<strong style="color:#fa0">' . __('For more info and plugins visit', 'wp-photo-iphone') . ' <a href="http://www.saidmade.com">Saidmade</a></strong>';
         }
+		return $links;
+	}
 
-        /**
-         * Prelevo la versione attuale
-         *
-         * version_array[0] = release
-         * version_array[1] = minor
-         * version_array[2] = revision
-         */
-        $version_array = explode(".", $this->options['wp_bannerize_version'] );
+	/**
+	 * Call on Plugin Activation
+	 *
+	 * @since 2.5.0
+	 *
+	 * @return void
+	 */
+	function activation_hook() {
+		global $wpdb;
+		// Table doesn't exists: create it
+		$this->createTable();
 
-        /**
-         * Check old table name and rename it
-         * RENAME TABLE `bannerize`  TO `wp_bannerize` ;
-         *
-         * @since 2.2.1
-         */
-        $desc = @$wpdb->get_results( 'DESC `' . $this->_old_table_bannerize . '`' );
+		$this->checkNeedUpdateFromPreviousDatabase();
+		
+	}
 
-		if(!is_null($desc)) {
-			if(count($desc) > 0) {
-				$wpdb->query( 'RENAME TABLE `' . $this->_old_table_bannerize . '` TO `' . $this->table_bannerize . '`' );
-			}
+	/**
+	 * Thi smethod is call from "active" Plugin. Check if exists a database table named "$this->old_table_bannerize".
+	 * If the table exists, then set a special flag in option for ask to the user three options: convert, do nothing
+	 * and remove old database table.
+	 * See method above for action hook callback.
+	 *
+	 * @return void
+	 */
+	function checkNeedUpdateFromPreviousDatabase() {
+		global $wpdb;
+		if($wpdb->get_var("SHOW TABLES LIKE '$this->old_table_bannerize'") == $this->old_table_bannerize ) {
+			$this->options['todo_upgrade'] = "yes";
+		} else {
+			$this->options['todo_upgrade'] = "no";
 		}
+		update_option( $this->options_key, $this->options);
+	}
 
-        /**
-         * Check group field for alter table varchar(128)
-         *
-         * @since 2.1.0
-         */
-        $desc = $wpdb->get_results( 'DESC `' . $this->table_bannerize . '`' );
+	/**
+	 * Read all records from WP Bannerize table previous 2.5.0 release and insert these records into new database table
+	 *
+	 * @return void
+	 */
+	function convertDatabse() {
+		global $wpdb;
 
-        foreach( $desc as $field ) {
-            if(  $field->Field == "group" )
-                if(  $field->Type == "varchar(8)" ) {
-                    $wpdb->query( 'ALTER TABLE `' . $this->table_bannerize . '` CHANGE `group` `group` VARCHAR(128)' );
-                    break;
-                }
-        }
+		$sql = sprintf("SELECT * FROM `%s`", $this->old_table_bannerize);
+		$old = $wpdb->get_results($sql);
+		foreach($old as $olditem) {
+			$dimensions = getimagesize( $olditem->realpath );
+			$sql = sprintf("INSERT INTO %s (`sorter`, `group`, `description`, `url`, `filename`, `target`, `realpath`, `width`, `height`) ".
+										"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", $this->table_bannerize,
+										$olditem->sorter, $olditem->group, $olditem->description, $olditem->url,
+										$olditem->filename, $olditem->target, $olditem->realpath, $dimensions[0], $dimensions[1]);
+			$wpdb->query($sql);
+		}
+		$this->dropOldDatabaseTable();
+		$this->options['todo_upgrade'] = "no";
+		update_option( $this->options_key, $this->options);
+		?>
+			<div class="wrap">
+				<div class="wp_saidmade_box">
+					<p class="wp_saidmade_copy_info"><?php _e('For more info and plugins visit', 'wp-bannerize') ?> <a href="http://www.saidmade.com">Saidmade</a></p>
+					<a class="wp_saidmade_logo" href="http://www.saidmade.com/prodotti/wordpress/wp-bannerize/">
+						<?php echo $this->plugin_name ?> ver. <?php echo $this->version ?>
+					</a>
+				</div>
+				<h3 class="wp_bannerize_info"><?php _e('Results','wp-bannerize') ?></h3>
+				<p class="wp_bannerize_info"><?php _e('Ok, your old WP Bannerize Database Table has been convert succesfully! Please, press "continue" button to start with new WP Bannerize Release! Thank you for collaboration.','wp-bannerize') ?></p>
+				<form class="wp_bannerize_form_action" method="post" action="">
+					<input type="submit" value="<?php _e('Continue', 'wp-bannerize') ?>" />
+				</form>
+			</div>
+		<?php
+	}
 
-        /**
-         * Check old wp-bannerize version
-         */
-        $q = 'DESC `' . $this->table_bannerize . '`';
-        $rows = $wpdb->get_results( $q );
-        if( count( $rows ) > 0 && count( $rows ) < 8 ) {
-            // previou version
-            return true;
-        } else {
-            $this->createTable();
-        }
-        return false;
-    }
+	/**
+	 * Delete all image files link into old WP Bannerize table. Drop the old WP Bannerize table
+	 *
+	 * @return void
+	 */
+	function dropOldDatabaseTableAndFiles() {
+		global $wpdb;
+
+		$sql = sprintf("SELECT * FROM `%s`", $this->old_table_bannerize);
+		$old = $wpdb->get_results($sql);
+		foreach($old as $olditem) {
+			@unlink( $olditem->realpath );
+		}
+		$this->dropOldDatabaseTable();
+		?>
+			<div class="wrap">
+				<div class="wp_saidmade_box">
+					<p class="wp_saidmade_copy_info"><?php _e('For more info and plugins visit', 'wp-bannerize') ?> <a href="http://www.saidmade.com">Saidmade</a></p>
+					<a class="wp_saidmade_logo" href="http://www.saidmade.com/prodotti/wordpress/wp-bannerize/">
+						<?php echo $this->plugin_name ?> ver. <?php echo $this->version ?>
+					</a>
+				</div>
+				<h3 class="wp_bannerize_info"><?php _e('Results','wp-bannerize') ?></h3>
+				<p class="wp_bannerize_info"><?php _e('Ok, ALL previous image file have been deleted succesfully. The old WP Bannerize Database table has been deleted.','wp-bannerize') ?></p>
+				<form class="wp_bannerize_form_action" method="post" action="">
+					<input type="submit" value="<?php _e('Continue', 'wp-bannerize') ?>" />
+				</form>
+			</div>
+		<?php
+	}
+
+	/**
+	 * Do a SQL Drop Table on old database table
+	 *
+	 * @return void
+	 */
+	function dropOldDatabaseTable() {
+		global $wpdb;
+		$sql = sprintf("DROP TABLE `%s`", $this->old_table_bannerize);
+		$res = $wpdb->query($sql);
+	}
 
     /**
      * Create WP Bannerize table for store banner data
-     * group field is varchar(128)
      *
      * @since 2.1.0
      *
@@ -660,44 +915,25 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      */
     function createTable() {
         global $wpdb;
-        $q = 'CREATE TABLE IF NOT EXISTS `' . $this->table_bannerize . '` (
-			  `id` int(11) NOT NULL auto_increment,
-			  `sorter` int(11) NOT NULL,
-			  `group` varchar(128) NOT NULL,
-			  `description` varchar(255) NOT NULL,
-			  `url` varchar(255) NOT NULL,
-			  `target` varchar(32) NOT NULL,
-			  `filename` varchar(255) NOT NULL,
-			  `realpath` varchar(255) NOT NULL,
-			  PRIMARY KEY  (`id`)
-			)';
-        $wpdb->query($q);
-    }
-
-    /**
-     * Drop WP Bannerize table
-     *
-     * @return
-     */
-    function dropTable() {
-        global $wpdb;
-        $q = 'DROP TABLE `' . $this->table_bannerize . '`';
-        $wpdb->query($q);
-    }
-
-    /**
-     * Alter WP Bannerize table
-     *
-     * ALTER TABLE `bannerize` ADD `realpath` VARCHAR( 255 ) NOT NULL
-     *
-     * @return
-     */
-    function alterTable() {
-        global $wpdb;
-        $q = 'ALTER TABLE `' . $this->table_bannerize . '` ADD
-			  `target` varchar(32) NOT NULL, ADD
-			  `realpath` varchar(255) NOT NULL
-			 ';
+        $q = "CREATE TABLE IF NOT EXISTS `" . $this->table_bannerize . "` (
+			   `id` bigint(20) NOT NULL auto_increment,
+				`sorter` bigint(20) NOT NULL,
+				`clickcount` bigint(20) NOT NULL,
+				`group` varchar(128) NOT NULL,
+				`description` varchar(255) NOT NULL,
+				`use_description` char(1) NOT NULL default '0',
+				`url` varchar(255) NOT NULL,
+				`target` varchar(32) NOT NULL,
+				`nofollow` char(1) NOT NULL default '0',
+				`trash` char(1) NOT NULL default '0',
+				`mime` varchar(255) NOT NULL,
+				`width` int(11) NOT NULL,
+				`height` int(11) NOT NULL,
+				`filename` varchar(255) NOT NULL,
+				`realpath` varchar(255) NOT NULL,
+				PRIMARY KEY  (`id`),
+				KEY `group` (`group`)
+				) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
         $wpdb->query($q);
     }
 

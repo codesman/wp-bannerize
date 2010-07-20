@@ -1,16 +1,16 @@
- === WP BANNERIZE ===
-Contributors: Giovambattista Fazioli
+ === WP Bannerize ===
+Contributors: Giovambattista Fazioli, Ivan, rotunda, marsev, benstewart, Fernando Lopes, Marcis G.
 Donate link: http://labs.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random
 Requires at least: 2.8
-Tested up to: 2.9.1
-Stable tag: 2.4.11
+Tested up to: 2.9.2
+Stable tag: 2.5.0
 
-WP BANNERIZE, banner-image manager.
+WP Bannerize, banner-image manager.
 
 == Description ==
 
-WP BANNERIZE is an Amazing Banner Image Manager. In your template insert: `<?php wp_bannerize(); ?>` or set it like Widget
+WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php wp_bannerize(); ?>` or set it like Widget
 
 **FEATURES**
 
@@ -68,14 +68,27 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 
 == Screenshots ==
 
-1. Options
-2. New inline edit
-3. Contextual HELP
-4. Widget support
+1. New Logo
+2. New Administrator Menu
+3. Add New Banner Pannel with Adobe FLash support and size autodetect
+4. New List View Banner list with Wordress standard tools: pagination, filters, drag & drop features
+5. Contextual Help
+6. Widget support
 
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.5.0 =
+* Improve Database table
+* Add convertion tools for pre-2.5.0 release
+* Improve User Interface
+* Add Adobe Flash support
+* Add footer text description
+* Add "nofollow" rel attribute support
+* Add "Click Counter" (only images)
+* Rev code
+* Fix minor bugs
 
 = 2.4.11 =
 * Fix Link on Plugins list page

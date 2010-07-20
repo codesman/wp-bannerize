@@ -15,7 +15,7 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
      *
      * @var string
      */
-    var $table_bannerize        = WP_BANNERIZE_TABLE;
+    var $table_bannerize        = "";
 
     function WP_BANNERIZE_WIDGET() {
         global $wpdb;
@@ -54,16 +54,16 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
             if( ! is_category( $categories ) ) return;
         }
 
-        $q = "SELECT * FROM `" . $this->table_bannerize . "` ";
+        $q = "SELECT * FROM `" . $this->table_bannerize . "` WHERE `trash` = '0' ";
 
-        if( $group != "") $q .= " WHERE `group` = '" . $group. "'";
+        if( $group != "") $q .= " AND `group` = '" . $group. "'";
 
         /**
          * Add random option
          *
          * @since 2.0.2
          */
-        $q .= ($random == '0') ? " ORDER BY `sorter` ASC" : "ORDER BY RAND()";
+        $q .= ($random == "" ) ? " ORDER BY `sorter` ASC" : "ORDER BY RAND()";
 
         /**
          * Limit rows number
@@ -72,9 +72,13 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
          */
         if( $limit != "") $q .= " LIMIT 0," . $limit ;
 
+		echo $q;
+
         $rows = $wpdb->get_results( $q );
 
         echo $before_widget;
+
+		echo '<div class="wp_bannerize">';
 
         // @since 2.4.3 - fix widget title output
         $title = apply_filters('widget_title', $instance['title']);
@@ -94,15 +98,30 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
         $new_link_class = ($link_class != "") ? 'class="'.$link_class.'"' : "";
 
         foreach( $rows as $row ) {
-            $target = ( $row->target != "" ) ? 'target="' . $row->target . '"' : "";
+			$target = ($row->target != "") ? 'target="' . $row->target . '"' : "";
+			$o .= (($index % 2 == 0) ? $odd_before : $even_before);
+			if($row->mime == "application/x-shockwave-flash") {
+				$flash = sprintf('<object width="%s" height="%s" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+				<param value="%s" name="movie">
+				<param value="transparent" name="wmode">
+				<embed width="%s" height="%s" wmode="transparent" type="application/x-shockwave-flash" src="%s">
+				</object>', $row->width, $row->height, $row->filename, $row->width, $row->height, $row->filename);
+				$o .= $flash;
+			} else {
+				$nofollow = ($row->nofollow == "1") ? 'rel="nofollow"' : "";
+				$o .= '<a ' . $nofollow . ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')" ' . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img alt="' . $row->description . '" border="0" src="' . $row->filename . '" /></a>';
+			}
 
-            $o .= ( ($index%2 == 0) ? $odd_before : $even_before ) . '<a ' . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img alt="'.$row->description.'" border="0" src="' . $row->filename . '" /></a>' . $after;
-            $index++;
+			if($row->use_description == "1") $o .= '<br/><span class="description">'.$row->description.'</span>';
+
+			$o .= $new_args['after'];
+			$index++;
         }
 
         echo $o;
 
         echo $container_after;
+		echo "</div>";
         echo $after_widget;
     }
 
@@ -167,7 +186,7 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
         ?>
 <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'wp-bannerize'); ?></label>
     <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></p>
-<p><label for="<?php echo $this->get_field_id('group'); ?>"><?php _e('Key:', 'wp-bannerize'); ?></label>
+<p><label for="<?php echo $this->get_field_id('group'); ?>"><?php _e('Group:', 'wp-bannerize'); ?></label>
         <?php echo $this->get_group( $group ) ?></p>
 <p><label for="<?php echo $this->get_field_id('random'); ?>"><?php _e('Random:', 'wp-bannerize'); ?></label>
     <input <?php echo ($random == '1') ? 'checked="chekced"' : '' ?> value="1" type="checkbox" name="<?php echo $this->get_field_name('random'); ?>" id="<?php echo $this->get_field_id('random'); ?>" /></p>

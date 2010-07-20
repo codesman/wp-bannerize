@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: WP-BANNERIZE
+Plugin Name: WP Bannerize
 Plugin URI: http://wordpress.org/extend/plugins/wp-bannerize/
-Description: WP_BANNERIZE is an Amazing Banner Image Manager. For more info and plugins visit <a href="http://labs.saidmade.com">Labs Saidmade</a>.
-Version: 2.4.11
+Description: WP Bannerize is an Amazing Banner Image Manager. For more info and plugins visit <a href="http://labs.saidmade.com">Labs Saidmade</a>.
+Version: 2.5.0
 Author: Giovambattista Fazioli
-Author URI: http://labs.saidmade.com
+Author URI: http://www.saidmade.com
 Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
 
 	Copyright 2010 Saidmade Srl (email : g.fazioli@undolog.com - g.fazioli@saidmade.com)
@@ -33,9 +33,11 @@ if( is_admin() ) {
 	//
 	$wp_bannerize_admin = new WPBANNERIZE_ADMIN();
 	$wp_bannerize_admin->register_plugin_settings( __FILE__ );
+	register_activation_hook( __FILE__, array( &$wp_bannerize_admin, 'activation_hook') );
 } else {
-	require_once( 'wp-bannerize_client.php');
-	$wp_bannerize_client = new WPBANNERIZE_CLIENT();
+	require_once( 'wp-bannerize_frontend.php');
+	$wp_bannerize_frontend = new WPBANNERIZE_FRONTEND();
 	require_once( 'wp-bannerize_functions.php');
 }
+
 ?>

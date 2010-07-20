@@ -16,8 +16,8 @@
  * @param object $args[optional]
  */
 function wp_bannerize( $args = '' ) {
-	global $wp_bannerize_client;
-	$wp_bannerize_client->bannerize( $args );
+	global $wp_bannerize_frontend;
+	$wp_bannerize_frontend->bannerize( $args );
 }
 
 ?>
