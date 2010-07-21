@@ -691,7 +691,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			$uploads = wp_upload_bits( strtolower($name), null, '' );
 
 			if ( move_uploaded_file( $_FILES['filename']['tmp_name'], $uploads['file'] )) {
-				if(function_exists('getimagesize'))	$dimensions = getimagesize($uploads['url']);
+				if(function_exists('getimagesize'))	$dimensions = getimagesize($uploads['file']);
 				$sql = sprintf("INSERT INTO %s (`group`, `description`, `use_description`, `url`, `filename`, `target`, `nofollow`, `mime`, `realpath`, `width`, `height`) ".
 										"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %s, %s)", $this->table_bannerize, $group, $description, $use_description, $url,
 										$uploads['url'], $target, $nofollow, $mime, $uploads['file'], $dimensions[0], $dimensions[1]);
