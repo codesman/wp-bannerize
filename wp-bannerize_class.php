@@ -20,7 +20,7 @@ class WPBANNERIZE_CLASS {
 	 * @since 2.4.7
 	 * @var string
 	 */
-	var $version 						= "2.5.2";
+	var $version 						= "2.5.3";
 
     /**
      * WP Bannerize release.minor.revision

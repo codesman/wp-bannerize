@@ -4,7 +4,7 @@ Donate link: http://www.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash
 Requires at least: 2.9
 Tested up to: 3.0
-Stable tag: 2.5.2
+Stable tag: 2.5.3
 
 WP Bannerize, banner-image manager.
 
@@ -14,7 +14,7 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **FEATURES**
 
-* Localizzate for Italian, English, Portuguese and Belorussian
+* Localized for Italian, English, Portuguese and Belorussian
 * Create your list (group/key) Banners image/Adobe Flash movie
 * Show your banners list by php code or Widget
 * Set random, limit and catories filters
@@ -85,8 +85,11 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 
 == Changelog ==
 
+= 2.5.3 =
+* Fix getimagesize() functions
+
 = 2.5.2 =
-* Fix italian localizzation
+* Fix italian localization
 
 = 2.5.1 =
 * Rev some bugs
@@ -122,14 +125,14 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * Add Secure Layer on Ajax Gateway
 
 = 2.4.4 =
-* Minor revision on localizzation
+* Minor revision on localization
 
 = 2.4.3 =
 * Fix Widget Title Output
 * Change Adv Engine
 
 = 2.4.1 =
-* Fix localizzation
+* Fix localization
 * Fix minor bugs
 
 = 2.4.0 =

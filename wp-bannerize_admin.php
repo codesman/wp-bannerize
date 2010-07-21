@@ -686,11 +686,12 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			$url            	= $_POST['url'];
 			$target 	 		= $_POST['target'];
 			$nofollow	 		= $_POST['nofollow'];
+			$dimensions			= array('0','0');
 
 			$uploads = wp_upload_bits( strtolower($name), null, '' );
 
 			if ( move_uploaded_file( $_FILES['filename']['tmp_name'], $uploads['file'] )) {
-				$dimensions = getimagesize($uploads['url']);
+				if(function_exists('getimagesize'))	$dimensions = getimagesize($uploads['url']);
 				$sql = sprintf("INSERT INTO %s (`group`, `description`, `use_description`, `url`, `filename`, `target`, `nofollow`, `mime`, `realpath`, `width`, `height`) ".
 										"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %s, %s)", $this->table_bannerize, $group, $description, $use_description, $url,
 										$uploads['url'], $target, $nofollow, $mime, $uploads['file'], $dimensions[0], $dimensions[1]);
@@ -834,10 +835,12 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	function convertDatabse() {
 		global $wpdb;
 
+		$dimensions			= array('0','0');
+
 		$sql = sprintf("SELECT * FROM `%s`", $this->old_table_bannerize);
 		$old = $wpdb->get_results($sql);
 		foreach($old as $olditem) {
-			$dimensions = getimagesize( $olditem->realpath );
+			if(function_exists('getimagesize'))	$dimensions = getimagesize( $olditem->realpath );
 			$sql = sprintf("INSERT INTO %s (`sorter`, `group`, `description`, `url`, `filename`, `target`, `realpath`, `width`, `height`) ".
 										"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", $this->table_bannerize,
 										$olditem->sorter, $olditem->group, $olditem->description, $olditem->url,
