@@ -72,8 +72,6 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
          */
         if( $limit != "") $q .= " LIMIT 0," . $limit ;
 
-		echo $q;
-
         $rows = $wpdb->get_results( $q );
 
         echo $before_widget;

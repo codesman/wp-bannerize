@@ -85,6 +85,9 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 
 == Changelog ==
 
+= 2.5.5 =
+* Fix "echo" on Widget output
+
 = 2.5.4 =
 * Fix getimagesize() functions on url file
 
