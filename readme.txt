@@ -16,7 +16,7 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 * Localized for Italian, English, Spanish, Portuguese and Belorussian
 * Create your list (group/key) Banners image/Adobe Flash movie
-* Show your banners list by php code or Widget
+* Show your banners list by php code, shortcode or Widget
 * Set random, limit and catories filters
 * Standard Wordpress interface improvement
 * "nofollow" support
