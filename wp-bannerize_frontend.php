@@ -25,6 +25,12 @@ class WPBANNERIZE_FRONTEND extends WPBANNERIZE_CLASS {
 								array (
 								'ajaxURL' => $this->ajax_clickcounter
 								) );
+		/**
+		 * Add shortcode
+		 *
+		 * @since 2.6.0
+		 */
+		add_shortcode( "wp-bannerize", array(&$this, "bannerize" ) );
     }
 
     /**

@@ -1,10 +1,10 @@
  === WP Bannerize ===
-Contributors: Giovambattista Fazioli, Ivan, rotunda, marsev, benstewart, Fernando Lopes, Marcis G.
+Contributors: Giovambattista Fazioli (see Thanks for contributors)
 Donate link: http://www.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash
 Requires at least: 2.9
 Tested up to: 3.0
-Stable tag: 2.5.4
+Stable tag: 2.6.0
 
 WP Bannerize, banner-image manager.
 
@@ -14,7 +14,7 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **FEATURES**
 
-* Localized for Italian, English, Portuguese and Belorussian
+* Localized for Italian, English, Spanish, Portuguese and Belorussian
 * Create your list (group/key) Banners image/Adobe Flash movie
 * Show your banners list by php code or Widget
 * Set random, limit and catories filters
@@ -26,10 +26,9 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **LAST IMPROVE**
 
-* Add Click Counter Engine
-* Add Adobe Flash support
-* Add text description
-* Add "nofollow" rel attribute support
+* Add Wordpress shortcode [wp-bannerize]
+* Add Spanish localization
+* Change access level to 'Editor'
 
 **HOW TO**
 
@@ -46,6 +45,10 @@ However wp-bannerize provides a filter by category, for example:
 `<?php wp_bannerize('group=right_sidebar&categories=13,14'); ?>`
 
 The code above shows only banners in the categories 13 or 14, for the "right_sidebar" group key.
+
+or (new from 2.6.0) in your post:
+
+`[wp-bannerize group="adv" random="1" limit="3"]`
 
 
 **params:**
@@ -65,9 +68,9 @@ The code above shows only banners in the categories 13 or 14, for the "right_sid
 
 = Related Links =
 
-* [Saidmade](http://www.saidmade.com/ "Creazione siti Web")
+* [Saidmade](http://www.saidmade.com/ "More Wordpress Plugins")
 * [Undolog](http://www.undolog.com/ "Author's Web")
-* [Labs Saidmade](http://labs.saidmade.com/ "More Wordpress Plugin info")
+* [Saidmade Blog](http://www.saidmade.com/category/blog "Saidmade Blog")
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 For more information on the roadmap for future improvements please e-mail: g.fazioli@saidmade.com
@@ -84,6 +87,12 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.6.0 =
+* Add shortcode [wp-bannerize]
+* Add Spanish localization: thanks to [David Pérez](http://www.closemarketing.net/ "Closemarketing")
+* Change access level to 'Editor'
+* Fix default value in database table
 
 = 2.5.5 =
 * Fix "echo" on Widget output
@@ -289,6 +298,7 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [benstewart](http://wordpress.org/support/profile/5722257 "benstewart") for widget bugs fix: `extract($args)`
 * [Fernando Lopes](http://www.fernandolopes.com.br/ "Fernando Lopes") for Portuguese localization
 * [Marcis G.](http://pc.de/ "Marcis G.") for Belorussian localization
+* [David Pérez](http://www.closemarketing.net/ "Closemarketing") for Spanish localization
 
 == Frequently Asked Questions == 
 

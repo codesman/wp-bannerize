@@ -113,11 +113,11 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
     function plugin_setup() {
 
 		if (function_exists('add_menu_page')) {
-			$plugin_page = add_menu_page( $this->plugin_name, $this->plugin_name, 10, $this->directory.'-settings', array(&$this, 'show_banners'), $this->uri . "/css/images/wp-bannerize-16x16.png" );
+			$plugin_page = add_menu_page( $this->plugin_name, $this->plugin_name, 7, $this->directory.'-settings', array(&$this, 'show_banners'), $this->uri . "/css/images/wp-bannerize-16x16.png" );
 		}
 		if (function_exists('add_submenu_page')) {
-			add_submenu_page( $this->directory.'-settings', __('Edit', 'wp-bannerize'), __('Edit', 'wp-bannerize'), 10, $this->directory.'-settings', array(&$this, 'show_banners') );
-			$add_new_banner_item = add_submenu_page( $this->directory.'-settings', __('Add New', 'wp-bannerize'), __('Add New', 'wp-bannerize'), 8, $this->directory.'-addnew', array(&$this, 'add_new_banner') );
+			add_submenu_page( $this->directory.'-settings', __('Edit', 'wp-bannerize'), __('Edit', 'wp-bannerize'), 7, $this->directory.'-settings', array(&$this, 'show_banners') );
+			$add_new_banner_item = add_submenu_page( $this->directory.'-settings', __('Add New', 'wp-bannerize'), __('Add New', 'wp-bannerize'), 7, $this->directory.'-addnew', array(&$this, 'add_new_banner') );
 		}
 
 		add_action( 'admin_print_scripts-'. $plugin_page, array($this, 'plugin_admin_scripts') );
@@ -129,7 +129,11 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
          * Add contextual Help
          */
         if (function_exists('add_contextual_help')) {
-            add_contextual_help( $plugin_page ,'<p><strong>'.__('Use', 'wp-bannerize').':</strong></p>' .
+            add_contextual_help( $plugin_page ,'<p><strong>New from 2.6.0</strong></p>'.
+				'<p>Now, you can use Wordpress shortcode in your post, like:</p>' .
+				'<pre>[wp-bannerize limit="2"]</pre>' .
+				'<p>Using the same args parameters</p>' .	
+			    '<strong>'.__('Use', 'wp-bannerize').':</strong></p>' .
                 '<pre>wp_bannerize();</pre>or<br/>' .
                 '<pre>wp_bannerize( \'group=a&limit=10\' );</pre>or<br/>' .
                 '<pre>wp_bannerize( \'group=a&limit=10&random=1\' );</pre>or<br/>' .
@@ -920,8 +924,8 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         global $wpdb;
         $q = "CREATE TABLE IF NOT EXISTS `" . $this->table_bannerize . "` (
 			   `id` bigint(20) NOT NULL auto_increment,
-				`sorter` bigint(20) NOT NULL,
-				`clickcount` bigint(20) NOT NULL,
+				`sorter` bigint(20) NOT NULL default 0,
+				`clickcount` bigint(20) NOT NULL default 0,
 				`group` varchar(128) NOT NULL,
 				`description` varchar(255) NOT NULL,
 				`use_description` char(1) NOT NULL default '0',
