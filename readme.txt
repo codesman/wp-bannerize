@@ -16,7 +16,7 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 * Localized for Italian, English, Spanish, Portuguese and Belorussian
 * Create your list (group/key) Banners image/Adobe Flash movie
-* Show your banners list by php code, shortcode or Widget
+* Show your banners list by php code, **shortcode** or Widget
 * Set random, limit and catories filters
 * Standard Wordpress interface improvement
 * "nofollow" support
@@ -87,6 +87,10 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.6.6 =
+* Fix online edit form for `clickcount`, `width` and `height` parameters
+* Improve online edit form size for `clickcount`, `width` and `height` parameters
 
 = 2.6.5 =
 * Fix wrong "height" value in edit online form
@@ -260,6 +264,9 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 
 
 == Upgrade Notice ==
+
+= 2.6.6 =
+Fix bugs. Upgrade immediately
 
 = 2.4.1 =
 Fix localization. Upgrade immediately

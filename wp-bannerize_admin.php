@@ -564,13 +564,13 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		'<label>' .  __('URL') . ':</label> <input type="text" name="url" size="32" value="' . $row->url . '" /> ' .
 		'<label style="float:none;display:inline">' . __('Target') . ':</label> ' . $this->get_target_combo( $row->target ) .
 		'<br/><label for="clickcount" style="float:none;display:inline">' . __('Click Counter:', 'wp-bannerize') . '</label>' .
-		'<input class="number" type="text" name="clickcount" id="clickcount" value="' . $row->clickcount . '" /> ' .		
+		'<input size="4" class="number" type="text" name="clickcount" id="clickcount" value="' . $row->clickcount . '" /> ' .		
 		'<label for="nofollow" style="float:none;display:inline">' . __('Add nofollow attribute', 'wp-bannerize') . '</label>' .
 		'<input ' . ( ($row->nofollow == '1') ? 'checked="checked"' : '' ) . ' type="checkbox" name="nofollow" id="nofollow" value="1" /><br/>' .
 		'<label for="width" style="float:none;display:inline">' . __('Width:', 'wp-bannerize') . '</label> ' .
-		'<input type="text" name="width" id="width" value="' . $row->width . '" /> ' .
+		'<input size="4" type="text" name="width" id="width" value="' . $row->width . '" /> ' .
 		'<label for="height" style="float:none;display:inline">' . __('Height:', 'wp-bannerize') . '</label>' .
-		'<input type="text" name="height" id="height" value="' . $row->height . '" /> ' .
+		'<input size="4" type="text" name="height" id="height" value="' . $row->height . '" /> ' .
 		'<p class="submit inline-edit-save">' .
 		'<a onclick="SMWPBannerizeJavascript.hideInlineEdit(' . $row->id . ')" class="button-secondary cancel alignleft" title="' .  __('Cancel') . '" href="#" accesskey="c">' .  __('Cancel') . '</a>' .
 		'<a onclick="SMWPBannerizeJavascript.update(' . $row->id . ')" class="button-primary save alignright" title="' .  __('Update') . '" href="#" accesskey="s">' .  __('Update') . '</a>'.
@@ -758,8 +758,8 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      */
     function updateBanner() {
         global $wpdb;
-		$sql = sprintf("UPDATE %s SET `group` ='%s', `description` = '%s', `url` = '%s', `target` = '%s', `use_description` = '%s', `nofollow` = '%s' WHERE id = %s",
-					$this->table_bannerize, $_POST['group'], $_POST['description'], $_POST['url'], $_POST['target'], $_POST['use_description'], $_POST['nofollow'], 
+		$sql = sprintf("UPDATE %s SET `group` = '%s', `description` = '%s', `url` = '%s', `target` = '%s', `use_description` = '%s', `nofollow` = '%s', `clickcount` = '%s', `width` = '%s', `height` = '%s' WHERE id = %s",
+					$this->table_bannerize, $_POST['group'], $_POST['description'], $_POST['url'], $_POST['target'], $_POST['use_description'], $_POST['nofollow'], $_POST['clickcount'], $_POST['width'], $_POST['height'], 
 					$_POST['id']);
         $wpdb->query($sql);
     }
