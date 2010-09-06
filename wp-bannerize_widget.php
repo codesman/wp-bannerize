@@ -107,7 +107,7 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
 				$o .= $flash;
 			} else {
 				$nofollow = ($row->nofollow == "1") ? 'rel="nofollow"' : "";
-				$o .= '<a ' . $nofollow . ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')" ' . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img alt="' . $row->description . '" border="0" src="' . $row->filename . '" /></a>';
+				$o .= '<a ' . $nofollow . ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')" ' . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img width="' . $row->width . '" height="' . $row->height . '" alt="' . $row->description . '" border="0" src="' . $row->filename . '" /></a>';
 			}
 
 			if($row->use_description == "1") $o .= '<br/><span class="description">'.$row->description.'</span>';

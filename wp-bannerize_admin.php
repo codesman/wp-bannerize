@@ -220,7 +220,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 							</tr>
 							<tr>
 								<th scope="row"><label for="nofollow"><?php _e('Add “nofollow“ attribute', 'wp-bannerize') ?></label></th>
-								<td><input type="checkbox" name="nofollow" id="nofollow" value="1" /></td>
+								<td><input type="checkbox" name="nofollow" id="nofollow" value="1" checked="checked" /></td>
 							</tr>
 						</table>
 						<p class="submit">
@@ -570,7 +570,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		'<label for="width" style="float:none;display:inline">' . __('Width:', 'wp-bannerize') . '</label> ' .
 		'<input type="text" name="width" id="width" value="' . $row->width . '" /> ' .
 		'<label for="height" style="float:none;display:inline">' . __('Height:', 'wp-bannerize') . '</label>' .
-		'<input type="text" name="height" id="height" value="' . $row->width . '" /> ' .
+		'<input type="text" name="height" id="height" value="' . $row->height . '" /> ' .
 		'<p class="submit inline-edit-save">' .
 		'<a onclick="SMWPBannerizeJavascript.hideInlineEdit(' . $row->id . ')" class="button-secondary cancel alignleft" title="' .  __('Cancel') . '" href="#" accesskey="c">' .  __('Cancel') . '</a>' .
 		'<a onclick="SMWPBannerizeJavascript.update(' . $row->id . ')" class="button-primary save alignright" title="' .  __('Update') . '" href="#" accesskey="s">' .  __('Update') . '</a>'.
@@ -578,7 +578,6 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		'</div>';
 		echo esc_html(addslashes( $o ));
 	}
-
 
     /**
      * Build the select/option filter group
@@ -599,7 +598,6 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         $o .= '</select>';
         echo $o;
     }
-
 
 	function combo_pagination_filter() { ?>
 		<select name="combo_pagination_filter">
@@ -652,7 +650,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      *
      * @return
      */
-    function get_target_combo( $sel = "") {
+    function get_target_combo( $sel = "_blank") {
         $o = '<select name="target" id="target">' .
 				'<option></option>' .
 				'<option ' . ( ($sel=='_blank')?'selected="selected"':'' ) . '>_blank</option>' .

@@ -4,7 +4,7 @@ Donate link: http://www.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash
 Requires at least: 2.9
 Tested up to: 3.0
-Stable tag: 2.6.0
+Stable tag: 2.6.5
 
 WP Bannerize, banner-image manager.
 
@@ -87,6 +87,11 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.6.5 =
+* Fix wrong "height" value in edit online form
+* Add `width`and `height` attributes in `img` tag
+* Set `nofollow` and `_blank` properties like default
 
 = 2.6.0 =
 * Add shortcode [wp-bannerize]
