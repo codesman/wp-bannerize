@@ -311,6 +311,7 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [Fernando Lopes](http://www.fernandolopes.com.br/ "Fernando Lopes") for Portuguese localization
 * [Marcis G.](http://pc.de/ "Marcis G.") for Belorussian localization
 * [David Pérez](http://www.closemarketing.net/ "Closemarketing") for Spanish localization
+* [Wasim Asif](http://www.infotales.com/ "wasimasif") for suggestions and beta test
 
 == Frequently Asked Questions == 
 
