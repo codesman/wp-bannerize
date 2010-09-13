@@ -19,5 +19,4 @@ function wp_bannerize( $args = '' ) {
 	global $wp_bannerize_frontend;
 	$wp_bannerize_frontend->bannerize( $args );
 }
-
 ?>

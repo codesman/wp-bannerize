@@ -93,7 +93,7 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
             $alternate_class = 'class="' . $alt_class . '"';
             $even_before = str_replace("%alt%", $alternate_class, $before);
         }
-        $new_link_class = ($link_class != "") ? 'class="'.$link_class.'"' : "";
+        $new_link_class = ($link_class != "") ? ' class="'.$link_class.'"' : "";
 
         foreach( $rows as $row ) {
 			$target = ($row->target != "") ? 'target="' . $row->target . '"' : "";
@@ -106,8 +106,8 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
 				</object>', $row->width, $row->height, $row->filename, $row->width, $row->height, $row->filename);
 				$o .= $flash;
 			} else {
-				$nofollow = ($row->nofollow == "1") ? 'rel="nofollow"' : "";
-				$o .= '<a ' . $nofollow . ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')" ' . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img width="' . $row->width . '" height="' . $row->height . '" alt="' . $row->description . '" border="0" src="' . $row->filename . '" /></a>';
+				$nofollow = ($row->nofollow == "1") ? ' rel="nofollow"' : "";
+				$o .= '<a' . $nofollow . ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')"' . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img width="' . $row->width . '" height="' . $row->height . '" alt="' . $row->description . '" src="' . $row->filename . '" /></a>';
 			}
 
 			if($row->use_description == "1") $o .= '<br/><span class="description">'.$row->description.'</span>';

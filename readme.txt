@@ -4,13 +4,13 @@ Donate link: http://www.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash
 Requires at least: 2.9
 Tested up to: 3.0
-Stable tag: 2.6.5
+Stable tag: 2.6.7
 
 WP Bannerize, banner-image manager.
 
 == Description ==
 
-WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php wp_bannerize(); ?>` or set it like Widget
+WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php wp_bannerize(); ?>`, use new shortcode featured or set it like Widget
 
 **FEATURES**
 
@@ -32,7 +32,7 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **HOW TO**
 
-When you insert a banner you can give a group (key) code. In this way you can "group" a block of banners. For examples if your theme is a 3 columns you can put in left sidebar:
+When you insert a banner you can give a group (key) code. In this way you can "group" a block of banners. For examples if your theme is a 3 columns, you can put in left sidebar:
 
 `<?php wp_bannerize('group=left_sidebar'); ?>`
 
@@ -87,6 +87,10 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.6.7 =
+* Improve HTML output for W3C validation
+* Fix documentation
 
 = 2.6.6 =
 * Fix online edit form for `clickcount`, `width` and `height` parameters
@@ -306,7 +310,7 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [Ivan](http://www.bobmarleymagazine.com/) for bugs report
 * [rotunda](http://wordpress.org/support/profile/2123029) for beta test
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video") 
-* [marsev](http://wordpress.org/support/profile/5368431 "marsev") for prefix table suggest and beta test
+* [marsev](http://wordpress.org/support/profile/5368431 "marsev") for prefix table suggestion and beta test
 * [benstewart](http://wordpress.org/support/profile/5722257 "benstewart") for widget bugs fix: `extract($args)`
 * [Fernando Lopes](http://www.fernandolopes.com.br/ "Fernando Lopes") for Portuguese localization
 * [Marcis G.](http://pc.de/ "Marcis G.") for Belorussian localization
@@ -315,7 +319,7 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 
 == Frequently Asked Questions == 
 
-= Can I customize output? =
+= Can I customize the HTML output? =
 
 Yes, use the `args` for set "container" and "before" and "after" tagging.
 For example the default output is:
@@ -337,9 +341,9 @@ You can change `<ul>` (container) and `<li>` (before)
 </div>`
 
 
-= Can I customize arguments TAG? =
+= Can I customize the arguments TAG? =
 
-Yes, you can cistomize alternate class on "before" TAG and class on link A:
+Yes, you can customize alternate class on "before" TAG and class on link A:
 
 `<?php wp_bannerize('container_before=<div>&container_after=</div>&before=<span %alt%>&after=</span>&link_class=myclass'); ?>`
 
