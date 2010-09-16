@@ -97,43 +97,45 @@ class WPBANNERIZE_FRONTEND extends WPBANNERIZE_CLASS {
 
 		$rows = $wpdb->get_results($q);
 
-		$o = '<div class="wp_bannerize">';
-		if ($new_args['group'] != "") $o = sprintf( '<div class="wp_bannerize_%s">', str_replace(" ", "_", $rows[0]->group) );
-		$o .= $new_args['container_before'];
+		if(count($rows) > 0) {
+			$o = '<div class="wp_bannerize">';
+			if ($new_args['group'] != "") $o = sprintf( '<div class="wp_bannerize_%s">', str_replace(" ", "_", $rows[0]->group) );
+			$o .= $new_args['container_before'];
 
-		$even_before = $odd_before = $alternate_class = "";
-		$index = 0;
+			$even_before = $odd_before = $alternate_class = "";
+			$index = 0;
 
-		$odd_before = str_replace("%alt%", "", $new_args['before']);
-		if ($new_args['alt_class'] != "") {
-			$alternate_class = 'class="' . $new_args['alt_class'] . '"';
-			$even_before = str_replace("%alt%", $alternate_class, $new_args['before']);
-		}
-		$new_link_class = ($new_args['link_class'] != "") ? ' class="' . $new_args['link_class'] . '"' : "";
-
-		foreach ($rows as $row) {
-			$target = ($row->target != "") ? 'target="' . $row->target . '"' : "";
-			$o .= (($index % 2 == 0) ? $odd_before : $even_before);
-			if($row->mime == "application/x-shockwave-flash") {
-				$flash = sprintf('<object width="%s" height="%s" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
-				<param value="%s" name="movie">
-				<param value="transparent" name="wmode">
-				<embed width="%s" height="%s" wmode="transparent" type="application/x-shockwave-flash" src="%s">
-				</object>', $row->width, $row->height, $row->filename, $row->width, $row->height, $row->filename);
-				$o .= $flash;
-			} else {
-				$nofollow = ($row->nofollow == "1") ? ' rel="nofollow"' : "";
-				$o .= '<a' . $nofollow . ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')"' . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img width="' . $row->width . '" height="' . $row->height . '" alt="' . $row->description . '" src="' . $row->filename . '" /></a>';
+			$odd_before = str_replace("%alt%", "", $new_args['before']);
+			if ($new_args['alt_class'] != "") {
+				$alternate_class = 'class="' . $new_args['alt_class'] . '"';
+				$even_before = str_replace("%alt%", $alternate_class, $new_args['before']);
 			}
+			$new_link_class = ($new_args['link_class'] != "") ? ' class="' . $new_args['link_class'] . '"' : "";
 
-			if($row->use_description == "1") $o .= '<br/><span class="description">'.$row->description.'</span>';
+			foreach ($rows as $row) {
+				$target = ($row->target != "") ? 'target="' . $row->target . '"' : "";
+				$o .= (($index % 2 == 0) ? $odd_before : $even_before);
+				if($row->mime == "application/x-shockwave-flash") {
+					$flash = sprintf('<object width="%s" height="%s" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+					<param value="%s" name="movie">
+					<param value="transparent" name="wmode">
+					<embed width="%s" height="%s" wmode="transparent" type="application/x-shockwave-flash" src="%s">
+					</object>', $row->width, $row->height, $row->filename, $row->width, $row->height, $row->filename);
+					$o .= $flash;
+				} else {
+					$nofollow = ($row->nofollow == "1") ? ' rel="nofollow"' : "";
+					$o .= '<a' . $nofollow . ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')"' . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img width="' . $row->width . '" height="' . $row->height . '" alt="' . $row->description . '" src="' . $row->filename . '" /></a>';
+				}
 
-			$o .= $new_args['after'];
-			$index++;
+				if($row->use_description == "1") $o .= '<br/><span class="description">'.$row->description.'</span>';
+
+				$o .= $new_args['after'];
+				$index++;
+			}
+			$o .= $new_args['container_after'];
+			$o .= '</div>';
+			echo $o;
 		}
-		$o .= $new_args['container_after'];
-		$o .= '</div>';
-		echo $o;
 	}
 } // end of class
 

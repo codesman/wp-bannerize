@@ -74,53 +74,55 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
 
         $rows = $wpdb->get_results( $q );
 
-        echo $before_widget;
+		if( count($rows) > 0 ) {
+			echo $before_widget;
 
-		echo '<div class="wp_bannerize">';
+			echo '<div class="wp_bannerize">';
 
-        // @since 2.4.3 - fix widget title output
-        $title = apply_filters('widget_title', $instance['title']);
-        if($title) {
-             echo $before_title . $title . $after_title;
-        }
-        echo $container_before;
+			// @since 2.4.3 - fix widget title output
+			$title = apply_filters('widget_title', $instance['title']);
+			if($title) {
+				 echo $before_title . $title . $after_title;
+			}
+			echo $container_before;
 
-        $even_before = $odd_before = $alternate_class = "";
-        $index = 0;
+			$even_before = $odd_before = $alternate_class = "";
+			$index = 0;
 
-        $odd_before = str_replace("%alt%", "", $before);
-        if($alt_class != "") {
-            $alternate_class = 'class="' . $alt_class . '"';
-            $even_before = str_replace("%alt%", $alternate_class, $before);
-        }
-        $new_link_class = ($link_class != "") ? ' class="'.$link_class.'"' : "";
+			$odd_before = str_replace("%alt%", "", $before);
+			if($alt_class != "") {
+				$alternate_class = 'class="' . $alt_class . '"';
+				$even_before = str_replace("%alt%", $alternate_class, $before);
+			}
+			$new_link_class = ($link_class != "") ? ' class="'.$link_class.'"' : "";
 
-        foreach( $rows as $row ) {
-			$target = ($row->target != "") ? 'target="' . $row->target . '"' : "";
-			$o .= (($index % 2 == 0) ? $odd_before : $even_before);
-			if($row->mime == "application/x-shockwave-flash") {
-				$flash = sprintf('<object width="%s" height="%s" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
-				<param value="%s" name="movie">
-				<param value="transparent" name="wmode">
-				<embed width="%s" height="%s" wmode="transparent" type="application/x-shockwave-flash" src="%s">
-				</object>', $row->width, $row->height, $row->filename, $row->width, $row->height, $row->filename);
-				$o .= $flash;
-			} else {
-				$nofollow = ($row->nofollow == "1") ? ' rel="nofollow"' : "";
-				$o .= '<a' . $nofollow . ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')"' . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img width="' . $row->width . '" height="' . $row->height . '" alt="' . $row->description . '" src="' . $row->filename . '" /></a>';
+			foreach( $rows as $row ) {
+				$target = ($row->target != "") ? 'target="' . $row->target . '"' : "";
+				$o .= (($index % 2 == 0) ? $odd_before : $even_before);
+				if($row->mime == "application/x-shockwave-flash") {
+					$flash = sprintf('<object width="%s" height="%s" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+					<param value="%s" name="movie">
+					<param value="transparent" name="wmode">
+					<embed width="%s" height="%s" wmode="transparent" type="application/x-shockwave-flash" src="%s">
+					</object>', $row->width, $row->height, $row->filename, $row->width, $row->height, $row->filename);
+					$o .= $flash;
+				} else {
+					$nofollow = ($row->nofollow == "1") ? ' rel="nofollow"' : "";
+					$o .= '<a' . $nofollow . ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')"' . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img width="' . $row->width . '" height="' . $row->height . '" alt="' . $row->description . '" src="' . $row->filename . '" /></a>';
+				}
+
+				if($row->use_description == "1") $o .= '<br/><span class="description">'.$row->description.'</span>';
+
+				$o .= $new_args['after'];
+				$index++;
 			}
 
-			if($row->use_description == "1") $o .= '<br/><span class="description">'.$row->description.'</span>';
+			echo $o;
 
-			$o .= $new_args['after'];
-			$index++;
-        }
-
-        echo $o;
-
-        echo $container_after;
-		echo "</div>";
-        echo $after_widget;
+			echo $container_after;
+			echo "</div>";
+			echo $after_widget;
+		}
     }
 
     /**
