@@ -4,7 +4,7 @@ Donate link: http://www.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash
 Requires at least: 2.9
 Tested up to: 3.0
-Stable tag: 2.6.6
+Stable tag: 2.6.8
 
 WP Bannerize, banner-image manager.
 
