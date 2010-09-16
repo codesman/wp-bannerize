@@ -4,7 +4,7 @@ Donate link: http://www.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash
 Requires at least: 2.9
 Tested up to: 3.0
-Stable tag: 2.6.7
+Stable tag: 2.6.6
 
 WP Bannerize, banner-image manager.
 
@@ -87,6 +87,9 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.6.8 =
+* Fix class attribute with `group` replace space with underscore
 
 = 2.6.7 =
 * Improve HTML output for W3C validation
@@ -307,15 +310,27 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 
 == Thanks ==
 
-* [Ivan](http://www.bobmarleymagazine.com/) for bugs report
-* [rotunda](http://wordpress.org/support/profile/2123029) for beta test
-* [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video") 
-* [marsev](http://wordpress.org/support/profile/5368431 "marsev") for prefix table suggestion and beta test
-* [benstewart](http://wordpress.org/support/profile/5722257 "benstewart") for widget bugs fix: `extract($args)`
-* [Fernando Lopes](http://www.fernandolopes.com.br/ "Fernando Lopes") for Portuguese localization
-* [Marcis G.](http://pc.de/ "Marcis G.") for Belorussian localization
-* [David Pérez](http://www.closemarketing.net/ "Closemarketing") for Spanish localization
-* [Wasim Asif](http://www.infotales.com/ "wasimasif") for suggestions and beta test
+**Bugs report and beta testing**
+
+* [Ivan](http://www.bobmarleymagazine.com/)
+* [rotunda](http://wordpress.org/support/profile/2123029)
+* [marsev](http://wordpress.org/support/profile/5368431 "marsev")
+* [benstewart](http://wordpress.org/support/profile/5722257 "benstewart")
+* [FTLSlacker](http://wordpress.org/support/profile/ftlslacker "FTLSlacker")
+
+**Suggestions and ideas**
+
+* [Wasim Asif](http://www.infotales.com/ "wasimasif")
+
+**Tutorial**
+
+* [Troypoint](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
+
+**Localization**
+
+* [Fernando Lopes](http://www.fernandolopes.com.br/ "Fernando Lopes") (Portuguese localization)
+* [Marcis G.](http://pc.de/ "Marcis G.") (Belorussian localization)
+* [David Pérez](http://www.closemarketing.net/ "Closemarketing") (Spanish localization)
 
 == Frequently Asked Questions == 
 

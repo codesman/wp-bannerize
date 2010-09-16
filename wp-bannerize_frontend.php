@@ -98,7 +98,7 @@ class WPBANNERIZE_FRONTEND extends WPBANNERIZE_CLASS {
 		$rows = $wpdb->get_results($q);
 
 		$o = '<div class="wp_bannerize">';
-		if ($new_args['group'] != "") $o = sprintf( '<div class="wp_bannerize_%s">', $rows[0]->group );
+		if ($new_args['group'] != "") $o = sprintf( '<div class="wp_bannerize_%s">', str_replace(" ", "_", $rows[0]->group) );
 		$o .= $new_args['container_before'];
 
 		$even_before = $odd_before = $alternate_class = "";
