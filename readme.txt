@@ -4,7 +4,7 @@ Donate link: http://www.saidmade.com
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash
 Requires at least: 2.9
 Tested up to: 3.0
-Stable tag: 2.6.8
+Stable tag: 2.6.9
 
 WP Bannerize, banner-image manager.
 
@@ -87,6 +87,9 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.6.9 =
+* Fix wrong use `alt class` in Widget setting [Detail](http://wordpress.org/support/topic/plugin-wp-bannerize-before-and-after-containers-not-working-properly?replies=6#post-1718323 "Detail")
 
 = 2.6.8 =
 * Fix class attribute with `group` replace space with underscore
@@ -317,6 +320,7 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [marsev](http://wordpress.org/support/profile/5368431 "marsev")
 * [benstewart](http://wordpress.org/support/profile/5722257 "benstewart")
 * [FTLSlacker](http://wordpress.org/support/profile/ftlslacker "FTLSlacker")
+* [kwoodall](http://wordpress.org/support/profile/kwoodall "kwoodall")
 
 **Suggestions and ideas**
 

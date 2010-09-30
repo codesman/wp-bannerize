@@ -90,6 +90,7 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
 			$index = 0;
 
 			$odd_before = str_replace("%alt%", "", $before);
+			$even_before = str_replace("%alt%", "", $before);
 			if($alt_class != "") {
 				$alternate_class = 'class="' . $alt_class . '"';
 				$even_before = str_replace("%alt%", $alternate_class, $before);
