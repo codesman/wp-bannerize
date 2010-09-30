@@ -106,6 +106,7 @@ class WPBANNERIZE_FRONTEND extends WPBANNERIZE_CLASS {
 			$index = 0;
 
 			$odd_before = str_replace("%alt%", "", $new_args['before']);
+			$even_before = str_replace("%alt%", "", $new_args['before']);
 			if ($new_args['alt_class'] != "") {
 				$alternate_class = 'class="' . $new_args['alt_class'] . '"';
 				$even_before = str_replace("%alt%", $alternate_class, $new_args['before']);
