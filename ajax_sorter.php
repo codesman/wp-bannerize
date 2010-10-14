@@ -19,9 +19,7 @@ if ( @isset($_SERVER['HTTP_X_REQUESTED_WITH']) ) {
 	$page_offset = (intval($_POST['offset']) - 1) * $limit;
 
     foreach($_POST["item"] as $key => $value){
-        //$sql = "UPDATE `" . $wpdb->prefix ."bannerize_a` SET `sorter` = {$key} WHERE id = {$value}";
 		$sql = sprintf("UPDATE `%s` SET `sorter` = %s WHERE id = %s", $wpdb->prefix ."bannerize_a", (intval($key)+$page_offset ), $value );
-		echo $sql;
         $result = mysql_query($sql);
     }
 }

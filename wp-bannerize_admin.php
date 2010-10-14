@@ -320,23 +320,29 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 
 	<?php
 		// Actions
-		if(isset($_POST['action']) || isset($_POST['action2']) || isset($_GET['action'] ) ) {
-			if(isset($_POST['action']) || isset($_POST['action2']) ) {
-				$action = ($_POST['action'] != "") ? $_POST['action'] : $_POST['action2'];
+		if(isset($_POST['action']) || isset($_POST['action2']) || isset($_GET['action']) || isset($_GET['action2'] ) ) {
+			if(isset($_POST['action']) && $_POST['action'] != "-1" || isset($_POST['action2']) && $_POST['action2'] != "-1" ) {
+				$action = ($_POST['action'] != "-1") ? $_POST['action'] : $_POST['action2'];
 			} else {
-				$action = $_GET['action'];
+				$action = ($_GET['action'] != "-1") ? $_GET['action'] : $_GET['action2'];
 			}
 			switch($action) {
 				case "trash-selected":
-					$id = implode(",", $_POST['image_record']);
-					$this->setBannerToTrash($id);
+					if(isset($_POST['image_record'])) {
+						$id = implode(",", $_POST['image_record']);
+						$this->setBannerToTrash($id);
+					}
 					break;
 				case "delete-selected":
-					if( is_array($_POST['image_record']) ) foreach($_POST['image_record'] as $id) $this->deleteBanner($id);
+					if(isset($_POST['image_record'])) {
+						if( is_array($_POST['image_record']) ) foreach($_POST['image_record'] as $id) $this->deleteBanner($id);
+					}
 					break;
 				case "restore-selected":
-					$id = implode(",", $_POST['image_record']);
-					$this->unsetBannerToTrash($id);
+					if(isset($_POST['image_record'])) {
+						$id = implode(",", $_POST['image_record']);
+						$this->unsetBannerToTrash($id);
+					}
 					break;
 			}
 		}
@@ -361,17 +367,20 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 
 		// All Total records
 		$sql = sprintf("SELECT COUNT(*) AS all_record FROM %s", $this->table_bannerize);
-		$count['All'] = intval($wpdb->get_row($sql)->all_record);
+		$result = $wpdb->get_row($sql);
+		$count['All'] = intval($result->all_record);
 
 		// Trash
 		$sql = sprintf("SELECT COUNT(*) AS trashed FROM %s WHERE trash = '1'", $this->table_bannerize);
-		$count['Trash'] = intval($wpdb->get_row($sql)->trashed);
+		$result = $wpdb->get_row($sql);
+		$count['Trash'] = intval($result->trashed);
 
-		$count['Publish'] = intval($count['All']) - intval($count['Trash']);
+		$count['Publish'] = $count['All'] - $count['Trash'];
 
 		// Count record with where conditions
 		$sql = sprintf("SELECT COUNT(*) AS showing FROM %s WHERE %s", $this->table_bannerize, $where);
-		$count['showing'] = intval($wpdb->get_row($sql)->showing);
+		$result = $wpdb->get_row($sql);
+		$count['showing'] = $result->showing;
 
 		$num_pages = ceil($count['showing'] / $limit);
 
