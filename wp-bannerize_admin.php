@@ -1100,10 +1100,10 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	 */
 	function dropOldDatabaseTable() {
 		global $wpdb;
-//		$sql = sprintf("DROP TABLE `%s`", $this->old_table_bannerize);
-//		$res = $wpdb->query($sql);
-//		$sql = sprintf("DROP TABLE `%s`", $this->prev_table_bannerize);
-//		$res = $wpdb->query($sql);
+		$sql = sprintf("DROP TABLE `%s`", $this->old_table_bannerize);
+		$res = $wpdb->query($sql);
+		$sql = sprintf("DROP TABLE `%s`", $this->prev_table_bannerize);
+		$res = $wpdb->query($sql);
 	}
 
     /**
