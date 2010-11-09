@@ -862,7 +862,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 				if(function_exists('getimagesize')) {
 					$dimensions = @getimagesize( $uploads['file'] );
 					if(!isset($dimensions)) {
-						$dimensions = array(0,0);
+						$dimensions = array('0','0');
 					}
 				}
 				$sql = sprintf("INSERT INTO %s (`group`, `description`, `use_description`, `url`, `filename`, `target`, `nofollow`, `mime`, `realpath`, `width`, `height`) ".
@@ -1030,13 +1030,14 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			if(function_exists('getimagesize')) {
 				$dimensions = @getimagesize( $olditem->realpath );
 				if(!isset($dimensions)) {
-					$dimensions = array(0,0);
+					$dimensions = array('0','0');
 				}
 			}
 			$sql = sprintf("INSERT INTO %s (`sorter`, `group`, `description`, `url`, `filename`, `target`, `realpath`, `width`, `height`) ".
 										"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", $this->table_bannerize,
 										$olditem->sorter, $olditem->group, $olditem->description, $olditem->url,
 										$olditem->filename, $olditem->target, $olditem->realpath, $dimensions[0], $dimensions[1]);
+			$wpdb->query($sql);
 		}
 		$this->dropOldDatabaseTable();
 		$this->options['todo_upgrade'] = "no";

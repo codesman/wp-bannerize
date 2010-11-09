@@ -4,7 +4,7 @@ Donate link: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Count Click
 Requires at least: 2.9
 Tested up to: 3.0.1
-Stable tag: 2.7.0
+Stable tag: 2.7.0.1
 
 WP Bannerize, banner-image manager.
 
@@ -21,6 +21,7 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 * Standard Wordpress interface improvement
 * "nofollow" support
 * Click Counter engine for stats
+* Impressions and Max Impressions
 * Wordpress Admin Contextual HELP
 * Wordpress MU compatible
 
