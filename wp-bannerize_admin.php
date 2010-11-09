@@ -1019,26 +1019,40 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		global $wpdb;
 
 		$dimensions			= array('0','0');
+		$flash				= false;
 
 		if($wpdb->get_var("SHOW TABLES LIKE '$this->old_table_bannerize'") == $this->old_table_bannerize ) {
 			$sql = sprintf("SELECT * FROM `%s`", $this->old_table_bannerize);
 		} else if($wpdb->get_var("SHOW TABLES LIKE '$this->prev_table_bannerize'") == $this->prev_table_bannerize) {
+			$flash = true;
 			$sql = sprintf("SELECT * FROM `%s`", $this->prev_table_bannerize);
 		}
 		$old = $wpdb->get_results($sql);
-		foreach($old as $olditem) {
-			if(function_exists('getimagesize')) {
-				$dimensions = @getimagesize( $olditem->realpath );
-				if(!isset($dimensions)) {
-					$dimensions = array('0','0');
-				}
+
+		if($flash) {
+			foreach($old as $olditem) {
+				$sql = sprintf("INSERT INTO %s (`sorter`, `group`, `description`, `url`, `filename`, `target`, `realpath`, `width`, `height`, `clickcount`, `use_description`, `nofollow`, `trash`, `mime` ) ".
+											"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", $this->table_bannerize,
+											$olditem->sorter, $olditem->group, $olditem->description, $olditem->url,
+											$olditem->filename, $olditem->target, $olditem->realpath, $olditem->width, $olditem->height, $olditem->clickcount, $olditem->user_description, $olditem->nofollow, $olditem->trash, $olditem->mime);
+				$wpdb->query($sql);
 			}
-			$sql = sprintf("INSERT INTO %s (`sorter`, `group`, `description`, `url`, `filename`, `target`, `realpath`, `width`, `height`) ".
-										"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", $this->table_bannerize,
-										$olditem->sorter, $olditem->group, $olditem->description, $olditem->url,
-										$olditem->filename, $olditem->target, $olditem->realpath, $dimensions[0], $dimensions[1]);
-			$wpdb->query($sql);
+		} else {
+			foreach($old as $olditem) {
+				if(function_exists('getimagesize')) {
+					$dimensions = @getimagesize( $olditem->realpath );
+					if(!isset($dimensions)) {
+						$dimensions = array('0','0');
+					}
+				}
+				$sql = sprintf("INSERT INTO %s (`sorter`, `group`, `description`, `url`, `filename`, `target`, `realpath`, `width`, `height`) ".
+											"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", $this->table_bannerize,
+											$olditem->sorter, $olditem->group, $olditem->description, $olditem->url,
+											$olditem->filename, $olditem->target, $olditem->realpath, $dimensions[0], $dimensions[1]);
+				$wpdb->query($sql);
+			}
 		}
+
 		$this->dropOldDatabaseTable();
 		$this->options['todo_upgrade'] = "no";
 		update_option( $this->options_key, $this->options);
