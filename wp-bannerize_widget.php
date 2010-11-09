@@ -5,7 +5,7 @@
  * @package         wp-bannerize
  * @subpackage      wp-bannerize_widget
  * @author          =undo= <g.fazioli@saidmade.com>
- * @copyright       Copyright (C) 2010 Saidmade Srl
+ * @copyright       Copyright © 2008-2010 Saidmade Srl
  *
  */
 class WP_BANNERIZE_WIDGET extends WP_Widget {
@@ -54,7 +54,9 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
             if( ! is_category( $categories ) ) return;
         }
 
-        $q = "SELECT * FROM `" . $this->table_bannerize . "` WHERE `trash` = '0' ";
+		$q = "SELECT * FROM `" . $this->table_bannerize . "` WHERE `trash` = '0' AND " .
+			 "(`maximpressions` = 0 OR `impressions` < `maximpressions`) AND " .
+			 "( (`start_date` < NOW() OR `start_date` = '0000-00-00 00:00:00' ) AND (`end_date` > NOW() OR `end_date` = '0000-00-00 00:00:00') ) ";	
 
         if( $group != "") $q .= " AND `group` = '" . $group. "'";
 
@@ -98,6 +100,12 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
 			$new_link_class = ($link_class != "") ? ' class="'.$link_class.'"' : "";
 
 			foreach( $rows as $row ) {
+				// Impressions
+				if($this->options['impressionsEnabled'] == "1") {
+					$sql = "UPDATE `" . $this->table_bannerize. "` SET `impressions` = `impressions`+1 WHERE id = " . $row->id;
+					$result = mysql_query($sql);
+				}
+
 				$target = ($row->target != "") ? 'target="' . $row->target . '"' : "";
 				$o .= (($index % 2 == 0) ? $odd_before : $even_before);
 				if($row->mime == "application/x-shockwave-flash") {
@@ -108,8 +116,10 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
 					</object>', $row->width, $row->height, $row->filename, $row->width, $row->height, $row->filename);
 					$o .= $flash;
 				} else {
+					$javascriptClickCounter = ( $this->options['clickCounterEnabled'] == '1') ? ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')" ' : '';
 					$nofollow = ($row->nofollow == "1") ? ' rel="nofollow"' : "";
-					$o .= '<a' . $nofollow . ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')"' . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img width="' . $row->width . '" height="' . $row->height . '" alt="' . $row->description . '" src="' . $row->filename . '" /></a>';
+					$imgsize = ($row->width == 0 || $row->height == 0) ? '' : sprintf('width="%s" height="%s"', $row->width, $row->height );
+					$o .= '<a' . $nofollow . $javascriptClickCounter . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img ' . $imgsize . ' alt="' . $row->description . '" src="' . $row->filename . '" /></a>';
 				}
 
 				if($row->use_description == "1") $o .= '<br/><span class="description">'.$row->description.'</span>';

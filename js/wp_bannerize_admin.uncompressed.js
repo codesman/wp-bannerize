@@ -4,8 +4,8 @@
  * @package         wp_bannerize
  * @subpackage      wp_bannerzie_admin.js
  * @author          =undo= <g.fazioli@saidmade.com>
- * @copyright       Copyright (C) 2010 Saidmade Srl
- * @version         2.5.0
+ * @copyright       Copyright © 2008-2010 Saidmade Srl
+ * @version         2.7.0
  */
 
 
@@ -31,6 +31,19 @@ var SMWPBannerizeJavascript = {
 	showInlineEdit : function(id, c) {
 		jQuery(id).html( unescape(c) );
 		jQuery('div.inline-edit').slideDown();
+
+		jQuery('input.date').datetimepicker({
+			timeOnlyTitle: wpBannerizeMainL10n.timeOnlyTitle,
+			timeText: wpBannerizeMainL10n.timeText,
+			hourText: wpBannerizeMainL10n.hourText,
+			minuteText: wpBannerizeMainL10n.minuteText,
+			secondText: wpBannerizeMainL10n.secondText,
+			currentText: wpBannerizeMainL10n.currentText,
+			dayNamesMin: (wpBannerizeMainL10n.dayNamesMin).split(','),
+			monthNames: (wpBannerizeMainL10n.monthNames).split(','),
+			closeText: wpBannerizeMainL10n.closeText,
+			dateFormat: wpBannerizeMainL10n.dateFormat
+		});
 	},
 
 	/**
@@ -50,6 +63,19 @@ var SMWPBannerizeJavascript = {
  */
 jQuery(document).ready(function() {
 	jQuery("a.fancybox").fancybox();
+
+	jQuery('input.date').datetimepicker({
+			timeOnlyTitle: wpBannerizeMainL10n.timeOnlyTitle,
+			timeText: wpBannerizeMainL10n.timeText,
+			hourText: wpBannerizeMainL10n.hourText,
+			minuteText: wpBannerizeMainL10n.minuteText,
+			secondText: wpBannerizeMainL10n.secondText,
+			currentText: wpBannerizeMainL10n.currentText,
+			dayNamesMin: (wpBannerizeMainL10n.dayNamesMin).split(','),
+			monthNames: (wpBannerizeMainL10n.monthNames).split(','),
+			closeText: wpBannerizeMainL10n.closeText,
+			dateFormat: wpBannerizeMainL10n.dateFormat
+	});
 
 	jQuery('table#wp_bannerize_list tbody tr').css('width',jQuery('table#wp_bannerize_list').width() );
 	jQuery('table#wp_bannerize_list tbody').sortable({

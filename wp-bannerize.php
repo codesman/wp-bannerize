@@ -1,14 +1,14 @@
 <?php
 /*
 Plugin Name: WP Bannerize
-Plugin URI: http://wordpress.org/extend/plugins/wp-bannerize/
+Plugin URI: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
 Description: WP Bannerize is an Amazing Banner Image Manager. For more info and plugins visit <a href="http://www.saidmade.com">Saidmade</a>.
-Version: 2.6.11
+Version: 2.7.0
 Author: Giovambattista Fazioli
 Author URI: http://www.saidmade.com
 Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
 
-	Copyright 2010 Saidmade Srl (email : g.fazioli@undolog.com - g.fazioli@saidmade.com)
+	Copyright © 2008-2010 Saidmade Srl (email : g.fazioli@undolog.com - g.fazioli@saidmade.com)
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by

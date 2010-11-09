@@ -1,10 +1,10 @@
  === WP Bannerize ===
 Contributors: Giovambattista Fazioli (see Thanks for contributors)
-Donate link: http://www.saidmade.com
-Tags: Banner, Manage, Image, ADV, Random, Adobe Flash
+Donate link: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
+Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Count Click
 Requires at least: 2.9
-Tested up to: 3.0
-Stable tag: 2.6.11
+Tested up to: 3.0.1
+Stable tag: 2.7.0
 
 WP Bannerize, banner-image manager.
 
@@ -24,11 +24,15 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 * Wordpress Admin Contextual HELP
 * Wordpress MU compatible
 
-**LAST IMPROVE**
+**LAST IMPROVEMENT**
 
-* Add Wordpress shortcode [wp-bannerize]
-* Add Spanish localization
-* Change access level to 'Editor'
+* Added **Settings** section for **Click Counter** and **Impressions** switch on/off
+* Added impressions
+* Added **start date** and **end date** for each single banner
+* Improved banner list view
+* Improved inlien edit
+* Improved response after any action
+* Fixed several minor bugs
 
 **HOW TO**
 
@@ -79,200 +83,210 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 
 1. New Logo
 2. New Administrator Menu
-3. Add New Banner Pannel with Adobe FLash support and size autodetect
-4. New List View Banner list with Wordress standard tools: pagination, filters, drag & drop features
-5. Contextual Help
-6. Widget support
+3. New Settings Menu Item
+4. Added New Banner Pannel with Adobe FLash support and size autodetect
+5. New List View Banner list with Wordress standard tools: pagination, filters, drag & drop features
+6. Contextual Help
+7. Widget support
 
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
 
+= 2.7.0 =
+* Added Settings section for Click Counter and Impressions switch on/off
+* Added impressions
+* Added **start date** and **end date** for each single banner
+* Improved banner list view
+* Improved response after any action
+* Fixed several minor bugs
+* Cleaned code
+
 = 2.6.11 =
-* Fix bugs on combo menu in admin
-* Fix "Parse error: syntax error, unexpected T_OBJECT_OPERATOR"
-* Update Portuguese localization
+* Fixed bugs on combo menu in admin
+* Fixed "Parse error: syntax error, unexpected T_OBJECT_OPERATOR"
+* Updated Portuguese localization
 
 = 2.6.9 =
-* Fix wrong use `alt class` in Widget setting [Detail](http://wordpress.org/support/topic/plugin-wp-bannerize-before-and-after-containers-not-working-properly?replies=6#post-1718323 "Detail")
+* Fixed wrong use `alt class` in Widget setting [Detail](http://wordpress.org/support/topic/plugin-wp-bannerize-before-and-after-containers-not-working-properly?replies=6#post-1718323 "Detail")
 
 = 2.6.8 =
-* Fix class attribute with `group` replace space with underscore
+* Fixed class attribute with `group` replace space with underscore
 
 = 2.6.7 =
-* Improve HTML output for W3C validation
-* Fix documentation
+* Improved HTML output for W3C validation
+* Fixed documentation
 
 = 2.6.6 =
-* Fix online edit form for `clickcount`, `width` and `height` parameters
-* Improve online edit form size for `clickcount`, `width` and `height` parameters
+* Fixed online edit form for `clickcount`, `width` and `height` parameters
+* Improved online edit form size for `clickcount`, `width` and `height` parameters
 
 = 2.6.5 =
-* Fix wrong "height" value in edit online form
-* Add `width`and `height` attributes in `img` tag
-* Set `nofollow` and `_blank` properties like default
+* Fixed wrong "height" value in edit online form
+* Added `width`and `height` attributes in `img` tag
+* `nofollow` and `_blank` settings as defaults
 
 = 2.6.0 =
-* Add shortcode [wp-bannerize]
-* Add Spanish localization: thanks to [David Pérez](http://www.closemarketing.net/ "Closemarketing")
+* Added shortcode [wp-bannerize]
+* Added Spanish localization: thanks to [David Pérez](http://www.closemarketing.net/ "Closemarketing")
 * Change access level to 'Editor'
-* Fix default value in database table
+* Fixed default value in database table
 
 = 2.5.5 =
-* Fix "echo" on Widget output
+* Fixed "echo" on Widget output
 
 = 2.5.4 =
-* Fix getimagesize() functions on url file
+* Fixed getimagesize() functions on url file
 
 = 2.5.3 =
-* Fix getimagesize() functions
+* Fixed getimagesize() functions
 
 = 2.5.2 =
-* Fix italian localization
+* Fixed italian localization
 
 = 2.5.1 =
-* Rev some bugs
+* Several fixes
 
 = 2.5.0 =
-* Improve Database table
-* Add convertion tools for pre-2.5.0 release
-* Improve User Interface
-* Add Adobe Flash support
-* Add footer text description
-* Add "nofollow" rel attribute support
-* Add "Click Counter" (only images)
-* Rev code
-* Fix minor bugs
+* Improved Database table
+* Added convertion tools for pre-2.5.0 release
+* Improved User Interface
+* Added Adobe Flash support
+* Added footer text description
+* Added "nofollow" rel attribute support
+* Added "Click Counter" (only images)
+* Revisioned code
+* Fixed minor bugs
 
 = 2.4.11 =
-* Fix Link on Plugins list page
+* Fixed Link on Plugins list page
 
 = 2.4.9 =
 * Change Menu Item position in Backend
-* Improve styles and script loading
-* Improve "edit" online styles and table views
+* Improved styles and script loading
+* Improved "edit" online styles and table views
 
 
 = 2.4.7 =
-* Fix warning while check previous version
-* Rev code/comment
+* Fixed warning while checked previous version
+* Cleaned code/comment
 
 = 2.4.6 =
-* Add Belorussian Localization; thanks to [Marcis G.](http://pc.de/ "Marcis G.")
+* Added Belorussian Localization; thanks to [Marcis G.](http://pc.de/ "Marcis G.")
 
 = 2.4.5 =
-* Add Secure Layer on Ajax Gateway
+* Added Secure Layer on Ajax Gateway
 
 = 2.4.4 =
-* Minor revision on localization
+* Minor revisions on localization
 
 = 2.4.3 =
-* Fix Widget Title Output
-* Change Adv Engine
+* Fixed Widget Title Output
+* Changed Adv Engine
 
 = 2.4.1 =
-* Fix localization
-* Fix minor bugs
+* Fixed localization
+* Fixed minor bugs
 
 = 2.4.0 =
-* Add localization
-* Improve code restyle
-* Minor rev code
+* Added localization
+* Improved code restyle
+* Cleaned code
 
 = 2.3.9 =
-* Fix Widgets args
+* Fixed Widgets args
 
 = 2.3.8 =
-* Rev include script and style
-* Minor rev path and code clean
+* Revisioned include script and style
+* Minor revisions in path and code cleaned
 
 = 2.3.5 =
-* Rev Widget Class implement
+* Revisioned Widget Class implement
 
 = 2.3.4 =
-* Revision readme.txt
+* Revisioned readme.txt
 
 = 2.3.3 =
 * Split Widget code
-* Fix "random" select on Widget
+* Fixed "random" select on Widget
 
 = 2.3.2 =
-* Add "alt" class in HTML output
-* Add additional class for link TAG A
-* Fix Widget output
+* Added "alt" class in HTML output
+* Added additional class for link TAG A
+* Fixed Widget output
 
 = 2.3.0 =
-* Add Wordpress Categories Filter - Show Banner Group for Categories ID
-* Improve admin
+* Added Wordpress Categories Filter - Show Banner Group for Categories ID
+* Improved admin
 
 = 2.2.2 =
-* Fix minor bugs + prepare major release
+* Fixed minor bugs + prepare major release
 
 = 2.2.1 =
-* Fix to Wordpress MU compatibilities
-* Fix minor bugs
+* Fixed to Wordpress MU compatibilities
+* Fixed minor bugs
 
 = 2.2.0 =
-* Add Widget support
-* Fix compatibility with Wordpress 2.8.6
+* Added Widget support
+* Fixed compatibility with Wordpress 2.8.6
 
 = 2.1.0 =
-* Add thickbox support for preview thumbnail
-* Resize key field to 128 chars
-* Minor Fix
+* Added thickbox support for preview thumbnail
+* Resized key field to 128 chars
+* Minor Fixes
 
 = 2.0.8 =
-* Minor Fix, improve admin
+* Minor Fixes, improved admin
 
 = 2.0.3 =
-* Minor Fix
+* Minor Fixes
 
 = 2.0.2 =
-* Add random option
-* Fix minor bugs
+* Added random option
+* Fixed minor bugs
 
 = 2.0.1 =
-* Fix bugs on varchar size in create table
+* Fixed bugs on varchar size in create table
 
 = 2.0.0 =
-* Add edit banner
+* Added edit banner
 * Combo menu for group/key and target
 * Contextual HELP
 * Icon
 * Limit option
-* rev list and rev code!
+* Cleaned list and cleaned code!
 
 = 1.4.3 =
-* Fix patch on old version database table
+* Fixed patch on old version database table
 
 = 1.4.2 =
-* Add screenshot
+* Added screenshot
 
 = 1.4.1 =
-* Clean code
+* Cleaned code
 
 = 1.4.0 =
 * Rev UI
-* Change database
-* Fix upload path server bug
+* Changed database
+* Fixed upload path server bug
 
 = 1.3.2 =
-* Fix bug to sort order with Ajax call
+* Fixed bug in sort order with Ajax call
 
 = 1.3.1 =
-* Update jQuery to last version
+* Updated jQuery to last version
 
 = 1.3.0 =
-* New improve class object structure
+* Improved class object structure
 
 = 1.2.5 =
-* Remove a conflict with a new class object structure
+* Removed a conflict with a new class object structure
 
 = 1.2 =
 * Done doc :)
 
 = 1.1 =
-* Rev, Fix and stable release
+* Rev, Fixes and stable release
 
 = 1.0 =
 * First release
@@ -281,22 +295,22 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 == Upgrade Notice ==
 
 = 2.6.6 =
-Fix bugs. Upgrade immediately
+Fixed bugs. Upgrade immediately
 
 = 2.4.1 =
-Fix localization. Upgrade immediately
+Fixed localization. Upgrade immediately
 
 = 2.4.0 =
-Add localization/multilanguage support and improve code restyle. Upgrade immediately
+Added localization/multilanguage support and improved code restyle. Upgrade immediately
 
 = 2.2.0 =
-Add Widget support and fix for Wordpress 2.8.6. Upgrade immediately
+Added Widget support and Fixed for Wordpress 2.8.6. Upgrade immediately
 
 = 2.0.0 =
-Major release improve. Upgrade immediately.
+Major release improved. Upgrade immediately.
 
 = 1.4.0 =
-Major release improve. Upgrade immediately.
+Major release improved. Upgrade immediately.
 
 = 1.3.1 =
 Upgrade to last jQuery release. Upgrade immediately.

@@ -5,7 +5,7 @@
  * @package         wp-bannerize
  * @subpackage      wp-bannerize_functions
  * @author          =undo= <g.fazioli@saidmade.com>
- * @copyright       Copyright (C) 2010 Saidmade Srl
+ * @copyright       Copyright © 2008-2010 Saidmade Srl
  *
  */
 

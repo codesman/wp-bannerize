@@ -5,12 +5,13 @@
  * @package         wp-bannerize
  * @subpackage      wp-bannerize_class
  * @author          =undo= <g.fazioli@saidmade.com>
- * @copyright       Copyright (C) 2010 Saidmade Srl
+ * @copyright       Copyright © 2008-2010 Saidmade Srl
  *
  */
 
-define('WP_BANNERIZE_TABLE_2411', 'bannerize');	// Name of Database table up 2.4.11
-define('WP_BANNERIZE_TABLE', 'bannerize_a');	// Name of Database table fom 2.5.0
+define('WP_BANNERIZE_TABLE_2411', 'bannerize');		// Name of Database table up 2.4.11
+define('WP_BANNERIZE_TABLE_250', 'bannerize_a');	// Name of Database table fom 2.5.0
+define('WP_BANNERIZE_TABLE', 'bannerize_b');		// Name of Database table fom 2.7.0
 
 class WPBANNERIZE_CLASS {
 
@@ -20,7 +21,7 @@ class WPBANNERIZE_CLASS {
 	 * @since 2.4.7
 	 * @var string
 	 */
-	var $version 						= "2.6.11";
+	var $version 						= "2.7.0";
 
     /**
      * WP Bannerize release.minor.revision
@@ -149,6 +150,7 @@ class WPBANNERIZE_CLASS {
 		 * @since 2.5.0
 		 */
 		$this->old_table_bannerize          = $wpdb->prefix . WP_BANNERIZE_TABLE_2411;
+		$this->prev_table_bannerize         = $wpdb->prefix . WP_BANNERIZE_TABLE_250;
 
 		$this->path 						= dirname(__FILE__);
 		$this->file 						= basename(__FILE__);
