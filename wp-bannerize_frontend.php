@@ -74,7 +74,7 @@ class WPBANNERIZE_FRONTEND extends WPBANNERIZE_CLASS {
 		 */
 		if ($new_args['categories'] != "") {
 			$cat_ids = explode(",", $new_args['categories']);
-			if (!is_category($cat_ids)) return;
+			if (!is_category($cat_ids) && !in_category($cat_ids) ) return;
 		}
 
 		$q = "SELECT * FROM `" . $this->table_bannerize . "` WHERE `trash` = '0' AND " .

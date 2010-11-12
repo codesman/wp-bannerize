@@ -1,27 +1,29 @@
  === WP Bannerize ===
 Contributors: Giovambattista Fazioli (see Thanks for contributors)
 Donate link: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
-Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Count Click
+Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 2.9
 Tested up to: 3.0.1
-Stable tag: 2.7.0.2
+Stable tag: 2.7.0.3
 
 WP Bannerize, banner-image manager.
 
 == Description ==
 
-WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php wp_bannerize(); ?>`, use new shortcode featured or set it like Widget
+WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php if(function_exists( 'wp_bannerize' )) wp_bannerize(); ?>`, use new shortcode featured or set it like Widget
 
 **FEATURES**
 
 * Localized for Italian, English, Spanish, Portuguese and Belorussian
 * Create your list (group/key) Banners image/Adobe Flash movie
+* Drag & Drop order
 * Show your banners list by php code, **shortcode** or Widget
 * Set random, limit and catories filters
 * Standard Wordpress interface improvement
-* "nofollow" support
+* "nofollow" attribute support
 * Click Counter engine for stats
 * Impressions and Max Impressions
+* Date Time schedule
 * Wordpress Admin Contextual HELP
 * Wordpress MU compatible
 
@@ -39,15 +41,18 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 When you insert a banner you can give a group (key) code. In this way you can "group" a block of banners. For examples if your theme is a 3 columns, you can put in left sidebar:
 
-`<?php wp_bannerize('group=left_sidebar'); ?>`
+`<?php if(function_exists( 'wp_bannerize' ))
+          wp_bannerize('group=left_sidebar'); ?>`
 
 and put in right sidebar:
 
-`<?php wp_bannerize('group=right_sidebar'); ?>`
+`<?php if(function_exists( 'wp_bannerize' ))
+          wp_bannerize('group=right_sidebar'); ?>`
 
-However wp-bannerize provides a filter by category, for example:
+However WP Bannerize provides a filter by category, for example:
 
-`<?php wp_bannerize('group=right_sidebar&categories=13,14'); ?>`
+`<?php if(function_exists( 'wp_bannerize' ))
+          wp_bannerize('group=right_sidebar&categories=13,14'); ?>`
 
 The code above shows only banners in the categories 13 or 14, for the "right_sidebar" group key.
 
@@ -395,7 +400,8 @@ Yes, you can customize alternate class on "before" TAG and class on link A:
 
 OR
 
-`<?php wp_bannerize('alt_class=pair&link_class=myclass'); ?>`
+`<?php if(function_exists( 'wp_bannerize' ))
+          wp_bannerize('alt_class=pair&link_class=myclass'); ?>`
 
 `
 <ul>

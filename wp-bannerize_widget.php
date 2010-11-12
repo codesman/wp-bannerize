@@ -16,6 +16,7 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
      * @var string
      */
     var $table_bannerize        = "";
+	var $options;
 
     function WP_BANNERIZE_WIDGET() {
         global $wpdb;
@@ -26,6 +27,12 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
          * @since 2.4.0
          */
 		load_plugin_textdomain ( 'wp-bannerize' , false, 'wp-bannerize/localization'  );
+
+		/**
+		 * Load options
+		 * @since 2.7.0.3
+		 */
+		$this->options = get_option( WP_BANNERIZE_OPTIONS );
 
         $this->table_bannerize = $wpdb->prefix . WP_BANNERIZE_TABLE;
         //
@@ -51,7 +58,7 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
          * @since 2.3.0
          */
         if( is_array($categories) )  {
-            if( ! is_category( $categories ) ) return;
+            if( !is_category( $categories ) && !in_category( $categories ) ) return;
         }
 
 		$q = "SELECT * FROM `" . $this->table_bannerize . "` WHERE `trash` = '0' AND " .

@@ -9,9 +9,10 @@
  *
  */
 
-define('WP_BANNERIZE_TABLE_2411', 'bannerize');		// Name of Database table up 2.4.11
-define('WP_BANNERIZE_TABLE_250', 'bannerize_a');	// Name of Database table fom 2.5.0
-define('WP_BANNERIZE_TABLE', 'bannerize_b');		// Name of Database table fom 2.7.0
+define('WP_BANNERIZE_TABLE_2411', 	'bannerize');		// Name of Database table up 2.4.11
+define('WP_BANNERIZE_TABLE_250', 	'bannerize_a');		// Name of Database table fom 2.5.0
+define('WP_BANNERIZE_TABLE', 		'bannerize_b');		// Name of Database table fom 2.7.0
+define('WP_BANNERIZE_OPTIONS',		'wp-bannerize');	// Option Key @since 2.7.0.3
 
 class WPBANNERIZE_CLASS {
 
@@ -21,7 +22,7 @@ class WPBANNERIZE_CLASS {
 	 * @since 2.4.7
 	 * @var string
 	 */
-	var $version 						= "2.7.0.2";
+	var $version 						= "2.7.0.3";
 
     /**
      * WP Bannerize release.minor.revision
@@ -55,7 +56,7 @@ class WPBANNERIZE_CLASS {
      * @since 1.0.0
      * @var string
      */
-    var $options_key 					= "wp-bannerize";
+    var $options_key 					= WP_BANNERIZE_OPTIONS;
 
     /**
      * Options array containing all options for this plugin
