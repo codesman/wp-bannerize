@@ -125,11 +125,10 @@ class WPBANNERIZE_FRONTEND extends WPBANNERIZE_CLASS {
 				$target = ($row->target != "") ? 'target="' . $row->target . '"' : "";
 				$o .= (($index % 2 == 0) ? $odd_before : $even_before);
 				if($row->mime == "application/x-shockwave-flash") {
-					$flash = sprintf('<object width="%s" height="%s" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
-					<param value="%s" name="movie">
-					<param value="transparent" name="wmode">
-					<embed width="%s" height="%s" wmode="transparent" type="application/x-shockwave-flash" src="%s">
-					</object>', $row->width, $row->height, $row->filename, $row->width, $row->height, $row->filename);
+					// 2.7.0.5 - Thanks to Tihomir Lichev
+					$flash = sprintf('<object data="%s" width="%s" height="%s" type="application/x-shockwave-flash">
+					<param value="%s" name="movie" />
+					</object>', $row->filename, $row->width, $row->height, $row->filename);
 					$o .= $flash;
 				} else {
 					$javascriptClickCounter = ( $this->options['clickCounterEnabled'] == '1') ? ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')" ' : '';
