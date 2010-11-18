@@ -317,7 +317,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 								</th>
 								<td>
 									<input class="date" type="text" name="start_date" id="start_date" size="18" />
-									<label for="endt_date"><?php _e('End Date', 'wp-bannerize')?>:</label>
+									<label for="end_date"><?php _e('End Date', 'wp-bannerize')?>:</label>
 									<input class="date" type="text" name="end_date" id="end_date" size="18" /> (<?php _e('Keep empty to set ever visible','wp-bannerize') ?>)
 								</td>
 							</tr>
@@ -856,6 +856,9 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			$nofollow	 		= $_POST['nofollow'];
 			$dimensions			= array('0','0');
 
+			$start_date			= $this->mysql_date($_POST['start_date']);
+			$end_date			= $this->mysql_date($_POST['end_date']);
+
 			$uploads = wp_upload_bits( strtolower($name), null, '' );
 
 			if ( move_uploaded_file( $_FILES['filename']['tmp_name'], $uploads['file'] )) {
@@ -865,10 +868,11 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 						$dimensions = array('0','0');
 					}
 				}
-				$sql = sprintf("INSERT INTO %s (`group`, `description`, `use_description`, `url`, `filename`, `target`, `nofollow`, `mime`, `realpath`, `width`, `height`) ".
-										"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %s, %s)", $this->table_bannerize, $group, $description, $use_description, $url,
-										$uploads['url'], $target, $nofollow, $mime, $uploads['file'], $dimensions[0], $dimensions[1]);
-				$wpdb->query($sql);
+				$sql = sprintf("INSERT INTO %s (`group`, `description`, `use_description`, `url`, `filename`, `target`, `nofollow`, `mime`, `realpath`, `width`, `height`, `start_date`, `end_date`) ".
+										"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %s, %s, '%s', '%s')", $this->table_bannerize, $group, $description, $use_description, $url,
+										$uploads['url'], $target, $nofollow, $mime, $uploads['file'], $dimensions[0], $dimensions[1],
+										$start_date, $end_date );
+				$result = $wpdb->query($sql);
 				return __('Banner added succesfully!', 'wp-bannerize');
 				
 			} else {

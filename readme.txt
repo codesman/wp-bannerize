@@ -4,7 +4,7 @@ Donate link: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 2.9
 Tested up to: 3.0.1
-Stable tag: 2.7.0.5
+Stable tag: 2.7.0.6
 
 WP Bannerize, banner-image manager.
 
@@ -98,6 +98,9 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.7.0.6 =
+* Fixed insert banner for on date start and date end
 
 = 2.7.0.5 =
 * Updated Adobe Flash output for XHTML 1.0 Transitional page validation (Thanks to Tihomir Lichev for suggestion)
