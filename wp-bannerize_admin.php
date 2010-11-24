@@ -623,9 +623,9 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 								<th scope="row"><div class="arrow"></div></th>
 								<td class="wp-bannerize-thumbnail">
 									<?php if($item->mime == "application/x-shockwave-flash") : ?>
-										<a class="fancybox wp_bannerize_flash" rel="wp-bannerize-gallery" title="<?php echo $item->description ?>" href="<?php echo $item->filename ?>"></a>
+										<a class="fancybox wp_bannerize_flash" rel="wp-bannerize-gallery-thumbnail" title="<?php echo $item->description ?>" href="<?php echo $item->filename ?>"></a>
 									<?php else : ?>
-										<a class="fancybox" rel="wp-bannerize-gallery" href="<?php echo $item->filename ?>" title="<?php echo $item->description ?>"><img alt="<?php echo $item->description ?>" border="0" src="<?php echo $item->filename ?>" /></a>
+										<a class="fancybox" rel="wp-bannerize-gallery-thumbnail" href="<?php echo $item->filename ?>" title="<?php echo $item->description ?>"><img alt="<?php echo $item->description ?>" border="0" src="<?php echo $item->filename ?>" /></a>
 									<?php endif; ?>
 								</td>
 								<td nowrap="nowrap"><?php echo $item->group ?></td>

@@ -4,7 +4,7 @@ Donate link: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 2.9
 Tested up to: 3.0.1
-Stable tag: 2.7.0.6
+Stable tag: 2.7.1
 
 WP Bannerize, banner-image manager.
 
@@ -98,6 +98,12 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.7.1 =
+* Fixed FancyBox image preview
+* Fixed Combo Group on inline edit
+* Fixed Open/Close inline edit
+* Improved inline edit
 
 = 2.7.0.6 =
 * Fixed insert banner for on date start and date end
@@ -387,7 +393,8 @@ For example the default output is:
 </ul>`  
 You can change `<ul>` (container) and `<li>` (before) 
 
-`<?php wp_bannerize('container_before=<div>&container_after=</div>&before=<span>&after=</span>'); ?>`
+`<?php if(function_exists( 'wp_bannerize' ))
+        wp_bannerize('container_before=<div>&container_after=</div>&before=<span>&after=</span>'); ?>`
 
 `
 <div>
@@ -401,7 +408,8 @@ You can change `<ul>` (container) and `<li>` (before)
 
 Yes, you can customize alternate class on "before" TAG and class on link A:
 
-`<?php wp_bannerize('container_before=<div>&container_after=</div>&before=<span %alt%>&after=</span>&link_class=myclass'); ?>`
+`<?php if(function_exists( 'wp_bannerize' ))
+           wp_bannerize('container_before=<div>&container_after=</div>&before=<span %alt%>&after=</span>&link_class=myclass'); ?>`
 
 `
 <div>

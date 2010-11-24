@@ -29,21 +29,31 @@ var SMWPBannerizeJavascript = {
 	 * @param c
 	 */
 	showInlineEdit : function(id, c) {
-		jQuery(id).html( unescape(c) );
-		jQuery('div.inline-edit').slideDown();
+		if( jQuery(id).html() == "" ) {
+			// Close all open inline edit
+			jQuery('div.inline-edit').slideUp(function(){jQuery(this).parent().html('')});
 
-		jQuery('input.date').datetimepicker({
-			timeOnlyTitle: wpBannerizeMainL10n.timeOnlyTitle,
-			timeText: wpBannerizeMainL10n.timeText,
-			hourText: wpBannerizeMainL10n.hourText,
-			minuteText: wpBannerizeMainL10n.minuteText,
-			secondText: wpBannerizeMainL10n.secondText,
-			currentText: wpBannerizeMainL10n.currentText,
-			dayNamesMin: (wpBannerizeMainL10n.dayNamesMin).split(','),
-			monthNames: (wpBannerizeMainL10n.monthNames).split(','),
-			closeText: wpBannerizeMainL10n.closeText,
-			dateFormat: wpBannerizeMainL10n.dateFormat
-		});
+			jQuery(id).html( unescape(c) );
+			jQuery('div.inline-edit').slideDown();
+
+			jQuery('input.date').datetimepicker({
+				timeOnlyTitle: wpBannerizeMainL10n.timeOnlyTitle,
+				timeText: wpBannerizeMainL10n.timeText,
+				hourText: wpBannerizeMainL10n.hourText,
+				minuteText: wpBannerizeMainL10n.minuteText,
+				secondText: wpBannerizeMainL10n.secondText,
+				currentText: wpBannerizeMainL10n.currentText,
+				dayNamesMin: (wpBannerizeMainL10n.dayNamesMin).split(','),
+				monthNames: (wpBannerizeMainL10n.monthNames).split(','),
+				closeText: wpBannerizeMainL10n.closeText,
+				dateFormat: wpBannerizeMainL10n.dateFormat
+			});
+
+			// Combo Group
+			jQuery('select#group_filter').change(function() {
+				jQuery('input#group').val(jQuery(this).val());
+			});
+		}
 	},
 
 	/**
