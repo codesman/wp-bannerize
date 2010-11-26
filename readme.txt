@@ -29,7 +29,7 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **LAST IMPROVEMENT**
 
-* Added Dutch localization (Thnaks to [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop"))
+* Added Dutch localization (Thanks to [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop"))
 
 * Added **Settings** section for **Click Counter** and **Impressions** switch on/off
 * Added impressions
@@ -102,7 +102,7 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 == Changelog ==
 
 = 2.7.1.1 =
-* Added Dutch localization (Thnaks to [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop"))
+* Added Dutch localization (Thanks to [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop"))
 
 = 2.7.1 =
 * Fixed FancyBox image preview
