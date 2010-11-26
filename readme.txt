@@ -29,13 +29,13 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **LAST IMPROVEMENT**
 
-* Added Dutch localization (Thnaks to [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop"))
+* Added Dutch localization (Thanks to [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop"))
 
 * Added **Settings** section for **Click Counter** and **Impressions** switch on/off
-* Added impressions
+* Added Impressions
 * Added **start date** and **end date** for each single banner
 * Improved banner list view
-* Improved inlien edit
+* Improved inline edit
 * Improved response after any action
 * Fixed several minor bugs
 
@@ -70,12 +70,12 @@ or (new from 2.6.0) in your post:
 * container_before    Main tag container open (default <ul>)
 * container_after     Main tag container close (default </ul>)
 * before              Before tag banner open (default <li %alt%>) see alt_class below
-* after               After tag banner close (default </li>) 
+* after               After tag banner close (default </li>)
 * random              Show random banner sequence (default '')
 * categories          Category ID separated by commas. (default '')
 * alt_class           class alternate for "before" TAG (use before param)
 * link_class          Additional class for link TAG A
-* limit               Limit rows number (default '' - show all rows) 
+* limit               Limit rows number (default '' - show all rows)
 `
 
 = Related Links =
@@ -102,7 +102,7 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 == Changelog ==
 
 = 2.7.1.1 =
-* Added Dutch localization (Thnaks to [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop"))
+* Added Dutch localization (Thanks to [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop"))
 
 = 2.7.1 =
 * Fixed FancyBox image preview
@@ -347,7 +347,7 @@ Please download :)
 
 == Installation ==
 
-1. Upload the entire content of plugin archive to your `/wp-content/plugins/` directory, 
+1. Upload the entire content of plugin archive to your `/wp-content/plugins/` directory,
    so that everything will remain in a `/wp-content/plugins/wp-bannerize/` folder
 2. Open the plugin configuration page, which is located under `Options -> wp-bannerize`
 3. Activate the plugin through the 'Plugins' menu in WordPress (deactivate and reactivate if you're upgrading).
@@ -385,7 +385,7 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 
 ... and sorry for everyone that I forgot ... please, send me a mail for your credits
 
-== Frequently Asked Questions == 
+== Frequently Asked Questions ==
 
 = Can I customize the HTML output? =
 
@@ -396,8 +396,8 @@ For example the default output is:
 <li><a href=".."><img src="..." /></a></li>
 <li><a href=".."><img src="..." /></a></li>
 ...
-</ul>`  
-You can change `<ul>` (container) and `<li>` (before) 
+</ul>`
+You can change `<ul>` (container) and `<li>` (before)
 
 `<?php if(function_exists( 'wp_bannerize' ))
         wp_bannerize('container_before=<div>&container_after=</div>&before=<span>&after=</span>'); ?>`
