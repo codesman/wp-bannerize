@@ -22,7 +22,7 @@ class WPBANNERIZE_CLASS {
 	 * @since 2.4.7
 	 * @var string
 	 */
-	var $version 						= "2.7.1";
+	var $version 						= "2.7.1.1";
 
     /**
      * WP Bannerize release.minor.revision
@@ -33,7 +33,8 @@ class WPBANNERIZE_CLASS {
     var $release                        = "";
     var $minor                          = "";
     var $revision                       = "";
-    
+    var $minorRevision                  = "";
+
     /**
      * Plugin name
      *
@@ -107,10 +108,11 @@ class WPBANNERIZE_CLASS {
 		/**
 		 * Split version for more detail
 		 */
-		$split_version  = explode(".", $this->version);
-		$this->release  = $split_version[0];
-		$this->minor    = $split_version[1];
-		$this->revision = $split_version[2];
+		$splitVersion  			= explode(".", $this->version);
+		$this->release 	 		= $splitVersion[0];
+		$this->minor    		= $splitVersion[1];
+		$this->revision 		= $splitVersion[2];
+		$this->minorRevision	= $splitVersion[3]; // @since 2.7.1.1
 
 		/**
 		 * Build the common and usefull path

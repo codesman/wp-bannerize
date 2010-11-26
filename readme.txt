@@ -4,7 +4,7 @@ Donate link: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 2.9
 Tested up to: 3.0.1
-Stable tag: 2.7.1
+Stable tag: 2.7.1.1
 
 WP Bannerize, banner-image manager.
 
@@ -14,7 +14,7 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **FEATURES**
 
-* Localized for Italian, English, Spanish, Portuguese and Belorussian
+* Localized for Italian, English, Spanish, Portuguese, Belorussian and Dutch
 * Create your list (group/key) Banners image/Adobe Flash movie
 * Drag & Drop order
 * Show your banners list by php code, **shortcode** or Widget
@@ -28,6 +28,8 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 * Wordpress MU compatible
 
 **LAST IMPROVEMENT**
+
+* Added Dutch localization (Thnaks to [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop"))
 
 * Added **Settings** section for **Click Counter** and **Impressions** switch on/off
 * Added impressions
@@ -98,6 +100,9 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.7.1.1 =
+* Added Dutch localization (Thnaks to [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop"))
 
 = 2.7.1 =
 * Fixed FancyBox image preview
@@ -376,6 +381,7 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [Fernando Lopes](http://www.fernandolopes.com.br/ "Fernando Lopes") (Portuguese localization)
 * [Marcis G.](http://pc.de/ "Marcis G.") (Belorussian localization)
 * [David Pérez](http://www.closemarketing.net/ "Closemarketing") (Spanish localization)
+* [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop") (Dutch localization)
 
 ... and sorry for everyone that I forgot ... please, send me a mail for your credits
 
