@@ -15,7 +15,7 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
      *
      * @var string
      */
-    var $table_bannerize        = "";
+    var $table_bannerize = "";
 	var $options;
 
     function WP_BANNERIZE_WIDGET() {
@@ -33,9 +33,7 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
 		 * @since 2.7.0.3
 		 */
 		$this->options = get_option( WP_BANNERIZE_OPTIONS );
-
         $this->table_bannerize = $wpdb->prefix . WP_BANNERIZE_TABLE;
-        //
         $widget_ops = array('classname' => 'widget_wp_bannerize', 'description' => 'Amazing Banner Image Manager');
         $control_ops = array('width' => 430, 'height' => 350);
         $this->WP_Widget('wp_bannerize', 'WP Bannerize', $widget_ops, $control_ops);
@@ -118,8 +116,8 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
 				if($row->mime == "application/x-shockwave-flash") {
 					// 2.7.0.5 - Thanks to Tihomir Lichev
 					$flash = sprintf('<object data="%s" width="%s" height="%s" type="application/x-shockwave-flash">
-					<param value="%s" name="movie" />
-					</object>', $row->filename, $row->width, $row->height, $row->filename);
+					<param value="%s" name="wmode" />
+					</object>', $row->filename, $row->width, $row->height, $row->filename, $this->options['comboWindowModeFlash']);
 					$o .= $flash;
 				} else {
 					$javascriptClickCounter = ( $this->options['clickCounterEnabled'] == '1') ? ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')" ' : '';
@@ -128,7 +126,13 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
 					$o .= '<a' . $nofollow . $javascriptClickCounter . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img ' . $imgsize . ' alt="' . $row->description . '" src="' . $row->filename . '" /></a>';
 				}
 
-				if($row->use_description == "1") $o .= '<br/><span class="description">'.$row->description.'</span>';
+				if($row->use_description == "1") {
+					if($this->options['linkDescription']) {
+						$o .= '<br/><span class="description"><a ' . $target . ' href="' . $row->url . '">' . $row->description . '</a></span>';
+					} else {
+						$o .= '<br/><span class="description">'.$row->description.'</span>';
+					}
+				}
 
 				$o .= $new_args['after'];
 				$index++;

@@ -3,7 +3,7 @@
  * Class for Manage Admin (back-end)
  *
  * @package         wp-bannerize
- * @subpackage      wp-bannerize_client
+ * @subpackage      wp-bannerize_admin
  * @author          =undo= <g.fazioli@saidmade.com>
  * @copyright       Copyright © 2008-2010 Saidmade Srl
  * 
@@ -14,11 +14,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		// super
         $this->WPBANNERIZE_CLASS();
 
-        /**
-         * Load localizations if available
-         *
-         * @since 2.4.0
-         */
+        // Load localizations if available; @since 2.4.0
 		load_plugin_textdomain ( 'wp-bannerize' , false, 'wp-bannerize/localization'  );
 
 		// Foo string for PoEdit
@@ -33,30 +29,24 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      * @since 2.2.2
      */
     function init() {
-        /**
-         * Add version control in options.
-         */
+        // Add version control in options
         $this->options = array(
 			'wp_bannerize_version' 		=> $this->version,
 			'clickCounterEnabled'		=> '1',
 			'impressionsEnabled'		=> '1',
-			'supportWPBannerize'		=> '1'
+			'supportWPBannerize'		=> '1',
+			'comboWindowModeFlash'		=> 'Window',
+			'linkDescription'			=> '0'
 			);
-        add_option( $this->options_key, $this->options, $this->options_title );
+        add_option( $this->options_key, $this->options );
 
         $this->options = get_option( $this->options_key );
 
-        /**
-         * Add option menu in Wordpress backend
-         */
+        // Add option menu in Wordpress backend
 		add_action('admin_init', array( $this, 'plugin_init') );
         add_action('admin_menu', array( $this, 'plugin_setup') );
 
-        /**
-         * Update version control in options
-         *
-         * @since 2.2.2
-         */
+        // Update version control in options
         update_option( $this->options_key, $this->options);
     }
 
@@ -79,11 +69,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	 * @return void
 	 */
 	function plugin_admin_scripts() {
- 		/**
-         * Add wp_enqueue_script for jquery library
-         *
-         * @since 2.3.6
-         */
+        // Add wp_enqueue_script for jquery library
         wp_enqueue_script('jquery-ui-sortable');
 
 		wp_enqueue_script ( 'fancybox_js' , $this->uri . '/js/fancybox/jquery.fancybox-1.3.1.pack.js' , array ( 'jquery' ) , '1.4' , true );
@@ -91,20 +77,16 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		wp_enqueue_script ( 'wp_bannerize_jquery_dp_js' , $this->uri . '/js/jquery-ui.min.js' , array ( 'jquery' ) , '1.4' , true );
 		wp_enqueue_script ( 'wp_bannerize_timepicker_js' , $this->uri . '/js/jquery.timepicker.js' , array ( 'jquery-ui-core' ) , '1.4' , true );		
 
-        /**
-         * Add main admin javascript
-         *
-         * @since 2.4.0
-         */
+        // Add main admin javascript
 		wp_localize_script ( 'wp_bannerize_admin_js' , 'wpBannerizeMainL10n' , array (
 						'ajaxURL'			=> $this->ajax_sorter,
-						'messageConfirm' 	=> __( 'WARINING!! Do you want delete this banner?'  , 'wp-bannerize' ),
-						'timeOnlyTitle' 	=> __( 'Choose Time'  , 'wp-bannerize' ),
-						'timeText'			=> __( 'Time'  , 'wp-bannerize' ),
-						'hourText'			=> __( 'Hour'  , 'wp-bannerize' ),
-						'minuteText'		=> __( 'Minute'  , 'wp-bannerize' ),
-						'secondText'		=> __( 'Seconds'  , 'wp-bannerize' ),
-						'currentText'		=> __( 'Now'  , 'wp-bannerize' ),
+						'messageConfirm' 	=> __( 'WARINING!! Do you want delete this banner?', 'wp-bannerize' ),
+						'timeOnlyTitle' 	=> __( 'Choose Time', 'wp-bannerize' ),
+						'timeText'			=> __( 'Time', 'wp-bannerize' ),
+						'hourText'			=> __( 'Hour', 'wp-bannerize' ),
+						'minuteText'		=> __( 'Minute', 'wp-bannerize' ),
+						'secondText'		=> __( 'Seconds', 'wp-bannerize' ),
+						'currentText'		=> __( 'Now', 'wp-bannerize' ),
 						'dayNamesMin'		=> __( 'Su,Mo,Tu,We,Th,Fr,Sa', 'wp-bannerize' ),
 						'monthNames'		=> __( 'January,February,March,April,May,June,July,August,September,October,November,December', 'wp-bannerize'),
 						'closeText'			=> __( 'Close'  , 'wp-bannerize' ),
@@ -146,9 +128,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		add_action( 'admin_print_styles-'. $add_new_banner_item, array($this, 'plugin_admin_styles') );
 		add_action( 'admin_print_styles-'. $settings, array($this, 'plugin_admin_styles') );
 
-        /**
-         * Add contextual Help
-         */
+        // Add contextual Help
         if (function_exists('add_contextual_help')) {
             add_contextual_help( $plugin_page ,'<p><strong>New from 2.6.0</strong></p>'.
 				'<p>Now, you can use Wordpress shortcode in your post, like:</p>' .
@@ -194,10 +174,12 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			$this->options['clickCounterEnabled']	= (isset($_POST['clickCounterEnabled'])) ? '1' : '0';
 			$this->options['impressionsEnabled']	= (isset($_POST['impressionsEnabled'])) ? '1' : '0';
 			$this->options['supportWPBannerize']	= (isset($_POST['supportWPBannerize'])) ? '1' : '0';
+			$this->options['comboWindowModeFlash']	= (isset($_POST['comboWindowModeFlash'])) ? $_POST['comboWindowModeFlash'] : 'Window';
+			$this->options['linkDescription']		= (isset($_POST['linkDescription'])) ? '1' : '0';
 
 			update_option( $this->options_key, $this->options);
 
-			$any_error = "";
+			$any_error = __( 'Settings update succesfully!', 'wp-bannerize');;
 		}
 
 		if( $any_error != '') : ?>
@@ -242,6 +224,24 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 								</th>
 								<td>
 									<input type="checkbox" name="supportWPBannerize" id="supportWPBannerize" value="1" <?php echo ($this->options['supportWPBannerize'] == "1") ? 'checked="checked"' : '' ?> /> (<?php _e('Append Powered by...','wp-bannerize') ?>)
+								</td>
+							</tr>
+
+							<tr>
+								<th scope="row">
+									<label for="supportWPBannerize"><?php _e('Adobe Flash Window Mode', 'wp-bannerize')?>:</label>
+								</th>
+								<td>
+									<?php $this->comboWindowModeFlash( $this->options['comboWindowModeFlash'] ); ?>
+								</td>
+							</tr>
+
+							<tr>
+								<th scope="row">
+									<label for="supportWPBannerize"><?php _e('Link description', 'wp-bannerize')?>:</label>
+								</th>
+								<td>
+									<input type="checkbox" name="linkDescription" id="linkDescription" value="1" <?php echo ($this->options['linkDescription'] == "1") ? 'checked="checked"' : '' ?> />
 								</td>
 							</tr>
 
@@ -775,6 +775,24 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	}
 
 	/**
+	 * Show Adobe Flash Window mode combo for settings
+	 */
+	function comboWindowModeFlash($param = null) {
+		if( is_null($param) ) {
+			$param = $_REQUEST['comboWindowModeFlash'];
+		}
+		?>
+	<select id="comboWindowModeFlash" name="comboWindowModeFlash">
+		<option <?php echo ($param == "Window") ? 'selected="selected"' : "" ?> value="Window">Window</option>
+		<option <?php echo ($param == "Opaque") ? 'selected="selected"' : "" ?> value="Opaque">Opaque</option>
+		<option <?php echo ($param == "Transparent") ? 'selected="selected"' : "" ?> value="Transparent">Transparent</option>
+		<option <?php echo ($param == "Direct") ? 'selected="selected"' : "" ?> value="Direct">Direct</option>
+		<option <?php echo ($param == "GPU") ? 'selected="selected"' : "" ?> value="GPU">GPU</option>
+	</select>
+		<?php
+	}
+
+	/**
 	 * Build combo group
 	 * 
 	 * @return string
@@ -961,7 +979,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
     /**
      * Add link to Plugin list page
      *
-     * @param <type> $links
+     * @param  $links
      * @return string
      */
     function plugin_settings( $links ) {
@@ -975,7 +993,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	 */
 	function add_plugin_links($links, $file) {
         if( $file == plugin_basename( $this->plugin_file ) ) {
-            $links[] = '<strong style="color:#fa0">' . __('For more info and plugins visit', 'wp-photo-iphone') . ' <a href="http://www.saidmade.com">Saidmade</a></strong>';
+            $links[] = '<strong style="color:#fa0">' . __('For more info and plugins visit', 'wp-bannerize') . ' <a href="http://www.saidmade.com">Saidmade</a></strong>';
         }
 		return $links;
 	}
@@ -991,9 +1009,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		global $wpdb;
 		// Table doesn't exists: create it
 		$this->createTable();
-
 		$this->checkNeedUpdateFromPreviousDatabase();
-		
 	}
 
 	/**
@@ -1159,14 +1175,28 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         $wpdb->query($q);
     }
 
-
-	function stringCut($s,$l=32,$f="...") {
+	/**
+	 * Cut a string
+	 *
+	 * @param  $s String to cut
+	 * @param int $l Length
+	 * @param string $f Append string
+	 * @return string
+	 */
+	function stringCut($s, $l=32, $f = "...") {
 		if( strlen($s) > $l) return substr($s, 0, ($l - strlen($f)) /2 ) . $f . substr($s, -($l - strlen($f))/2, ($l - strlen($f))/2); else return $s;
 	}
 
-	function mysql_date($s) {
+	/**
+	 * Reformatting a date
+	 *
+	 * @param  $s String date
+	 * @return string Format date or "0000-00-00 00:00:00" for default
+	 */
+	function mysql_date( $s ) {
+		$result = "0000-00-00 00:00:00";
 		$f = __('mm/dd/yy','wp-bannerize') . ' H:i';
-		if($s != "" && $s != '0000-00-00 00:00:00') {
+		if($s != "" && $s != $result) {
 			if(substr($s,4,1) == '-') {
 				if(substr($f,0,1) == "m") {
 					$fa = "m/d/Y H:i";
@@ -1174,17 +1204,18 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 					$fa = "d/m/Y H:i";
 				}
 				$date = date_create($s);
-				return date_format($date, $fa);
+				$result = date_format($date, $fa);
 			} else {
 				$a = explode(' ', $s);
 				$d = explode('/', $a[0]);
 				if(substr($f,0,1) == 'm') { // mm/dd/yyyy hh:mm
-					return sprintf('%s-%s-%s %s:00', $d[2],$d[0],$d[1],$a[1]);
+					$result = sprintf('%s-%s-%s %s:00', $d[2],$d[0],$d[1],$a[1]);
 				} else if(substr($f,0,1) == 'd') { // dd/mm/yyyy hh:mm
-					return sprintf('%s-%s-%s %s:00', $d[2],$d[1],$d[0],$a[1]);
+					$result = sprintf('%s-%s-%s %s:00', $d[2],$d[1],$d[0],$a[1]);
 				}
 			}
 		}
+		return $result;
 	}
 
 } // end of class

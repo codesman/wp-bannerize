@@ -5,7 +5,7 @@
  * @package         wp-bannerize
  * @subpackage      wp-bannerize_client
  * @author          =undo= <g.fazioli@saidmade.com>
- * @copyright       Copyright © 2008-2010 Saidmade Srl
+ * @copyright       Copyright © 2008-2011 Saidmade Srl
  *
  */
 
@@ -25,11 +25,8 @@ class WPBANNERIZE_FRONTEND extends WPBANNERIZE_CLASS {
 								array (
 								'ajaxURL' => $this->ajax_clickcounter
 								) );
-		/**
-		 * Add shortcode
-		 *
-		 * @since 2.6.0
-		 */
+
+		// Add shortcode; @since 2.6.0
 		add_shortcode( "wp-bannerize", array(&$this, "bannerize" ) );
     }
 
@@ -128,7 +125,8 @@ class WPBANNERIZE_FRONTEND extends WPBANNERIZE_CLASS {
 					// 2.7.0.5 - Thanks to Tihomir Lichev
 					$flash = sprintf('<object data="%s" width="%s" height="%s" type="application/x-shockwave-flash">
 					<param value="%s" name="movie" />
-					</object>', $row->filename, $row->width, $row->height, $row->filename);
+					<param value="%s" name="wmode" />
+					</object>', $row->filename, $row->width, $row->height, $row->filename, $this->options['comboWindowModeFlash']);
 					$o .= $flash;
 				} else {
 					$javascriptClickCounter = ( $this->options['clickCounterEnabled'] == '1') ? ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')" ' : '';
@@ -137,8 +135,13 @@ class WPBANNERIZE_FRONTEND extends WPBANNERIZE_CLASS {
 					$o .= '<a' . $nofollow . $javascriptClickCounter . $new_link_class . ' ' . $target . ' href="' . $row->url . '"><img ' . $imgsize . ' alt="' . $row->description . '" src="' . $row->filename . '" /></a>';
 				}
 
-				if($row->use_description == "1") $o .= '<br/><span class="description">'.$row->description.'</span>';
-
+				if($row->use_description == "1") {
+					if($this->options['linkDescription']) {
+						$o .= '<br/><span class="description"><a' . $nofollow . $javascriptClickCounter . $new_link_class . ' ' . $target . ' href="' . $row->url . '">' . $row->description . '</a></span>';
+					} else {
+						$o .= '<br/><span class="description">'.$row->description.'</span>';
+					}
+				}
 				$o .= $new_args['after'];
 				$index++;
 			}

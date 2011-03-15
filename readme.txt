@@ -4,7 +4,7 @@ Donate link: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 2.9
 Tested up to: 3.0.1
-Stable tag: 2.7.1.1
+Stable tag: 2.7.5
 
 WP Bannerize, banner-image manager.
 
@@ -14,7 +14,7 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **FEATURES**
 
-* Localized for Italian, English, Spanish, Portuguese, Belorussian and Dutch
+* Localized for Italian, English, Spanish, Portuguese, Belorussian, Dutch and Polish
 * Create your list (group/key) Banners image/Adobe Flash movie
 * Drag & Drop order
 * Show your banners list by php code, **shortcode** or Widget
@@ -29,15 +29,11 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **LAST IMPROVEMENT**
 
-* Added Dutch localization (Thanks to [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop"))
-
-* Added **Settings** section for **Click Counter** and **Impressions** switch on/off
-* Added Impressions
-* Added **start date** and **end date** for each single banner
-* Improved banner list view
-* Improved inline edit
-* Improved response after any action
-* Fixed several minor bugs
+* Added Polish localization (Thanks to Krzysztof Bociurko)
+* Added Adobe Flash Window Mode settings
+* Added Link description settings (Thanks to [bsdezign](http://wordpress.org/support/profile/bsdezign) "bsdezign")
+* Improved HTML/CSS documentation
+* Fixed wrong date for blank text input (Thanks to Viktor Zozulyak)
 
 **HOW TO**
 
@@ -100,6 +96,13 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.7.5 =
+* Fixed wrong date for blank text input (Thanks to Viktor Zozulyak)
+* Added Polish localization (Thanks to Krzysztof Bociurko)
+* Added Adobe Flash Window Mode settings
+* Added Link description settings (Thanks to [bsdezign](http://wordpress.org/support/profile/bsdezign) "bsdezign")
+* Improved HTML/CSS documentation
 
 = 2.7.1.1 =
 * Added Dutch localization (Thanks to [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop"))
@@ -366,11 +369,13 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [benstewart](http://wordpress.org/support/profile/5722257 "benstewart")
 * [FTLSlacker](http://wordpress.org/support/profile/ftlslacker "FTLSlacker")
 * [kwoodall](http://wordpress.org/support/profile/kwoodall "kwoodall")
+* Viktor Zozulyak
 
 **Suggestions and ideas**
 
 * [Wasim Asif](http://www.infotales.com/ "wasimasif")
 * Tihomir Lichev
+* bsdezign
 
 **Tutorial**
 
@@ -382,8 +387,9 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [Marcis G.](http://pc.de/ "Marcis G.") (Belorussian localization)
 * [David Pérez](http://www.closemarketing.net/ "Closemarketing") (Spanish localization)
 * [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop") (Dutch localization)
+* Krzysztof Bociurko (Polish localization)
 
-... and sorry for everyone that I forgot ... please, send me a mail for your credits
+ ... and sorry for everyone that I forgot ... please, send me a mail for your credits
 
 == Frequently Asked Questions == 
 
@@ -391,12 +397,38 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 
 Yes, use the `args` for set "container" and "before" and "after" tagging.
 For example the default output is:
+
 `
-<ul>
-<li><a href=".."><img src="..." /></a></li>
-<li><a href=".."><img src="..." /></a></li>
-...
-</ul>`  
+<div class="wp_bannerize">
+ <ul>
+  <li><a href=".."><img src="..." /></a></li>
+  <li><a href=".."><img src="..." /></a><br/><span class="description">[description]</span></li>
+ ...
+ </ul>
+</div>`
+
+If you use a group key named "network", for example:
+
+`
+<div class="wp_bannerize">
+ <div class="wp_bannerize_network">
+  <ul>
+   <li><a href=".."><img src="..." /></a></li>
+   <li><a href=".."><img src="..." /></a><br/><span class="description">[description]</span></li>
+   ...
+  </ul>
+ </div>
+</div>`
+
+Using CSS style for layout your banner; side by side banner is very simple:
+
+`
+div.wp_bannerize ul li {
+  display:inline;
+  float:left;
+}`
+
+
 You can change `<ul>` (container) and `<li>` (before) 
 
 `<?php if(function_exists( 'wp_bannerize' ))
@@ -404,9 +436,9 @@ You can change `<ul>` (container) and `<li>` (before)
 
 `
 <div>
-<span><a href=".."><img src="..." /></a></span>
-<span><a href=".."><img src="..." /></a></span>
-...
+ <span><a href=".."><img src="..." /></a></span>
+ <span><a href=".."><img src="..." /></a></span>
+ ...
 </div>`
 
 
@@ -419,9 +451,9 @@ Yes, you can customize alternate class on "before" TAG and class on link A:
 
 `
 <div>
-<span><a href=".."><img src="..." /></a></span>
-<span class="alt"><a class="myclass" href=".."><img src="..." /></a></span>
-...
+ <span><a href=".."><img src="..." /></a></span>
+ <span class="alt"><a class="myclass" href=".."><img src="..." /></a></span>
+ ...
 </div>`
 
 OR
@@ -431,7 +463,7 @@ OR
 
 `
 <ul>
-<li><a href=".."><img src="..." /></a></li>
-<li class="pair"><a class="myclass" href=".."><img src="..." /></a></li>
-...
+ <li><a href=".."><img src="..." /></a></li>
+ <li class="pair"><a class="myclass" href=".."><img src="..." /></a></li>
+ ...
 </ul>`
