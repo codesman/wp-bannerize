@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-bannerize\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-15 22:52+0100\n"
-"PO-Revision-Date: 2011-03-15 22:52+0100\n"
+"POT-Creation-Date: 2011-03-24 23:16-0300\n"
+"PO-Revision-Date: 2011-03-24 23:22-0300\n"
 "Last-Translator: Fernando Lopes <contato@fernandolopes.com.br>\n"
 "Language-Team: Fernando Lopes <contato@fernandolopes.com.br>\n"
 "MIME-Version: 1.0\n"
@@ -91,9 +91,8 @@ msgid "Use"
 msgstr "Use"
 
 #: ../wp-bannerize_admin.php:182
-#, fuzzy
 msgid "Settings update succesfully!"
-msgstr "Banner atualizado com sucesso!"
+msgstr "Configurações atualizadas com sucesso!"
 
 #: ../wp-bannerize_admin.php:191
 #: ../wp-bannerize_admin.php:288
@@ -123,12 +122,11 @@ msgstr "Acrescentar, Desenvolvido por..."
 
 #: ../wp-bannerize_admin.php:232
 msgid "Adobe Flash Window Mode"
-msgstr ""
+msgstr "Adobe Flash Modo Janela"
 
 #: ../wp-bannerize_admin.php:241
-#, fuzzy
 msgid "Link description"
-msgstr "Descrição"
+msgstr "Descrição do link"
 
 #: ../wp-bannerize_admin.php:250
 #: ../wp-bannerize_admin.php:742

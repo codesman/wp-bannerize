@@ -4,7 +4,7 @@ Donate link: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 2.9
 Tested up to: 3.1
-Stable tag: 2.7.6
+Stable tag: 2.8.0
 
 WP Bannerize, banner-image manager.
 
@@ -14,7 +14,7 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **FEATURES**
 
-* Localized for Italian, English, Spanish, Portuguese, Belorussian, Dutch and Polish
+* Localized for Italian, English, Spanish, Portuguese, Belorussian, Dutch, Polish and German
 * Create your list (group/key) Banners image/Adobe Flash movie
 * Drag & Drop order
 * Show your banners list by php code, **shortcode** or Widget
@@ -29,11 +29,10 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **LAST IMPROVEMENT**
 
-* Added Polish localization (Thanks to Krzysztof Bociurko)
-* Added Adobe Flash Window Mode settings
-* Added Link description settings (Thanks to [bsdezign](http://wordpress.org/support/profile/bsdezign) "bsdezign")
-* Improved HTML/CSS documentation
-* Fixed wrong date for blank text input (Thanks to Viktor Zozulyak)
+* Added German localization (Thnaks to [Lara Van der Wiel](http://www.u-center.nl "U-Center"))
+* Updated jQuery UI, jQuery DateTime Picker
+* Fixed jQuery (this._mouseInit) (Thanks to Gary Williams)
+* Fixed wrong close tag on widget (Thanks to Andrey Tv)
 
 **HOW TO**
 
@@ -96,6 +95,12 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.8.0 =
+* Added German localization (Thnaks to [Lara Van der Wiel](http://www.u-center.nl "U-Center"))
+* Updated jQuery UI, jQuery DateTime Picker
+* Fixed jQuery (this._mouseInit) (Thanks to Gary Williams)
+* Fixed wrong close tag on widget (Thanks to Andrey Tv)
 
 = 2.7.5 =
 * Fixed wrong date for blank text input (Thanks to Viktor Zozulyak)
@@ -370,6 +375,8 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [FTLSlacker](http://wordpress.org/support/profile/ftlslacker "FTLSlacker")
 * [kwoodall](http://wordpress.org/support/profile/kwoodall "kwoodall")
 * Viktor Zozulyak
+* Andrey Tv
+* Gary Williams
 
 **Suggestions and ideas**
 
@@ -388,6 +395,7 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [David Pérez](http://www.closemarketing.net/ "Closemarketing") (Spanish localization)
 * [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop") (Dutch localization)
 * Krzysztof Bociurko (Polish localization)
+* [Lara Van der Wiel](http://www.u-center.nl "U-Center") (German localization)
 
  ... and sorry for everyone that I forgot ... please, send me a mail for your credits
 
