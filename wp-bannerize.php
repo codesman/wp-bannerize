@@ -39,5 +39,4 @@ if( is_admin() ) {
 	$wp_bannerize_frontend = new WPBANNERIZE_FRONTEND();
 	require_once( 'wp-bannerize_functions.php');
 }
-
 ?>
