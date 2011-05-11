@@ -58,7 +58,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	 */
 	function plugin_init() {
 		wp_register_style('wp-bannerize-style-css', $this->uri . "/css/wp_bannerize_admin.css");
-		wp_register_style('wp-bannerize-jqueryui-css', $this->uri . "/css/ui-lightness/jquery-ui-1.7.3.custom.css");
+		wp_register_style('wp-bannerize-jqueryui-css', $this->uri . "/css/ui-lightness/jquery-ui.custom.css");
 		wp_register_style('fancybox-css', $this->uri . "/js/fancybox/jquery.fancybox-1.3.1.css");
 	}
 
@@ -709,40 +709,53 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	 * Show hide form for inline edit in banner list
 	 *
 	 * @param  $row
+	 *   Database Object with data row
+	 *
 	 * @return void
 	 */
 	function inlineEdit($row) {
-		$o = '<div class="inline-edit" style="display:none">' .
-
-		'<p><label for="start_date">' . __('Start Date', 'wp-bannerize') . ':</label> <input class="date" type="text" name="start_date" id="start_date" size="18" value="' . ( ($row->start_date == "" || $row->start_date == "0000-00-00 00:00:00") ? '' : $this->mysql_date($row->start_date) ) . '" /> '.
-		'<label for="end_date" style="float:none;display:inline">' . __('End Date', 'wp-bannerize') . ':</label> <input class="date" type="text" name="end_date" id="end_date" size="18" value="' . ( ($row->end_date == "" || $row->end_date == "0000-00-00 00:00:00") ? '' : $this->mysql_date($row->end_date) ) . '" /></p>' .
-				
-		'<p><label>' .  __('Group', 'wp-bannerize') . ':</label> <input size="8" type="text" id="group" name="group" value="' .  $row->group  . '" /> ' . $this->get_combo_group() . '</p>' .
-		'<p><label>' .  __('Description', 'wp-bannerize') . ':</label> <input size="32" type="text" name="description" value="' . $row->description . '" /> ' .
-		'<input ' . ( ($row->use_description == '1') ? 'checked="checked"' : '' ) . ' type="checkbox" name="use_description" value="1" /> ' . __('Use this description in output', 'wp-bannerize') . '</p>' .		
-
-		'<p><label>' .  __('URL', 'wp-bannerize') . ':</label> <input type="text" name="url" size="32" value="' . $row->url . '" /> ' .
-		'<label style="float:none;display:inline">' . __('Target', 'wp-bannerize') . ':</label> ' . $this->get_target_combo( $row->target ) . '</p>' .
-
-		'<p><label for="clickcount" style="float:none;display:inline">' . __('Click Counter:', 'wp-bannerize') . ':</label>' .
-		'<input size="4" class="number" type="text" name="clickcount" id="clickcount" value="' . $row->clickcount . '" /> ' .
-		'<label for="impressions" style="float:none;display:inline">'. __('Impressions', 'wp-bannerize') . ':</label>' .
-		'<input type="text" name="impressions" id="iImpressions" value="'. $row->impressions .'" size="4"/> '.
-		'<label for="maxImpressions" style="float:none;display:inline">'. __('Max Impressions', 'wp-bannerize') . ':</label>' .
-		'<input type="text" name="maxImpressions" id="maxImpressions" value="'. $row->maximpressions .'" size="4"/></p>'.
-
-		'<p><label for="nofollow" style="float:none;display:inline">' . __('Add nofollow attribute', 'wp-bannerize') . '</label> ' .
-		'<input ' . ( ($row->nofollow == '1') ? 'checked="checked"' : '' ) . ' type="checkbox" name="nofollow" id="nofollow" value="1" /> ' .
-		'<label for="width" style="float:none;display:inline">' . __('Width:', 'wp-bannerize') . ':</label> ' .
-		'<input size="4" type="text" name="width" id="width" value="' . $row->width . '" /> ' .
-		'<label for="height" style="float:none;display:inline">' . __('Height:', 'wp-bannerize') . ':</label>' .
-		'<input size="4" type="text" name="height" id="height" value="' . $row->height . '" /></p>' .
-		'<p class="submit inline-edit-save">' .
-		'<a onclick="SMWPBannerizeJavascript.hideInlineEdit(' . $row->id . ')" class="button-secondary cancel alignleft" title="' .  __('Cancel', 'wp-bannerize') . '" href="#" accesskey="c">' .  __('Cancel', 'wp-bannerize') . '</a>' .
-		'<a onclick="SMWPBannerizeJavascript.update(' . $row->id . ')" class="button-primary save alignright" title="' .  __('Update', 'wp-bannerize') . '" href="#" accesskey="s">' .  __('Update', 'wp-bannerize') . '</a>'.
-		'</p>' .
-		'</div>';
-		echo esc_html(addslashes( $o ));
+		ob_start(); ?><div class="inline-edit" style="display:none">
+<p>
+<label for="start_date"><?php _e('Start Date', 'wp-bannerize') ?>:</label> <input class="date" type="text" name="start_date" id="start_date" size="18" value="<?php echo ( ($row->start_date == "" || $row->start_date == "0000-00-00 00:00:00") ? '' : $this->mysql_date($row->start_date) ) ?>" />
+ <label for="end_date" style="float:none;display:inline"><?php _e('End Date', 'wp-bannerize') ?>:</label> <input class="date" type="text" name="end_date" id="end_date" size="18" value="<?php echo ( ($row->end_date == "" || $row->end_date == "0000-00-00 00:00:00") ? '' : $this->mysql_date($row->end_date) ) ?>" />
+</p>
+<p>
+<label><?php _e('Group', 'wp-bannerize') ?>:</label> <input size="8" type="text" id="group" name="group" value="<?php echo $row->group ?>" /> <?php echo $this->get_combo_group() ?>
+</p>
+<p>
+<label><?php _e('Description', 'wp-bannerize') ?>:</label> <input size="32" type="text" name="description" value="<?php echo $row->description ?>" />
+<input <?php echo ( ($row->use_description == '1') ? 'checked="checked"' : '' ) ?> type="checkbox" name="use_description" value="1" /> <?php _e('Use this description in output', 'wp-bannerize') ?>
+</p>
+<p>
+<label><?php _e('URL', 'wp-bannerize') ?>:</label> <input type="text" name="url" size="32" value="<?php echo $row->url ?>" />
+ <label style="float:none;display:inline"><?php _e('Target', 'wp-bannerize') ?>:</label> <?php echo $this->get_target_combo( $row->target ) ?>
+</p>
+<p>
+<label for="clickcount" style="float:none;display:inline"><?php _e('Click Counter:', 'wp-bannerize') ?>:</label>
+<input size="4" class="number" type="text" name="clickcount" id="clickcount" value="<?php echo $row->clickcount ?>" />
+ <label for="impressions" style="float:none;display:inline"><?php _e('Impressions', 'wp-bannerize') ?>:</label>
+<input type="text" name="impressions" id="iImpressions" value="<?php echo $row->impressions ?>" size="4"/>
+ <label for="maxImpressions" style="float:none;display:inline"><?php _e('Max Impressions', 'wp-bannerize') ?>:</label>
+<input type="text" name="maxImpressions" id="maxImpressions" value="<?php echo $row->maximpressions ?>" size="4"/>
+</p>
+<p>
+<label for="nofollow" style="float:none;display:inline"><?php _e('Add nofollow attribute', 'wp-bannerize') ?></label>
+<input <?php echo ( ($row->nofollow == '1') ? 'checked="checked"' : '' ) ?> type="checkbox" name="nofollow" id="nofollow" value="1" />
+ <label for="width" style="float:none;display:inline"><?php _e('Width', 'wp-bannerize') ?>:</label>
+<input size="4" type="text" name="width" id="width" value="<?php echo $row->width ?>" />
+ <label for="height" style="float:none;display:inline"><?php _e('Height', 'wp-bannerize') ?>:</label>
+<input size="4" type="text" name="height" id="height" value="<?php echo $row->height ?>" />
+</p>
+<p class="submit inline-edit-save">
+<a onclick="SMWPBannerizeJavascript.hideInlineEdit(<?php echo $row->id ?>)" class="button-secondary cancel alignleft" title="<?php _e('Cancel', 'wp-bannerize') ?>" href="#" accesskey="c"><?php _e('Cancel', 'wp-bannerize') ?></a>
+<a onclick="SMWPBannerizeJavascript.update(<?php echo $row->id ?>)" class="button-primary save alignright" title="<?php _e('Update', 'wp-bannerize') ?>" href="#" accesskey="s"><?php _e('Update', 'wp-bannerize') ?></a>
+</p>
+</div><?php
+		$result = ob_get_contents();
+		$result = str_replace("\n", "", $result);
+		$result = str_replace("\r", "", $result);
+		ob_end_clean();
+		echo esc_html(addslashes( $result ));
 	}
 
     /**
@@ -753,7 +766,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
     function combo_group_filter() {
         global $wpdb;
         $o = '<select name="combo_group_filter">' .
-            '<option value="">'.__('All groups', 'wp-bannerize').'</option>';
+            '<option value="">' . __('All groups', 'wp-bannerize') . '</option>';
         $q = "SELECT `group` FROM `" . $this->table_bannerize . "` GROUP BY `group` ORDER BY `group` ";
         $rows = $wpdb->get_results( $q );
         $sel = "";

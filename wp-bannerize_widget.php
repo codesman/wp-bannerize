@@ -134,7 +134,7 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
 					}
 				}
 
-				$o .= $new_args['after'];
+				$o .= $after;
 				$index++;
 			}
 
