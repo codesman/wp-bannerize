@@ -182,10 +182,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			$any_error = __( 'Settings update succesfully!', 'wp-bannerize');;
 		}
 
-		if( $any_error != '') : ?>
-        	<div id="message" class="updated fade"><p><?php echo $any_error ?></p></div>
-        <?php endif; ?>
-
+?>
 <div class="wrap">
 	<div class="wp_saidmade_box">
 		<p class="wp_saidmade_copy_info"><?php _e('For more info and plugins visit', 'wp-bannerize') ?> <a href="http://www.saidmade.com">Saidmade</a></p>
@@ -193,6 +190,10 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			<?php echo $this->plugin_name ?> ver. <?php echo $this->version ?>
 		</a>
 	</div>
+
+	<?php if( $any_error != '') : ?>
+		<div id="message" class="updated fade"><p><?php echo $any_error ?></p></div>
+	<?php endif; ?>
 
 	<div id="poststuff" class="metabox-holder">
 
