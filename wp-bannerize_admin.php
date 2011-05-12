@@ -278,10 +278,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		if(isset($_POST['command_action']) && $_POST['command_action'] == "insert") {
 			$any_error = $this->insertBanner();
 		}
-
-		if( $any_error != '') : ?>
-        	<div id="message" class="updated fade"><p><?php echo $any_error ?></p></div>
-        <?php endif; ?>
+?>
 
 <div class="wrap">
 	<div class="wp_saidmade_box">
@@ -290,6 +287,10 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			<?php echo $this->plugin_name ?> ver. <?php echo $this->version ?>
 		</a>
 	</div>
+
+	<?php if( $any_error != '') : ?>
+		<div id="message" class="updated fade"><p><?php echo $any_error ?></p></div>
+	<?php endif; ?>	
 	
 	<div id="poststuff" class="metabox-holder">
 
@@ -437,10 +438,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
                     break;
             }
         }
-
-		if( $any_error != '') : ?>
-        	<div id="message" class="updated fade"><p><?php echo $any_error ?></p></div>
-        <?php endif; ?>
+?>
 
 <div class="wrap">
 
@@ -451,7 +449,11 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 		</a>
 	</div>
 
-	<a class="button add-new-h2" href="?page=wp-bannerize-addnew"><?php _e('Add New', 'wp-bannerize') ?></a>
+	<p style="text-align:right;"><a class="button-primary" href="?page=wp-bannerize-addnew"><?php _e('Add New', 'wp-bannerize') ?></a></p>
+
+	<?php if( $any_error != '') : ?>
+		<div id="message" class="updated fade"><p><?php echo $any_error ?></p></div>
+	<?php endif; ?>
 
 	<?php
 		// Actions
@@ -899,10 +901,10 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 						$dimensions = array('0','0');
 					}
 				}
-				$sql = sprintf("INSERT INTO %s (`group`, `description`, `use_description`, `url`, `filename`, `target`, `nofollow`, `mime`, `realpath`, `width`, `height`, `start_date`, `end_date`) ".
-										"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %s, %s, '%s', '%s')", $this->table_bannerize, $group, $description, $use_description, $url,
+				$sql = sprintf("INSERT INTO %s (`group`, `description`, `use_description`, `url`, `filename`, `target`, `nofollow`, `mime`, `realpath`, `width`, `height`, `start_date`, `end_date`, `maximpressions`) ".
+										"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %s, %s, '%s', '%s', %s)", $this->table_bannerize, $group, $description, $use_description, $url,
 										$uploads['url'], $target, $nofollow, $mime, $uploads['file'], $dimensions[0], $dimensions[1],
-										$start_date, $end_date );
+										$start_date, $end_date, $_POST['maxImpressions'] );
 				$result = $wpdb->query($sql);
 				return __('Banner added succesfully!', 'wp-bannerize');
 				
@@ -971,8 +973,8 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
      */
     function updateBanner() {
         global $wpdb;
-		$sql = sprintf("UPDATE %s SET `group` = '%s', `start_date` = '%s', `end_date` = '%s', `maximpressions` = '%s', `impressions` = '%s', `description` = '%s', `url` = '%s', `target` = '%s', `use_description` = '%s', `nofollow` = '%s', `clickcount` = '%s', `width` = '%s', `height` = '%s' WHERE id = %s",
-					$this->table_bannerize, $_POST['group'], $this->mysql_date($_POST['start_date']), $this->mysql_date($_POST['end_date']), $_POST['maxImpressions'], $_POST['impressions'],
+		$sql = sprintf("UPDATE %s SET `group` = '%s', `start_date` = '%s', `end_date` = '%s', `maximpressions` = '%s', `impressions` = '%s', `maximpressions` = '%s', `description` = '%s', `url` = '%s', `target` = '%s', `use_description` = '%s', `nofollow` = '%s', `clickcount` = '%s', `width` = '%s', `height` = '%s' WHERE id = %s",
+					$this->table_bannerize, $_POST['group'], $this->mysql_date($_POST['start_date']), $this->mysql_date($_POST['end_date']), $_POST['maxImpressions'], $_POST['impressions'], $_POST['maxImpressions'],
 					$_POST['description'], $_POST['url'], $_POST['target'], $_POST['use_description'], $_POST['nofollow'], $_POST['clickcount'], $_POST['width'], $_POST['height'],
 					$_POST['id']);
         $wpdb->query($sql);
