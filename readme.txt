@@ -29,7 +29,7 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **LAST IMPROVEMENT**
 
-* Added German localization (Thnaks to [Lara Van der Wiel](http://www.u-center.nl "U-Center"))
+* Added German localization (Thanks to [Lara Van der Wiel](http://www.u-center.nl "U-Center"))
 * Updated jQuery UI, jQuery DateTime Picker
 * Fixed jQuery (this._mouseInit) (Thanks to Gary Williams)
 * Fixed wrong close tag on widget (Thanks to Andrey Tv)
@@ -100,7 +100,7 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * Fixed maxImpression field on insert and update
 * New Layout for feedback messeages
 
-  = 2.8.0 =
+= 2.8.0 =
 * Added German localization (Thanks to [Lara Van der Wiel](http://www.u-center.nl "U-Center"))
 * Updated jQuery UI, jQuery DateTime Picker
 * Fixed jQuery (this._mouseInit) (Thanks to Gary Williams)
