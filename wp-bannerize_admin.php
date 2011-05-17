@@ -1016,8 +1016,8 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 
 			}
 		}
-		$sql = sprintf("UPDATE `%s` SET `group` = '%s', `start_date` = '%s', `end_date` = '%s', `maximpressions` = '%s', `impressions` = '%s', `maximpressions` = '%s', `description` = '%s', `url` = '%s', `target` = '%s', `use_description` = '%s', `nofollow` = '%s', `clickcount` = '%s', `width` = '%s', `height` = '%s', `filename` = '%s', `realpath` = '%s', `mime` = '%s' WHERE id = %s",
-					$this->table_bannerize, $_POST['group'], $this->mysql_date($_POST['start_date']), $this->mysql_date($_POST['end_date']), $_POST['maxImpressions'], $_POST['impressions'], $_POST['maxImpressions'],
+		$sql = sprintf("UPDATE `%s` SET `group` = '%s', `start_date` = '%s', `end_date` = '%s', `maximpressions` = '%s', `impressions` = '%s', `description` = '%s', `url` = '%s', `target` = '%s', `use_description` = '%s', `nofollow` = '%s', `clickcount` = '%s', `width` = '%s', `height` = '%s', `filename` = '%s', `realpath` = '%s', `mime` = '%s' WHERE id = %s",
+					$this->table_bannerize, $_POST['group'], $this->mysql_date($_POST['start_date']), $this->mysql_date($_POST['end_date']), $_POST['maxImpressions'], $_POST['impressions'],
 					$_POST['description'], $_POST['url'], $_POST['target'], $_POST['use_description'], $_POST['nofollow'], $_POST['clickcount'], $width, $height, $filename, $realpath, $mime,
 					$_POST['id']);
         $wpdb->query($sql);
