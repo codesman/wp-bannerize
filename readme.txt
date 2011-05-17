@@ -4,7 +4,7 @@ Donate link: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 2.9
 Tested up to: 3.1.2
-Stable tag: 2.8.1
+Stable tag: 2.8.5
 
 WP Bannerize, banner-image manager.
 
@@ -29,10 +29,7 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 
 **LAST IMPROVEMENT**
 
-* Added German localization (Thanks to [Lara Van der Wiel](http://www.u-center.nl "U-Center"))
-* Updated jQuery UI, jQuery DateTime Picker and jQuery UI Theme
-* Fixed jQuery (this._mouseInit) (Thanks to Gary Williams)
-* Fixed wrong close tag on widget (Thanks to Andrey Tv)
+* Added **replace banner image** in edit
 
 **HOW TO**
 
@@ -96,7 +93,11 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 
 == Changelog ==
 
-= 2.8.1 =
+= 2.8.5 =
+* Added replace banner image in edit
+* Minor improvements
+
+ = 2.8.1 =
 * Fixed maxImpression field on insert and update
 * New Layout for feedback messeages
 

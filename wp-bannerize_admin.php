@@ -533,11 +533,12 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 			'total' => $num_pages,
 			'current' => $pagenum));
 		?>
-		<form method="post" name="form_show" action="" id="posts-filter">
+		<form method="post" name="form_show" action="" id="posts-filter" enctype="multipart/form-data">
 			<input type="hidden" name="id" />
 			<input type="hidden" name="command_action" value="update" />
 			<input type="hidden" name="page" value="wp-bannerize-mainshow" />
 			<input type="hidden" name="status" value="<?php echo ( isset($_GET['trash']) ? $_GET['trash'] : "" ) ?>" />
+			<input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
 
 			<ul class="subsubsub">
 			<?php
@@ -718,6 +719,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	 */
 	function inlineEdit($row) {
 		ob_start(); ?><div class="inline-edit" style="display:none">
+<p><label for="filename"><?php _e('Image', 'wp-bannerize')?>:</label> <input type="file" name='filename' id='filename'/></p>
 <p>
 <label for="start_date"><?php _e('Start Date', 'wp-bannerize') ?>:</label> <input class="date" type="text" name="start_date" id="start_date" size="18" value="<?php echo ( ($row->start_date == "" || $row->start_date == "0000-00-00 00:00:00") ? '' : $this->mysql_date($row->start_date) ) ?>" />
  <label for="end_date" style="float:none;display:inline"><?php _e('End Date', 'wp-bannerize') ?>:</label> <input class="date" type="text" name="end_date" id="end_date" size="18" value="<?php echo ( ($row->end_date == "" || $row->end_date == "0000-00-00 00:00:00") ? '' : $this->mysql_date($row->end_date) ) ?>" />
@@ -876,7 +878,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
         global $wpdb;
 
         // check post error
-		if( $_FILES['filename']['error'] == 0 ) {
+		if( is_uploaded_file( $_FILES['filename']['tmp_name'] ) ) {
 			$size           = floor( $_FILES['filename']['size'] / (1024*1024) );
 			$mime           = $_FILES['filename']['type'];
 			$name           = $_FILES['filename']['name'];
@@ -902,8 +904,9 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 						$dimensions = array('0','0');
 					}
 				}
-				$sql = sprintf("INSERT INTO %s (`group`, `description`, `use_description`, `url`, `filename`, `target`, `nofollow`, `mime`, `realpath`, `width`, `height`, `start_date`, `end_date`, `maximpressions`) ".
-										"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %s, %s, '%s', '%s', %s)", $this->table_bannerize, $group, $description, $use_description, $url,
+				$sql = sprintf("INSERT INTO `%s` (`group`, `description`, `use_description`, `url`, `filename`, `target`, `nofollow`, `mime`, `realpath`, `width`, `height`, `start_date`, `end_date`, `maximpressions`) ".
+										"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %s, %s, '%s', '%s', %s)", $this->table_bannerize,
+							   			$group, $description, $use_description, $url,
 										$uploads['url'], $target, $nofollow, $mime, $uploads['file'], $dimensions[0], $dimensions[1],
 										$start_date, $end_date, $_POST['maxImpressions'] );
 				$result = $wpdb->query($sql);
@@ -928,7 +931,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	function setBannerToTrash($id = null) {
 		global $wpdb;
 		$id = ( is_null($id) ) ? $_POST['id'] : $id;
-		$sql = sprintf("UPDATE %s SET trash = '1' WHERE id IN(%s)", $this->table_bannerize, $id);
+		$sql = sprintf("UPDATE `%s` SET trash = '1' WHERE id IN(%s)", $this->table_bannerize, $id);
 		$wpdb->query($sql);
 
 		return __('Banner sent to trash succesfully!', 'wp-bannerize');
@@ -943,7 +946,7 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
 	function unsetBannerToTrash($id = null) {
 		global $wpdb;
 		$id = ( is_null($id) ) ? $_POST['id'] : $id;
-		$sql = sprintf("UPDATE %s SET trash = '0' WHERE id IN(%s)", $this->table_bannerize, $id);
+		$sql = sprintf("UPDATE `%s` SET trash = '0' WHERE id IN(%s)", $this->table_bannerize, $id);
 		$wpdb->query($sql);
 
 		return __('Banner restore from trash succesfully!', 'wp-bannerize');
@@ -968,15 +971,54 @@ class WPBANNERIZE_ADMIN extends WPBANNERIZE_CLASS {
     }
 
     /**
-     * Update a banner. Only db data
+     * Update a banner data and image
      *
-     * @return 		(not used)
+     * @return
+	 *   Information message
      */
     function updateBanner() {
         global $wpdb;
-		$sql = sprintf("UPDATE %s SET `group` = '%s', `start_date` = '%s', `end_date` = '%s', `maximpressions` = '%s', `impressions` = '%s', `maximpressions` = '%s', `description` = '%s', `url` = '%s', `target` = '%s', `use_description` = '%s', `nofollow` = '%s', `clickcount` = '%s', `width` = '%s', `height` = '%s' WHERE id = %s",
+
+		// Retrive image info
+		$sql = sprintf("SELECT * FROM `%s` WHERE id = %s", $this->table_bannerize, $_POST['id']);
+		$row = $wpdb->get_row($sql);
+
+		$filename = $row->filename;
+		$mime = $row->mime;
+		$realpath = $row->realpath;
+		$width = $_POST['width'];
+		$height = $_POST['height'];
+
+		if( is_uploaded_file( $_FILES['filename']['tmp_name'] ) ) {
+			$size           = floor( $_FILES['filename']['size'] / (1024*1024) );
+			$mime           = $_FILES['filename']['type'];
+			$name           = $_FILES['filename']['name'];
+			$temp           = $_FILES['filename']['tmp_name'];
+
+			$dimensions			= array('0','0');
+
+			$uploads = wp_upload_bits( strtolower($name), null, '' );
+
+			if ( move_uploaded_file( $_FILES['filename']['tmp_name'], $uploads['file'] )) {
+				if(function_exists('getimagesize')) {
+					$dimensions = @getimagesize( $uploads['file'] );
+					if(!isset($dimensions)) {
+						$dimensions = array('0','0');
+					}
+				}
+				// Delete old image
+				@unlink( $realpath );
+
+				$filename = $uploads['url'];
+				$realpath = $uploads['file'];
+				$width = $dimensions[0];
+				$height = $dimensions[1];
+
+			}
+		}
+		$sql = sprintf("UPDATE `%s` SET `group` = '%s', `start_date` = '%s', `end_date` = '%s', `maximpressions` = '%s', `impressions` = '%s', `maximpressions` = '%s', `description` = '%s', `url` = '%s', `target` = '%s', `use_description` = '%s', `nofollow` = '%s', `clickcount` = '%s', `width` = '%s', `height` = '%s', `filename` = '%s', `realpath` = '%s', `mime` = '%s' WHERE id = %s",
 					$this->table_bannerize, $_POST['group'], $this->mysql_date($_POST['start_date']), $this->mysql_date($_POST['end_date']), $_POST['maxImpressions'], $_POST['impressions'], $_POST['maxImpressions'],
-					$_POST['description'], $_POST['url'], $_POST['target'], $_POST['use_description'], $_POST['nofollow'], $_POST['clickcount'], $_POST['width'], $_POST['height'],
+					$_POST['description'], $_POST['url'], $_POST['target'], $_POST['use_description'], $_POST['nofollow'], $_POST['clickcount'], $width, $height, $filename, $realpath, $mime,
 					$_POST['id']);
         $wpdb->query($sql);
 
