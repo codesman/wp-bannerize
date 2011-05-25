@@ -115,9 +115,16 @@ class WP_BANNERIZE_WIDGET extends WP_Widget {
 				$o .= (($index % 2 == 0) ? $odd_before : $even_before);
 				if($row->mime == "application/x-shockwave-flash") {
 					// 2.7.0.5 - Thanks to Tihomir Lichev
-					$flash = sprintf('<object data="%s" width="%s" height="%s" type="application/x-shockwave-flash">
+					$flash = sprintf('<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="%s" height="%s">
+					<param name="movie" value="%s" />
 					<param value="%s" name="wmode" />
-					</object>', $row->filename, $row->width, $row->height, $row->filename, $this->options['comboWindowModeFlash']);
+					<!--[if !IE]>-->
+						<object data="%s" width="%s" height="%s" type="application/x-shockwave-flash">
+							<param value="%s" name="wmode" />
+						</object>
+					<!--<![endif]-->
+					</object>', $row->width, $row->height, $row->filename, $this->options['comboWindowModeFlash'],
+									 $row->filename, $row->width, $row->height, $this->options['comboWindowModeFlash']);
 					$o .= $flash;
 				} else {
 					$javascriptClickCounter = ( $this->options['clickCounterEnabled'] == '1') ? ' onclick="SMWPBannerizeJavascript.incrementClickCount(' . $row->id . ')" ' : '';
