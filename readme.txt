@@ -4,7 +4,7 @@ Donate link: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 2.9
 Tested up to: 3.1.2
-Stable tag: 2.8.7
+Stable tag: 2.8.8
 
 WP Bannerize, banner-image manager.
 
@@ -92,6 +92,9 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 2.8.8 =
+* Fixed ajax
 
 = 2.8.7 =
 * Fixed (http://www.exploit-db.com/exploits/17764/ "exploit")
