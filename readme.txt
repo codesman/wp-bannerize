@@ -1,23 +1,28 @@
- === WP Bannerize ===
-Contributors: Giovambattista Fazioli (see Thanks for contributors)
-Donate link: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
+=== WP Bannerize ===
+Contributors: gfazioli
+Donate link: http://en.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 2.9
 Tested up to: 3.1.2
-Stable tag: 2.8.8
+Stable tag: 3.0
 
-WP Bannerize, banner-image manager.
+WP Bannerize, Amazing Banner Manager.
 
 == Description ==
 
-WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php if(function_exists( 'wp_bannerize' )) wp_bannerize(); ?>`, use new shortcode featured or set it like Widget
+WP Bannerize is an Amazing Banner Manager. In your template insert: `<?php if(function_exists( 'wp_bannerize' )) wp_bannerize(); ?>`, use new shortcode featured or set it like Widget. Remember: This software is free. You don't need to donate money to support it. Just talk about it.
 
 **FEATURES**
 
-* Localized for Italian, English, Spanish, Portuguese, Belorussian, Dutch, Polish and German
-* Create your list (group/key) Banners image/Adobe Flash movie
+* Localized for Italian, English, Spanish, Portuguese, Belorussian, Dutch, Polish, German and Turkish
+* Manage image, Adobe Flash movie, HTML/Javascript and free text
+* Create your list (group/key) Banners image/Adobe Flash movie/URL/Free HTML
 * Drag & Drop order
-* Show your banners list by php code, **shortcode** or Widget
+* Quick switch button to enable/disable banner
+* Show your banners list by PHP code, Wordpress **shortcode** or Widget
+* Customize output by 'Settings' in admin area
+* Customize CSS Rules for frontend layout
+* Tools panel with Function and Shortcode Editor
 * Set random, limit and catories filters
 * Standard Wordpress interface improvement
 * "nofollow" attribute support
@@ -25,13 +30,31 @@ WP Bannerize is an Amazing Banner Image Manager. In your template insert: `<?php
 * Impressions and Max Impressions
 * Date Time schedule
 * Wordpress Admin Contextual HELP
-* Wordpress MU compatible
 
-**LAST IMPROVEMENT**
+**3.0 RELEASE NOTES**
 
-* Added **replace banner image** in edit
+* Added insert banner by URL
+* Added insert banner by Free HTML
+* Added insert banner from Media Gallery
+* Added quick switch button to enable/disable banner
+* Added Server Date/Time information
+* Added click count on Flash Movie
+* Added `no_html_wrap` arguments for avoid WP Bannerize HTML
+* Added frontend stylesheet, predefined or custom
+* Added 'no banner to display' HTML/message settings
+* Added Tools menu with Function and Shortcode Editor, Database utility
+* Improved HTML contextual Help
+* Improved Code and HTML layout
+* Improved HTML output
+* Fixed shortcode
+* Fixed several minor bugs
+* Updated Fancybox Javascript Library
+* Deprecated shortcode name "wp-bannerize"
+* Deprecated HTML output - see documentation for detail
 
 **HOW TO**
+
+Check the new "Function and Shortcode Editor" in Tools section.
 
 When you insert a banner you can give a group (key) code. In this way you can "group" a block of banners. For examples if your theme is a 3 columns, you can put in left sidebar:
 
@@ -43,49 +66,69 @@ and put in right sidebar:
 `<?php if(function_exists( 'wp_bannerize' ))
           wp_bannerize('group=right_sidebar'); ?>`
 
-However WP Bannerize provides a filter by category, for example:
+In addition WP Bannerize provides a filter by category, for example:
 
 `<?php if(function_exists( 'wp_bannerize' ))
           wp_bannerize('group=right_sidebar&categories=13,14'); ?>`
 
-The code above shows only banners in the categories 13 or 14, for the "right_sidebar" group key.
+The code above shows banners only for the categories 13 or 14, for the "right_sidebar" group key.
 
-or (new from 2.6.0) in your post:
+or in your post:
 
 `[wp-bannerize group="adv" random="1" limit="3"]`
 
+The default HTML output for above code is:
+
+`<div class="wp_bannerize adv">
+  <div>
+    <a href=".."><img src="..." /></a>
+  </div>
+  <div>
+    <a href=".."><img src="..." /></a>
+    <div class="description">[description]</div>
+  </div>
+  ...
+</div>
+`
 
 **params:**
 
 `
 * group               If '' show all groups, else show the selected group code (default '')
-* container_before    Main tag container open (default <ul>)
-* container_after     Main tag container close (default </ul>)
-* before              Before tag banner open (default <li %alt%>) see alt_class below
-* after               After tag banner close (default </li>) 
+* no_html_wrap        Display only link and image tag, No WP Bannerize wrap HTML (default '')
 * random              Show random banner sequence (default '')
 * categories          Category ID separated by commas. (default '')
-* alt_class           class alternate for "before" TAG (use before param)
-* link_class          Additional class for link TAG A
-* limit               Limit rows number (default '' - show all rows) 
+* limit               Limit rows number (default '' - show all rows)
+* before              HTML Tag before banner (default '<div>')
+* after               HTML Tag after banner (default '</div>')
 `
 
-= Related Links =
+== Who's using WP Bannerize? ==
 
-* [Saidmade](http://www.saidmade.com/ "More Wordpress Plugins")
+* [Elio e le Storie Tese](http://www.elioelestorietese.it "Elio e le Storie Tese")
+* [Artribune](http://www.artribune.com/ "Artribune")
+* [Undolog](http://www.undolog.com "Undolog")
+* [Saidmade](http://en.saidmade.com "Saidmade")
+
+Aren't you in this list? Please, [let me know your Wordpress site url](mailto:g.fazioli@saidmade.com "let me know your Wordpress site url")
+
+== Related Links ==
+
+* [Saidmade](http://en.saidmade.com/ "More Wordpress Plugins")
 * [Undolog](http://www.undolog.com/ "Author's Web")
 * [Saidmade Blog](http://www.saidmade.com/category/blog "Saidmade Blog")
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
-For more information on the roadmap for future improvements please e-mail: g.fazioli@saidmade.com
+For more information on the roadmap and the next improvements, please send an e-mail to: [g.fazioli@saidmade.com](mailto:g.fazioli@saidmade.com "g.fazioli@saidmade.com")
 
-== Screenshots ==
 
-1. New Logo
-2. New Administrator Menu
-3. New Settings Menu Item
-4. Added New Banner Pannel with Adobe FLash support and size autodetect
-5. New List View Banner list with Wordress standard tools: pagination, filters, drag & drop features
+== Screenshots == 
+
+1. New list banners with switch to enable/disable banner
+2. New Edit inline with server date informations
+3. New add banner form; from local, from url or free HTML text
+4. New panel settings with default css rules
+5. PHP and Shortcode Editor, Database utility
 6. Contextual Help
 7. Widget support
 
@@ -93,11 +136,25 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 
 == Changelog ==
 
-= 2.8.8 =
-* Fixed ajax
-
-= 2.8.7 =
-* Fixed (http://www.exploit-db.com/exploits/17764/ "exploit")
+= 3.0.0 =
+* Added insert banner by URL
+* Added insert banner by Free HTML
+* Added insert banner from Media Gallery
+* Added click count on Flash Movie
+* Added quick switch button to enable/disable banner
+* Added Server Date/Time information
+* Added `no_html_wrap` arguments for avoid WP Bannerize HTML
+* Added frontend stylesheet, predefined or custom
+* Added 'no banner to display' HTML/message settings
+* Added Tools menu with Function and Shortcode Editor, Database utility
+* Improved HTML contextual Help
+* Improved Code and HTML layout
+* Improved HTML output
+* Fixed shortcode
+* Fixed several minor bugs
+* Updated Fancybox Javascript Library
+* Deprecated shortcode name "wp-bannerize"
+* Deprecated HTML output - see documentation for detail
 
 = 2.8.6 =
 * Fixed Adobe Flash Object Tag for Microsoft Explorer
@@ -342,6 +399,9 @@ For more information on the roadmap for future improvements please e-mail: g.faz
 
 == Upgrade Notice ==
 
+= 3.0 =
+Very large improvements and security fix! Upgrade immediately
+
 = 2.6.6 =
 Fixed bugs. Upgrade immediately
 
@@ -380,6 +440,8 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 
 == Thanks ==
 
+A special thanks to all contributors:
+
 **Bugs report and beta testing**
 
 * [Ivan](http://www.bobmarleymagazine.com/)
@@ -397,6 +459,7 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [Wasim Asif](http://www.infotales.com/ "wasimasif")
 * Tihomir Lichev
 * bsdezign
+* [Slight](http://www.copiaincolla.net/ "Slight")
 
 **Tutorial**
 
@@ -410,82 +473,39 @@ See [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video"
 * [Rene](http://wpwebshop.com/premium-wordpress-themes/ "WordPress Webshop") (Dutch localization)
 * Krzysztof Bociurko (Polish localization)
 * [Lara Van der Wiel](http://www.u-center.nl "U-Center") (German localization)
+* [kazanc](http://kazancexpert.com "kazanc") (Turkish localization)
 
- ... and sorry for everyone that I forgot ... please, send me a mail for your credits
+ ... and sorry for everyone that I forgot ... please, send me an email for your credits
 
 == Frequently Asked Questions == 
 
 = Can I customize the HTML output? =
 
-Yes, use the `args` for set "container" and "before" and "after" tagging.
-For example the default output is:
+Yes, first check the 'Settings' in admin area, or use a custom CSS rules.
+For example the default WP Bannerize output is:
 
 `
 <div class="wp_bannerize">
- <ul>
-  <li><a href=".."><img src="..." /></a></li>
-  <li><a href=".."><img src="..." /></a><br/><span class="description">[description]</span></li>
+  <div>
+    <a href=".."><img src="..." /></a>
+  </div>
+  <div>
+    <a href=".."><img src="..." /></a>
+    <div class="description">[description]</div>
+  </div>
  ...
- </ul>
 </div>`
 
 If you use a group key named "network", for example:
 
 `
-<div class="wp_bannerize">
- <div class="wp_bannerize_network">
-  <ul>
-   <li><a href=".."><img src="..." /></a></li>
-   <li><a href=".."><img src="..." /></a><br/><span class="description">[description]</span></li>
-   ...
-  </ul>
- </div>
-</div>`
-
-Using CSS style for layout your banner; side by side banner is very simple:
-
-`
-div.wp_bannerize ul li {
-  display:inline;
-  float:left;
-}`
-
-
-You can change `<ul>` (container) and `<li>` (before) 
-
-`<?php if(function_exists( 'wp_bannerize' ))
-        wp_bannerize('container_before=<div>&container_after=</div>&before=<span>&after=</span>'); ?>`
-
-`
-<div>
- <span><a href=".."><img src="..." /></a></span>
- <span><a href=".."><img src="..." /></a></span>
+<div class="wp_bannerize network">
+  <div>
+    <a href=".."><img src="..." /></a>
+  </div>
+  <div>
+    <a href=".."><img src="..." /></a>
+    <div class="description">[description]</div>
+  </div>
  ...
 </div>`
-
-
-= Can I customize the arguments TAG? =
-
-Yes, you can customize alternate class on "before" TAG and class on link A:
-
-`<?php if(function_exists( 'wp_bannerize' ))
-           wp_bannerize('container_before=<div>&container_after=</div>&before=<span %alt%>&after=</span>&link_class=myclass'); ?>`
-
-`
-<div>
- <span><a href=".."><img src="..." /></a></span>
- <span class="alt"><a class="myclass" href=".."><img src="..." /></a></span>
- ...
-</div>`
-
-OR
-
-`<?php if(function_exists( 'wp_bannerize' ))
-          wp_bannerize('alt_class=pair&link_class=myclass'); ?>`
-
-`
-<ul>
- <li><a href=".."><img src="..." /></a></li>
- <li class="pair"><a class="myclass" href=".."><img src="..." /></a></li>
- ...
-</ul>`
