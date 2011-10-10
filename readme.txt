@@ -156,6 +156,13 @@ For more information on the roadmap and the next improvements, please send an e-
 * Deprecated shortcode name "wp-bannerize"
 * Deprecated HTML output - see documentation for detail
 
+= 2.8.8 =
+* Fixed ajax
+
+= 2.8.7 =
+* Fixed (http://www.exploit-db.com/exploits/17764/ "exploit")
+
+
 = 2.8.6 =
 * Fixed Adobe Flash Object Tag for Microsoft Explorer
 
