@@ -162,7 +162,6 @@ For more information on the roadmap and the next improvements, please send an e-
 = 2.8.7 =
 * Fixed (http://www.exploit-db.com/exploits/17764/ "exploit")
 
-
 = 2.8.6 =
 * Fixed Adobe Flash Object Tag for Microsoft Explorer
 
