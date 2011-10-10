@@ -2,9 +2,9 @@
 /**
  * Wrap for allow to call a simple function from Wordpress envirorment
  *
- * @package         wp-bannerize
- * @subpackage      wp-bannerize_functions
- * @author          =undo= <g.fazioli@saidmade.com>
+ * @package         wpBannerize
+ * @subpackage      wpBannerizeFunctions
+ * @author          =undo= <g.fazioli@undolog.com>, <g.fazioli@saidmade.com>
  * @copyright       Copyright © 2008-2011 Saidmade Srl
  *
  */
@@ -14,10 +14,10 @@
  * 
  * @return 
  * @param object $args[optional]
- * @see WPBANNERIZE_FRONTEND
+ * @see WPBannerizeFrontend Class
  */
 function wp_bannerize( $args = '' ) {
-	global $wp_bannerize_frontend;
-	$wp_bannerize_frontend->bannerize( $args );
+	global $wpBannerizeFrontend;
+	$wpBannerizeFrontend->bannerize( $args );
 }
 ?>
