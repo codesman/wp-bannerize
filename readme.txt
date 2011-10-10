@@ -56,12 +56,12 @@ WP Bannerize is an Amazing Banner Manager. In your template insert: `<?php if(fu
 
 Check the new "Function and Shortcode Editor" in Tools section.
 
-When you insert a banner you can give a group (key) code. In this way you can "group" a block of banners. For examples if your theme is a 3 columns, you can put in left sidebar:
+When you insert a banner you can assign it to a group (or key). In this way, for example, if your theme layout is a 3 columns, you can insert in left sidebar:
 
 `<?php if(function_exists( 'wp_bannerize' ))
           wp_bannerize('group=left_sidebar'); ?>`
 
-and put in right sidebar:
+in right sidebar:
 
 `<?php if(function_exists( 'wp_bannerize' ))
           wp_bannerize('group=right_sidebar'); ?>`
@@ -75,7 +75,7 @@ The code above shows banners only for the categories 13 or 14, for the "right_si
 
 or in your post:
 
-`[wp-bannerize group="adv" random="1" limit="3"]`
+`[wp_bannerize group="adv" random="1" limit="3"]`
 
 The default HTML output for above code is:
 
