@@ -2,8 +2,8 @@
 /*
 Plugin Name: WP Bannerize
 Plugin URI: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
-Description: WP Bannerize is an Amazing Banner Image Manager. For more info and plugins visit <a href="http://www.saidmade.com">Saidmade</a>.
-Version: 2.8.8
+Description: WP Bannerize is an Amazing Banner Manager. For more info and plugins visit <a href="http://www.saidmade.com">Saidmade</a>.
+Version: 3.0.0
 Author: Giovambattista Fazioli
 Author URI: http://www.saidmade.com
 Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -26,17 +26,27 @@ Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
 
 */
 
-require_once( 'wp-bannerize_class.php');
+require_once('main.h.php');
+require_once('Classes/wpBannerizeClass.php');
 
-if( is_admin() ) {
-	require_once( 'wp-bannerize_admin.php' );
+if (@isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+	require_once('Classes/wpBannerizeAdmin.php');
 	//
-	$wp_bannerize_admin = new WPBANNERIZE_ADMIN();
-	$wp_bannerize_admin->register_plugin_settings( __FILE__ );
-	register_activation_hook( __FILE__, array( &$wp_bannerize_admin, 'activation_hook') );
+	$wpBannerizeAdmin = new WPBannerizeAdmin(__FILE__);
+	require_once('Classes/wpBannerizeAjax.php');
 } else {
-	require_once( 'wp-bannerize_frontend.php');
-	$wp_bannerize_frontend = new WPBANNERIZE_FRONTEND();
-	require_once( 'wp-bannerize_functions.php');
+	if (is_admin()) {
+		require_once('Classes/wpBannerizeAdmin.php');
+		//
+		$wpBannerizeAdmin = new WPBannerizeAdmin(__FILE__);
+		$wpBannerizeAdmin->register_plugin_settings(__FILE__);
+		register_activation_hook(__FILE__, array(&$wpBannerizeAdmin, 'pluginDidActive'));
+		register_activation_hook(__FILE__, array(&$wpBannerizeAdmin, 'pluginDidDeactive'));
+	} else {
+		require_once('Classes/wpBannerizeFrontend.php');
+		$wpBannerizeFrontend = new WPBannerizeFrontend();
+		require_once('Classes/wpBannerizeFunctions.php');
+	}
 }
+
 ?>
