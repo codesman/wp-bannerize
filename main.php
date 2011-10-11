@@ -3,7 +3,7 @@
 Plugin Name: WP Bannerize
 Plugin URI: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
 Description: WP Bannerize is an Amazing Banner Manager. For more info and plugins visit <a href="http://www.saidmade.com">Saidmade</a>.
-Version: 3.0.0
+Version: 3.0.1
 Author: Giovambattista Fazioli
 Author URI: http://www.saidmade.com
 Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -44,7 +44,7 @@ if (@isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 		register_activation_hook(__FILE__, array(&$wpBannerizeAdmin, 'pluginDidDeactive'));
 	} else {
 		require_once('Classes/wpBannerizeFrontend.php');
-		$wpBannerizeFrontend = new WPBannerizeFrontend();
+		$wpBannerizeFrontend = new WPBannerizeFrontend(__FILE__);
 		require_once('Classes/wpBannerizeFunctions.php');
 	}
 }

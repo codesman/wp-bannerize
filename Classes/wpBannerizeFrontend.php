@@ -11,9 +11,9 @@
 
 class WPBannerizeFrontend extends WPBannerizeClass {
 
-	function WPBannerizeFrontend() {
+	function WPBannerizeFrontend($__file__) {
 		// super
-		$this->WPBannerizeClass();
+		$this->WPBannerizeClass($__file__);
 
 		// Load configurations options
 		$this->options = get_option($this->options_key);
