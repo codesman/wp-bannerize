@@ -589,6 +589,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 		global $wpdb;
 
 		if (isset($_POST['command_action']) && $_POST['command_action'] != "") {
+			var_dump($_POST['command_action']);
 			switch ($_POST['command_action']) {
 				case "trash":
 					$any_error = $this->setBannerToTrash();
@@ -614,40 +615,43 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 										href="?page=wp-bannerize-addnew"><?php _e('Add New', 'wp-bannerize') ?></a></p>
 		<?php
 		   // Group Actions
-			if (isset($_POST['groupAction']) || isset($_POST['groupAction2']) || isset($_GET['groupAction']) || isset($_GET['groupAction2'])) {
-				if (isset($_POST['groupAction']) && $_POST['groupAction'] != "-1" || isset($_POST['groupAction2']) && $_POST['groupAction2'] != "-1") {
-					$action = ($_POST['groupAction'] != "-1") ? $_POST['groupAction'] : $_POST['groupAction2'];
-				} else {
-					$action = ($_GET['groupAction'] != "-1") ? $_GET['groupAction'] : $_GET['groupAction2'];
-				}
-				switch ($action) {
-					case "trash-selected":
-						if (isset($_POST['image_record'])) {
-							$id = implode(",", $_POST['image_record']);
-							$any_error = $this->setBannerToTrash($id);
-						}
-						break;
-					case "delete-selected":
-						if (isset($_POST['image_record'])) {
-							if (is_array($_POST['image_record'])) {
-								foreach ($_POST['image_record'] as $id) {
-									$any_error = $this->deleteBanner($id);
-								}
+			$action = -1;
+			if (isset($_POST['groupAction']) && $_POST['groupAction'] != '-1') {
+				$action = $_POST['groupAction'];
+			} elseif (isset($_POST['groupAction2']) && $_POST['groupAction2'] != '-1') {
+				$action = $_POST['groupAction2'];
+			} elseif (isset($_GET['groupAction']) && $_GET['groupAction'] != '-1') {
+				$action = $_GET['groupAction'];
+			} elseif (isset($_GET['groupAction2']) && $_GET['groupAction2'] != '-1') {
+				$action = $_GET['groupAction2'];
+			}
+			switch ($action) {
+				case "trash-selected":
+					if (isset($_POST['image_record'])) {
+						$id = implode(",", $_POST['image_record']);
+						$any_error = $this->setBannerToTrash($id);
+					}
+					break;
+				case "delete-selected":
+					if (isset($_POST['image_record'])) {
+						if (is_array($_POST['image_record'])) {
+							foreach ($_POST['image_record'] as $id) {
+								$any_error = $this->deleteBanner($id);
 							}
 						}
-						break;
-					case "restore-selected":
-						if (isset($_POST['image_record'])) {
-							$id = implode(",", $_POST['image_record']);
-							$any_error = $this->unsetBannerToTrash($id);
-						}
-						break;
-				}
+					}
+					break;
+				case "restore-selected":
+					if (isset($_POST['image_record'])) {
+						$id = implode(",", $_POST['image_record']);
+						$any_error = $this->unsetBannerToTrash($id);
+					}
+					break;
 			}
 
 			$any_error = '';
 		    $pagenum = isset( $_GET['pagenum'] ) ? ( ($_GET['pagenum'] == '' ? 1 : $_GET['pagenum']) ) : '1';
-			$limit = isset($_REQUEST['combo_pagination_filter']) ? ( ($_REQUEST['combo_pagination_filter'] == '' ? 10 : $_REQUEST['combo_pagination_filter']) ) : '10';
+			$limit = isset($_REQUEST['combo_pagination_filter']) ? $_REQUEST['combo_pagination_filter'] : '10';
 			$where = "1";
 			$count = array();
 
@@ -681,12 +685,11 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 
 			$num_pages = ceil($count['showing'] / $limit);
 
-
 			// GET query fields
 			$query_search = array(
 				'trash' => isset($_GET['trash']) ? $_GET['trash'] : 0,
-				'combo_group_filter' => isset($_REQUEST['combo_group_filter']) ? $_REQUEST['combo_group_filter'] : 0,
-				'combo_pagination_filter' => isset($_REQUEST['combo_pagination_filter']) ? $_REQUEST['combo_pagination_filter'] : 0);
+				'combo_group_filter' => isset($_REQUEST['combo_group_filter']) ? $_REQUEST['combo_group_filter'] : '',
+				'combo_pagination_filter' => $limit);
 
 			$arraytolink = array_merge(array('edit' => null, 'pagenum' => '%#%'), $query_search);
 
@@ -703,7 +706,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 		<form name="form_show" class="wpBannerizeForm" method="post" action="" id="posts-filter" enctype="multipart/form-data">
 		<input type="hidden" name="id"/>
 		<input type="hidden" name="action" value=""/>
-		<input type="hidden" name="command_action" value="update"/>
+		<input type="hidden" name="command_action" value=""/>
 		<input type="hidden" name="page" value="wp-bannerize-mainshow"/>
 		<input type="hidden" name="status" value="<?php echo (isset($_GET['trash']) ? $_GET['trash'] : "") ?>"/>
 		<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo kWPBannerizeMaxFileSize ?>"/>
@@ -1232,7 +1235,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 
 		$group = $_POST['group'];
 		$description = $_POST['description'];
-		$use_description = $_POST['use_description'];
+		$use_description = isset($_POST['use_description']) ? $_POST['use_description'] : 0;
 		$url = $_POST['url'];
 		$target = $_POST['target'];
 		$nofollow = $_POST['nofollow'];
@@ -1277,7 +1280,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 
 		$group = $_POST['group'];
 		$description = $_POST['description'];
-		$use_description = $_POST['use_description'];
+		$use_description = isset($_POST['use_description']) ? $_POST['use_description'] : 0;
 		$url = $_POST['url'];
 		$target = $_POST['target'];
 		$nofollow = $_POST['nofollow'];
@@ -1319,10 +1322,10 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 
 			$group = $_POST['group'];
 			$description = $_POST['description'];
-			$use_description = $_POST['use_description'];
+			$use_description = isset($_POST['use_description']) ? $_POST['use_description'] : 0;
 			$url = $_POST['url'];
 			$target = $_POST['target'];
-			$nofollow = $_POST['nofollow'];
+			$nofollow = isset($_POST['nofollow']) ? $_POST['nofollow'] : 0;
 			$dimensions = array('0', '0');
 
 			$start_date = $this->mysql_date($_POST['start_date']);
@@ -1461,7 +1464,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 			'start_date' => $this->mysql_date($_POST['start_date']),
 			'end_date' => $this->mysql_date($_POST['end_date']), 'maximpressions' => $_POST['maxImpressions'],
 			'impressions' => $_POST['impressions'], 'description' => $_POST['description'], 'url' => $_POST['url'],
-			'target' => $_POST['target'], 'use_description' => $_POST['use_description'],
+			'target' => $_POST['target'], 'use_description' => isset($_POST['use_description']) ? $_POST['use_description'] : 0 ,
 			'nofollow' => $_POST['nofollow'], 'clickcount' => $_POST['clickcount'], 'width' => $dimensions[0],
 			'height' => $dimensions[1], 'filename' => $_POST['filenameFromURL'], 'mime' => $mime, 'free_html' => $_POST['freeHTML']);
 		$where = array('id' => $_POST['id']);
@@ -1517,7 +1520,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 			'start_date' => $this->mysql_date($_POST['start_date']),
 			'end_date' => $this->mysql_date($_POST['end_date']), 'maximpressions' => $_POST['maxImpressions'],
 			'impressions' => $_POST['impressions'], 'description' => $_POST['description'], 'url' => $_POST['url'],
-			'target' => $_POST['target'], 'use_description' => $_POST['use_description'],
+			'target' => $_POST['target'], 'use_description' => isset($_POST['use_description']) ? $_POST['use_description'] : 0,
 			'nofollow' => $_POST['nofollow'], 'clickcount' => $_POST['clickcount'], 'width' => $dimensions[0],
 			'height' => $dimensions[1], 'filename' => $filename, 'realpath' => $realpath, 'mime' => $mime);
 		$where = array('id' => $_POST['id']);
@@ -1556,7 +1559,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 			'start_date' => $this->mysql_date($_POST['start_date']),
 			'end_date' => $this->mysql_date($_POST['end_date']), 'maximpressions' => $_POST['maxImpressions'],
 			'impressions' => $_POST['impressions'], 'description' => $_POST['description'], 'url' => $_POST['url'],
-			'target' => $_POST['target'], 'use_description' => $_POST['use_description'],
+			'target' => $_POST['target'], 'use_description' => isset($_POST['use_description']) ? $_POST['use_description'] : 0,
 			'nofollow' => $_POST['nofollow'], 'clickcount' => $_POST['clickcount'], 'width' => $dimensions[0],
 			'height' => $dimensions[1], 'filename' => $_POST['filenameFromURL'], 'mime' => $mime);
 		$where = array('id' => $_POST['id']);
