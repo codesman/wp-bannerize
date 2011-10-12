@@ -72,7 +72,7 @@ echo $this->options['wpBannerizeStyleCustom'];
 
 		// Default args key/value
 		$default = array(
-			'group' => '', 'no_html_wrap', '', 'random' => '', 'categories' => '', 'limit' => '', 'before' => '<div>', 'after' => '</div>');
+			'group' => '', 'no_html_wrap' => '', 'random' => '', 'categories' => '', 'limit' => '', 'before' => '<div>', 'after' => '</div>');
 
 		// Merge
 		$args = wp_parse_args($theArgs, $default);

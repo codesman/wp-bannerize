@@ -16,8 +16,8 @@
  * @param object $args[optional]
  * @see WPBannerizeFrontend Class
  */
-function wp_bannerize( $args = '' ) {
+function wp_bannerize( $args = array() ) {
 	global $wpBannerizeFrontend;
-	$wpBannerizeFrontend->bannerize( $args );
+	echo $wpBannerizeFrontend->bannerize( $args );
 }
 ?>
