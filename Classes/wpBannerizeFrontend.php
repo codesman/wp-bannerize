@@ -147,12 +147,10 @@ echo $this->options['wpBannerizeStyleCustom'];
 							<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="<?php echo $row->width ?>" height="<?php echo $row->height ?>">
 							<param name="movie" value="<?php echo $row->filename ?>" />
 							<param value="<?php echo $this->options['comboWindowModeFlash'] ?>" name="wmode" />
-							<!--[if !IE]>-->
-								<div <?php echo $javascriptClickCounter ?>>
-									<object data="<?php echo $row->filename ?>" width="<?php echo $row->width ?>" height="<?php echo $row->height ?>" type="application/x-shockwave-flash">
-										<param value="<?php echo $this->options['comboWindowModeFlash'] ?>" name="wmode" />
-									</object>
-								</div>
+							<!--[if !IE]> -->
+								<object data="<?php echo $row->filename ?>" width="<?php echo $row->width ?>" height="<?php echo $row->height ?>" type="application/x-shockwave-flash">
+									<param value="<?php echo $this->options['comboWindowModeFlash'] ?>" name="wmode" />
+								</object>
 							<!--<![endif]-->
 							</object>
 							<?php if ($row->use_description == '1') : ?>
