@@ -4,7 +4,7 @@ Donate link: http://en.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 3.1
 Tested up to: 3.1.2
-Stable tag: 3.0.3
+Stable tag: 3.0.5
 
 WP Bannerize, Amazing Banner Manager.
 
@@ -135,6 +135,10 @@ For more information on the roadmap and the next improvements, please send an e-
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+
+= 3.0.5 =
+* Rev
 
 = 3.0.4 =
 * Fixed double click count on Adobe Flash Movie
