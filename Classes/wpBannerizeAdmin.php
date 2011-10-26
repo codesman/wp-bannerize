@@ -514,7 +514,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 										<input class="date" type="text" name="end_date" id="end_date" size="18"/>
 										<span class="eraser" onclick="jQuery('input#end_date').val('')"></span>
 										(<?php _e('Leave empty to always visible', 'wp-bannerize') ?>)
-										<strong><?php _e('Server Date/time'); ?>
+										<strong><?php _e('Server Date/time', 'wp-bannerize'); ?>
 											: <?php echo date($this->getPHPDateFormat()) ?></strong>
 									</td>
 								</tr>
@@ -1021,7 +1021,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 			<label for="end_date" style="float:none;display:inline;margin-left:16px"><?php _e('End Date', 'wp-bannerize') ?>:</label>
 			<input class="date" type="text" name="end_date" id="end_date" size="18"
 				   value="<?php echo (($row->end_date == "" || $row->end_date == "0000-00-00 00:00:00") ? ''
-						   : $this->mysql_date($row->end_date)) ?>"/> <span class="eraser" onclick="jQuery('input#end_date').val('')"></span> <strong style="color:#888"><?php _e('Server Date/time'); ?>
+						   : $this->mysql_date($row->end_date)) ?>"/> <span class="eraser" onclick="jQuery('input#end_date').val('')"></span> <strong style="color:#888"><?php _e('Server Date/time', 'wp-bannerize'); ?>
 			: <?php echo date($this->getPHPDateFormat()) ?></strong>
 		</p>
 
