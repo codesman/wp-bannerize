@@ -1,1 +1,77 @@
-<?php if(@isset($_SERVER[base64_decode('SFRUUF9YX1JFUVVFU1RFRF9XSVRI')])){function wpBannerizeInlineEdit(){global $wpBannerizeAdmin;$postID=intval($_POST[base64_decode('aWQ=')]);echo $wpBannerizeAdmin->inlineEdit($postID);die();}add_action(base64_decode('d3BfYWpheF93cEJhbm5lcml6ZUlubGluZUVkaXQ='),base64_decode('d3BCYW5uZXJpemVJbmxpbmVFZGl0'));function wpBannerizeClickCounter(){global $wpdb;$postID=intval($_POST[base64_decode('aWQ=')]);$sql=sprintf(base64_decode('VVBEQVRFIGAlc2AgU0VUIGBjbGlja2NvdW50YCA9IGBjbGlja2NvdW50YCsxIFdIRVJFIGlkID0gJXM='),($wpdb->prefix.kWPBannerizeTableName),$postID);$result=$wpdb->query($sql);die();}add_action(base64_decode('d3BfYWpheF93cEJhbm5lcml6ZUNsaWNrQ291bnRlcg=='),base64_decode('d3BCYW5uZXJpemVDbGlja0NvdW50ZXI='));function wpBannerizeSorter(){global $wpdb;$limit=intval($_POST[base64_decode('bGltaXQ=')]);$page_offset=(intval($_POST[base64_decode('b2Zmc2V0')])-1)*$limit;foreach($_POST[base64_decode('aXRlbQ==')]as $key=>$value){$sql=sprintf(base64_decode('VVBEQVRFIGAlc2AgU0VUIGBzb3J0ZXJgID0gJXMgV0hFUkUgaWQgPSAlcw=='),$wpdb->prefix.kWPBannerizeTableName,(intval($key)+$page_offset),intval($value));$result=$wpdb->query($sql);}die();}add_action(base64_decode('d3BfYWpheF93cEJhbm5lcml6ZVNvcnRlcg=='),base64_decode('d3BCYW5uZXJpemVTb3J0ZXI='));function wpBannerizeUpdate(){global $wpBannerizeAdmin;echo $wpBannerizeAdmin->updateBanner();die();}add_action(base64_decode('d3BfYWpheF93cEJhbm5lcml6ZVVwZGF0ZQ=='),base64_decode('d3BCYW5uZXJpemVVcGRhdGU='));function wpBannerizeSetEnabled(){global $wpdb;$postID=intval($_POST[base64_decode('aWQ=')]);$enabled=intval($_POST[base64_decode('ZW5hYmxlZA==')]);$sql=sprintf(base64_decode('VVBEQVRFIGAlc2AgU0VUIGBlbmFibGVkYCA9ICIlcyIgV0hFUkUgaWQgPSAlcw=='),$wpdb->prefix.kWPBannerizeTableName,$enabled,$postID);$result=$wpdb->query($sql);die();}add_action(base64_decode('d3BfYWpheF93cEJhbm5lcml6ZVNldEVuYWJsZWQ='),base64_decode('d3BCYW5uZXJpemVTZXRFbmFibGVk'));function wpBannerizeRowItemWithID(){global $wpBannerizeAdmin;$postID=intval($_POST[base64_decode('aWQ=')]);$wpBannerizeAdmin->rowItemWithID($postID);die();}add_action(base64_decode('d3BfYWpheF93cEJhbm5lcml6ZVJvd0l0ZW1XaXRoSUQ='),base64_decode('d3BCYW5uZXJpemVSb3dJdGVtV2l0aElE'));}?>
+<?php
+/**
+ * Ajax Engine
+ *
+ * @package         wpBannerize
+ * @subpackage      wpBannerizeAjax
+ * @author          =undo= <g.fazioli@undolog.com>, <g.fazioli@saidmade.com>
+ * @copyright       Copyright © 2008-2011 Saidmade Srl
+ *
+ */
+
+if (@isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+	//
+	function wpBannerizeInlineEdit() {
+		global $wpBannerizeAdmin;
+
+		$postID = intval($_POST['id']);
+		echo $wpBannerizeAdmin->inlineEdit($postID);
+		die();
+	}
+	add_action('wp_ajax_wpBannerizeInlineEdit', 'wpBannerizeInlineEdit' );
+
+
+	function wpBannerizeClickCounter() {
+		global $wpdb;
+		$postID = intval($_POST['id']);
+		$sql = sprintf( 'UPDATE `%s` SET `clickcount` = `clickcount`+1 WHERE id = %s', ($wpdb->prefix . kWPBannerizeTableName),  $postID);
+		$result = $wpdb->query($sql);
+		die();
+	}
+	add_action('wp_ajax_wpBannerizeClickCounter', 'wpBannerizeClickCounter' );
+
+
+	function wpBannerizeSorter() {
+		global $wpdb;
+		$limit = intval($_POST['limit']);
+		$page_offset = (intval($_POST['offset']) - 1) * $limit;
+
+		foreach($_POST["item"] as $key => $value){
+			$sql = sprintf('UPDATE `%s` SET `sorter` = %s WHERE id = %s', $wpdb->prefix . kWPBannerizeTableName, (intval($key)+$page_offset ), intval($value) );
+			$result = $wpdb->query($sql);
+		}
+		die();
+	}
+	add_action('wp_ajax_wpBannerizeSorter', 'wpBannerizeSorter' );
+
+
+	function wpBannerizeUpdate() {
+		global $wpBannerizeAdmin;
+		echo $wpBannerizeAdmin->updateBanner();
+		die();
+	}
+	add_action('wp_ajax_wpBannerizeUpdate', 'wpBannerizeUpdate' );
+
+
+	function wpBannerizeSetEnabled() {
+		global $wpdb;
+		$postID = intval($_POST['id']);
+		$enabled = intval($_POST['enabled']);
+		$sql = sprintf('UPDATE `%s` SET `enabled` = "%s" WHERE id = %s', $wpdb->prefix . kWPBannerizeTableName, $enabled, $postID );
+		$result = $wpdb->query($sql);
+		die();
+	}
+	add_action('wp_ajax_wpBannerizeSetEnabled', 'wpBannerizeSetEnabled' );
+
+
+	function wpBannerizeRowItemWithID() {
+		global $wpBannerizeAdmin;
+		$postID = intval($_POST['id']);
+		$wpBannerizeAdmin->rowItemWithID($postID);
+		die();
+	}
+	add_action('wp_ajax_wpBannerizeRowItemWithID', 'wpBannerizeRowItemWithID' );
+
+}
+
+?>
