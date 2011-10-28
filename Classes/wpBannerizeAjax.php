@@ -29,6 +29,7 @@ if (@isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 		die();
 	}
 	add_action('wp_ajax_wpBannerizeClickCounter', 'wpBannerizeClickCounter' );
+	add_action('wp_ajax_nopriv_wpBannerizeClickCounter', 'wpBannerizeClickCounter' );
 
 
 	function wpBannerizeSorter() {

@@ -136,6 +136,9 @@ For more information on the roadmap and the next improvements, please send an e-
 
 == Changelog ==
 
+= 3.0.9 =
+* Fixed click counter
+
 = 3.0.8 =
 * Fixed default value in database table for Microsoft IIS
 
