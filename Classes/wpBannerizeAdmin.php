@@ -776,10 +776,13 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 				<th class="manage-column column-description"
 					scope="col"><?php _e('Description', 'wp-bannerize') ?></th>
 				<th class="manage-column column-clickcount num" scope="col">
-					<div class="vers clickcounter"></div>
+					<div class="clickcounter" title="<?php _e('Click Counter', 'wp-bannerize') ?>"></div>
 				</th>
 				<th class="manage-column column-clickcount num" scope="col">
-					<div class="vers impressions"></div>
+					<div class="impressions" title="<?php _e('Impressions', 'wp-bannerize') ?>"></div>
+				</th>
+				<th class="manage-column column-clickcount num" scope="col">
+					CTR
 				</th>
 			</tr>
 			</thead>
@@ -793,10 +796,13 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 				<th class="manage-column column-description"
 					scope="col"><?php _e('Description', 'wp-bannerize') ?></th>
 				<th class="manage-column column-clickcount num" scope="col">
-					<div class="vers clickcounter"></div>
+					<div class="clickcounter"></div>
 				</th>
 				<th class="manage-column column-clickcount num" scope="col">
-					<div class="vers impressions"></div>
+					<div class="impressions"></div>
+				</th>
+				<th class="manage-column column-clickcount num" scope="col">
+					CTR
 				</th>
 			</tr>
 			</tfoot>
@@ -964,6 +970,13 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 		<div class="post-com-count-wrapper">
 			<div class="post-com-count">
 				<span><?php echo $item->impressions ?></span>
+			</div>
+		</div>
+	</td>
+	<td class="comments column-comments">
+		<div class="post-com-count-wrapper">
+			<div class="post-com-count">
+				<span><?php echo intval( ($item->clickcount /  $item->impressions) * 100) . '%' ?></span>
 			</div>
 		</div>
 	</td>

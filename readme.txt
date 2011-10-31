@@ -4,7 +4,7 @@ Donate link: http://en.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 3.1
 Tested up to: 3.1.2
-Stable tag: 3.0.8
+Stable tag: 3.0.10
 
 WP Bannerize, Amazing Banner Manager.
 
@@ -28,6 +28,7 @@ WP Bannerize is an Amazing Banner Manager. In your template insert: `<?php if(fu
 * "nofollow" attribute support
 * Click Counter engine for stats
 * Impressions and Max Impressions
+* CTR (Click-through rate)
 * Date Time schedule
 * Wordpress Admin Contextual HELP
 
@@ -51,6 +52,8 @@ WP Bannerize is an Amazing Banner Manager. In your template insert: `<?php if(fu
 * Updated Fancybox Javascript Library
 * Deprecated shortcode name "wp-bannerize"
 * Deprecated HTML output - see documentation for detail
+
+http://www.youtube.com/watch?v=sAZOyAwXu-U
 
 **HOW TO**
 
@@ -135,6 +138,9 @@ For more information on the roadmap and the next improvements, please send an e-
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 3.0.10 =
+* Added CTR (Click-through rate) column in banner list view (Thanks to aplussideas)
 
 = 3.0.9 =
 * Fixed click counter
@@ -496,6 +502,7 @@ A special thanks to all contributors:
 * Tihomir Lichev
 * bsdezign
 * [Slight](http://www.copiaincolla.net/ "Slight")
+* [aplussideas](http://wordpress.org/support/profile/aplussideas "aplussideas")
 
 **Tutorial**
 
