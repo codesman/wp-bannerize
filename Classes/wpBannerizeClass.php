@@ -156,7 +156,7 @@ class WPBannerizeClass {
 		$this->path = dirname($__file__);
 		$this->file = basename($__file__);
 		$this->directory = basename($this->path);
-		$this->uri = plugins_url("", $__file__);
+		$this->uri = plugins_url('', $__file__);
 		$this->siteurl = get_bloginfo('url');
 		$this->wpadminurl = admin_url();
 

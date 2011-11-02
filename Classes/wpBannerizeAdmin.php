@@ -589,7 +589,6 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 		global $wpdb;
 
 		if (isset($_POST['command_action']) && $_POST['command_action'] != "") {
-			var_dump($_POST['command_action']);
 			switch ($_POST['command_action']) {
 				case "trash":
 					$any_error = $this->setBannerToTrash();
