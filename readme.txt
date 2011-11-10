@@ -4,7 +4,7 @@ Donate link: http://en.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 3.1
 Tested up to: 3.1.2
-Stable tag: 3.0.11
+Stable tag: 3.0.20
 
 WP Bannerize, Amazing Banner Manager.
 
@@ -32,7 +32,7 @@ WP Bannerize is an Amazing Banner Manager. In your template insert: `<?php if(fu
 * Date Time schedule
 * Wordpress Admin Contextual HELP
 
-**3.0 RELEASE NOTES**
+**WHAT'S NEWS IN 3.0 RELEASE**
 
 * Added insert banner by URL
 * Added insert banner by Free HTML
@@ -138,6 +138,9 @@ For more information on the roadmap and the next improvements, please send an e-
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 3.0.20 =
+* Fixed Minor notices
 
 = 3.0.11 =
 * Removed debug info

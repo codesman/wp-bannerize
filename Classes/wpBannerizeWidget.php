@@ -68,6 +68,21 @@ class WPBannerizeWidget extends WP_Widget {
 	 * @return array
 	 */
 	function update($new_instance, $old_instance) {
+		$default =
+				array
+				(
+					'title' => '',
+					'group' => '',
+					'random' => '0',
+					'no_html_wrap' => '0',
+					'limit' => '10',
+					'categories' =>
+					array
+					(),
+					'before' => '<div>',
+					'after' => '</div>'
+				);
+		$new_instance = wp_parse_args($new_instance, $default);
 		$instance = $old_instance;
 
 		// Wordpress Widget Titile
@@ -92,10 +107,18 @@ class WPBannerizeWidget extends WP_Widget {
 	 * @param array $instance
 	 */
 	function form($instance) {
-		$instance = wp_parse_args((array)$instance, array(
-														 'title' => '', 'random' => '0', 'no_html_wrap' => '0',
-														 'before' => '<div>', 'after' => '</div>', 'limit' => '10',
-														 'categories' => array()));
+		$instance = wp_parse_args((array)$instance,
+								  array
+								  (
+								  'title' => '',
+								  'group' => '',
+								  'random' => '0',
+								  'no_html_wrap' => '0',
+								  'limit' => '10',
+								  'categories' => array(),
+								  'before' => '<div>',
+								  'after' => '</div>'
+								  ));
 		$title = strip_tags($instance['title']);
 
 		$group = strip_tags($instance['group']);
