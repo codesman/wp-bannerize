@@ -72,7 +72,7 @@ echo $this->options['wpBannerizeStyleCustom'];
 
 		// Default args key/value
 		$default = array(
-			'group' => '', 'no_html_wrap' => '', 'random' => '', 'categories' => '', 'limit' => '', 'before' => '<div>', 'after' => '</div>');
+			'group' => '', 'no_html_wrap' => '0', 'random' => '', 'categories' => '', 'limit' => '', 'before' => '<div>', 'after' => '</div>');
 
 		// Merge
 		$args = wp_parse_args($theArgs, $default);
@@ -127,7 +127,7 @@ echo $this->options['wpBannerizeStyleCustom'];
 				?>
 			<?php endif; ?>
 			<!-- Start WP Bannerize -->
-			<?php if( $args['no_html_wrap'] == '' ) : ?>
+			<?php if( $args['no_html_wrap'] == '0' ) : ?>
 				<div class="wp_bannerize <?php if($args['group'] != "") echo $args['group'] ?>">
 			<?php endif; ?>
 			<?php foreach ($rows as $row) : ?>
@@ -166,7 +166,7 @@ echo $this->options['wpBannerizeStyleCustom'];
 							<?php endif; ?>
 						</div>
 					<?php else:	?>
-						<?php if( $args['no_html_wrap'] == '' ) echo $args['before']; ?>
+						<?php if( $args['no_html_wrap'] == '0' ) echo $args['before']; ?>
 							<?php if($row->url != '') : ?>
 							<a <?php echo $javascriptClickCounter ?> href="<?php echo $row->url ?>" <?php echo ( ($row->nofollow == '1') ? 'rel="nofollow"' : '')  ?> <?php echo (  ($row->target != '') ? 'target="' . $row->target . '"' : '' )  ?>>
 							<?php endif; ?>
@@ -184,13 +184,13 @@ echo $this->options['wpBannerizeStyleCustom'];
 										  endif; ?>
 								</div>
 							<?php endif; ?>
-						<?php if( $args['no_html_wrap'] == '' ) echo $args['after']; ?>
+						<?php if( $args['no_html_wrap'] == '0' ) echo $args['after']; ?>
 					<?php endif; ?>
 				<?php elseif ($row->banner_type == kWPBannerizeBannerTypeFreeHTML ) : ?>
 					<div><?php echo stripslashes( $row->free_html ); ?></div>
 				<?php endif; ?>
 			<?php endforeach; ?>
-			<?php if( $args['no_html_wrap'] == '') : ?>
+			<?php if( $args['no_html_wrap'] == '0') : ?>
 				</div>
 			<?php endif; ?>
 			<?php if ($this->options['supportWPBannerize'] == '1') : ?>
