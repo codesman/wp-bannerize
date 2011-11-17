@@ -975,7 +975,14 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 	<td class="comments column-comments">
 		<div class="post-com-count-wrapper">
 			<div class="post-com-count">
-				<span><?php echo intval( ($item->clickcount /  $item->impressions) * 100) . '%' ?></span>
+				<span>
+					<?php
+						if($item->impressions > 0) {
+							echo intval( ($item->clickcount / $item->impressions) * 100) . '%';
+						} else {
+							echo '0%';
+						}
+					?></span>
 			</div>
 		</div>
 	</td>
