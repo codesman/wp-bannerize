@@ -4,7 +4,7 @@ Donate link: http://en.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 3.1
 Tested up to: 3.1.2
-Stable tag: 3.0.21
+Stable tag: 3.0.22
 
 WP Bannerize, Amazing Banner Manager.
 
@@ -139,8 +139,11 @@ For more information on the roadmap and the next improvements, please send an e-
 
 == Changelog ==
 
+= 3.0.22 =
+* Fixed category display, thanks to [SchattenMann](http://wordpress.org/support/profile/schattenmann "SchattenMann")
+
 = 3.0.21 =
-* Fixed  'no_html_wrap' in Widget output
+* Fixed 'no_html_wrap' in Widget output
 
 = 3.0.20 =
 * Fixed Minor notices
@@ -504,6 +507,7 @@ A special thanks to all contributors:
 * Viktor Zozulyak
 * Andrey Tv
 * Gary Williams
+* [SchattenMann](http://wordpress.org/support/profile/schattenmann "SchattenMann")
 
 **Suggestions and ideas**
 

@@ -84,7 +84,8 @@ echo $this->options['wpBannerizeStyleCustom'];
 				$categoriesID = explode(',', $args['categories']);
 			}
 		}
-		if (is_array( $categoriesID) && !is_category($categoriesID) && !in_category($categoriesID)) {
+		// Fixed by http://wordpress.org/support/profile/schattenmann
+		if (is_array($categoriesID) && count($categoriesID) > 0 && !is_category($categoriesID) && !in_category($categoriesID)) {
 			return;
 		}
 
