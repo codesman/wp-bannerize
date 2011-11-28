@@ -118,7 +118,6 @@ echo $this->options['wpBannerizeStyleCustom'];
 		if (count($rows) > 0) { ?>
 			<?php // Widget
 			if( isset( $args['before_widget'])) : ?>
-			<!-- Start WP Bannerize Widget -->
 				<?php
 					echo $args['before_widget'];
 					$title = apply_filters('widget_title', $args['title']);
@@ -127,7 +126,6 @@ echo $this->options['wpBannerizeStyleCustom'];
 					}
 				?>
 			<?php endif; ?>
-			<!-- Start WP Bannerize -->
 			<?php if( $args['no_html_wrap'] == '0' ) : ?>
 				<div class="wp_bannerize <?php if($args['group'] != "") echo $args['group'] ?>">
 			<?php endif; ?>
@@ -197,10 +195,8 @@ echo $this->options['wpBannerizeStyleCustom'];
 			<?php if ($this->options['supportWPBannerize'] == '1') : ?>
 				<p class="wp-bannerize-support"><a style="font-size:11px;text-align:center" href="http://www.saidmade.com/prodotti/wordpress/wp-bannerize/" target="_blank"><span>Powered by WP Bannerize</span></a></p>
 			<?php endif; ?>
-			<!-- End WP Bannerize -->
 			<?php // Widget
 			if( isset( $args['after_widget'])) : ?>
-			<!-- End WP Bannerize Widget -->
 				<?php echo $args['after_widget'] ?>
 			<?php endif; ?>
 		<?php
