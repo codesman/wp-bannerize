@@ -1489,7 +1489,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 		$where = array('id' => $_POST['id']);
 		$wpdb->show_errors();
 		$result = $wpdb->update($this->table_bannerize, $values, $where);
-		if ($result !== fale) {
+		if ($result !== false) {
 			$this->error = false;
 			return __('Banner update succesfully!', 'wp-bannerize');
 		} else {
@@ -1545,7 +1545,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 		$where = array('id' => $_POST['id']);
 		$wpdb->show_errors();
 		$result = $wpdb->update($this->table_bannerize, $values, $where);
-		if ($result !== fale) {
+		if ($result !== false) {
 			$this->error = false;
 			return __('Banner update succesfully!', 'wp-bannerize');
 		} else {
@@ -1584,7 +1584,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 		$where = array('id' => $_POST['id']);
 		$wpdb->show_errors();
 		$result = $wpdb->update($this->table_bannerize, $values, $where);
-		if ($result !== fale) {
+		if ($result !== false) {
 			$this->error = false;
 			return __('Banner update succesfully!', 'wp-bannerize');
 		} else {
