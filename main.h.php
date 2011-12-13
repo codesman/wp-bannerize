@@ -13,12 +13,12 @@
 define('kWPBannerizeDebug', false);
 
 // Common
-define('kWPBannerizeVersion', '3.0.30');
+define('kWPBannerizeVersion', '3.0.32');
 define('kWPBannerizePluginName', 'WP Bannerize');
 define('kWPBannerizeOptionTitle', kWPBannerizePluginName);
 define('kWPBannerizeSlugName', 'wp-bannerize');
 define('kWPBannerizeShortcodeName', 'wp_bannerize');
-define('kWPBannerizeUserCapabilitiy', 'manage_options');
+define('kWPBannerizeUserCapabilitiy', 'edit_posts');
 define('kWPBannerizeMaxFileSize', 10000000);
 
 // Widget Class

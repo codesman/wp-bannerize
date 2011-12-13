@@ -142,7 +142,8 @@ echo $this->options['wpBannerizeStyleCustom'];
 				<?php // Check for Adobe Flash, Image or free HTML text
 				if ($row->banner_type == kWPBannerizeBannerTypeFromLocal || $row->banner_type == kWPBannerizeBannerTypeByURL) :
 					if ($row->mime == "application/x-shockwave-flash") : ?>
-						<div <?php echo $javascriptClickCounter ?>>
+                        <div style="position:relative; z-index:0">
+                            <a <?php echo $javascriptClickCounter ?> style="width:<?php echo $row->width ?>px; height:<?php echo $row->height ?>px;  position:absolute; z-index:999" href="<?php echo $row->url ?>" <?php echo ( ($row->nofollow == '1') ? 'rel="nofollow"' : '')  ?> <?php echo (  ($row->target != '') ? 'target="' . $row->target . '"' : '' )  ?>></a>
 							<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="<?php echo $row->width ?>" height="<?php echo $row->height ?>">
 							<param name="movie" value="<?php echo $row->filename ?>" />
 							<param value="<?php echo $this->options['comboWindowModeFlash'] ?>" name="wmode" />

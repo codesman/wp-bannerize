@@ -4,7 +4,7 @@ Donate link: http://en.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 3.1
 Tested up to: 3.1.2
-Stable tag: 3.0.30
+Stable tag: 3.0.32
 
 WP Bannerize, Amazing Banner Manager.
 
@@ -138,6 +138,10 @@ For more information on the roadmap and the next improvements, please send an e-
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 3.0.32 =
+* Changed manage_option to edit_posts
+* Fixed ClickCounter on Adobe Flash Movie, thanks to [preukson](http://wordpress.org/support/profile/preukson "preukson")
 
 = 3.0.30 =
 * Fixed locale date, thanks to [moikano](http://wordpress.org/support/profile/moikano "moikano")
@@ -521,6 +525,7 @@ A special thanks to all contributors:
 * [SchattenMann](http://wordpress.org/support/profile/schattenmann "SchattenMann")
 * [jasonpel](http://wordpress.org/support/profile/jasonpel "jasonpel")
 * [moikano](http://wordpress.org/support/profile/moikano "moikano")
+* [preukson](http://wordpress.org/support/profile/preukson "preukson")
 
 **Suggestions and ideas**
 
