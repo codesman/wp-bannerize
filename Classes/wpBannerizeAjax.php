@@ -74,5 +74,3 @@ if (@isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 	add_action('wp_ajax_wpBannerizeRowItemWithID', 'wpBannerizeRowItemWithID' );
 
 }
-
-?>

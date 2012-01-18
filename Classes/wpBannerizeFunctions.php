@@ -11,13 +11,14 @@
 
 /**
  * Comodity function for Show banner list
- * 
- * @return 
- * @param object $args[optional]
+ *
+ * @return void
+ *
+ * @param array|object $args [optional]
+ *
  * @see WPBannerizeFrontend Class
  */
-function wp_bannerize( $args = array() ) {
+function wp_bannerize( $args = array () ) {
 	global $wpBannerizeFrontend;
 	echo $wpBannerizeFrontend->bannerize( $args );
 }
-?>

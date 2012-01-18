@@ -28,7 +28,7 @@ CREATE TABLE `%s` (
   `filename` varchar(255) NOT NULL DEFAULT '',
   `realpath` varchar(255) NOT NULL DEFAULT '',
   `banner_type` char(1) NOT NULL DEFAULT '1',
-  `free_html` text NOT NULL DEFAULT '',
+  `free_html` text NOT NULL,
   `enabled` char(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `group` (`group`),

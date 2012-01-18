@@ -4,7 +4,7 @@ Donate link: http://en.saidmade.com/prodotti/wordpress/wp-bannerize/
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 3.1
 Tested up to: 3.1.2
-Stable tag: 3.0.32
+Stable tag: 3.0.50
 
 WP Bannerize, Amazing Banner Manager.
 
@@ -14,7 +14,7 @@ WP Bannerize is an Amazing Banner Manager. In your template insert: `<?php if(fu
 
 **FEATURES**
 
-* Localized for Italian, English, Spanish, Portuguese, Belorussian, Dutch, Polish, German and Turkish
+* Localized for Italian, English, Spanish, Portuguese, Belorussian, Dutch, Polish, German, Turkish and Russian
 * Manage image, Adobe Flash movie, HTML/Javascript and free text
 * Create your list (group/key) Banners image/Adobe Flash movie/URL/Free HTML
 * Drag & Drop order
@@ -138,6 +138,13 @@ For more information on the roadmap and the next improvements, please send an e-
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 3.0.50 =
+* Added Russian translation, thanks to [Mick Levin](http://wordpress.org/support/profile/mick-levin "Mick Levin")
+* Fixed sql file for delta db, thanks to [esu66](http://wordpress.org/support/profile/esu66 "esu66")
+* Fixed random in Widget
+* Fixed "go top" when click on "edit" banner, thanks to [moikano](http://wordpress.org/support/profile/moikano "moikano")
+* Fixed "FreeHTML banners lose newlines with inline-edit", thanks to [moikano](http://wordpress.org/support/profile/moikano "moikano")
 
 = 3.0.32 =
 * Changed manage_option to edit_posts
@@ -526,6 +533,7 @@ A special thanks to all contributors:
 * [jasonpel](http://wordpress.org/support/profile/jasonpel "jasonpel")
 * [moikano](http://wordpress.org/support/profile/moikano "moikano")
 * [preukson](http://wordpress.org/support/profile/preukson "preukson")
+* [esu66](http://wordpress.org/support/profile/esu66 "esu66")
 
 **Suggestions and ideas**
 
@@ -548,6 +556,7 @@ A special thanks to all contributors:
 * Krzysztof Bociurko (Polish localization)
 * [Lara Van der Wiel](http://www.u-center.nl "U-Center") (German localization)
 * [kazanc](http://kazancexpert.com "kazanc") (Turkish localization)
+* [Mick Levin](http://wordpress.org/support/profile/mick-levin "Mick Levin") (Russian localization)
 
  ... and sorry for everyone that I forgot ... please, send me an email for your credits
 
