@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: WP Bannerize
- * Plugin URI: http://www.saidmade.com/prodotti/wordpress/wp-bannerize/
- * Description: WP Bannerize is an Amazing Banner Manager. For more info and plugins visit <a href="http://www.saidmade.com">Saidmade</a>.
- * Version: 3.0.50
- * Author: Giovambattista Fazioli
- * Author URI: http://www.undolog.com
+ * Plugin URI: http://wordpress.org/extend/plugins/wp-bannerize/
+ * Description: WP Bannerize: an easy to use adv server with html, free text and Flash banner support.
+ * Version: 3.0.60
+ * Author: wpXtreme
+ * Author URI: http://www.wpxtre.me
  *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
  * General Public License version 2, as published by the Free Software Foundation.  You may NOT assume
@@ -15,7 +15,7 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @package   WP Bannerize
- * @version   3.0.50
+ * @version   3.0.60
  * @author    =undo= <g.fazioli@undolog.com>
  * @copyright Copyright (c) 2008-2012, Saidmade, srl
  * @link      http://www.saidmade.com
@@ -23,24 +23,49 @@
  *
  */
 
+add_action( 'admin_init', function() {
+
+    if( get_transient( 'wpxtreme-for-cleanfix' ) ) {
+        return;
+    }
+
+    if ( isset( $_POST['wpxtreme_hidden'] ) ) {
+        update_option( 'wpxtreme_bannerize_hot_news', 2 );
+    }
+
+    $first_time = get_option( 'wpxtreme_bannerize_hot_news' );
+
+    if ( !$first_time || $first_time == 1 ) {
+
+        set_transient( 'wpxtreme-for-bannerize', 1, 60 * 1 );
+
+        update_option( 'wpxtreme_bannerize_hot_news', 1 );
+
+        add_action( 'admin_notices', function() { ?>
+            <script type="text/javascript" src="http://blog.wpxtre.me/widget/?<?php echo time() ?>"></script>
+        <?php
+        } );
+    }
+} );
+
 require_once( 'main.h.php' );
 require_once( 'Classes/wpBannerizeClass.php' );
 
 if ( @isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) ) {
-	require_once( 'Classes/wpBannerizeAdmin.php' );
-	$wpBannerizeAdmin = new WPBannerizeAdmin( __FILE__ );
-	require_once( 'Classes/wpBannerizeAjax.php' );
+    require_once( 'Classes/wpBannerizeAdmin.php' );
+    $wpBannerizeAdmin = new WPBannerizeAdmin( __FILE__ );
+    require_once( 'Classes/wpBannerizeAjax.php' );
 } else {
-	if ( is_admin() ) {
-		require_once( 'Classes/wpBannerizeAdmin.php' );
-		//
-		$wpBannerizeAdmin = new WPBannerizeAdmin( __FILE__ );
-		$wpBannerizeAdmin->register_plugin_settings( __FILE__ );
-		register_activation_hook( __FILE__, array ( &$wpBannerizeAdmin, 'pluginDidActive' ) );
-		register_activation_hook( __FILE__, array ( &$wpBannerizeAdmin, 'pluginDidDeactive' ) );
-	} else {
-		require_once( 'Classes/wpBannerizeFrontend.php' );
-		$wpBannerizeFrontend = new WPBannerizeFrontend( __FILE__ );
-		require_once( 'Classes/wpBannerizeFunctions.php' );
-	}
+    if ( is_admin() ) {
+        require_once( 'Classes/wpBannerizeAdmin.php' );
+        //
+        $wpBannerizeAdmin = new WPBannerizeAdmin( __FILE__ );
+        $wpBannerizeAdmin->register_plugin_settings( __FILE__ );
+        register_activation_hook( __FILE__, array( &$wpBannerizeAdmin, 'pluginDidActive' ) );
+        register_activation_hook( __FILE__, array( &$wpBannerizeAdmin, 'pluginDidDeactive' ) );
+    } else {
+        require_once( 'Classes/wpBannerizeFrontend.php' );
+        $wpBannerizeFrontend = new WPBannerizeFrontend( __FILE__ );
+        require_once( 'Classes/wpBannerizeFunctions.php' );
+    }
 }

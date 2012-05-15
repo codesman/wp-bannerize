@@ -1,16 +1,26 @@
 === WP Bannerize ===
 Contributors: gfazioli
-Donate link: http://en.saidmade.com/prodotti/wordpress/wp-bannerize/
+Donate link: http://www.wpxtre.me
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 3.1
 Tested up to: 3.1.2
-Stable tag: 3.0.50
+Stable tag: 3.0.60
 
-WP Bannerize, Amazing Banner Manager.
+WP Bannerize is an easy to use adv server with html, free text and Flash banner support.
 
 == Description ==
 
-WP Bannerize is an Amazing Banner Manager. In your template insert: `<?php if(function_exists( 'wp_bannerize' )) wp_bannerize(); ?>`, use new shortcode featured or set it like Widget. Remember: This software is free. You don't need to donate money to support it. Just talk about it.
+**[HOT NEWS]** WP Bannerize will be part of the new upcoming [wpXtreme](http://www.wpxtre.me "wpXtreme")!
+
+**wpXtreme** is a powerful tool for enhancing your WordPress experience. Downloading one free plugin, you will get:
+
+* a lot of improvements to the WordPress core for free (like a cool backend layout, improved user management, etc)
+* access to the evergrowing wpxPluginStore, where you will be able to download plugins for all your needs
+
+Signup to [wpXtreme](http://www.wpxtre.me "wpXtreme") and win a free licence!
+
+WP Bannerize is an Amazing Banner Manager. With WP Bannerize you can manage all your advertising stuff through widgets, shortcodes or directly from your template.
+In your template insert: `<?php if(function_exists( 'wp_bannerize' )) wp_bannerize(); ?>`, use new shortcode featured or set it like Widget.
 
 **FEATURES**
 
@@ -19,18 +29,18 @@ WP Bannerize is an Amazing Banner Manager. In your template insert: `<?php if(fu
 * Create your list (group/key) Banners image/Adobe Flash movie/URL/Free HTML
 * Drag & Drop order
 * Quick switch button to enable/disable banner
-* Show your banners list by PHP code, Wordpress **shortcode** or Widget
+* Show your banners list by PHP code, WordPress **shortcode** or Widget
 * Customize output by 'Settings' in admin area
 * Customize CSS Rules for frontend layout
 * Tools panel with Function and Shortcode Editor
 * Set random, limit and catories filters
-* Standard Wordpress interface improvement
+* Standard WordPress interface improvement
 * "nofollow" attribute support
 * Click Counter engine for stats
 * Impressions and Max Impressions
 * CTR (Click-through rate)
 * Date Time schedule
-* Wordpress Admin Contextual HELP
+* WordPress Admin Contextual HELP
 
 **WHAT'S NEWS IN 3.0 RELEASE**
 
@@ -111,18 +121,19 @@ The default HTML output for above code is:
 * [Elio e le Storie Tese](http://www.elioelestorietese.it "Elio e le Storie Tese")
 * [Artribune](http://www.artribune.com/ "Artribune")
 * [Undolog](http://www.undolog.com "Undolog")
-* [Saidmade](http://en.saidmade.com "Saidmade")
+* [wpXtreme](http://www.wpxtre.me "wpXtreme")
+* [wpXtreme Blog](http://blog.wpxtre.me "wpXtreme Blog")
 
-Aren't you in this list? Please, [let me know your Wordpress site url](mailto:g.fazioli@saidmade.com "let me know your Wordpress site url")
+Aren't you in this list? Please, [let me know your WordPress site url](mailto:g.fazioli@saidmade.com "let me know your WordPress site url")
 
 == Related Links ==
 
-* [Saidmade](http://en.saidmade.com/ "More Wordpress Plugins")
+* [wpXtreme](http://www.wpxtre.me "More WordPress Plugin")
 * [Undolog](http://www.undolog.com/ "Author's Web")
-* [Saidmade Blog](http://www.saidmade.com/category/blog "Saidmade Blog")
+* [wpXtreme Blog](http://blog.wpxtre.me "wpXtreme Blog")
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
-For more information on the roadmap and the next improvements, please send an e-mail to: [g.fazioli@saidmade.com](mailto:g.fazioli@saidmade.com "g.fazioli@saidmade.com")
+For more information on the roadmap and the next improvements, please send an e-mail to: [support@wpxtre.me](mailto:support@wpxtre.me "support@wpxtre.me")
 
 
 == Screenshots == 
@@ -397,19 +408,19 @@ For more information on the roadmap and the next improvements, please send an e-
 * Fixed Widget output
 
 = 2.3.0 =
-* Added Wordpress Categories Filter - Show Banner Group for Categories ID
+* Added WordPress Categories Filter - Show Banner Group for Categories ID
 * Improved admin
 
 = 2.2.2 =
 * Fixed minor bugs + prepare major release
 
 = 2.2.1 =
-* Fixed to Wordpress MU compatibilities
+* Fixed to WordPress MU compatibilities
 * Fixed minor bugs
 
 = 2.2.0 =
 * Added Widget support
-* Fixed compatibility with Wordpress 2.8.6
+* Fixed compatibility with WordPress 2.8.6
 
 = 2.1.0 =
 * Added thickbox support for preview thumbnail
@@ -488,7 +499,7 @@ Fixed localization. Upgrade immediately
 Added localization/multilanguage support and improved code restyle. Upgrade immediately
 
 = 2.2.0 =
-Added Widget support and Fixed for Wordpress 2.8.6. Upgrade immediately
+Added Widget support and Fixed for WordPress 2.8.6. Upgrade immediately
 
 = 2.0.0 =
 Major release improved. Upgrade immediately.
