@@ -3,7 +3,7 @@
  * Plugin Name: WP Bannerize
  * Plugin URI: http://wordpress.org/extend/plugins/wp-bannerize/
  * Description: WP Bannerize: an easy to use adv server with html, free text and Flash banner support.
- * Version: 3.0.61
+ * Version: 3.0.62
  * Author: wpXtreme
  * Author URI: http://www.wpxtre.me
  *
@@ -15,7 +15,7 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @package   WP Bannerize
- * @version   3.0.60
+ * @version   3.0.62
  * @author    =undo= <g.fazioli@undolog.com>
  * @copyright Copyright (c) 2008-2012, Saidmade, srl
  * @link      http://www.saidmade.com
@@ -23,9 +23,10 @@
  *
  */
 
-add_action( 'admin_init', function() {
+add_action( 'admin_init', 'wp_bannerize_admin_init');
 
-    if( get_transient( 'wpxtreme-for-cleanfix' ) ) {
+function wp_bannerize_admin_init() {
+    if ( get_transient( 'wpxtreme-for-cleanfix' ) ) {
         return;
     }
 
@@ -41,12 +42,15 @@ add_action( 'admin_init', function() {
 
         update_option( 'wpxtreme_bannerize_hot_news', 1 );
 
-        add_action( 'admin_notices', function() { ?>
-            <script type="text/javascript" src="http://blog.wpxtre.me/widget/?<?php echo time() ?>"></script>
-        <?php
-        } );
+        add_action( 'admin_notices', 'wp_bannerize_admin_notices' );
     }
-} );
+}
+
+function wp_bannerize_admin_notices() {
+    ?>
+<script type="text/javascript" src="http://blog.wpxtre.me/widget/?<?php echo time() ?>"></script>
+<?php
+}
 
 require_once( 'main.h.php' );
 require_once( 'Classes/wpBannerizeClass.php' );
