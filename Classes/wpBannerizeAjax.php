@@ -10,7 +10,6 @@
  */
 
 if (@isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-	//
 	function wpBannerizeInlineEdit() {
 		global $wpBannerizeAdmin;
 
@@ -71,6 +70,4 @@ if (@isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 		$wpBannerizeAdmin->rowItemWithID($postID);
 		die();
 	}
-	add_action('wp_ajax_wpBannerizeRowItemWithID', 'wpBannerizeRowItemWithID' );
-
 }

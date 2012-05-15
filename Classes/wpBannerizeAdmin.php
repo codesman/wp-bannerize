@@ -2,7 +2,7 @@
 /**
  * Class for Manage Admin (back-end)
  *
- * @package			wpBannerize
+ * @package            wpBannerize
  * @subpackage         wpBannerizeAdmin
  * @author             =undo= <g.fazioli@undolog.com>, <g.fazioli@saidmade.com>
  * @copyright          Copyright © 2008-2012 Saidmade Srl
@@ -60,13 +60,11 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 		// super
 		parent::WPBannerizeClass( $__file__ );
 
-		// Load localizations if available; @since 2.4.0
-		load_plugin_textdomain( 'wp-bannerize', false, 'wp-bannerize/localization' );
-
 		// Foo string for PoEdit
 		$foo_publish = __( 'Publish', 'wp-bannerize' );
 
-		$this->init();
+		//$this->init();
+        add_action( 'plugins_loaded', array( $this, 'init' ), 1 );
 	}
 
 	/**
@@ -75,6 +73,9 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 	 * @since 2.2.2
 	 */
 	function init() {
+		// Load localizations if available; @since 2.4.0
+		load_plugin_textdomain( 'wp-bannerize', false, 'wp-bannerize/localization' );
+
 		$this->cssRulesSample = $this->cssRulesSample();
 		// Add version control in options
 		$this->options = $this->defaultOptions();
@@ -100,11 +101,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 	function saidmadeHeader() {
 		?>
 	<div class="wp_saidmade_box">
-		<p class="wp_saidmade_copy_info">
-			<strong><?php _e( 'This software is free. You don\'t need to donate money to support it. Just talk about it.', 'wp-bannerize' ) ?></strong><br/><?php _e( 'For more info and plugins visit', 'wp-bannerize' ) ?>
-			<a
-				href="http://www.saidmade.com">Saidmade</a></p>
-		<a class="wp_saidmade_logo" href="http://www.saidmade.com/prodotti/wordpress/wp-bannerize/">
+		<a class="wp_saidmade_logo" href="http://www.wpxtre.me">
 			<?php echo $this->plugin_name ?> ver. <?php echo $this->version ?>
 		</a>
 	</div><?php
@@ -1328,7 +1325,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 		$use_description = isset( $_POST['use_description'] ) ? $_POST['use_description'] : 0;
 		$url             = $_POST['url'];
 		$target          = $_POST['target'];
-		$nofollow        = $_POST['nofollow'];
+		$nofollow        = isset( $_POST['nofollow'] ) ? $_POST['nofollow'] : 0;
 
 		$start_date = $this->mysql_date( $_POST['start_date'] );
 		$end_date   = $this->mysql_date( $_POST['end_date'] );
@@ -1376,26 +1373,28 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 		$use_description = isset( $_POST['use_description'] ) ? $_POST['use_description'] : 0;
 		$url             = $_POST['url'];
 		$target          = $_POST['target'];
-		$nofollow        = $_POST['nofollow'];
+		$nofollow        = isset( $_POST['nofollow'] ) ? $_POST['nofollow'] : 0;
 
 		$start_date = $this->mysql_date( $_POST['start_date'] );
 		$end_date   = $this->mysql_date( $_POST['end_date'] );
 
 		$wpdb->show_errors();
-		$rows = $wpdb->insert( $this->table_bannerize, array ( 'banner_type'     => $_POST['wpBannerizeBannerType'],
-		                                                       'group'           => $group,
-		                                                       'description'     => $description,
-		                                                       'use_description' => $use_description,
-		                                                       'url'             => $url,
-		                                                       'filename'        => $_POST['filenameFromURL'],
-		                                                       'target'          => $target,
-		                                                       'nofollow'        => $nofollow,
-		                                                       'start_date'      => $start_date,
-		                                                       'end_date'        => $end_date,
-		                                                       'maximpressions'  => $_POST['maxImpressions'],
-		                                                       'mime'            => $mime,
-		                                                       'width'           => $dimensions[0],
-		                                                       'height'          => $dimensions[1]
+        $rows = $wpdb->insert( $this->table_bannerize, array(
+                                                            'banner_type'     => $_POST['wpBannerizeBannerType'],
+                                                            'group'           => $group,
+                                                            'description'     => $description,
+                                                            'use_description' => $use_description,
+                                                            'url'             => $url,
+                                                            'filename'        => $_POST['filenameFromURL'],
+                                                            'target'          => $target,
+                                                            'nofollow'        => $nofollow,
+                                                            'start_date'      => $start_date,
+                                                            'end_date'        => $end_date,
+                                                            'maximpressions'  => $_POST['maxImpressions'],
+                                                            'mime'            => $mime,
+                                                            'width'           => $dimensions[0],
+                                                            'height'          => $dimensions[1],
+                                                            'free_html'       => ''
 
 		) );
 		if ( $rows !== false ) {
@@ -1438,25 +1437,27 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 					}
 				}
 
-				$wpdb->show_errors();
-				$rows = $wpdb->insert( $this->table_bannerize, array ( 'banner_type'     => $_POST['wpBannerizeBannerType'],
-				                                                       'group'           => $group,
-				                                                       'description'     => $description,
-				                                                       'use_description' => $use_description,
-				                                                       'url'             => $url,
-				                                                       'filename'        => $uploads['url'],
-				                                                       'target'          => $target,
-				                                                       'nofollow'        => $nofollow,
-				                                                       'mime'            => $mime,
-				                                                       'realpath'        => $uploads['file'],
-				                                                       'width'           => $dimensions[0],
-				                                                       'height'          => $dimensions[1],
-				                                                       'start_date'      => $start_date,
-				                                                       'end_date'        => $end_date,
-				                                                       'maximpressions'  => $_POST['maxImpressions']
+                $wpdb->show_errors();
+                $rows = $wpdb->insert( $this->table_bannerize, array(
+                                                                    'banner_type'     => $_POST['wpBannerizeBannerType'],
+                                                                    'group'           => $group,
+                                                                    'description'     => $description,
+                                                                    'use_description' => $use_description,
+                                                                    'url'             => $url,
+                                                                    'filename'        => $uploads['url'],
+                                                                    'target'          => $target,
+                                                                    'nofollow'        => $nofollow,
+                                                                    'mime'            => $mime,
+                                                                    'realpath'        => $uploads['file'],
+                                                                    'width'           => $dimensions[0],
+                                                                    'height'          => $dimensions[1],
+                                                                    'start_date'      => $start_date,
+                                                                    'end_date'        => $end_date,
+                                                                    'maximpressions'  => $_POST['maxImpressions'],
+                                                                    'free_html'       => ''
 
-				) );
-				if ( $rows !== false ) {
+                                                               ) );
+                if ( $rows !== false ) {
 					$this->error = false;
 					return __( 'Banner added succesfully!', 'wp-bannerize' );
 				} else {
@@ -1744,8 +1745,8 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 	 */
 	function add_plugin_links( $links, $file ) {
 		if ( $file == plugin_basename( $this->plugin_file ) ) {
-			$links[] = '<strong style="color:#fa0">' . __( 'For more info and plugins visit', 'wp-bannerize' ) .
-				' <a href="http://www.saidmade.com">Saidmade</a></strong>';
+			$links[] = '<strong style="color:#fa0">' . __( 'For more info visit', 'wp-bannerize' ) .
+				' <a href="http://blog.wpxtre.me">wpXtreme Blog</a></strong>';
 		}
 		return $links;
 	}
