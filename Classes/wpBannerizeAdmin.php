@@ -1800,9 +1800,9 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 		ob_start();
 		require_once( 'wpBannerizeTable.sql' );
 		$sql = sprintf( ob_get_contents(), ( $this->previousDatabaseTableNameExists() ) ? $this->prev_table_bannerize : $this->table_bannerize );
-		ob_end_clean();
-		dbDelta( $sql );
-	}
+		@dbDelta( $sql );
+        ob_end_clean();
+    }
 
 	/**
 	 * Rename previous databsse table name if needed

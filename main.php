@@ -3,7 +3,7 @@
  * Plugin Name: WP Bannerize
  * Plugin URI: http://wordpress.org/extend/plugins/wp-bannerize/
  * Description: WP Bannerize: an easy to use adv server with html, free text and Flash banner support.
- * Version: 3.0.60
+ * Version: 3.0.61
  * Author: wpXtreme
  * Author URI: http://www.wpxtre.me
  *

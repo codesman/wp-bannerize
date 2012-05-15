@@ -4,7 +4,7 @@ Donate link: http://www.wpxtre.me
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 3.1
 Tested up to: 3.1.2
-Stable tag: 3.0.60
+Stable tag: 3.0.61
 
 WP Bannerize is an easy to use adv server with html, free text and Flash banner support.
 
@@ -149,6 +149,10 @@ For more information on the roadmap and the next improvements, please send an e-
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 3.0.61 =
+* Introducing [wpXtreme](http://www.wpxtre.me "wpXtreme")
+* Fixed dbDelat output on plugin activation
 
 = 3.0.50 =
 * Added Russian translation, thanks to [Mick Levin](http://wordpress.org/support/profile/mick-levin "Mick Levin")
