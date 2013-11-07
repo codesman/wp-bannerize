@@ -219,7 +219,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
     wp_enqueue_script( 'jquery-ui-sortable' );
 
     wp_enqueue_script( 'fancybox_js', $this->uri . kWPBannerizeFancyBoxJavascript, array( 'jquery' ), kWPBannerizeVersion, true );
-    wp_enqueue_script( 'WPBannerizeJavascriptAdmin', $this->uri . kWPBannerizeJavascriptAdmin, array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'media-upload', 'thickbox' ), kWPBannerizeVersion, true );
+    wp_enqueue_script( 'WPBannerizeJavascriptAdmin', $this->uri . kWPBannerizeJavascriptAdmin, array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'media-upload', 'fancybox_js', 'thickbox' ), kWPBannerizeVersion, true );
 
     //wp_enqueue_script( 'wp_bannerize_jquery_dp_js', $this->uri . '/js/jquery-ui.min.js', array( 'jquery' ), kWPBannerizeVersion, true );
     wp_enqueue_script( 'wp_bannerize_timepicker_js', $this->uri . '/js/jquery.timepicker.min.js', array( 'WPBannerizeJavascriptAdmin' ), kWPBannerizeVersion, true );
