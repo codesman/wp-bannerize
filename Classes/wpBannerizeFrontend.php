@@ -4,8 +4,8 @@
  *
  * @package             wpBannerize
  * @subpackage          wpBannerizeFrontend
- * @author			  =undo= <g.fazioli@undolog.com>, <g.fazioli@saidmade.com>
- * @copyright		   Copyright © 2008-2011 Saidmade Srl
+ * @author			  =undo= <g.fazioli@undolog.com>, <g.fazioli@wpxtre.me>
+ * @copyright		   Copyright (C) 2008-2013
  *
  */
 
@@ -22,37 +22,39 @@ class WPBannerizeFrontend extends WPBannerizeClass {
 		// Load configurations options
 		$this->options = get_option( $this->options_key );
 
-		wp_enqueue_script( 'wp_bannerize_frontend_js',
-			$this->uri . kWPBannerizeJavascriptFrontend, array ( 'jquery' ), kWPBannerizeVersion, true );
+    add_action( 'wp_head', array( &$this, 'wp_enqueue_script' ) );
+    add_action( 'wp_head', array( &$this, 'customCSS' ) );
 
-		wp_localize_script( 'wp_bannerize_frontend_js', 'wpBannerizeJavascriptLocalization', array ( 'ajaxURL' => $this->ajaxURL ) );
-
-		// Load predefined css or own custom css
-		if ( $this->options['wpBannerizeStyleDefault'] == 'default' ) {
-			wp_enqueue_style( kWPBannerizeBannerStyleDefault,
-				$this->uri . '/css/' . $this->options['wpBannerizeStyle'] );
-		} else {
-			add_action( 'wp_head', array ( &$this, 'customCSS' ) );
-		}
-
-		// @deprecated from 3.0.0
+    // @deprecated from 3.0.0
 		add_shortcode( "wp-bannerize", array ( $this, "bannerize" ) );
 
 		// Added @since 3.0.0
 		add_shortcode( kWPBannerizeShortcodeName, array ( $this, "bannerize" ) );
 	}
 
-	function customCSS() {
-		?>
-	<!-- WP bannerize Custom CSS -->
-	<style type="text/css">
+  public function wp_enqueue_script()
+  {
+    wp_enqueue_script( 'wp_bannerize_frontend_js', $this->uri . kWPBannerizeJavascriptFrontend, array( 'jquery' ), kWPBannerizeVersion, true );
+    wp_localize_script( 'wp_bannerize_frontend_js', 'wpBannerizeJavascriptLocalization', array( 'ajaxURL' => $this->ajaxURL ) );
+  }
+
+  function customCSS()
+  {
+    if ( $this->options['wpBannerizeStyleDefault'] == 'default' ) {
+      wp_enqueue_style( kWPBannerizeBannerStyleDefault, $this->uri . '/css/' . $this->options['wpBannerizeStyle'] );
+    }
+    else {
+      ?>
+      <!-- WP bannerize Custom CSS -->
+      <style type="text/css">
 			<?php
 			echo $this->options['wpBannerizeStyleCustom'];
 			?>
 	</style>
-	<!-- WP bannerize Custom CSS -->
-	<?php
-	}
+      <!-- WP bannerize Custom CSS -->
+    <?php
+    }
+  }
 
 	/**
 	 * Build HTML output
@@ -235,7 +237,7 @@ class WPBannerizeFrontend extends WPBannerizeClass {
 			<?php endif; ?>
 		<?php if ( $this->options['supportWPBannerize'] == '1' ) : ?>
 			<p class="wp-bannerize-support"><a style="font-size:11px;text-align:center"
-			                                   href="http://www.saidmade.com/prodotti/wordpress/wp-bannerize/"
+			                                   href="https://wpxtre.me/product/bannerize/"
 			                                   target="_blank"><span>Powered by WP Bannerize</span></a></p>
 			<?php endif; ?>
 		<?php // Widget

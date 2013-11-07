@@ -5,8 +5,8 @@
  * @class        WPBannerizeClass
  * @package      wpBannerize
  * @subpackage   wpBannerizeClass
- * @author       =undo= <g.fazioli@undolog.com>, <g.fazioli@saidmade.com>
- * @copyright    Copyright © 2008-2011 Saidmade Srl
+ * @author       =undo= <g.fazioli@undolog.com>, <g.fazioli@wpxtre.me>
+ * @copyright    Copyright (C) 2008-2013
  *
  */
 
@@ -95,6 +95,7 @@ class WPBannerizeClass {
 	var $file = '';
 	var $directory = '';
 	var $uri = '';
+	var $url = '';
 	var $siteurl = '';
 	var $wpadminurl = '';
 

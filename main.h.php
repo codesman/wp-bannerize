@@ -4,8 +4,8 @@
  *
  * @package         wpBannerize
  * @subpackage      wpBannerizeDefines
- * @author          =undo= <g.fazioli@undolog.com>, <g.fazioli@saidmade.com>
- * @copyright       Copyright © 2008-2012 Saidmade Srl
+ * @author          =undo= <g.fazioli@undolog.com>, <g.fazioli@wpxtre.me>
+ * @copyright       Copyright (C) 2008-2013
  *
  */
 
@@ -13,7 +13,7 @@
 define( 'kWPBannerizeDebug', false );
 
 // Common
-define( 'kWPBannerizeVersion', '3.0.62' );
+define( 'kWPBannerizeVersion', '3.1.0' );
 define( 'kWPBannerizePluginName', 'WP Bannerize' );
 define( 'kWPBannerizeOptionTitle', kWPBannerizePluginName );
 define( 'kWPBannerizeSlugName', 'wp-bannerize' );

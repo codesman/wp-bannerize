@@ -4,8 +4,8 @@
  *
  * @package         wp-bannerize
  * @subpackage      ajax_sorter.php
- * @author          =undo= <g.fazioli@saidmade.com>
- * @copyright       Copyright © 2008-2010 Saidmade Srl
+ * @author          =undo= <g.fazioli@wpxtre.me>
+ * @copyright       Copyright (C) 2008-2013
  *
  */
 if ( @isset($_SERVER['HTTP_X_REQUESTED_WITH']) ) {

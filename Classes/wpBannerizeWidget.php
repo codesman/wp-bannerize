@@ -2,11 +2,11 @@
 /**
  * WP Bannerize Wordpress Widget Class support
  *
- * @package			wpBannerize
+ * @package            wpBannerize
  * @subpackage         wpBannerizeWidget
- * @author             =undo= <g.fazioli@undolog.com>, <g.fazioli@saidmade.com>
- * @copyright          Copyright © 2008-2011 Saidmade Srl
- * @version			3.0
+ * @author             =undo= <g.fazioli@undolog.com>, <g.fazioli@wpxtre.me>
+ * @copyright          Copyright (C) 2008-2013
+ * @version            3.0
  *
  */
 

@@ -4,8 +4,8 @@
  *
  * @package         wpBannerize
  * @subpackage      wpBannerizeFunctions
- * @author          =undo= <g.fazioli@undolog.com>, <g.fazioli@saidmade.com>
- * @copyright       Copyright © 2008-2011 Saidmade Srl
+ * @author          =undo= <g.fazioli@undolog.com>, <g.fazioli@wpxtre.me>
+ * @copyright       Copyright (C) 2008-2013
  *
  */
 

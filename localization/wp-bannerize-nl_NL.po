@@ -7,376 +7,600 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-bannerize v2.7.0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-03 18:43+0100\n"
-"PO-Revision-Date: 2011-10-11 00:22+0100\n"
+"POT-Creation-Date: 2013-11-07 11:29+0100\n"
+"PO-Revision-Date: 2013-11-07 11:29+0100\n"
 "Last-Translator: Giovambattista Fazioli <g.fazioli@undolog.com>\n"
 "Language-Team: Translation by WordPressWebshop.com <info@wpwebshop.com>\n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../wp-bannerize_admin.php:25
+#: ../Classes/wpBannerizeAdmin.php:68
 msgid "Publish"
 msgstr "Publiceren"
 
-#: ../wp-bannerize_admin.php:101
+#: ../Classes/wpBannerizeAdmin.php:233
 msgid "WARINING!! Do you want delete this banner?"
 msgstr "WAARSCHUWING! Wil je deze banner verwijderen?"
 
-#: ../wp-bannerize_admin.php:102
+#: ../Classes/wpBannerizeAdmin.php:234
+msgid "WARINING!! Do you have to check `Confirm unreversible action` "
+msgstr ""
+
+#: ../Classes/wpBannerizeAdmin.php:235
+msgid "WARINING!! Are you sure to erase all WP Bannerize Database Table? "
+msgstr ""
+
+#: ../Classes/wpBannerizeAdmin.php:236
 msgid "Choose Time"
 msgstr "Kies tijd"
 
-#: ../wp-bannerize_admin.php:103
+#: ../Classes/wpBannerizeAdmin.php:237
 msgid "Time"
 msgstr "Tijd"
 
-#: ../wp-bannerize_admin.php:104
+#: ../Classes/wpBannerizeAdmin.php:238
 msgid "Hour"
 msgstr "Uur"
 
-#: ../wp-bannerize_admin.php:105
+#: ../Classes/wpBannerizeAdmin.php:239
 msgid "Minute"
 msgstr "Minuut"
 
-#: ../wp-bannerize_admin.php:106
+#: ../Classes/wpBannerizeAdmin.php:240
 msgid "Seconds"
 msgstr "Seconden"
 
-#: ../wp-bannerize_admin.php:107
+#: ../Classes/wpBannerizeAdmin.php:241
 msgid "Now"
 msgstr "Nu"
 
-#: ../wp-bannerize_admin.php:108
+#: ../Classes/wpBannerizeAdmin.php:242
 msgid "Su,Mo,Tu,We,Th,Fr,Sa"
 msgstr "Zo,Ma,Di,Wo,Do,Vr,Za"
 
-#: ../wp-bannerize_admin.php:109
-msgid "January,February,March,April,May,June,July,August,September,October,November,December"
-msgstr "Januari,Februari,Maart,April,Mei,Juni,Juli,Augustus,September,October,November,December"
+#: ../Classes/wpBannerizeAdmin.php:243
+msgid ""
+"January,February,March,April,May,June,July,August,September,October,November,"
+"December"
+msgstr ""
+"Januari,Februari,Maart,April,Mei,Juni,Juli,Augustus,September,October,"
+"November,December"
 
-#: ../wp-bannerize_admin.php:110
+#: ../Classes/wpBannerizeAdmin.php:244
 msgid "Close"
 msgstr "Sluiten"
 
-#: ../wp-bannerize_admin.php:111
-#: ../wp-bannerize_admin.php:1135
+#: ../Classes/wpBannerizeAdmin.php:245 ../Classes/wpBannerizeAdmin.php:1997
+#: ../Classes/wpBannerizeAdmin.php:2033
 msgid "mm/dd/yy"
 msgstr "dd/mm/yy"
 
-#: ../wp-bannerize_admin.php:137
-#: ../wp-bannerize_admin.php:640
-msgid "Edit"
-msgstr "Bewerken"
+#: ../Classes/wpBannerizeAdmin.php:256
+msgid "PHP Function and Shortcode Editor"
+msgstr ""
 
-#: ../wp-bannerize_admin.php:138
-#: ../wp-bannerize_admin.php:454
-msgid "Add New"
-msgstr "Nieuwe Toevoegen"
+#: ../Classes/wpBannerizeAdmin.php:257
+msgid "Database"
+msgstr ""
 
-#: ../wp-bannerize_admin.php:139
-#: ../wp-bannerize_admin.php:219
-#: ../wp-bannerize_admin.php:955
+#: ../Classes/wpBannerizeAdmin.php:262 ../Classes/wpBannerizeAdmin.php:450
+#: ../Classes/wpBannerizeAdmin.php:1829
 msgid "Settings"
 msgstr "Instellingen"
 
-#: ../wp-bannerize_admin.php:157
-msgid "Use"
-msgstr "Gebruik"
+#: ../Classes/wpBannerizeAdmin.php:311
+#, fuzzy
+msgid "Settings update succesfully!"
+msgstr "Banner succesvol bijgewerkt!"
 
-#: ../wp-bannerize_admin.php:209
-#: ../wp-bannerize_admin.php:288
-#: ../wp-bannerize_admin.php:402
-#: ../wp-bannerize_admin.php:448
-#: ../wp-bannerize_admin.php:965
-#: ../wp-bannerize_admin.php:1033
-#: ../wp-bannerize_admin.php:1067
-msgid "For more info and plugins visit"
-msgstr "Voor meer informatie en plugins bezoek"
+#: ../Classes/wpBannerizeAdmin.php:316
+#, fuzzy
+msgid "Settings Reset to default succesfully!"
+msgstr "Banner succesvol naar prullenbak verzonden!"
 
-#: ../wp-bannerize_admin.php:227
-msgid "Turn on Click Counter"
-msgstr "Activeren klik teller"
+#: ../Classes/wpBannerizeAdmin.php:381
+#, fuzzy
+msgid "WP Bannerize Table was erase succesfully!"
+msgstr "Banner succesvol naar prullenbak verzonden!"
 
-#: ../wp-bannerize_admin.php:234
-msgid "Turn on Impressions"
-msgstr "Activeren Impressies"
+#: ../Classes/wpBannerizeAdmin.php:442 ../Classes/wpBannerizeAdmin.php:991
+#: ../Classes/wpBannerizeAdmin.php:992
+msgid "Edit"
+msgstr "Bewerken"
 
-#: ../wp-bannerize_admin.php:241
-msgid "Support WP Bannerize"
-msgstr "Help WP Bannerize"
+#: ../Classes/wpBannerizeAdmin.php:446 ../Classes/wpBannerizeAdmin.php:638
+msgid "Add New"
+msgstr "Nieuwe Toevoegen"
 
-#: ../wp-bannerize_admin.php:244
-msgid "Append Powered by..."
-msgstr "Voeg Powered by... toe"
+#: ../Classes/wpBannerizeAdmin.php:454
+msgid "Tools"
+msgstr ""
 
-#: ../wp-bannerize_admin.php:250
-#: ../wp-bannerize_admin.php:738
-msgid "Update"
-msgstr "Update"
-
-#: ../wp-bannerize_admin.php:298
-msgid "Insert new Banner"
+#: ../Classes/wpBannerizeAdmin.php:488
+#, fuzzy
+msgid "Insert a new banner"
 msgstr "Invoegen nieuwe Banner"
 
-#: ../wp-bannerize_admin.php:309
-#: ../wp-bannerize_admin.php:595
-#: ../wp-bannerize_admin.php:607
-msgid "Image"
-msgstr "Afbeelding"
+#: ../Classes/wpBannerizeAdmin.php:499 ../Classes/wpBannerizeAdmin.php:1061
+msgid "Banner"
+msgstr ""
 
-#: ../wp-bannerize_admin.php:316
-#: ../wp-bannerize_admin.php:717
+#: ../Classes/wpBannerizeAdmin.php:505 ../Classes/wpBannerizeAdmin.php:1065
+msgid "From local"
+msgstr ""
+
+#: ../Classes/wpBannerizeAdmin.php:507 ../Classes/wpBannerizeAdmin.php:1067
+msgid "By URL o Media Library"
+msgstr ""
+
+#: ../Classes/wpBannerizeAdmin.php:509 ../Classes/wpBannerizeAdmin.php:1069
+msgid "Free HTML"
+msgstr ""
+
+#: ../Classes/wpBannerizeAdmin.php:520 ../Classes/wpBannerizeAdmin.php:1079
+msgid "Media Library Image"
+msgstr ""
+
+#: ../Classes/wpBannerizeAdmin.php:530 ../Classes/wpBannerizeAdmin.php:1089
 msgid "Start Date"
 msgstr "Start Datum"
 
-#: ../wp-bannerize_admin.php:320
-#: ../wp-bannerize_admin.php:718
+#: ../Classes/wpBannerizeAdmin.php:535 ../Classes/wpBannerizeAdmin.php:1099
 msgid "End Date"
 msgstr "Eind Datum"
 
-#: ../wp-bannerize_admin.php:321
-msgid "Keep empty to set ever visible"
+#: ../Classes/wpBannerizeAdmin.php:538
+#, fuzzy
+msgid "Leave empty to always visible"
 msgstr "Behoud leeg om altijd weer te geven"
 
-#: ../wp-bannerize_admin.php:328
-#: ../wp-bannerize_admin.php:596
-#: ../wp-bannerize_admin.php:608
-#: ../wp-bannerize_admin.php:720
+#: ../Classes/wpBannerizeAdmin.php:539 ../Classes/wpBannerizeAdmin.php:1104
+msgid "Server Date/time"
+msgstr ""
+
+#: ../Classes/wpBannerizeAdmin.php:546 ../Classes/wpBannerizeAdmin.php:819
+#: ../Classes/wpBannerizeAdmin.php:839 ../Classes/wpBannerizeAdmin.php:1109
+#: ../Classes/wpBannerizeTools.php:9 ../Classes/wpBannerizeWidget.php:134
 msgid "Group"
 msgstr "Groep"
 
-#: ../wp-bannerize_admin.php:331
+#: ../Classes/wpBannerizeAdmin.php:551
 msgid "Insert a key max 128 chars"
 msgstr "Voeg een sleutel in  max. 128 karakters"
 
-#: ../wp-bannerize_admin.php:336
-#: ../wp-bannerize_admin.php:597
-#: ../wp-bannerize_admin.php:609
-#: ../wp-bannerize_admin.php:721
+#: ../Classes/wpBannerizeAdmin.php:556 ../Classes/wpBannerizeAdmin.php:821
+#: ../Classes/wpBannerizeAdmin.php:841 ../Classes/wpBannerizeAdmin.php:1114
 msgid "Description"
 msgstr "Omschrijving"
 
-#: ../wp-bannerize_admin.php:339
-#: ../wp-bannerize_admin.php:722
+#: ../Classes/wpBannerizeAdmin.php:561 ../Classes/wpBannerizeAdmin.php:1118
 msgid "Use this description in output"
 msgstr "Gebruik deze omschrijving in output"
 
-#: ../wp-bannerize_admin.php:343
-#: ../wp-bannerize_admin.php:723
+#: ../Classes/wpBannerizeAdmin.php:565 ../Classes/wpBannerizeAdmin.php:1122
 msgid "URL"
 msgstr "URL"
 
-#: ../wp-bannerize_admin.php:345
-msgid "Target:"
-msgstr "Doel:"
+#: ../Classes/wpBannerizeAdmin.php:568 ../Classes/wpBannerizeAdmin.php:1124
+msgid "Target"
+msgstr "Doel"
 
-#: ../wp-bannerize_admin.php:350
-#: ../wp-bannerize_admin.php:727
+#: ../Classes/wpBannerizeAdmin.php:575 ../Classes/wpBannerizeAdmin.php:1143
 msgid "Max Impressions"
 msgstr "Max Impressies"
 
-#: ../wp-bannerize_admin.php:352
-msgid "When Impressions are great than this value then this banner is set to hidden"
-msgstr "Wanneer Impressies groter zijn dan deze waarde is deze banner op verbergen ingesteld"
+#: ../Classes/wpBannerizeAdmin.php:580
+msgid ""
+"When Impressions are great than this value then this banner is set to hidden"
+msgstr ""
+"Wanneer Impressies groter zijn dan deze waarde is deze banner op verbergen "
+"ingesteld"
 
-#: ../wp-bannerize_admin.php:357
-msgid "Add “nofollow“ attribute"
-msgstr "Toevoegen “nofollow“ attribuut"
+#: ../Classes/wpBannerizeAdmin.php:587
+#, fuzzy
+msgid "Add \"nofollow\" attribute"
+msgstr "Toevoegen nofollow attribuut"
 
-#: ../wp-bannerize_admin.php:362
+#: ../Classes/wpBannerizeAdmin.php:595
 msgid "Insert"
 msgstr "Invoegen"
 
-#: ../wp-bannerize_admin.php:407
-msgid "Warning!"
-msgstr "Waarschuwing!"
-
-#: ../wp-bannerize_admin.php:408
-msgid "This WP Bannerize release has a different Database Table struct. WP Bannerize has found an old Database Table. Do you want convert old struct for this release?"
-msgstr "Deze WP Bannerize heeft een andere Database Tabel structuur. WP Bannerize heeft een oude Database Tabel gevonden. Wil je de oude structuur converteren naar deze versie?"
-
-#: ../wp-bannerize_admin.php:411
-msgid "Convert Database Table"
-msgstr "Converteren Database Tabel"
-
-#: ../wp-bannerize_admin.php:415
-msgid "Do nothing"
-msgstr "Doe niets"
-
-#: ../wp-bannerize_admin.php:419
-msgid "Delete Database and Images"
-msgstr "Verwijder Database en Afbeeldingen"
-
-#: ../wp-bannerize_admin.php:567
-#: ../wp-bannerize_admin.php:674
+#: ../Classes/wpBannerizeAdmin.php:785 ../Classes/wpBannerizeAdmin.php:873
 msgid "Actions"
 msgstr "Acties"
 
-#: ../wp-bannerize_admin.php:569
-#: ../wp-bannerize_admin.php:641
-#: ../wp-bannerize_admin.php:676
+#: ../Classes/wpBannerizeAdmin.php:787 ../Classes/wpBannerizeAdmin.php:875
+#: ../Classes/wpBannerizeAdmin.php:994 ../Classes/wpBannerizeAdmin.php:995
 msgid "Trash"
 msgstr "Prullenbak"
 
-#: ../wp-bannerize_admin.php:571
-#: ../wp-bannerize_admin.php:645
-#: ../wp-bannerize_admin.php:678
+#: ../Classes/wpBannerizeAdmin.php:789 ../Classes/wpBannerizeAdmin.php:877
+#: ../Classes/wpBannerizeAdmin.php:1004 ../Classes/wpBannerizeAdmin.php:1005
 msgid "Restore"
 msgstr "Herstellen"
 
-#: ../wp-bannerize_admin.php:572
-#: ../wp-bannerize_admin.php:644
-#: ../wp-bannerize_admin.php:679
+#: ../Classes/wpBannerizeAdmin.php:790 ../Classes/wpBannerizeAdmin.php:878
+#: ../Classes/wpBannerizeAdmin.php:1001 ../Classes/wpBannerizeAdmin.php:1002
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: ../wp-bannerize_admin.php:575
-#: ../wp-bannerize_admin.php:682
+#: ../Classes/wpBannerizeAdmin.php:794 ../Classes/wpBannerizeAdmin.php:882
 msgid "Apply"
 msgstr "Toepassen"
 
-#: ../wp-bannerize_admin.php:577
+#: ../Classes/wpBannerizeAdmin.php:799
 msgid "Filter"
 msgstr "Filteren"
 
-#: ../wp-bannerize_admin.php:582
-#: ../wp-bannerize_admin.php:686
+#: ../Classes/wpBannerizeAdmin.php:804 ../Classes/wpBannerizeAdmin.php:886
 #, php-format
 msgid "Showing %s-%s of %s"
 msgstr "Weergeven %s-%s van %s"
 
-#: ../wp-bannerize_admin.php:636
-msgid "URL:"
-msgstr "URL:"
+#: ../Classes/wpBannerizeAdmin.php:818 ../Classes/wpBannerizeAdmin.php:838
+msgid "Image"
+msgstr "Afbeelding"
 
-#: ../wp-bannerize_admin.php:642
-msgid "View"
-msgstr "Bekijken"
+#: ../Classes/wpBannerizeAdmin.php:823 ../Classes/wpBannerizeAdmin.php:1129
+#, fuzzy
+msgid "Click Counter"
+msgstr "Klik Teller:"
 
-#: ../wp-bannerize_admin.php:694
+#: ../Classes/wpBannerizeAdmin.php:826 ../Classes/wpBannerizeAdmin.php:1134
+#, fuzzy
+msgid "Impressions"
+msgstr "Max Impressies"
+
+#: ../Classes/wpBannerizeAdmin.php:895
 msgid "No Banner found!"
 msgstr "Geen Banner gevonden!"
 
-#: ../wp-bannerize_admin.php:724
-msgid "Target"
-msgstr "Doel"
+#: ../Classes/wpBannerizeAdmin.php:969 ../Classes/wpBannerizeAdmin.php:971
+msgid "Always"
+msgstr ""
 
-#: ../wp-bannerize_admin.php:725
-msgid "Click Counter:"
-msgstr "Klik Teller:"
+#: ../Classes/wpBannerizeAdmin.php:998
+msgid "View"
+msgstr "Bekijken"
 
-#: ../wp-bannerize_admin.php:730
+#: ../Classes/wpBannerizeAdmin.php:1155
 msgid "Add nofollow attribute"
 msgstr "Toevoegen nofollow attribuut"
 
-#: ../wp-bannerize_admin.php:732
-msgid "Width:"
+#: ../Classes/wpBannerizeAdmin.php:1160
+#, fuzzy
+msgid "Width"
 msgstr "Breedte:"
 
-#: ../wp-bannerize_admin.php:734
-msgid "Height:"
+#: ../Classes/wpBannerizeAdmin.php:1164
+#, fuzzy
+msgid "Height"
 msgstr "Hoogte:"
 
-#: ../wp-bannerize_admin.php:737
+#: ../Classes/wpBannerizeAdmin.php:1170 ../Classes/wpBannerizeAdmin.php:1171
 msgid "Cancel"
 msgstr "Afbreken"
 
-#: ../wp-bannerize_admin.php:752
+#: ../Classes/wpBannerizeAdmin.php:1173 ../Classes/wpBannerizeAdmin.php:1174
+#: ../Classes/wpBannerizeSettings.php:108
+msgid "Update"
+msgstr "Update"
+
+#: ../Classes/wpBannerizeAdmin.php:1192
 msgid "All groups"
 msgstr "Alle groepen"
 
-#: ../wp-bannerize_admin.php:863
+#: ../Classes/wpBannerizeAdmin.php:1385 ../Classes/wpBannerizeAdmin.php:1447
+#: ../Classes/wpBannerizeAdmin.php:1515
 msgid "Banner added succesfully!"
 msgstr "Banner succesvol toegevoegd!"
 
-#: ../wp-bannerize_admin.php:866
+#: ../Classes/wpBannerizeAdmin.php:1389
+msgid "Error on insert Free HTML banner type"
+msgstr ""
+
+#: ../Classes/wpBannerizeAdmin.php:1451
+msgid "Error on insert URL banner type"
+msgstr ""
+
+#: ../Classes/wpBannerizeAdmin.php:1519
+msgid "Error on insert local banner type"
+msgstr ""
+
+#: ../Classes/wpBannerizeAdmin.php:1524
 #, php-format
 msgid "Error while copying [%s] [%s bytes] - [%s]"
 msgstr "Fout tijdens kopiëren [%s] [%s bytes] - [%s]"
 
-#: ../wp-bannerize_admin.php:870
+#: ../Classes/wpBannerizeAdmin.php:1530
 #, php-format
 msgid "No file to upload! - [%s]"
 msgstr "Geen bestand voor uploaden! - [%s]"
 
-#: ../wp-bannerize_admin.php:887
+#: ../Classes/wpBannerizeAdmin.php:1549
 msgid "Banner sent to trash succesfully!"
 msgstr "Banner succesvol naar prullenbak verzonden!"
 
-#: ../wp-bannerize_admin.php:902
+#: ../Classes/wpBannerizeAdmin.php:1566
 msgid "Banner restore from trash succesfully!"
 msgstr "Banner succesvol herstelt van prullenbak!"
 
-#: ../wp-bannerize_admin.php:920
+#: ../Classes/wpBannerizeAdmin.php:1596
 msgid "Banner delete succesfully!"
 msgstr "Banner succesvol verwijderd!"
 
-#: ../wp-bannerize_admin.php:936
+#: ../Classes/wpBannerizeAdmin.php:1657 ../Classes/wpBannerizeAdmin.php:1735
+#: ../Classes/wpBannerizeAdmin.php:1794
 msgid "Banner update succesfully!"
 msgstr "Banner succesvol bijgewerkt!"
 
-#: ../wp-bannerize_admin.php:1038
-#: ../wp-bannerize_admin.php:1072
-msgid "Results"
-msgstr "Resultaten"
+#: ../Classes/wpBannerizeAdmin.php:1661
+msgid "Error while update free HTML Banner!"
+msgstr ""
 
-#: ../wp-bannerize_admin.php:1039
-msgid "Ok, your old WP Bannerize Database Table has been convert succesfully! Please, press \"continue\" button to start with new WP Bannerize Release! Thank you for collaboration."
-msgstr "Ok, je oude WP Bannerize Database Tabel is succesvol geconverteerd! Klik op de \"doorgaan\" knop om te starten met de nieuwe WP Bannerize versie! Bedankt voor de medewerking."
+#: ../Classes/wpBannerizeAdmin.php:1739 ../Classes/wpBannerizeAdmin.php:1798
+msgid "Error while update local Banner!"
+msgstr ""
 
-#: ../wp-bannerize_admin.php:1041
-#: ../wp-bannerize_admin.php:1075
-msgid "Continue"
-msgstr "Doorgaan"
+#: ../Classes/wpBannerizeAdmin.php:1846
+#, fuzzy
+msgid "For more info visit"
+msgstr "Voor meer informatie en plugins bezoek"
 
-#: ../wp-bannerize_admin.php:1073
-msgid "Ok, ALL previous image file have been deleted succesfully. The old WP Bannerize Database table has been deleted."
-msgstr "Ok, ALLE vorige afbeeldingen zijn succesvol verwijderd. De oude WP Bannerize Database tabel is verwijderd."
+#: ../Classes/wpBannerizeAdmin.php:1953
+msgid "Numer of rows"
+msgstr ""
 
-#: ../wp-bannerize_widget.php:197
-msgid "Title:"
-msgstr "Titel:"
+#: ../Classes/wpBannerizeAdmin.php:1954
+msgid "Size"
+msgstr ""
 
-#: ../wp-bannerize_widget.php:199
-msgid "Group:"
-msgstr "Groep:"
+#: ../Classes/wpBannerizeDatabase.php:9
+msgid "Status"
+msgstr ""
 
-#: ../wp-bannerize_widget.php:201
-msgid "Random:"
+#: ../Classes/wpBannerizeDatabase.php:14
+msgid "Clear"
+msgstr ""
+
+#: ../Classes/wpBannerizeDatabase.php:15
+msgid ""
+"Removes all data from WP Bannerize Table. This operation is irreversible! "
+"Make a backup before proceding."
+msgstr ""
+
+#: ../Classes/wpBannerizeDatabase.php:18
+msgid "Remove uploaded images"
+msgstr ""
+
+#: ../Classes/wpBannerizeDatabase.php:24
+msgid "Initialize"
+msgstr ""
+
+#: ../Classes/wpBannerizeDatabase.php:27
+msgid "Please, confirm irreversible action"
+msgstr ""
+
+#: ../Classes/wpBannerizeHelp.php:1
+msgid "How to"
+msgstr ""
+
+#: ../Classes/wpBannerizeHelp.php:2
+msgid ""
+"To display your banner use Widget area, PHP or Wordpress shortcode in your "
+"post and page"
+msgstr ""
+
+#: ../Classes/wpBannerizeHelp.php:3
+msgid "Usage from PHP"
+msgstr ""
+
+#: ../Classes/wpBannerizeHelp.php:8
+msgid "Arguments for PHP function"
+msgstr ""
+
+#: ../Classes/wpBannerizeHelp.php:18
+msgid "Usage from shortcode"
+msgstr ""
+
+#: ../Classes/wpBannerizeHelp.php:22
+msgid "Deprecated"
+msgstr ""
+
+#: ../Classes/wpBannerizeHelp.php:23
+msgid "These arguments are no longer supported"
+msgstr ""
+
+#: ../Classes/wpBannerizeHelp.php:30
+msgid "The shortcode"
+msgstr ""
+
+#: ../Classes/wpBannerizeSettings.php:11
+msgid "Turn on Click Counter"
+msgstr "Activeren klik teller"
+
+#: ../Classes/wpBannerizeSettings.php:21
+msgid "Turn on Impressions"
+msgstr "Activeren Impressies"
+
+#: ../Classes/wpBannerizeSettings.php:30
+#, fuzzy
+msgid "Link description"
+msgstr "Omschrijving"
+
+#: ../Classes/wpBannerizeSettings.php:42
+msgid "Support WP Bannerize"
+msgstr "Help WP Bannerize"
+
+#: ../Classes/wpBannerizeSettings.php:48
+msgid "Append Powered by..."
+msgstr "Voeg Powered by... toe"
+
+#: ../Classes/wpBannerizeSettings.php:54
+msgid "Adobe Flash Window Mode"
+msgstr ""
+
+#: ../Classes/wpBannerizeSettings.php:65
+msgid "Frontend Style"
+msgstr ""
+
+#: ../Classes/wpBannerizeSettings.php:72
+msgid "Default: vertical"
+msgstr ""
+
+#: ../Classes/wpBannerizeSettings.php:74
+msgid "Inline: side by side"
+msgstr ""
+
+#: ../Classes/wpBannerizeSettings.php:78
+msgid "Custom rules"
+msgstr ""
+
+#: ../Classes/wpBannerizeSettings.php:95
+msgid "Default HTML/message for no banner"
+msgstr ""
+
+#: ../Classes/wpBannerizeSettings.php:110
+msgid "Reset to Default"
+msgstr ""
+
+#: ../Classes/wpBannerizeTools.php:11
+msgid "Any"
+msgstr ""
+
+#: ../Classes/wpBannerizeTools.php:16 ../Classes/wpBannerizeWidget.php:137
+#, fuzzy
+msgid "Random"
 msgstr "Willekeurig:"
 
-#: ../wp-bannerize_widget.php:204
-msgid "Show only for these Categories:"
+#: ../Classes/wpBannerizeTools.php:23 ../Classes/wpBannerizeWidget.php:143
+msgid "No HTML wrap"
+msgstr ""
+
+#: ../Classes/wpBannerizeTools.php:30
+msgid "Limit"
+msgstr ""
+
+#: ../Classes/wpBannerizeTools.php:38 ../Classes/wpBannerizeWidget.php:151
+msgid "HTML Tag before banner"
+msgstr ""
+
+#: ../Classes/wpBannerizeTools.php:42 ../Classes/wpBannerizeWidget.php:160
+msgid "HTML Tag after banner"
+msgstr ""
+
+#: ../Classes/wpBannerizeTools.php:49
+#, fuzzy
+msgid "Show banners only for following categories"
 msgstr "Geef alleen voor deze Categorieën weer:"
 
-#: ../wp-bannerize_widget.php:207
-msgid "Max:"
+#: ../Classes/wpBannerizeTools.php:63
+msgid "Click in the text area and copy code below"
+msgstr ""
+
+#: ../Classes/wpBannerizeTools.php:69
+msgid "PHP Function"
+msgstr ""
+
+#: ../Classes/wpBannerizeTools.php:79
+msgid "Wordpress shortcode"
+msgstr ""
+
+#: ../Classes/wpBannerizeWidget.php:45
+msgid "Amazing Banner Manager"
+msgstr ""
+
+#: ../Classes/wpBannerizeWidget.php:128
+#, fuzzy
+msgid "Title"
+msgstr "Titel:"
+
+#: ../Classes/wpBannerizeWidget.php:171
+#, fuzzy
+msgid "Show only for these Categories"
+msgstr "Geef alleen voor deze Categorieën weer:"
+
+#: ../Classes/wpBannerizeWidget.php:178
+#, fuzzy
+msgid "Max"
 msgstr "Max:"
 
-#: ../wp-bannerize_widget.php:210
-msgid "container_before:"
-msgstr "container_before:"
+#~ msgid "Use"
+#~ msgstr "Gebruik"
 
-#: ../wp-bannerize_widget.php:213
-msgid "before:"
-msgstr "voor:"
+#~ msgid "Target:"
+#~ msgstr "Doel:"
 
-#: ../wp-bannerize_widget.php:219
-msgid "link_class:"
-msgstr "link_class:"
+#~ msgid "Add “nofollow“ attribute"
+#~ msgstr "Toevoegen “nofollow“ attribuut"
 
-#: ../wp-bannerize_widget.php:223
-msgid "after:"
-msgstr "na:"
+#~ msgid "Warning!"
+#~ msgstr "Waarschuwing!"
 
-#: ../wp-bannerize_widget.php:227
-msgid "container_after:"
-msgstr "container_after:"
+#~ msgid ""
+#~ "This WP Bannerize release has a different Database Table struct. WP "
+#~ "Bannerize has found an old Database Table. Do you want convert old struct "
+#~ "for this release?"
+#~ msgstr ""
+#~ "Deze WP Bannerize heeft een andere Database Tabel structuur. WP Bannerize "
+#~ "heeft een oude Database Tabel gevonden. Wil je de oude structuur "
+#~ "converteren naar deze versie?"
 
+#~ msgid "Convert Database Table"
+#~ msgstr "Converteren Database Tabel"
+
+#~ msgid "Do nothing"
+#~ msgstr "Doe niets"
+
+#~ msgid "Delete Database and Images"
+#~ msgstr "Verwijder Database en Afbeeldingen"
+
+#~ msgid "URL:"
+#~ msgstr "URL:"
+
+#~ msgid "Results"
+#~ msgstr "Resultaten"
+
+#~ msgid ""
+#~ "Ok, your old WP Bannerize Database Table has been convert succesfully! "
+#~ "Please, press \"continue\" button to start with new WP Bannerize Release! "
+#~ "Thank you for collaboration."
+#~ msgstr ""
+#~ "Ok, je oude WP Bannerize Database Tabel is succesvol geconverteerd! Klik "
+#~ "op de \"doorgaan\" knop om te starten met de nieuwe WP Bannerize versie! "
+#~ "Bedankt voor de medewerking."
+
+#~ msgid "Continue"
+#~ msgstr "Doorgaan"
+
+#~ msgid ""
+#~ "Ok, ALL previous image file have been deleted succesfully. The old WP "
+#~ "Bannerize Database table has been deleted."
+#~ msgstr ""
+#~ "Ok, ALLE vorige afbeeldingen zijn succesvol verwijderd. De oude WP "
+#~ "Bannerize Database tabel is verwijderd."
+
+#~ msgid "Group:"
+#~ msgstr "Groep:"
+
+#~ msgid "container_before:"
+#~ msgstr "container_before:"
+
+#~ msgid "before:"
+#~ msgstr "voor:"
+
+#~ msgid "link_class:"
+#~ msgstr "link_class:"
+
+#~ msgid "after:"
+#~ msgstr "na:"
+
+#~ msgid "container_after:"
+#~ msgstr "container_after:"

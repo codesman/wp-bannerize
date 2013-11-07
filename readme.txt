@@ -1,23 +1,19 @@
 === WP Bannerize ===
 Contributors: gfazioli
-Donate link: http://www.wpxtre.me
+Donate link: http://www.undolog.com
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 3.1
 Tested up to: 3.1.2
-Stable tag: 3.0.62
+Stable tag: 3.1.0
 
 WP Bannerize is an easy to use adv server with html, free text and Flash banner support.
 
 == Description ==
 
-**[HOT NEWS]** WP Bannerize will be part of the new upcoming [wpXtreme](http://www.wpxtre.me "wpXtreme")!
+**NOTE**
 
-**wpXtreme** is a powerful tool for enhancing your WordPress experience. Downloading one free plugin, you will get:
+This plugin version is no longer updated and supported! [Check the new version here](https://wpxtre.me/product/bannerize "Check the new version here")
 
-* a lot of improvements to the WordPress core for free (like a cool backend layout, improved user management, etc)
-* access to the evergrowing wpxPluginStore, where you will be able to download plugins for all your needs
-
-Signup to [wpXtreme](http://www.wpxtre.me "wpXtreme") and win a free licence!
 
 WP Bannerize is an Amazing Banner Manager. With WP Bannerize you can manage all your advertising stuff through widgets, shortcodes or directly from your template.
 In your template insert: `<?php if(function_exists( 'wp_bannerize' )) wp_bannerize(); ?>`, use new shortcode featured or set it like Widget.
@@ -121,16 +117,14 @@ The default HTML output for above code is:
 * [Elio e le Storie Tese](http://www.elioelestorietese.it "Elio e le Storie Tese")
 * [Artribune](http://www.artribune.com/ "Artribune")
 * [Undolog](http://www.undolog.com "Undolog")
-* [wpXtreme](http://www.wpxtre.me "wpXtreme")
-* [wpXtreme Blog](http://blog.wpxtre.me "wpXtreme Blog")
+* [wpXtreme](https://wpxtre.me "wpXtreme")
 
-Aren't you in this list? Please, [let me know your WordPress site url](mailto:g.fazioli@saidmade.com "let me know your WordPress site url")
+Aren't you in this list? Please, [let me know your WordPress site url](mailto:g.fazioli@wpxtre.me "let me know your WordPress site url")
 
 == Related Links ==
 
-* [wpXtreme](http://www.wpxtre.me "More WordPress Plugin")
+* [wpXtreme](https://wpxtre.me "More WordPress Plugin")
 * [Undolog](http://www.undolog.com/ "Author's Web")
-* [wpXtreme Blog](http://blog.wpxtre.me "wpXtreme Blog")
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 For more information on the roadmap and the next improvements, please send an e-mail to: [support@wpxtre.me](mailto:support@wpxtre.me "support@wpxtre.me")
@@ -150,11 +144,17 @@ For more information on the roadmap and the next improvements, please send an e-
 
 == Changelog ==
 
+= 3.1.0 =
+
+* Added Notice: This plugin version is no longer updated and supported [Check the new version here](https://wpxtre.me/product/bannerize "Check the new version here")
+* Fixed several bugs and updated to WordPress 3.7
+* Updated localization
+
 = 3.0.62 =
 * Fixed anonymous function for php 4
 
 = 3.0.61 =
-* Introducing [wpXtreme](http://www.wpxtre.me "wpXtreme")
+* Introducing [wpXtreme](https://wpxtre.me "wpXtreme")
 * Fixed dbDelat output on plugin activation
 
 = 3.0.50 =
@@ -492,6 +492,9 @@ For more information on the roadmap and the next improvements, please send an e-
 
 
 == Upgrade Notice ==
+
+= 3.1.0 =
+This plugin version is no longer updated and supported! [Check the new version here](https://wpxtre.me/product/bannerize "Check the new version here")
 
 = 3.0 =
 Very large improvements and security fix! Upgrade immediately
