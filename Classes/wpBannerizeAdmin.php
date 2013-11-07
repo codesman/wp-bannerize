@@ -90,8 +90,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
     $this->options = get_option( $this->options_key );
 
     // Add option menu in Wordpress backend
-    add_action( 'admin_init', array( $this, 'plugin_init' ) );
-    add_action( 'admin_menu', array( $this, 'plugin_setup' ) );
+    add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 
     add_filter( 'screen_layout_columns', array( &$this, 'on_screen_layout_columns' ), 10, 2 );
 
@@ -176,12 +175,11 @@ class WPBannerizeAdmin extends WPBannerizeClass {
   }
 
   /**
-   * Register style for plugin
+   * Contextual Help
    *
-   * @since 2.4.9
    * @return void
    */
-  function plugin_init()
+  function contextualHelp()
   {
     // Add contextual Help
     $screen = get_current_screen();
@@ -426,10 +424,8 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 
   /**
    * Setup main init: add hook for backend
-   *
-   * @revision 2.4.9
    */
-  function plugin_setup()
+  function admin_menu()
   {
 
     if ( function_exists( 'add_menu_page' ) ) {
@@ -456,6 +452,11 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 
       add_action( 'load-' . $this->pageSettings, array( &$this, 'didSettingsLoadPage' ) );
       add_action( 'load-' . $this->pageTools, array( &$this, 'didToolsLoadPage' ) );
+
+      add_action( 'load-' . $this->pageMain, array( $this, 'contextualHelp' ) );
+      add_action( 'load-' . $this->pageAddBanner, array( $this, 'contextualHelp' ) );
+      add_action( 'load-' . $this->pageSettings, array( $this, 'contextualHelp' ) );
+      add_action( 'load-' . $this->pageTools, array( $this, 'contextualHelp' ) );
     }
   }
 

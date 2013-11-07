@@ -18,7 +18,8 @@
  *
  * @see WPBannerizeFrontend Class
  */
-function wp_bannerize( $args = array () ) {
-	global $wpBannerizeFrontend;
-	echo $wpBannerizeFrontend->bannerize( $args );
+function wp_bannerize( $args = array() )
+{
+  global $wpBannerizeFrontend;
+  echo $wpBannerizeFrontend->bannerize( $args );
 }

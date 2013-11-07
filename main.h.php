@@ -13,7 +13,7 @@
 define( 'kWPBannerizeDebug', false );
 
 // Common
-define( 'kWPBannerizeVersion', '3.1.0' );
+define( 'kWPBannerizeVersion', '3.1.1' );
 define( 'kWPBannerizePluginName', 'WP Bannerize' );
 define( 'kWPBannerizeOptionTitle', kWPBannerizePluginName );
 define( 'kWPBannerizeSlugName', 'wp-bannerize' );
@@ -61,5 +61,3 @@ define( 'kWPBannerizeFormAction', 'wpBannerizeFormAction' );
 
 // Form action/command
 define( 'kWPBannerizeFormActionTruncateTable', 'wpBannerizeFormActionTruncateTable' );
-
-?>
