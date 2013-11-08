@@ -68,8 +68,6 @@ class WPBannerizeAdmin extends WPBannerizeClass {
     $foo_publish = __( 'Publish', 'wp-bannerize' );
 
     add_action( 'plugins_loaded', array( $this, 'init' ), 1 );
-
-    add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
   }
 
   /**
@@ -181,6 +179,8 @@ class WPBannerizeAdmin extends WPBannerizeClass {
    */
   function contextualHelp()
   {
+    $this->admin_enqueue_scripts();
+
     // Add contextual Help
     $screen = get_current_screen();
 
@@ -211,6 +211,20 @@ class WPBannerizeAdmin extends WPBannerizeClass {
    */
   function admin_enqueue_scripts()
   {
+
+    $fancybox_folder = $this->uri . '/js/';
+
+    wp_enqueue_script( 'wpx-bannerize-fancybox-mousewheel', $fancybox_folder . 'fancybox/lib/jquery.mousewheel-3.0.6.pack.js', array( 'jquery' ), kWPBannerizeVersion );
+    wp_enqueue_script( 'wpx-bannerize-fancybox', $fancybox_folder . 'fancybox/source/jquery.fancybox.js', array( 'jquery' ), kWPBannerizeVersion );
+    wp_enqueue_script( 'wpx-bannerize-fancybox-buttons', $fancybox_folder . 'fancybox/source/helpers/jquery.fancybox-buttons.js', array( 'wpx-bannerize-fancybox' ), kWPBannerizeVersion );
+    wp_enqueue_script( 'wpx-bannerize-fancybox-thumbs', $fancybox_folder . 'fancybox/source/helpers/jquery.fancybox-thumbs.js', array( 'wpx-bannerize-fancybox' ), kWPBannerizeVersion );
+    wp_enqueue_script( 'wpx-bannerize-fancybox-media', $fancybox_folder . 'fancybox/source/helpers/jquery.fancybox-media.js', array( 'wpx-bannerize-fancybox' ), kWPBannerizeVersion );
+
+    /* Fancybox styles */
+    wp_enqueue_style( 'wpxbz-fancybox', $fancybox_folder . 'fancybox/source/jquery.fancybox.css', array(), kWPBannerizeVersion );
+    wp_enqueue_style( 'wpxbz-fancybox-thumbs', $fancybox_folder . 'fancybox/source/helpers/jquery.fancybox-thumbs.css', array(), kWPBannerizeVersion );
+
+
     wp_enqueue_script( 'common' );
     wp_enqueue_script( 'postbox' );
     wp_enqueue_script( 'wp-lists' );
@@ -218,8 +232,7 @@ class WPBannerizeAdmin extends WPBannerizeClass {
     // Add wp_enqueue_script for jquery library
     wp_enqueue_script( 'jquery-ui-sortable' );
 
-    wp_enqueue_script( 'fancybox_js', $this->uri . kWPBannerizeFancyBoxJavascript, array( 'jquery' ), kWPBannerizeVersion, true );
-    wp_enqueue_script( 'WPBannerizeJavascriptAdmin', $this->uri . kWPBannerizeJavascriptAdmin, array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'media-upload', 'fancybox_js', 'thickbox' ), kWPBannerizeVersion, true );
+    wp_enqueue_script( 'WPBannerizeJavascriptAdmin', $this->uri . kWPBannerizeJavascriptAdmin, array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'media-upload', 'thickbox' ), kWPBannerizeVersion, true );
 
     //wp_enqueue_script( 'wp_bannerize_jquery_dp_js', $this->uri . '/js/jquery-ui.min.js', array( 'jquery' ), kWPBannerizeVersion, true );
     wp_enqueue_script( 'wp_bannerize_timepicker_js', $this->uri . '/js/jquery.timepicker.min.js', array( 'WPBannerizeJavascriptAdmin' ), kWPBannerizeVersion, true );
@@ -251,12 +264,16 @@ class WPBannerizeAdmin extends WPBannerizeClass {
 
   function didToolsLoadPage()
   {
+    $this->admin_enqueue_scripts();
+
     add_meta_box( 'wp_bannerize_tools_editor', __( 'PHP Function and Shortcode Editor', 'wp-bannerize' ), array( &$this, 'boxTools' ), $this->pageTools, 'normal', 'core' );
     add_meta_box( 'wp_bannerize_tools_database', __( 'Database', 'wp-bannerize' ), array( &$this, 'boxToolsDatabase' ), $this->pageTools, 'side', 'core' );
   }
 
   function didSettingsLoadPage()
   {
+    $this->admin_enqueue_scripts();
+
     add_meta_box( kWPBannerizeMetaBoxSettingsKey, __( 'Settings', 'wp-bannerize' ), array( &$this, 'boxSettings' ), $this->pageSettings, 'normal', 'core' );
   }
 
