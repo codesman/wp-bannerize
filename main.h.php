@@ -13,7 +13,7 @@
 define( 'kWPBannerizeDebug', false );
 
 // Common
-define( 'kWPBannerizeVersion', '3.1.3' );
+define( 'kWPBannerizeVersion', '3.1.4' );
 define( 'kWPBannerizePluginName', 'WP Bannerize' );
 define( 'kWPBannerizeOptionTitle', kWPBannerizePluginName );
 define( 'kWPBannerizeSlugName', 'wp-bannerize' );
