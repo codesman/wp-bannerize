@@ -149,11 +149,8 @@ class WPBannerizeFrontend extends WPBannerizeClass {
 			<?php foreach ( $rows as $row ) : ?>
 				<?php // Impressions
 				if ( $this->options['impressionsEnabled'] == "1" ) {
-					$sql    =
-						"UPDATE `" . $this->table_bannerize . "` SET `impressions` = `impressions`+1 WHERE id = " .
-							$row->id;
-					$result = mysql_query( $sql );
-				} ?>
+          $wpdb->query( $wpdb->prepare( 'UPDATE `' . $this->table_bannerize . '` SET `impressions` = `impressions`+1 WHERE `id` = %d', $row->id ) );
+        } ?>
 				<?php // Javascript Click count
 				$javascriptClickCounter = ( $this->options['clickCounterEnabled'] == '1' ) ?
 					' onclick="WPBannerizeJavascript.incrementClickCount(' . $row->id . ')" ' : '';

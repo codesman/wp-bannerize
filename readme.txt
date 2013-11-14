@@ -4,7 +4,7 @@ Donate link: http://www.undolog.com
 Tags: Banner, Manage, Image, ADV, Random, Adobe Flash, Impressions, Click Counter
 Requires at least: 3.6
 Tested up to: 3.7.1
-Stable tag: 3.1.4
+Stable tag: 3.1.5
 
 WP Bannerize is an easy to use adv server with html, free text and Flash banner support.
 
@@ -143,6 +143,10 @@ For more information on the roadmap and the next improvements, please send an e-
 * [Tutorial Video](http://www.youtube.com/watch?v=sAZOyAwXu-U "Tutorial Video")
 
 == Changelog ==
+
+= 3.1.5 =
+
+* Fixed impressions, thankk to Mathijs Huis <mathijs@impres.nl>
 
 = 3.1.4 =
 
