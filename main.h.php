@@ -13,7 +13,7 @@
 define( 'kWPBannerizeDebug', false );
 
 // Common
-define( 'kWPBannerizeVersion', '3.1.5' );
+define( 'kWPBannerizeVersion', '3.1.6' );
 define( 'kWPBannerizePluginName', 'WP Bannerize' );
 define( 'kWPBannerizeOptionTitle', kWPBannerizePluginName );
 define( 'kWPBannerizeSlugName', 'wp-bannerize' );
@@ -44,11 +44,6 @@ define( 'kWPBannerizeBannerStyleInline', 'wpBannerizeStyleInline.css' );
 define( 'kWPBannerizeMetaBoxSettingsKey', 'wpBannerizeMetaBoxSettings' );
 define( 'kWPBannerizeMetaBoxToolsKey', 'wpBannerizeMetaBoxTools' );
 define( 'kWPBannerizeMetaBoxToolsDatabaseKey', 'wpBannerizeMetaBoxToolsDatabase' );
-
-// FancyBox
-define( 'kWPBannerizeFancyBoxRelease', '1.3.4' );
-define( 'kWPBannerizeFancyBoxCSS', '/js/fancybox/jquery.fancybox-1.3.4.css' );
-define( 'kWPBannerizeFancyBoxJavascript', '/js/fancybox/jquery.fancybox-1.3.4.pack.js' );
 
 // Database
 define( 'kWPBannerizeTableName_3_0', 'bannerize_b' ); ///< Name of Database table before 3.0

@@ -211,19 +211,8 @@ class WPBannerizeAdmin extends WPBannerizeClass {
    */
   function admin_enqueue_scripts()
   {
-
-    $fancybox_folder = $this->uri . '/js/';
-
-    wp_enqueue_script( 'wpx-bannerize-fancybox-mousewheel', $fancybox_folder . 'fancybox/lib/jquery.mousewheel-3.0.6.pack.js', array( 'jquery' ), kWPBannerizeVersion );
-    wp_enqueue_script( 'wpx-bannerize-fancybox', $fancybox_folder . 'fancybox/source/jquery.fancybox.js', array( 'jquery' ), kWPBannerizeVersion );
-    wp_enqueue_script( 'wpx-bannerize-fancybox-buttons', $fancybox_folder . 'fancybox/source/helpers/jquery.fancybox-buttons.js', array( 'wpx-bannerize-fancybox' ), kWPBannerizeVersion );
-    wp_enqueue_script( 'wpx-bannerize-fancybox-thumbs', $fancybox_folder . 'fancybox/source/helpers/jquery.fancybox-thumbs.js', array( 'wpx-bannerize-fancybox' ), kWPBannerizeVersion );
-    wp_enqueue_script( 'wpx-bannerize-fancybox-media', $fancybox_folder . 'fancybox/source/helpers/jquery.fancybox-media.js', array( 'wpx-bannerize-fancybox' ), kWPBannerizeVersion );
-
-    /* Fancybox styles */
-    wp_enqueue_style( 'wpxbz-fancybox', $fancybox_folder . 'fancybox/source/jquery.fancybox.css', array(), kWPBannerizeVersion );
-    wp_enqueue_style( 'wpxbz-fancybox-thumbs', $fancybox_folder . 'fancybox/source/helpers/jquery.fancybox-thumbs.css', array(), kWPBannerizeVersion );
-
+    // ThickBox
+    add_thickbox();
 
     wp_enqueue_script( 'common' );
     wp_enqueue_script( 'postbox' );
@@ -255,8 +244,6 @@ class WPBannerizeAdmin extends WPBannerizeClass {
                                                                                                 'closeText'                   => __( 'Close', 'wp-bannerize' ),
                                                                                                 'dateFormat'                  => __( 'mm/dd/yy', 'wp-bannerize' )
                                                                                            ) );
-    wp_enqueue_style( 'thickbox' );
-    wp_enqueue_style( 'fancybox-css', $this->uri . kWPBannerizeFancyBoxCSS, array(), kWPBannerizeVersion );
     wp_enqueue_style( 'WPBannerizeBannerStyleAdmin', $this->uri . kWPBannerizeBannerStyleAdmin, array(), kWPBannerizeVersion );
     wp_enqueue_style( 'wp-bannerize-jqueryui-css', $this->uri . '/css/ui-lightness/jquery-ui.custom.css', array(),  kWPBannerizeVersion );
 
@@ -951,25 +938,30 @@ class WPBannerizeAdmin extends WPBannerizeClass {
    */
   function rowWithItem( $item )
   {
+    $thickbox = '';
     ?>
-    <th class="check-column" scope="row"><input type="checkbox" value="<?php echo $item->id ?>"
-                                                name="image_record[]" /></th>
+    <th class="check-column" scope="row">
+      <input type="checkbox" value="<?php echo $item->id ?>" name="image_record[]" /></th>
     <th scope="row">
 		<div class="arrow"></div>
 	</th>
     <td class="wp-bannerize-thumbnail">
-		<?php
-    if ( $item->banner_type == kWPBannerizeBannerTypeFromLocal || $item->banner_type == kWPBannerizeBannerTypeByURL
-    ) : ?>
+		<?php if ( $item->banner_type == kWPBannerizeBannerTypeFromLocal || $item->banner_type == kWPBannerizeBannerTypeByURL ) : ?>
+
       <?php if ( $item->mime == "application/x-shockwave-flash" ) : ?>
-        <a class="fancybox wp_bannerize_flash" rel="wp-bannerize-gallery-thumbnail"
-           title="<?php echo $item->description ?>" href="<?php echo $item->filename ?>"></a>
+        <?php $thickbox = '?TB_iframe' ?>
+        <a class="thickbox wp_bannerize_flash" rel="wp-bannerize-gallery-thumbnail"
+           title="<?php echo $item->description ?>" href="<?php echo $item->filename ?><?php echo $thickbox ?>"></a>
       <?php else : ?>
-        <a class="fancybox" rel="wp-bannerize-gallery-thumbnail"
+
+        <a class="thickbox" rel="wp-bannerize-gallery-thumbnail"
            href="<?php echo $item->filename ?>" title="<?php echo $item->description ?>"><img
-            alt="<?php echo $item->description ?>" border="0"
-            src="<?php echo $item->filename ?>" /></a>
+           alt="<?php echo $item->description ?>" border="0"
+           src="<?php echo $item->filename ?>" />
+        </a>
+
       <?php endif; ?>
+
     <?php else : ?>
       <img alt="<?php echo $item->description ?>" border="0"
            src="<?php echo $this->url . '/css/images/shellscript.png' ?>" />
@@ -1005,15 +997,28 @@ class WPBannerizeAdmin extends WPBannerizeClass {
       <div class="row-actions">
 			<?php if ( $item->trash == "0" ) : ?>
         <span class="edit">
-			<a href="#" class="edit_<?php echo $item->id ?>"
-         title="<?php _e( 'Edit', 'wp-bannerize' ) ?>"
-         onclick="WPBannerizeJavascript.displayEdit(<?php echo $item->id ?>)"><?php _e( 'Edit', 'wp-bannerize' ) ?></a> | </span>
-        <span class="trash"><a class="<?php echo $item->id ?>"
-                               title="<?php _e( 'Trash', 'wp-bannerize' ) ?>"
-                               href="#"><?php _e( 'Trash', 'wp-bannerize' ) ?></a> | </span>
-        <span class="view"><a class="fancybox submitview" rel="wp-bannerize-gallery"
-                              title="<?php echo $item->description ?>"" href="<?php echo $item->filename ?>
-                                                                      "><?php _e( 'View', 'wp-bannerize' ) ?></a></span>
+
+          <a href="#"
+             class="edit_<?php echo $item->id ?>"
+             title="<?php _e( 'Edit', 'wp-bannerize' ) ?>"
+             onclick="WPBannerizeJavascript.displayEdit(<?php echo $item->id ?>)"><?php _e( 'Edit', 'wp-bannerize' ) ?>
+          </a> | </span>
+
+        <span class="trash">
+          <a class="<?php echo $item->id ?>"
+             title="<?php _e( 'Trash', 'wp-bannerize' ) ?>"
+             href="#"><?php _e( 'Trash', 'wp-bannerize' ) ?>
+          </a> | </span>
+
+        <span class="view">
+          <a class="thickbox submitview"
+             rel="wp-bannerize-gallery"
+             title="<?php echo $item->description ?>"
+             href="<?php echo $item->filename ?><?php echo $thickbox ?>">
+            <?php _e( 'View', 'wp-bannerize' ) ?>
+          </a>
+        </span>
+
       <?php else : ?>
         <span class="delete"><a class="<?php echo $item->id ?>"
                                 title="<?php _e( 'Delete', 'wp-bannerize' ) ?>"
