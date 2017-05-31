@@ -45,7 +45,7 @@ class WPBannerizeWidget extends WP_Widget {
 		                                 'description' => __( 'Amazing Banner Manager', 'wp-bannerize' ) );
 		$control_ops           = array ( 'width'  => 430,
 		                                 'height' => 350 );
-		$this->WP_Widget( kWPBannerizeShortcodeName, kWPBannerizePluginName, $widget_ops, $control_ops );
+		parent::__construct( kWPBannerizeShortcodeName, kWPBannerizePluginName, $control_ops, $widget_ops );
 	}
 
 	/**
